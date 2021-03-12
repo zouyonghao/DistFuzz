@@ -3,6 +3,7 @@
 
 #include <map>
 #include <mutex>
+#include <vector>
 #include <thread>
 
 struct connection_pair
@@ -11,6 +12,13 @@ struct connection_pair
     int dest_sock;
     std::thread *thread1;
     std::thread *thread2;
+};
+struct replace_pair
+{
+    std::string src;
+    std::string src_name;
+    std::string dest;
+    std::string dest_name;
 };
 /**
  * This class proxy a port to another
@@ -29,7 +37,9 @@ class ProxyServer
 private:
     int src_port;
     int dest_port;
-    std::map<std::string, std::string> replace_pairs;
+    std::string src_name;
+    std::string dest_name;
+    std::vector<struct replace_pair> replace_pairs;
     int delay_time;
 
     std::thread *thread0;
@@ -57,8 +67,11 @@ public:
     ProxyServer(int _src_port,
                 int _dest_port,
                 int _delay_time,
-                std::map<std::string, std::string> _replace_pairs);
+                std::vector<struct replace_pair> _replace_pairs);
     ~ProxyServer();
+
+    void set_src_name(std::string _src_name);
+    void set_dest_name(std::string _dest_name);
 };
 
 #endif

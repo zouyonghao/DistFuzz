@@ -4,10 +4,10 @@
 #include <fstream>
 #include <iostream>
 
-#include <document.h>
-#include <prettywriter.h>
-#include <istreamwrapper.h>
-#include <ostreamwrapper.h>
+#include <rapidjson/document.h>
+#include <rapidjson/prettywriter.h>
+#include <rapidjson/istreamwrapper.h>
+#include <rapidjson/ostreamwrapper.h>
 
 #include <proxy_server.h>
 
@@ -37,12 +37,31 @@ int main(int argc, char *argv[])
         int dest_port = i["dest_port"].GetInt();
         int delay_time = i["delay_time"].GetInt();
         auto replace_pairs = i["replace_pairs"].GetArray();
-        std::map<std::string, std::string> replace_map;
+        std::vector<struct replace_pair> _replace_pairs;
         for (auto &pair : replace_pairs)
         {
-            replace_map[pair["src"].GetString()] = pair["dest"].GetString();
+            struct replace_pair p;
+            p.src = pair["src"].GetString();
+            p.dest = pair["dest"].GetString();
+            if (pair.HasMember("src_name"))
+            {
+                p.src_name = pair["src_name"].GetString();
+            }
+            if (pair.HasMember("dest_name"))
+            {
+                p.dest_name = pair["dest_name"].GetString();
+            }
         }
-        ProxyServer *p = new ProxyServer(src_port, dest_port, delay_time, replace_map);
+        ProxyServer *p = new ProxyServer(src_port, dest_port, delay_time, _replace_pairs);
+
+        if (i.HasMember("src_name"))
+        {
+            p->set_src_name(i["src_name"].GetString());
+        }
+        if (i.HasMember("dest_name"))
+        {
+            p->set_dest_name(i["dest_name"].GetString());
+        }
         proxy_servers.push_back(p);
     }
 

@@ -5,13 +5,14 @@
 
 #include <list>
 #include <iostream>
+#include <algorithm>
 
 #include <proxy_server.h>
 
 ProxyServer::ProxyServer(int _src_port,
                          int _dest_port,
                          int _delay_time,
-                         std::map<std::string, std::string> _replace_pairs)
+                         std::vector<struct replace_pair> _replace_pairs)
     : src_port(_src_port),
       dest_port(_dest_port),
       delay_time(_delay_time),
@@ -21,12 +22,22 @@ ProxyServer::ProxyServer(int _src_port,
     thread0 = new std::thread(&ProxyServer::accept_connection_handler, this);
 }
 
+void ProxyServer::set_src_name(std::string _src_name)
+{
+    this->src_name = _src_name;
+}
+
+void ProxyServer::set_dest_name(std::string _dest_name)
+{
+    this->dest_name = _dest_name;
+}
+
 void ProxyServer::accept_connection_handler()
 {
     int socket_desc, client_sock, c;
     struct sockaddr_in server, client;
     socket_desc = socket(AF_INET, SOCK_STREAM, 0);
-    if (socket_desc == -1)
+    if (socket_desc < 0)
     {
         std::cout << "Could not create socket" << std::endl;
         return;
@@ -34,16 +45,16 @@ void ProxyServer::accept_connection_handler()
     std::cout << "Socket created" << std::endl;
 
     int enable = 0;
-    if (setsockopt(socket_desc, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+    if (setsockopt(socket_desc, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) != 0)
     {
         std::cout << "setsockopt(SO_REUSEADDR) failed\n";
         exit(-1);
     }
-    // if (setsockopt(socket_desc, SOL_SOCKET, SO_REUSEPORT, &enable, sizeof(int)) < 0)
-    // {
-    //     printf("setsockopt(SO_REUSEPORT) failed\n");
-    //     exit(-1);
-    // }
+    if (setsockopt(socket_desc, SOL_SOCKET, SO_REUSEPORT, &enable, sizeof(int)) != 0)
+    {
+        std::cout << "setsockopt(SO_REUSEPORT) failed\n";
+        exit(-1);
+    }
 
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
@@ -69,7 +80,7 @@ void ProxyServer::accept_connection_handler()
     {
         std::cout << "Connection accepted, client port is" << client.sin_port << std::endl;
 
-        struct connection_pair *current_connection = (struct connection_pair *)malloc(1 * sizeof(struct connection_pair));
+        struct connection_pair *current_connection = new connection_pair;
         current_connection->src_sock = client_sock;
         current_connection->dest_sock = connect_to_server();
         if (current_connection->dest_sock < 0)
@@ -78,11 +89,11 @@ void ProxyServer::accept_connection_handler()
             continue;
         }
 
-        std::thread thread1(&ProxyServer::receive_from_src_handler, this, current_connection);
-        std::thread thread2(&ProxyServer::receive_from_dest_handler, this, current_connection);
+        std::thread *thread1 = new std::thread(&ProxyServer::receive_from_src_handler, this, current_connection);
+        std::thread *thread2 = new std::thread(&ProxyServer::receive_from_dest_handler, this, current_connection);
 
-        current_connection->thread1 = &thread1;
-        current_connection->thread2 = &thread2;
+        current_connection->thread1 = thread1;
+        current_connection->thread2 = thread2;
 
         puts("Handler assigned");
         connection_pairs.push_back(current_connection);
@@ -135,13 +146,12 @@ int ProxyServer::connect_to_server()
 void ProxyServer::close_connection_pair(struct connection_pair *cp)
 {
     connection_lock.lock();
-    if (cp)
+    if (cp != NULL && std::find(connection_pairs.begin(), connection_pairs.end(), cp) != connection_pairs.end())
     {
         close(cp->src_sock);
         close(cp->dest_sock);
-        //Free the socket pointer
-        free(cp);
         connection_pairs.remove(cp);
+        delete cp;
     }
     connection_lock.unlock();
 }
@@ -175,15 +185,16 @@ void ProxyServer::receive_from_src_handler(struct connection_pair *current_pair)
             printf("%c", client_message[i]);
         }
         printf("\n");
+        // TODO: log name here
         for (int i = 0; i < read_size; i++)
         {
             for (auto &s : replace_pairs)
             {
-                if (is_replace_str((char *)client_message + i, s.first))
+                if (is_replace_str((char *)client_message + i, s.src))
                 {
-                    for (int k = 0; k < s.second.length(); k++)
+                    for (int k = 0; k < s.dest.length(); k++)
                     {
-                        client_message[i] = s.second[k];
+                        client_message[i] = s.dest[k];
                         i++;
                     }
                 }
@@ -230,11 +241,11 @@ void ProxyServer::receive_from_dest_handler(struct connection_pair *current_pair
         {
             for (auto &s : replace_pairs)
             {
-                if (is_replace_str((char *)client_message + i, s.second))
+                if (is_replace_str((char *)client_message + i, s.dest))
                 {
-                    for (int k = 0; k < s.first.length(); k++)
+                    for (int k = 0; k < s.src.length(); k++)
                     {
-                        client_message[i] = s.first[k];
+                        client_message[i] = s.src[k];
                         i++;
                     }
                 }
@@ -263,20 +274,20 @@ void ProxyServer::receive_from_dest_handler(struct connection_pair *current_pair
 
 void ProxyServer::cleanup(int signo)
 {
-    connection_lock.lock();
-    running = false;
-    std::cout << "cleaning up..." << std::endl;
-    for (struct connection_pair *cp : connection_pairs)
-    {
-        close(cp->src_sock);
-        close(cp->dest_sock);
-        cp->thread1->join();
-        cp->thread2->join();
-    }
-    connection_lock.unlock();
+    // connection_lock.lock();
+    // running = false;
+    // std::cout << "cleaning up..." << std::endl;
+    // for (struct connection_pair *cp : connection_pairs)
+    // {
+    //     close(cp->src_sock);
+    //     close(cp->dest_sock);
+    //     cp->thread1->join();
+    //     cp->thread2->join();
+    // }
+    // connection_lock.unlock();
 }
 
 ProxyServer::~ProxyServer()
 {
-    cleanup(0);
+    // cleanup(0);
 }
