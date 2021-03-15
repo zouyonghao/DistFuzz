@@ -3,7 +3,6 @@ project(distributed_system_test)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(rapidjson)
 add_subdirectory(proxy_server)
 add_subdirectory(core)
 add_subdirectory(braft_test)

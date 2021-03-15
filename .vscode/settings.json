@@ -56,5 +56,6 @@
         "typeinfo": "cpp",
         "functional": "cpp",
         "set": "cpp"
-    }
+    },
+    "editor.fontSize": 16
 }
