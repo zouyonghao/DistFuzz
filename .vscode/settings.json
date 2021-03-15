@@ -55,7 +55,8 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "functional": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "unordered_set": "cpp"
     },
     "editor.fontSize": 16
 }
