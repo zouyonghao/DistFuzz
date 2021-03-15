@@ -63,7 +63,9 @@ private:
 
     void close_connection_pair(struct connection_pair *cp);
 
-    // the thread function
+    /*
+     * receive from src and send to dest
+     */
     void receive_and_send_handler(struct connection_pair *cp, int src_sock,
                                   int dest_sock, DIRECTION direction);
 

@@ -179,9 +179,7 @@ bool is_replace_str(char *target, const std::string &replace_str)
     }
     return true;
 }
-/*
- * receive from src and send to dest
- * */
+
 void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                                            int src_sock, int dest_sock,
                                            DIRECTION direction)
