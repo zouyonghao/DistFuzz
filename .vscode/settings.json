@@ -56,7 +56,9 @@
         "typeinfo": "cpp",
         "functional": "cpp",
         "set": "cpp",
-        "unordered_set": "cpp"
+        "unordered_set": "cpp",
+        "complex": "cpp",
+        "typeindex": "cpp"
     },
     "editor.fontSize": 18
 }

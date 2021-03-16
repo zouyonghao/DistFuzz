@@ -8,6 +8,8 @@
 #include <iostream>
 #include <list>
 
+#include <event.hpp>
+
 ProxyServer::ProxyServer(int _src_port, int _dest_port, int _delay_time,
                          std::vector<struct replace_pair> _replace_pairs)
     : src_port(_src_port), dest_port(_dest_port), delay_time(_delay_time),
@@ -211,6 +213,8 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                 {
                     std::cout << "Receiving from " << src.target_name
                               << ", send it to " << dest.target_name << "\n";
+                    event_trigger(("Receiving from " + src.target_name +
+                                  ", send it to " + dest.target_name).c_str());
                     for (int k = 0; k < dest.target_string.length(); k++)
                     {
                         client_message[i] = dest.target_string[k];
