@@ -33,7 +33,6 @@ public:
         return map[name];
     }
 
-private:
     // Use Meyer's singleton to prevent SIOF
     static ItemMap &getItemMap()
     {
