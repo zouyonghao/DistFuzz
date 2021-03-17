@@ -14,3 +14,6 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 add_library(dst_event SHARED src/default_event.cpp)
 target_link_libraries(dst_event pthread ${Boost_LIBRARIES} rt)
+
+add_library(dst_random SHARED src/default_dst_random.c)
+target_link_libraries(dst_random pthread ${Boost_LIBRARIES} rt)

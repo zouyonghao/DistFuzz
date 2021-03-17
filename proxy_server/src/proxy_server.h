@@ -48,11 +48,11 @@ private:
     int src_port;
     int dest_port;
     std::vector<struct replace_pair> replace_pairs;
-    int delay_time;
+    int delay_time; // deprecated
 
     std::thread *thread0;
     bool running = true;
-    char *reorder_buffer[3];
+    char *reorder_buffer[3]; // deprecated
     std::mutex connection_lock;
 
     std::list<struct connection_pair *> connection_pairs;

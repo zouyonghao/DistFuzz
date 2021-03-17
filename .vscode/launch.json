@@ -9,10 +9,17 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/zyh/distributed-system-test/build/proxy_server/proxy_server",
-            "args": ["config.json"],
+            "args": [
+                "config.json"
+            ],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/test",
-            "environment": [],
+            "cwd": "${workspaceFolder}/braft_test/bin",
+            "environment": [
+                {
+                    "name": "__DST_ENV_RANDOM_FILE__",
+                    "value": "random.txt"
+                }
+            ],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
@@ -28,7 +35,9 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/zyh/distributed-system-test/build/proxy_server/proxy_server",
-            "args": ["config.json"],
+            "args": [
+                "config.json"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/test",
             "environment": [],

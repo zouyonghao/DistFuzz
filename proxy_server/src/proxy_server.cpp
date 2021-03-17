@@ -8,6 +8,7 @@
 #include <iostream>
 #include <list>
 
+#include <dst_random.h>
 #include <event.hpp>
 
 ProxyServer::ProxyServer(int _src_port, int _dest_port, int _delay_time,
@@ -214,7 +215,8 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                     std::cout << "Receiving from " << src.target_name
                               << ", send it to " << dest.target_name << "\n";
                     __dst_event_trigger(("Receiving from " + src.target_name +
-                                  ", send it to " + dest.target_name).c_str());
+                                         ", send it to " + dest.target_name)
+                                            .c_str());
                     for (int k = 0; k < dest.target_string.length(); k++)
                     {
                         client_message[i] = dest.target_string[k];
@@ -230,7 +232,10 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         }
         std::cout << std::endl;
 
-        usleep(delay_time);
+        uint16_t random = __dst_get_random_uint16_t();
+        usleep(random);
+        __dst_event_trigger(
+            ("sleep for " + std::to_string(random) + "n").c_str());
         int ret = write(dest_sock, client_message, read_size);
         if (ret < 0)
         {
