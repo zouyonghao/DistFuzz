@@ -213,7 +213,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                 {
                     std::cout << "Receiving from " << src.target_name
                               << ", send it to " << dest.target_name << "\n";
-                    event_trigger(("Receiving from " + src.target_name +
+                    __dst_event_trigger(("Receiving from " + src.target_name +
                                   ", send it to " + dest.target_name).c_str());
                     for (int k = 0; k < dest.target_string.length(); k++)
                     {

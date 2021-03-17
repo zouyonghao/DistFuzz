@@ -8,7 +8,7 @@
 
 using namespace boost::interprocess;
 
-extern "C" int event_trigger(const char *s)
+extern "C" int __dst_event_trigger(const char *s)
 {
     try
     {

@@ -1,1 +1,1 @@
-extern "C" int event_trigger(const char *);
+extern "C" int __dst_event_trigger(const char *);
