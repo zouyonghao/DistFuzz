@@ -1,5 +1,7 @@
 #include <dst_random.h>
 
+// TODO: this variable should be put into the shared memory to keep its value
+// when the program is shutdown/restart
 static volatile uint32_t fuzz_file_index = 0;
 static uint64_t fuzz_file_length = 0;
 static uint8_t *fuzz_file_array;
@@ -39,7 +41,10 @@ static void file_to_string(const char *filename)
 static void __attribute__((constructor)) init_random_file()
 {
     printf("Reading random file %s\n", getenv(ENV_DST_RANDOM_FILE));
-    file_to_string(getenv(ENV_DST_RANDOM_FILE));
+    if (getenv(ENV_DST_RANDOM_FILE))
+    {
+        file_to_string(getenv(ENV_DST_RANDOM_FILE));
+    }
 }
 
 static void __attribute__((destructor)) uninit() { free(fuzz_file_array); }
