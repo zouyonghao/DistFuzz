@@ -58,7 +58,9 @@
         "set": "cpp",
         "unordered_set": "cpp",
         "complex": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "iomanip": "cpp",
+        "future": "cpp"
     },
     "editor.fontSize": 18
 }

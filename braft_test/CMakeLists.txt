@@ -6,6 +6,10 @@ find_package(Threads REQUIRED)
 include_directories(src)
 include_directories(${CMAKE_SOURCE_DIR}/core/include)
 
-add_executable(braft_test_main ${SOURCE_DIR}/braft_test_main.cpp)
+file(GLOB braft_test_main_SRC
+     "src/*.cpp"
+)
 
-target_link_libraries(braft_test_main restart_operator) # add restart operator
+add_executable(braft_test_main ${braft_test_main_SRC})
+
+target_link_libraries(braft_test_main default_operator dst_random) # add restart operator

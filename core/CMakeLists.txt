@@ -5,7 +5,7 @@ find_package(Threads REQUIRED)
 include_directories(include)
 include_directories(src)
 
-add_library(restart_operator SHARED src/restart_operator.cpp)
+add_library(default_operator SHARED src/default_operator.cpp)
 
 
 find_package(Boost REQUIRED COMPONENTS)
