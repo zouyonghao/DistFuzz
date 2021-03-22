@@ -6,21 +6,21 @@ static std::map<std::string, std::string> kv;
 
 static std::string EMPTY_STRING = "";
 
-void set_bool(const char *key, int value)
+void dst_set_bool(const char *key, int value)
 {
     kv[std::string(key)] = std::to_string(value);
 }
 
-int get_bool_or_not_exist(const char *key)
+int dst_get_bool_or_not_exist(const char *key)
 {
-    if (exist(key))
+    if (dst_exist(key))
     {
         return std::stoi(kv[std::string(key)]) == true;
     }
     return false;
 }
 
-int exist(const char *key)
+int dst_exist(const char *key)
 {
     if (kv.find(std::string(key)) != kv.end())
     {
@@ -29,14 +29,14 @@ int exist(const char *key)
     return false;
 }
 
-void set(const char *key, const char *value)
+void dst_set(const char *key, const char *value)
 {
     kv[std::string(key)] = std::string(value);
 }
 
-const char *get(const char *key)
+const char *dst_get(const char *key)
 {
-    if (exist(key))
+    if (dst_exist(key))
     {
         return kv[std::string(key)].c_str();
     }

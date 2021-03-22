@@ -19,5 +19,6 @@ target_link_libraries(dst_random pthread ${Boost_LIBRARIES} rt)
 add_library(dst_default_kv SHARED src/dst_default_in_memory_kv_store.cpp)
 target_link_libraries(dst_default_kv pthread ${Boost_LIBRARIES} rt)
 
-add_executable(test_dst_default_kv test/test_kv.cpp)
+# unit test
+add_executable(test_dst_default_kv test/dst_test_kv.cpp)
 target_link_libraries(test_dst_default_kv pthread ${Boost_LIBRARIES} rt dst_default_kv)

@@ -12,7 +12,7 @@ private:
 
     bool is_already_killed()
     {
-        if (exist(key) && !get_bool_or_not_exist(key))
+        if (dst_exist(key) && !dst_get_bool_or_not_exist(key))
         {
             return true;
         }

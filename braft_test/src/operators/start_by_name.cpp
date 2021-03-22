@@ -12,11 +12,11 @@ private:
     {
         // the node is started at first
         // and can be stopped by KillByName operators
-        if (!exist(key))
+        if (!dst_exist(key))
         {
             return true;
         }
-        return get_bool_or_not_exist(key);
+        return dst_get_bool_or_not_exist(key);
     }
 
 public:
@@ -32,7 +32,7 @@ public:
         if (!is_already_started())
         {
             SimpleCommandOperator::_do();
-            set_bool(key, true);
+            dst_set_bool(key, true);
             return true;
         }
         std::cout << node_name << " already started\n";
