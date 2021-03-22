@@ -1,4 +1,3 @@
 build
-braft_test/bin/
 test/a.out
 test/test.c

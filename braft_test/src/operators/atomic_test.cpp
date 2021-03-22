@@ -1,26 +1,6 @@
 #include <default_operator.hpp>
 #include <dst_random.h>
 
-class KillByName : public Operator
-{
-private:
-    std::string name;
-
-public:
-    KillByName(std::string _name) : name(_name) {}
-    ~KillByName() {}
-    bool _do()
-    {
-        return std::system(("ps -ef | grep " + name +
-                            " | head -1 | awk '{print $2}' | xargs kill -9")
-                               .c_str()) == 0;
-    }
-};
-
-REGISTER_OPERATOR(KillNode0, new KillByName("8300"));
-REGISTER_OPERATOR(KillNode1, new KillByName("8301"));
-REGISTER_OPERATOR(KillNode2, new KillByName("8303"));
-
 class AtomicTestOperator : public Operator
 {
 private:
