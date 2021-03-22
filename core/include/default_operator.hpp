@@ -15,7 +15,4 @@ public:
     std::string &get_command() { return command; }
 };
 
-REGISTER_OPERATOR(EchoOperator,
-                  new SimpleCommandOperator("echo this operator does nothing"));
-
 #endif
