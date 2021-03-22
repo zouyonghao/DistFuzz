@@ -1,4 +1,4 @@
-#include <default_operator.hpp>
+#include <dst_default_operator.hpp>
 #include <dst_random.h>
 
 class AtomicTestOperator : public Operator

@@ -3,8 +3,8 @@
 
 #include <boost/interprocess/ipc/message_queue.hpp>
 
-#include <event.hpp>
-#include <event_control.hpp>
+#include <dst_event.hpp>
+#include <dst_event_control.hpp>
 
 using namespace boost::interprocess;
 

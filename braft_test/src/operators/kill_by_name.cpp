@@ -1,6 +1,6 @@
 #include <braft_test_common.hpp>
 
-#include <default_operator.hpp>
+#include <dst_default_operator.hpp>
 #include <dst_kv_store.h>
 
 class KillByName : public Operator

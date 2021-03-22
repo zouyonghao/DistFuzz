@@ -8,9 +8,9 @@ include_directories(include)
 include_directories(src)
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_library(default_operator SHARED src/default_operator.cpp)
+add_library(default_operator SHARED src/dst_default_operator.cpp)
 
-add_library(dst_event SHARED src/default_event.cpp)
+add_library(dst_event SHARED src/dst_default_event.cpp)
 target_link_libraries(dst_event pthread ${Boost_LIBRARIES} rt)
 
 add_library(dst_random SHARED src/dst_default_random.c)

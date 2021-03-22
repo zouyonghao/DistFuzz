@@ -8,8 +8,8 @@
 #include <iostream>
 #include <list>
 
+#include <dst_event.hpp>
 #include <dst_random.h>
-#include <event.hpp>
 
 ProxyServer::ProxyServer(int _src_port, int _dest_port, int _delay_time,
                          std::vector<struct replace_pair> _replace_pairs)

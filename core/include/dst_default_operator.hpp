@@ -1,8 +1,8 @@
 #ifndef DST_DEFAULT_OPERATOR_HPP
 #define DST_DEFAULT_OPERATOR_HPP
 
-#include <operator.hpp>
-#include <operator_registry.hpp>
+#include <dst_operator.hpp>
+#include <dst_operator_registry.hpp>
 
 class SimpleCommandOperator : public Operator
 {
