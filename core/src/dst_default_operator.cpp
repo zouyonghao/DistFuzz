@@ -9,4 +9,4 @@ bool SimpleCommandOperator::_do()
     return system(get_command().c_str()) == 0;
 }
 
-REGISTER_OPERATOR(NoopOperator, new SimpleCommandOperator("Echo do nothing"));
+REGISTER_OPERATOR(NoopOperator, new SimpleCommandOperator("echo do nothing"));

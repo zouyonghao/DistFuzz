@@ -4,11 +4,13 @@
 
 #include <functional>
 #include <unordered_map>
+#include <vector>
 
 template <typename T> class OperatorRegistry
 {
 public:
     typedef std::unordered_map<std::string, T *> ItemMap;
+    typedef std::vector<std::pair<std::string, T *>> ItemVector;
 
     static bool add(const std::string &name, T *target)
     {
@@ -19,6 +21,7 @@ public:
         }
 
         getItemMap()[name] = target;
+        getItemVector().push_back(std::pair<std::string, T *>(name, target));
         return true;
     }
 
@@ -38,5 +41,11 @@ public:
     {
         static ItemMap map;
         return map;
+    }
+
+    static ItemVector &getItemVector()
+    {
+        static ItemVector vector;
+        return vector;
     }
 };

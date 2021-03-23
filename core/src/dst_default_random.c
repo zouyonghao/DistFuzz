@@ -49,7 +49,7 @@ static void __attribute__((constructor)) init_random_file()
 
 static void __attribute__((destructor)) uninit() { free(fuzz_file_array); }
 
-uint8_t __dst_get_random_char() { return read_byte(); }
+uint8_t __dst_get_random_uint8_t() { return read_byte(); }
 
 uint16_t __dst_get_random_uint16_t()
 {

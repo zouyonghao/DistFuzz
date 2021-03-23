@@ -25,7 +25,7 @@ extern "C"
 {
 #endif
 
-    extern uint8_t __dst_get_random_char();
+    extern uint8_t __dst_get_random_uint8_t();
 
     extern uint16_t __dst_get_random_uint16_t();
 

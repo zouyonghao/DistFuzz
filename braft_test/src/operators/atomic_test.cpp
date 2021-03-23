@@ -1,6 +1,8 @@
 #include <dst_default_operator.hpp>
 #include <dst_random.h>
 
+static const std::string ATOMIC_TEST_PATH = "/home/zyh/braft/example/atomic";
+
 class AtomicTestOperator : public Operator
 {
 private:
@@ -12,7 +14,7 @@ public:
                        std::vector<std::string> _need_random_parameters)
         : need_random_parameters(_need_random_parameters)
     {
-        unfinished_command = "timeout 2 ./atomic_test -conf=" + _conf +
+        unfinished_command = "timeout 2 " + ATOMIC_TEST_PATH + "/atomic_test -conf=" + _conf +
                              " -atomic_op=" + _atomic_op;
     }
 
