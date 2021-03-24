@@ -1,12 +1,11 @@
-#define REGISTER_OPERATOR(operator_name, operator)                             \
-    bool operator_name##_entry =                                               \
-        OperatorRegistry<Operator>::add(#operator_name, operator)
+#ifndef DST_OPERATOR_REGISTRY_HEADER
+#define DST_OPERATOR_REGISTRY_HEADER
 
 #include <functional>
 #include <unordered_map>
 #include <vector>
 
-template <typename T> class OperatorRegistry
+template <typename T> class Registry
 {
 public:
     typedef std::unordered_map<std::string, T *> ItemMap;
@@ -49,3 +48,5 @@ public:
         return vector;
     }
 };
+
+#endif // DST_OPERATOR_REGISTRY_HEADER

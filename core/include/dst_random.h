@@ -1,3 +1,6 @@
+#ifndef DST_RANDOM_HEADER
+#define DST_RANDOM_HEADER
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +15,7 @@
  * @see __dst_get_random_uint32
  *
  * The file is specified by environment variable __DST_ENV_RANDOM_FILE__
+ * in the default implementation dst_default_random.c
  * e.g. __DST_ENV_RANDOM_FILE__=random.txt ./a.out
  *
  * @author Yong-Hao Zou
@@ -34,3 +38,5 @@ extern "C"
 #ifdef __cplusplus
 }
 #endif
+
+#endif // DST_RANDOM_HEADER

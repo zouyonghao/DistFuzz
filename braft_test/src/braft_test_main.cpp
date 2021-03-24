@@ -3,7 +3,6 @@
 
 #include <dst_kv_store.h>
 #include <dst_operator.hpp>
-#include <dst_operator_registry.hpp>
 #include <dst_random.h>
 
 using namespace std::chrono_literals;
@@ -30,33 +29,32 @@ int main(int argc, char const *argv[])
 
         std::this_thread::sleep_for(5s);
         // run 20 operations
-        size_t operator_size =
-            OperatorRegistry<Operator>::getItemVector().size();
+        size_t operator_size = Registry<Operator>::getItemVector().size();
         for (int i = 0; i < 20; i++)
         {
             std::this_thread::sleep_for(2s);
             uint32_t index = __dst_get_random_uint8_t() % operator_size;
-            std::cout
-                << "running operator "
-                << OperatorRegistry<Operator>::getItemVector()[index].first
-                << "\n";
+            std::cout << "running operator "
+                      << Registry<Operator>::getItemVector()[index].first
+                      << "\n";
             std::thread t1([index]() {
-                OperatorRegistry<Operator>::getItemVector()[index]
-                    .second->_do();
+                Registry<Operator>::getItemVector()[index].second->_do();
             });
 
-            // run another operation
-            index = __dst_get_random_uint8_t() % operator_size;
-            std::cout
-                << "running operator "
-                << OperatorRegistry<Operator>::getItemVector()[index].first
-                << "\n";
-            std::thread t2([index]() {
-                OperatorRegistry<Operator>::getItemVector()[index]
-                    .second->_do();
-            });
+            if (__dst_get_random_uint8_t() < 150)
+            {
+                // run another operation
+                index = __dst_get_random_uint8_t() % operator_size;
+                std::cout << "running operator "
+                          << Registry<Operator>::getItemVector()[index].first
+                          << "\n";
+                std::thread t2([index]() {
+                    Registry<Operator>::getItemVector()[index].second->_do();
+                });
+                t2.join();
+            }
+
             t1.join();
-            t2.join();
         }
 
         // stop
