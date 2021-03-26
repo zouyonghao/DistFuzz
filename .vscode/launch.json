@@ -5,7 +5,73 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Launch",
+            "name": "compiler_gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/distributed-system-test/build/fuzz/default_compiler",
+            "args": [
+                "test.cpp",
+                "-c"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/fuzz/test/",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "compiler3",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/distributed-system-test/build/fuzz/default_compiler",
+            "args": [
+                "-o", "CMakeFiles/cmTC_d5ad5.dir/CMakeCCompilerABI.c.o",   "-c", "/usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c"
+            ],
+            "stopAtEntry": false,
+            "cwd": "/home/zyh/braft/build",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "compiler2",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/distributed-system-test/build/fuzz/default_compiler",
+            "args": [
+                "test_with_lib.cpp",
+                "test_lib.cpp",
+                "-c"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/fuzz/test/",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "proxy_server1",
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/zyh/distributed-system-test/build/proxy_server/proxy_server",
@@ -31,7 +97,7 @@
             ]
         },
         {
-            "name": "clang++-9 - Build and debug active file",
+            "name": "proxy_server2",
             "type": "cppdbg",
             "request": "launch",
             "program": "/home/zyh/distributed-system-test/build/proxy_server/proxy_server",

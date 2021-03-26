@@ -60,7 +60,9 @@
         "complex": "cpp",
         "typeindex": "cpp",
         "iomanip": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "numeric": "cpp",
+        "random": "cpp"
     },
     "editor.fontSize": 18
 }

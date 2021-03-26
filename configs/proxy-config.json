@@ -1,0 +1,85 @@
+{
+    "typology": {
+        "node0": "8300",
+        "node1": "8301",
+        "proxy": "8302",
+        "node2": "8303"
+    },
+    "proxy_servers": [
+        {
+            "src_port": 8302,
+            "dest_port": 8303,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "8300",
+                    "src_name": "node0",
+                    "dest": "8304",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "8301",
+                    "src_name": "node1",
+                    "dest": "8305",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "8302",
+                    "src_name": "proxy",
+                    "dest": "8303",
+                    "dest_name": "node2"
+                }
+            ]
+        },
+        {
+            "src_port": 8304,
+            "dest_port": 8300,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "8304",
+                    "src_name": "node2",
+                    "dest": "8300",
+                    "dest_name": "node0"
+                },
+                {
+                    "src": "8305",
+                    "src_name": "node2",
+                    "dest": "8301",
+                    "dest_name": "node0"
+                },
+                {
+                    "src": "8303",
+                    "src_name": "node2",
+                    "dest": "8302",
+                    "dest_name": "node0"
+                }
+            ]
+        },
+        {
+            "src_port": 8305,
+            "dest_port": 8301,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "8304",
+                    "src_name": "node2",
+                    "dest": "8300",
+                    "dest_name": "node1"
+                },
+                {
+                    "src": "8305",
+                    "src_name": "node2",
+                    "dest": "8301",
+                    "dest_name": "node1"
+                },
+                {
+                    "src": "8303",
+                    "src_name": "node2",
+                    "dest": "8302",
+                    "dest_name": "node1"
+                }
+            ]
+        }
+    ]
+}

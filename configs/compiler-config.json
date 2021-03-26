@@ -1,0 +1,23 @@
+{
+    "instrumentors": [
+        "DefaultInstrumentor"
+    ],
+    "additional_link_args": [
+        "/tmp/default_instrument_lib.c.o"
+    ],
+    "additional_compile_args": [
+        "-g",
+        "-fPIC"
+    ],
+    "ignored_args": [
+        "-O1",
+        "-O2",
+        "-O3",
+        "-gstabs",
+        "-mincoming-stack-boundary",
+        "-mpreferred-stack-boundary",
+        "-Wcast-align",
+        "-Wconstant-conversion",
+        "-Werror"
+    ]
+}

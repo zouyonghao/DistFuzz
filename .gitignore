@@ -1,6 +1,7 @@
 build
 test/a.out
 test/test.c
+test/test.cpp
 braft_test/bin/*.txt
 braft_test/bin/test_case*
 braft_test/bin/log*
