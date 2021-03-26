@@ -175,13 +175,6 @@ int main(int argc, char **argv)
 
     if (is_only_compile)
     {
-        if (source_files.size() > 1)
-        {
-            // TODO
-            std::cerr << "Currently we do not support to run compling multiple "
-                         "sources together.\n";
-            exit(-1);
-        }
         // emit llvm
         if (fork() == 0)
         {

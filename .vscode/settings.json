@@ -64,5 +64,6 @@
         "numeric": "cpp",
         "random": "cpp"
     },
-    "editor.fontSize": 18
+    "editor.fontSize": 18,
+    "cmake.ctest.parallelJobs": 1
 }
