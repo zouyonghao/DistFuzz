@@ -35,6 +35,8 @@ extern "C"
 
     extern uint32_t __dst_get_random_uint32();
 
+    extern void __dst_init_random();
+
 #ifdef __cplusplus
 }
 #endif

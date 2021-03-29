@@ -47,3 +47,10 @@ target_link_libraries(default_compiler++ ${LLVM_LIBS})
 
 add_library(default_instrument_lib OBJECT instrumentor_lib/default_instrument_lib.c)
 target_compile_options(default_instrument_lib PUBLIC -fPIC)
+
+file(GLOB FUZZER_SRC
+     "fuzzer/old/*.cpp"
+)
+
+add_executable(fuzzer ${FUZZER_SRC})
+target_compile_definitions(fuzzer PUBLIC -DNO_FUZZING_ERROR -DNO_CONCURRENCY_FUZZ)

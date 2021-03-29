@@ -3,7 +3,27 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [
+    "configurations": [{
+        "name": "braft_test_gdb",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "/home/zyh/distributed-system-test/build/braft_test/braft_test_main",
+        "args": [
+            "report.md"
+        ],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}/braft_test/bin",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "setupCommands": [
+            {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+            }
+        ]
+    },
         {
             "name": "compiler_gdb",
             "type": "cppdbg",

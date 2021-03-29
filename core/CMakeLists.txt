@@ -9,15 +9,19 @@ include_directories(src)
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_library(dst_default_operator SHARED src/dst_default_operator.cpp)
+target_compile_options(dst_default_operator PUBLIC -fPIC)
 
 add_library(dst_event SHARED src/dst_default_event.cpp)
 target_link_libraries(dst_event pthread ${Boost_LIBRARIES} rt)
+target_compile_options(dst_event PUBLIC -fPIC)
 
 add_library(dst_random SHARED src/dst_default_random.c)
 target_link_libraries(dst_random pthread ${Boost_LIBRARIES} rt)
+target_compile_options(dst_random PUBLIC -fPIC)
 
 add_library(dst_default_kv SHARED src/dst_default_in_memory_kv_store.cpp)
 target_link_libraries(dst_default_kv pthread ${Boost_LIBRARIES} rt)
+target_compile_options(dst_default_kv PUBLIC -fPIC)
 
 # unit test
 add_executable(dst_test_default_kv test/dst_test_kv.cpp)

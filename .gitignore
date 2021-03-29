@@ -6,3 +6,9 @@ braft_test/bin/*.txt
 braft_test/bin/test_case*
 braft_test/bin/log*
 braft_test/bin/data*
+braft_test/bin/output/
+braft_test/bin/sync_branch_cov_file
+braft_test/bin/sync_file
+braft_test/bin/file_lock
+test/test_case_count
+braft_test/bin/input/random.txt

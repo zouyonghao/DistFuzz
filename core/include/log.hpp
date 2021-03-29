@@ -1,6 +1,8 @@
 #if !defined(__FUZZ_LOG_HEADER__)
 #define __FUZZ_LOG_HEADER__
 
+#include <iostream>
+
 #ifndef NDEBUG
 #define DEBUG_LOG(X)                                                           \
     do                                                                         \
@@ -19,5 +21,11 @@
 #else
 #define IS_DEBUG false
 #endif
+
+#define ERROR_LOG(X)                                                           \
+    do                                                                         \
+    {                                                                          \
+        std::cerr << X;                                                        \
+    } while (false)
 
 #endif // __FUZZ_LOG_HEADER__

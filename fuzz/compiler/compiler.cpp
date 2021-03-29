@@ -46,12 +46,12 @@ inline bool is_assembly_file(int argc, char **argv)
 }
 
 // target name should end with .o and not .mod.o
-inline bool is_object_name(std::string &target_name)
-{
-    return target_name.rfind(".o") == target_name.length() - 2 &&
-           (target_name.length() < 6 ||
-            target_name.rfind(".mod.o") != target_name.length() - 6);
-}
+// inline bool is_object_name(std::string &target_name)
+// {
+//     return target_name.rfind(".o") == target_name.length() - 2 &&
+//            (target_name.length() < 6 ||
+//             target_name.rfind(".mod.o") != target_name.length() - 6);
+// }
 
 inline bool ends_with(std::string const &value, std::string const &ending)
 {
@@ -247,8 +247,8 @@ int main(int argc, char **argv)
     }
 
     // TODO
-    std::cerr << "Currently we do not support to run compling and linking "
-                 "together.\n";
+    ERROR_LOG(
+        "Currently we do not support to run compling and linking together.\n");
     only_link_vector.push_back(nullptr);
     execvp(only_link_vector[0], (char *const *)&only_link_vector[0]);
     perror((std::string("failed to exec ") + CLANG).c_str());

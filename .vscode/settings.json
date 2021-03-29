@@ -62,7 +62,9 @@
         "iomanip": "cpp",
         "future": "cpp",
         "numeric": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "codecvt": "cpp",
+        "filesystem": "cpp"
     },
     "editor.fontSize": 18,
     "cmake.ctest.parallelJobs": 1
