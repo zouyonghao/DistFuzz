@@ -5,6 +5,7 @@
 #include <unistd.h> //write
 
 #include <algorithm>
+#include <future>
 #include <iostream>
 #include <list>
 
@@ -189,9 +190,10 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
 {
     int read_size;
     char client_message[2000];
-
+    bool should_break = false;
     // Receive a message from client
-    while (running && (read_size = recv(src_sock, client_message, 2000, 0)) > 0)
+    while (!should_break && running &&
+           (read_size = recv(src_sock, client_message, 2000, 0)) > 0)
     {
         // Send the message back to client
         // std::cout << "message from " << src_sock << ", size = " << read_size;
@@ -232,14 +234,55 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         }
         std::cout << std::endl;
 
-        uint16_t random = __dst_get_random_uint16_t();
-        usleep(random);
-        __dst_event_trigger(
-            ("sleep for " + std::to_string(random) + "n").c_str());
+        uint8_t select_random =
+            __dst_get_random_uint8_t() % SUPPORTED_ACTION::ACTION_COUNT;
+
+        switch (select_random)
+        {
+        case SUPPORTED_ACTION::NOOP:
+        {
+            break;
+        }
+        case SUPPORTED_ACTION::DELAY:
+        {
+            uint16_t random = __dst_get_random_uint16_t();
+            usleep(random);
+            __dst_event_trigger(
+                ("sleep for " + std::to_string(random) + "n").c_str());
+            break;
+        }
+        case SUPPORTED_ACTION::LOST:
+        {
+            continue;
+        }
+        // case SUPPORTED_ACTION::REORDER:
+        //     // TODO
+        //     break;
+        case SUPPORTED_ACTION::ASYNC_DELAY:
+        {
+            std::async(std::launch::async, [dest_sock, client_message,
+                                            read_size, &should_break] {
+                uint16_t random = __dst_get_random_uint16_t();
+                usleep(random);
+                __dst_event_trigger(
+                    ("sleep for " + std::to_string(random) + "n").c_str());
+                int ret = write(dest_sock, client_message, read_size);
+                if (ret < 0)
+                {
+                    perror("write failed!");
+                    should_break = true;
+                }
+            });
+            continue;
+        }
+        default:
+            break;
+        }
+
         int ret = write(dest_sock, client_message, read_size);
         if (ret < 0)
         {
-            std::cout << "write failed!\n";
+            perror("write failed!");
             break;
         }
     }

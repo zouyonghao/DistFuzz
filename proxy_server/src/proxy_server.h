@@ -7,6 +7,16 @@
 #include <thread>
 #include <vector>
 
+enum SUPPORTED_ACTION
+{
+    NOOP,
+    // REORDER,
+    LOST,
+    DELAY,
+    ASYNC_DELAY,  // TODO: think about this argument: async delay is reorder?
+    ACTION_COUNT
+};
+
 enum DIRECTION
 {
     SRC_TO_DEST,
