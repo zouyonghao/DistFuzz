@@ -12,3 +12,4 @@ braft_test/bin/sync_file
 braft_test/bin/file_lock
 test/test_case_count
 braft_test/bin/input/random.txt
+braft_test/bin/operation_log

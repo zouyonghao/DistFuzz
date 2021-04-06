@@ -64,7 +64,9 @@
         "numeric": "cpp",
         "random": "cpp",
         "codecvt": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "csignal": "cpp",
+        "*.ipp": "cpp"
     },
     "editor.fontSize": 18,
     "cmake.ctest.parallelJobs": 1
