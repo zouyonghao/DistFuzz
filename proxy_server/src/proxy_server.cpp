@@ -9,7 +9,7 @@
 #include <iostream>
 #include <list>
 
-#include <dst_event.hpp>
+#include <dst_event.h>
 #include <dst_random.h>
 
 ProxyServer::ProxyServer(int _src_port, int _dest_port, int _delay_time,
