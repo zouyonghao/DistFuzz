@@ -1,0 +1,84 @@
+Receive message :node2 got timeout value: 5155
+Receive message :node0 got timeout value: 5186
+Receive message :node1 got timeout value: 5118
+Receive message :node1 got timeout value: 5072
+Receive message :node2 got timeout value: 5001
+Receive message :node0 got timeout value: 5048
+Receive need record message: {:process 1739744843, :type :invoke, :f :write, :value 226474160}
+Receive message :node1 got timeout value: 5018
+Receive message :node1 got timeout value: 6175
+Receive message :node0 got timeout value: 5214
+Receive need record message: {:process 1739744843, :type :fail, :f :write, :value 226474160}
+Receive message :node2 got timeout value: 5155
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :sleep for 42254n
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :Receiving from node0, send it to node2
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :sleep for 18174n
+Receive message :sleep for 33903n
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive need record message: {:process 1739744843, :type :invoke, :f :write, :value 1556599557}
+Receive need record message: {:process 1731352139, :type :invoke, :f :write, :value 3759176820}
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive need record message: {:process 1731352139, :type :ok, :f :write, :value 3759176820}
+Receive need record message: {:process 1739744843, :type :ok, :f :write, :value 1556599557}
+Receive message :node0 got timeout value: 5203
+Receive need record message: {:process 1739744843, :type :invoke, :f :write, :value 572072099}
+Receive need record message: {:process 1739744843, :type :ok, :f :write, :value 572072099}
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :sleep for 36480n
+Receive message :sleep for 50066n
+Receive message :node2 got timeout value: 5001
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :sleep for 8770n
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :sleep for 25867n
+Receive need record message: {:process 1739744843, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1739744843, :type :ok, :f :read, :value 572072099}
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :node0 got timeout value: 5203
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :node2 got timeout value: 5206
+Receive message :node1 got timeout value: 5118
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :node2 got timeout value: 5123
+Receive message :Receiving from node2, send it to node1
+Receive message :Receiving from node2, send it to node1
+Receive message :sleep for 218n
+Receive message :Receiving from node1, send it to node2
+Receive message :Receiving from proxy, send it to node2
+Receive message :sleep for 29831n
+Receive message :sleep for 30252n
+Receive message :node1 got timeout value: 5072
+Receive message :node0 got timeout value: 5186
+Receive message :node2 got timeout value: 5136
+Receive need record message: {:process 1731352139, :type :invoke, :f :write, :value 202168352}
+Receive message :node0 got timeout value: 5048
+Receive need record message: {:process 1731352139, :type :fail, :f :write, :value 202168352}
+Receive message :Receiving from node2, send it to node0
+Receive message :node2 got timeout value: 5000
+Receive message :Receiving from node2, send it to node0
+Receive message :sleep for 777n
+Receive message :node2 got timeout value: 5155
+Receive message :node0 got timeout value: 5186
+Receive message :node2 got timeout value: 5085
+Receive message :Receiving from node2, send it to node0
+Receive message :Receiving from node2, send it to node0
+Receive message :sleep for 28759n
+Receive message :node2 got timeout value: 5001
+Receive message :node2 got timeout value: 5090
+receive sigkill, closing...

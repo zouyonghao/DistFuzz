@@ -69,5 +69,12 @@
         "*.ipp": "cpp"
     },
     "editor.fontSize": 18,
-    "cmake.ctest.parallelJobs": 1
+    "cmake.ctest.parallelJobs": 1,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/.hg/store/**": true,
+        "**/bin/test_cases/*/**": true
+    }
 }

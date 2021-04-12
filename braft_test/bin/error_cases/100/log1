@@ -1,0 +1,67 @@
+I0406 10:15:49.420208 47618 /home/zyh/incubator-brpc/src/brpc/server.cpp:1046] Server[braft::RaftStatImpl+braft::FileServiceImpl+braft::RaftServiceImpl+braft::CliServiceImpl+example::AtomicServiceImpl] is serving on port=8301.
+I0406 10:15:49.420520 47618 /home/zyh/incubator-brpc/src/brpc/server.cpp:1049] Check out http://virtual:8301 in web browser.
+I0406 10:15:49.427831 47618 /home/zyh/braft/src/braft/log.cpp:674] Use crc32c as the checksum type of appending entries
+W0406 10:15:49.427858 47618 /home/zyh/braft/src/braft/protobuf_file.cpp:91] open file failed, path: ./data1/log/log_meta: FILE_ERROR_NOT_FOUND
+W0406 10:15:49.427864 47618 /home/zyh/braft/src/braft/log.cpp:685] ./data1/log is empty
+I0406 10:15:49.431143 47618 /home/zyh/braft/src/braft/log.cpp:1136] log save_meta ./data1/log/log_meta first_log_index: 1 time: 3262
+W0406 10:15:49.431187 47618 /home/zyh/braft/src/braft/protobuf_file.cpp:91] open file failed, path: ./data1/raft_meta/raft_meta: FILE_ERROR_NOT_FOUND
+I0406 10:15:49.431212 47618 /home/zyh/braft/src/braft/raft_meta.cpp:521] Loaded single stable meta, path ./data1/raft_meta term 1 votedfor 0.0.0.0:0:0 time: 12
+W0406 10:15:49.431262 47618 /home/zyh/braft/src/braft/protobuf_file.cpp:91] open file failed, path: ./data1/raft_meta/raft_meta: FILE_ERROR_NOT_FOUND
+I0406 10:15:49.431270 47618 /home/zyh/braft/src/braft/raft_meta.cpp:521] Loaded single stable meta, path ./data1/raft_meta term 1 votedfor 0.0.0.0:0:0 time: 8
+I0406 10:15:49.431279 47618 /home/zyh/braft/src/braft/node.cpp:587] node Atomic:127.0.1.1:8301:0 init, term: 1 last_log_id: (index=0,term=0) conf: 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0 old_conf: 
+I0406 10:15:49.431293 47618 /home/zyh/braft/src/braft/node.cpp:121] random_timeout function changed!
+I0406 10:15:49.431299 47618 /home/zyh/braft/src/braft/node.cpp:129] node1 got timeout value: 5118
+I0406 10:15:49.432243 47618 /home/zyh/braft/example/atomic/server.cpp:518] Atomic service is running on 0.0.0.0:8301
+I0406 10:15:54.550769 47639 /home/zyh/braft/src/braft/node.cpp:121] random_timeout function changed!
+I0406 10:15:54.550956 47639 /home/zyh/braft/src/braft/node.cpp:129] node1 got timeout value: 5072
+I0406 10:15:59.623851 47643 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8301:0 term 1 start pre_vote
+I0406 10:15:59.626844 47643 /home/zyh/braft/src/braft/node.cpp:121] random_timeout function changed!
+I0406 10:15:59.627099 47643 /home/zyh/braft/src/braft/node.cpp:129] node1 got timeout value: 5018
+W0406 10:15:59.627553 47638 /home/zyh/incubator-brpc/src/brpc/input_messenger.cpp:214] Fail to read from Socket{id=258 fd=10 addr=127.0.1.1:8302:47400} (0x7f5c1c0354f0): Connection reset by peer
+W0406 10:15:59.628281 47638 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8301:0 request PreVote from 127.0.1.1:8302:0 error: [E104]Fail to read from Socket{id=258 fd=10 addr=127.0.1.1:8302:47400} (0x0x7f5c1c0354f0): Connection reset by peer
+I0406 10:15:59.628393 47643 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8301:0 received PreVoteResponse from 127.0.1.1:8300:0 term 1 granted 1
+I0406 10:15:59.628463 47643 /home/zyh/braft/src/braft/node.cpp:1559] node Atomic:127.0.1.1:8301:0 term 1 start vote and grant vote self
+I0406 10:15:59.628511 47643 /home/zyh/braft/src/braft/node.cpp:121] random_timeout function changed!
+I0406 10:15:59.628548 47643 /home/zyh/braft/src/braft/node.cpp:129] node1 got timeout value: 6175
+W0406 10:15:59.631894 47636 /home/zyh/incubator-brpc/src/brpc/input_messenger.cpp:214] Fail to read from Socket{id=262 fd=11 addr=127.0.1.1:8302:47406} (0x7f5c1c035cf0): Connection reset by peer
+W0406 10:15:59.631961 47641 /home/zyh/incubator-brpc/src/brpc/socket.cpp:1615] Fail to keep-write into Socket{id=262 fd=11 addr=127.0.1.1:8302:47406} (0x7f5c1c035cf0): Broken pipe
+W0406 10:15:59.632235 47639 /home/zyh/braft/src/braft/node.cpp:1388] node Atomic:127.0.1.1:8301:0 received RequestVoteResponse from 127.0.1.1:8302:0 error: [E104]Fail to read from Socket{id=262 fd=11 addr=127.0.1.1:8302:47406} (0x0x7f5c1c035cf0): Connection reset by peer
+I0406 10:15:59.635395 47643 /home/zyh/braft/src/braft/raft_meta.cpp:546] Saved single stable meta, path ./data1/raft_meta term 2 votedfor 127.0.1.1:8301:0 time: 4642
+I0406 10:15:59.645985 47636 /home/zyh/braft/src/braft/node.cpp:1359] node Atomic:127.0.1.1:8301:0 received RequestVoteResponse from 127.0.1.1:8300:0 term 2 granted 1
+I0406 10:15:59.646069 47636 /home/zyh/braft/src/braft/node.cpp:1792] node Atomic:127.0.1.1:8301:0 term 2 become leader of group 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0 
+I0406 10:15:59.646138 47636 /home/zyh/braft/src/braft/replicator.cpp:138] Replicator=2233382993925@127.0.1.1:8300:0 is started, group Atomic
+I0406 10:15:59.646559 47636 /home/zyh/braft/src/braft/replicator.cpp:138] Replicator=3311419785217@127.0.1.1:8302:0 is started, group Atomic
+W0406 10:15:59.647761 47641 /home/zyh/braft/src/braft/replicator.cpp:392] Group Atomic fail to issue RPC to 127.0.1.1:8302:0 _consecutive_error_times=1, [E104]Fail to connect Socket{id=384 addr=127.0.1.1:8302} (0x0x7f5c1403cee0): Connection reset by peer [R1][E112]Not connected to 127.0.1.1:8302 yet, server_id=384 [R2][E112]Not connected to 127.0.1.1:8302 yet, server_id=384 [R3][E112]Not connected to 127.0.1.1:8302 yet, server_id=384
+I0406 10:15:59.648624 47643 /home/zyh/braft/src/braft/log.cpp:108] Created new segment `./data1/log/log_inprogress_00000000000000000001' with fd=10
+I0406 10:15:59.652518 47639 /home/zyh/braft/example/atomic/server.cpp:315] Configuration of this group is 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0
+I0406 10:15:59.652715 47639 /home/zyh/braft/src/braft/node.cpp:3151] node Atomic:127.0.1.1:8301:0 reset ConfigurationCtx, new_peers: 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0, old_peers: 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0
+I0406 10:15:59.653558 47636 /home/zyh/braft/example/atomic/server.cpp:300] Node becomes leader
+I0406 10:15:59.748045 47639 /home/zyh/incubator-brpc/src/brpc/socket.cpp:2201] Checking Socket{id=384 addr=127.0.1.1:8302} (0x7f5c1403cee0)
+I0406 10:15:59.748866 47636 /home/zyh/incubator-brpc/src/brpc/socket.cpp:2261] Revived Socket{id=384 addr=127.0.1.1:8302} (0x7f5c1403cee0) (Connectable)
+I0406 10:16:00.348544 47636 /home/zyh/incubator-brpc/src/brpc/socket.cpp:2201] Checking Socket{id=384 addr=127.0.1.1:8302} (0x7f5c1403cee0)
+W0406 10:16:02.150627 47639 /home/zyh/braft/src/braft/replicator.cpp:392] Group Atomic fail to issue RPC to 127.0.1.1:8302:0 _consecutive_error_times=11, [E112]Not connected to 127.0.1.1:8302 yet, server_id=384 [R1][E112]Not connected to 127.0.1.1:8302 yet, server_id=384 [R2][E112]Not connected to 127.0.1.1:8302 yet, server_id=384 [R3][E112]Not connected to 127.0.1.1:8302 yet, server_id=384
+I0406 10:16:03.350334 47637 /home/zyh/incubator-brpc/src/brpc/socket.cpp:2261] Revived Socket{id=384 addr=127.0.1.1:8302} (0x7f5c1403cee0) (Connectable)
+W0406 10:16:06.699577 47643 /home/zyh/braft/src/braft/replicator.cpp:292] Group Atomic fail to issue RPC to 127.0.1.1:8302:0 _consecutive_error_times=1, [E1008]Reached timeout=2500ms @127.0.1.1:8302
+W0406 10:16:11.331506 47643 /home/zyh/braft/src/braft/replicator.cpp:292] Group Atomic fail to issue RPC to 127.0.1.1:8302:0 _consecutive_error_times=1, [E1008]Reached timeout=2500ms @127.0.1.1:8302
+I0406 10:16:11.964657 47643 /home/zyh/braft/src/braft/node.cpp:922] node Atomic:127.0.1.1:8301:0 starts to do snapshot
+I0406 10:16:11.969027 47643 /home/zyh/braft/src/braft/snapshot.cpp:638] Deleting ./data1/snapshot/snapshot_00000000000000000005
+I0406 10:16:11.969130 47643 /home/zyh/braft/src/braft/snapshot.cpp:644] Renaming ./data1/snapshot/temp to ./data1/snapshot/snapshot_00000000000000000005
+I0406 10:16:11.969259 47643 /home/zyh/braft/src/braft/snapshot_executor.cpp:234] node Atomic:127.0.1.1:8301:0 snapshot_save_done, last_included_index=5 last_included_term=2
+I0406 10:16:14.595406 47918 /home/zyh/incubator-brpc/src/brpc/server.cpp:1046] Server[braft::RaftStatImpl+braft::FileServiceImpl+braft::RaftServiceImpl+braft::CliServiceImpl+example::AtomicServiceImpl] is serving on port=8301.
+I0406 10:16:14.596213 47918 /home/zyh/incubator-brpc/src/brpc/server.cpp:1049] Check out http://virtual:8301 in web browser.
+I0406 10:16:14.599526 47918 /home/zyh/braft/src/braft/log.cpp:674] Use crc32c as the checksum type of appending entries
+I0406 10:16:14.599565 47918 /home/zyh/braft/src/braft/log.cpp:1158] log load_meta ./data1/log/log_meta first_log_index: 1 time: 24
+I0406 10:16:14.599582 47918 /home/zyh/braft/src/braft/log.cpp:1098] load open segment, path: ./data1/log first_index: 1
+I0406 10:16:14.599672 47918 /home/zyh/braft/src/braft/raft_meta.cpp:521] Loaded single stable meta, path ./data1/raft_meta term 2 votedfor 127.0.1.1:8301:0 time: 12
+I0406 10:16:14.600104 47928 /home/zyh/braft/example/atomic/server.cpp:315] Configuration of this group is 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0
+I0406 10:16:14.600148 47928 /home/zyh/braft/src/braft/snapshot_executor.cpp:264] node Atomic:127.0.1.1:8301:0 snapshot_load_done, last_included_index: 5 last_included_term: 2 peers: "127.0.1.1:8300:0" peers: "127.0.1.1:8301:0" peers: "127.0.1.1:8302:0"
+I0406 10:16:14.600290 47918 /home/zyh/braft/src/braft/raft_meta.cpp:521] Loaded single stable meta, path ./data1/raft_meta term 2 votedfor 127.0.1.1:8301:0 time: 11
+I0406 10:16:14.600303 47918 /home/zyh/braft/src/braft/node.cpp:587] node Atomic:127.0.1.1:8301:0 init, term: 2 last_log_id: (index=5,term=2) conf: 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0 old_conf: 
+I0406 10:16:14.600316 47918 /home/zyh/braft/src/braft/node.cpp:121] random_timeout function changed!
+I0406 10:16:14.600322 47918 /home/zyh/braft/src/braft/node.cpp:129] node1 got timeout value: 5118
+I0406 10:16:14.600504 47918 /home/zyh/braft/example/atomic/server.cpp:518] Atomic service is running on 0.0.0.0:8301
+W0406 10:16:14.678168 47639 /home/zyh/braft/src/braft/replicator.cpp:292] Group Atomic fail to issue RPC to 127.0.1.1:8300:0 _consecutive_error_times=1, [E112]Not connected to 127.0.1.1:8300 yet, server_id=8589934855 [R1][E112]Not connected to 127.0.1.1:8300 yet, server_id=8589934855 [R2][E112]Not connected to 127.0.1.1:8300 yet, server_id=8589934855 [R3][E112]Not connected to 127.0.1.1:8300 yet, server_id=8589934855
+I0406 10:16:14.696094 47636 /home/zyh/incubator-brpc/src/brpc/socket.cpp:2201] Checking Socket{id=8589934855 addr=127.0.1.1:8300} (0x7f5c1c035ef0)
+I0406 10:16:17.832961 47926 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8301:0 received PreVote from 127.0.1.1:8302:0 in term 3 current_term 2 granted 0
+I0406 10:16:19.719129 47924 /home/zyh/braft/src/braft/node.cpp:121] random_timeout function changed!
+I0406 10:16:19.719303 47924 /home/zyh/braft/src/braft/node.cpp:129] node1 got timeout value: 5072
