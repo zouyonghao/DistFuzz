@@ -3,11 +3,13 @@
         "DefaultInstrumentor"
     ],
     "additional_link_args": [
-        "/tmp/default_instrument_lib.c.o"
+        "/tmp/default_instrument_lib.c.o",
+        "-fsanitize=address"
     ],
     "additional_compile_args": [
         "-g",
-        "-fPIC"
+        "-fPIC",
+        "-fsanitize=address"
     ],
     "ignored_args": [
         "-O1",
