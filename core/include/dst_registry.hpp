@@ -2,6 +2,7 @@
 #define DST_OPERATOR_REGISTRY_HEADER
 
 #include <functional>
+#include <string>
 #include <unordered_map>
 #include <vector>
 
