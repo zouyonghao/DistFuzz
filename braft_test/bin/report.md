@@ -53,7 +53,9 @@
         https://github.com/baidu/braft/issues/273
     related logs
         error_cases/1486
+
 4. grpc Too many open files
 
     related logs
         error_cases/1486
+    https://github.com/grpc/grpc/issues/20418
