@@ -3,27 +3,76 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": [{
-        "name": "braft_test_gdb",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "/home/zyh/distributed-system-test/build/braft_test/braft_test_main",
-        "args": [
-            "report.md"
-        ],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}/braft_test/bin",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "gdb",
-        "setupCommands": [
-            {
-                "description": "Enable pretty-printing for gdb",
-                "text": "-enable-pretty-printing",
-                "ignoreFailures": true
-            }
-        ]
-    },
+    "configurations": [
+        {
+            "name": "ceph_mon_test_gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/ceph/build/bin/ceph-mon",
+            "args": [
+                "-i",
+                "a",
+                "-c",
+                "./ceph.conf"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/ceph_test/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "ceph_test_gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/ceph/build/bin/ceph-osd",
+            "args": [
+                "-i",
+                "2",
+                "-c",
+                "./ceph_with_proxy1.conf"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/ceph_test/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "braft_test_gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/distributed-system-test/build/braft_test/braft_test_main",
+            "args": [
+                "report.md"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/braft_test/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
         {
             "name": "compiler_gdb",
             "type": "cppdbg",
@@ -52,7 +101,10 @@
             "request": "launch",
             "program": "/home/zyh/distributed-system-test/build/fuzz/default_compiler",
             "args": [
-                "-o", "CMakeFiles/cmTC_d5ad5.dir/CMakeCCompilerABI.c.o",   "-c", "/usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c"
+                "-o",
+                "CMakeFiles/cmTC_d5ad5.dir/CMakeCCompilerABI.c.o",
+                "-c",
+                "/usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c"
             ],
             "stopAtEntry": false,
             "cwd": "/home/zyh/braft/build",
@@ -122,21 +174,20 @@
             "request": "launch",
             "program": "/home/zyh/distributed-system-test/build/proxy_server/proxy_server",
             "args": [
-                "config.json"
+                "proxy-config.json"
             ],
             "stopAtEntry": false,
-            "cwd": "${workspaceFolder}/test",
+            "cwd": "${workspaceFolder}/ceph_test/bin",
             "environment": [],
             "externalConsole": false,
-            "MIMode": "lldb",
+            "MIMode": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ],
-            "miDebuggerPath": "/usr/bin/lldb-mi-9"
+            ]
         }
     ]
 }

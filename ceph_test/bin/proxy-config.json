@@ -1,9 +1,366 @@
 {
+    "note": "c0 a8 a9 7b is 192.168.169.123",
+    "common_replace_mode": "hex",
+    "common_replace_pairs": [
+        {
+            "src": "c6 37 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "9f 27 c0 a8 a9 7b",
+            "dest_name": "mon",
+            "note": "50743(c6 37) to 40743(9f 27)"
+        },
+        {
+            "src": "1a f4 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 90 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6900(1a f4) to 6800(1a 90)"
+        },
+        {
+            "src": "1a f5 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 91 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6901(1a f5) to 6801(1a 91)"
+        },
+        {
+            "src": "1a f6 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 92 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6902(1a f6) to 6802(1a 92)"
+        },
+        {
+            "src": "1a f7 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 93 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6903(1a f7) to 6803(1a 93)"
+        },
+        {
+            "src": "1a f8 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 94 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6904(1a f8) to 6804(1a 94)"
+        },
+        {
+            "src": "1a f9 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 95 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6905(1a f9) to 6805(1a 95)"
+        },
+        {
+            "src": "1a fa c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 96 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6906(1a fa) to 6806(1a 96)"
+        },
+        {
+            "src": "1a fb c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 97 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6907(1a fb) to 6807(1a 97)"
+        },
+        {
+            "src": "1a fe c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 9a c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6910(1a fe) to 6810(1a 9a)"
+        },
+        {
+            "src": "1a ff c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 9b c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6911(1a ff) to 6811(1a 9b)"
+        },
+        {
+            "src": "1b 0 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 9c c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6912(1b 00) to 6812(1a 9c)"
+        },
+        {
+            "src": "1b 1 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 9d c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6913(1b 01) to 6813(1a 9d)"
+        },
+        {
+            "src": "1b 2 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 9e c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6914(1b 02) to 6814(1a 9e)"
+        },
+        {
+            "src": "1b 3 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a 9f c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6915(1b 03) to 6815(1a 9f)"
+        },
+        {
+            "src": "1b 4 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a a0 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6916(1b 04) to 6816(1a a0)"
+        },
+        {
+            "src": "1b 5 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a a1 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6917(1b 05) to 6817(1a a1)"
+        },
+        {
+            "src": "1b 8 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a a4 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6920(1b 08) to 6820(1a a4)"
+        },
+        {
+            "src": "1b 9 c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a a5 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6921(1b 09) to 6821(1a a5)"
+        },
+        {
+            "src": "1b a c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a a6 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6922(1b 0a) to 6822(1a a6)"
+        },
+        {
+            "src": "1b b c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a a7 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6923(1b 0b) to 6823(1a a7)"
+        },
+        {
+            "src": "1b c c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a a8 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6924(1b 0c) to 6824(1a a8)"
+        },
+        {
+            "src": "1b d c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a a9 c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6925(1b 0d) to 6825(1a a9)"
+        },
+        {
+            "src": "1b e c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a aa c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6926(1b 0e) to 6826(1a aa)"
+        },
+        {
+            "src": "1b f c0 a8 a9 7b",
+            "src_name": "osd.2",
+            "dest": "1a ab c0 a8 a9 7b",
+            "dest_name": "proxy",
+            "note": "6927(1b 0f) to 6827(1a ab)"
+        }
+    ],
     "proxy_servers": [
         {
-            "src_port": 50878,
-            "dest_port": 40878,
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 50743,
+            "dest_port": 40743,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 50744,
+            "dest_port": 40744,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6900,
+            "dest_port": 6800,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6901,
+            "dest_port": 6801,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6902,
+            "dest_port": 6802,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6903,
+            "dest_port": 6803,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6904,
+            "dest_port": 6804,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6905,
+            "dest_port": 6805,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6906,
+            "dest_port": 6806,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6907,
+            "dest_port": 6807,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6910,
+            "dest_port": 6810,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6911,
+            "dest_port": 6811,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6912,
+            "dest_port": 6812,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6913,
+            "dest_port": 6813,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6914,
+            "dest_port": 6814,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6915,
+            "dest_port": 6815,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6916,
+            "dest_port": 6816,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6917,
+            "dest_port": 6817,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6820,
+            "dest_port": 6920,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6821,
+            "dest_port": 6921,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6822,
+            "dest_port": 6922,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6823,
+            "dest_port": 6923,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6824,
+            "dest_port": 6924,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6825,
+            "dest_port": 6925,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6826,
+            "dest_port": 6926,
+            "delay_time": 0
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 6827,
+            "dest_port": 6927,
             "delay_time": 0
         }
-    ]
+    ],
+    "backup": []
 }

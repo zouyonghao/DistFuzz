@@ -13,7 +13,7 @@ enum SUPPORTED_ACTION
     // REORDER,
     LOST,
     DELAY,
-    ASYNC_DELAY,  // TODO: think about this argument: async delay is reorder?
+    ASYNC_DELAY, // TODO: think about this argument: async delay is reorder?
     ACTION_COUNT
 };
 
@@ -32,8 +32,9 @@ struct connection_pair
 };
 struct replace_item
 {
-    std::string target_string;
     std::string target_name;
+    char* target_string;
+    int size;
 };
 struct replace_pair
 {
@@ -55,7 +56,9 @@ struct replace_pair
 class ProxyServer
 {
 private:
+    std::string src_ip;
     int src_port;
+    std::string dest_ip;
     int dest_port;
     std::vector<struct replace_pair> replace_pairs;
     int delay_time; // deprecated
@@ -82,7 +85,8 @@ private:
     void cleanup(int signo);
 
 public:
-    ProxyServer(int _src_port, int _dest_port, int _delay_time,
+    ProxyServer(std::string src_ip, int _src_port, std::string dest_ip,
+                int _dest_port, int _delay_time,
                 std::vector<struct replace_pair> _replace_pairs);
     ~ProxyServer();
 };

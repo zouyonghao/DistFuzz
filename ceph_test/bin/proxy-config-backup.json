@@ -1,0 +1,86 @@
+{
+    "proxy_servers": [
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 50743,
+            "dest_port": 40743,
+            "delay_time": 0,
+            "replace_mode": "hex",
+            "replace_pairs": [
+                {
+                    "src": "c6 37",
+                    "src_name": "osd.2",
+                    "dest": "9f 27",
+                    "dest_name": "mon",
+                    "note": "50743(c6 37) to 40743(9f 27)"
+                },
+                {
+                    "src": "1b 8",
+                    "src_name": "osd.2",
+                    "dest": "1a a4",
+                    "dest_name": "proxy",
+                    "note": "6920(1b 08) to 6820(1a a4)"
+                },
+                {
+                    "src": "1b 9",
+                    "src_name": "osd.2",
+                    "dest": "1a a5",
+                    "dest_name": "proxy",
+                    "note": "6921(1b 09) to 6821(1a a5)"
+                },
+                {
+                    "src": "1b a",
+                    "src_name": "osd.2",
+                    "dest": "1a a6",
+                    "dest_name": "proxy",
+                    "note": "6922(1b 0a) to 6822(1a a6)"
+                },
+                {
+                    "src": "1b b",
+                    "src_name": "osd.2",
+                    "dest": "1a a7",
+                    "dest_name": "proxy",
+                    "note": "6923(1b 0b) to 6823(1a a7)"
+                },
+                {
+                    "src": "1b c",
+                    "src_name": "osd.2",
+                    "dest": "1a a8",
+                    "dest_name": "proxy",
+                    "note": "6924(1b 0c) to 6824(1a a8)"
+                },
+                {
+                    "src": "1b d",
+                    "src_name": "osd.2",
+                    "dest": "1a a9",
+                    "dest_name": "proxy",
+                    "note": "6925(1b 0d) to 6825(1a a9)"
+                },
+                {
+                    "src": "1b e",
+                    "src_name": "osd.2",
+                    "dest": "1a aa",
+                    "dest_name": "proxy",
+                    "note": "6926(1b 0e) to 6826(1a aa)"
+                },
+                {
+                    "src": "1b f",
+                    "src_name": "osd.2",
+                    "dest": "1a ab",
+                    "dest_name": "proxy",
+                    "note": "6927(1b 0f) to 6827(1a ab)"
+                }
+            ]
+        },
+        {
+            "src_ip": "192.168.169.123",
+            "dest_ip": "192.168.169.123",
+            "src_port": 50744,
+            "dest_port": 40744,
+            "delay_time": 0,
+            "replace_pairs": []
+        }
+    ],
+    "backup": []
+}

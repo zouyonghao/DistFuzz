@@ -13,3 +13,12 @@ braft_test/bin/file_lock
 test/test_case_count
 braft_test/bin/input/random.txt
 braft_test/bin/operation_log
+ceph_test/bin/dev/
+ceph_test/bin/out/
+ceph_test/bin/keyring
+ceph_test/bin/logrotate.conf
+.gitignore
+ceph_test/bin/dashboard-admin-secret.txt
+ceph_test/bin/log_proxy
+ceph_test/bin/error_cases/1/mgr.x_error.log
+operation_log

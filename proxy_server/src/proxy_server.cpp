@@ -12,9 +12,11 @@
 #include <dst_event.h>
 #include <dst_random.h>
 
-ProxyServer::ProxyServer(int _src_port, int _dest_port, int _delay_time,
+ProxyServer::ProxyServer(std::string _src_ip, int _src_port,
+                         std::string _dest_ip, int _dest_port, int _delay_time,
                          std::vector<struct replace_pair> _replace_pairs)
-    : src_port(_src_port), dest_port(_dest_port), delay_time(_delay_time),
+    : src_ip(_src_ip), src_port(_src_port), dest_ip(_dest_ip),
+      dest_port(_dest_port), delay_time(_delay_time),
       replace_pairs(_replace_pairs)
 {
     printf("src_port = %d, dest_port = %d\n", src_port, dest_port);
@@ -58,7 +60,7 @@ void ProxyServer::accept_connection_handler()
 
     // Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
-    server.sin_addr.s_addr = inet_addr("127.0.1.1");
+    server.sin_addr.s_addr = inet_addr(src_ip.c_str());
     server.sin_port = htons(src_port);
 
     // Bind
@@ -81,7 +83,7 @@ void ProxyServer::accept_connection_handler()
                                  (socklen_t *)&c)))
     {
         std::cout << "Connection accepted, client port is " << client.sin_port
-                  << std::endl;
+                  << ", server port is " << src_port << std::endl;
 
         struct connection_pair *current_connection = new connection_pair;
         current_connection->src_sock = client_sock;
@@ -89,6 +91,7 @@ void ProxyServer::accept_connection_handler()
         if (current_connection->dest_sock < 0)
         {
             close(current_connection->src_sock);
+            free(current_connection);
             continue;
         }
 
@@ -142,7 +145,7 @@ int ProxyServer::connect_to_server()
         exit(-1);
     }
 
-    server.sin_addr.s_addr = inet_addr("127.0.1.1");
+    server.sin_addr.s_addr = inet_addr(dest_ip.c_str());
     server.sin_family = AF_INET;
     server.sin_port = htons(dest_port);
 
@@ -159,6 +162,7 @@ int ProxyServer::connect_to_server()
 
 void ProxyServer::close_connection_pair(struct connection_pair *cp)
 {
+    std::cout << "closing...\n";
     connection_lock.lock();
     if (cp != NULL &&
         std::find(connection_pairs.begin(), connection_pairs.end(), cp) !=
@@ -172,9 +176,9 @@ void ProxyServer::close_connection_pair(struct connection_pair *cp)
     connection_lock.unlock();
 }
 
-bool is_replace_str(char *target, const std::string &replace_str)
+bool is_replace_str(char *target, char *replace_str, int size)
 {
-    for (int i = 0; i < replace_str.length(); i++)
+    for (int i = 0; i < size; i++)
     {
         if (target[i] != replace_str[i])
         {
@@ -189,12 +193,13 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                                            DIRECTION direction)
 {
     int read_size;
-    char client_message[2000];
+    uint8_t client_message[2000];
     bool should_break = false;
     // Receive a message from client
     while (!should_break && running &&
-           (read_size = recv(src_sock, client_message, 2000, 0)) > 0)
+           (read_size = read(src_sock, client_message, 100)) > 0)
     {
+        std::cout << "read size = " << read_size << "\n";
         // Send the message back to client
         // std::cout << "message from " << src_sock << ", size = " << read_size;
         // for (int i = 0; i < read_size; i++)
@@ -202,6 +207,14 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         //     std::cout << client_message[i];
         // }
         // std::cout << std::endl;
+        
+        std::cout << "\nMessage content original:\n";
+        for (int i = 0; i < read_size; i++)
+        {
+            // std::cout << client_message[i];
+            printf("%x", client_message[i]);
+        }
+        std::cout << "\n";
         for (int i = 0; i < read_size; i++)
         {
             for (auto &s : replace_pairs)
@@ -211,26 +224,28 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                 const struct replace_item &dest =
                     direction == SRC_TO_DEST ? s.dest : s.src;
 
-                if (is_replace_str((char *)client_message + i,
-                                   src.target_string))
+                if (is_replace_str((char *)(client_message + i),
+                                   src.target_string, src.size))
                 {
                     std::cout << "Receiving from " << src.target_name
                               << ", send it to " << dest.target_name << "\n";
                     __dst_event_trigger(("Receiving from " + src.target_name +
                                          ", send it to " + dest.target_name)
                                             .c_str());
-                    for (int k = 0; k < dest.target_string.length(); k++)
+                    for (int k = 0; k < dest.size; k++)
                     {
+                        printf("%x ", client_message[i]);
                         client_message[i] = dest.target_string[k];
                         i++;
                     }
                 }
             }
         }
-        std::cout << "\nMessage Replaced!\n";
+        std::cout << "\nMessage content:\n";
         for (int i = 0; i < read_size; i++)
         {
-            std::cout << client_message[i];
+            // std::cout << client_message[i];
+            printf("%x", client_message[i]);
         }
         std::cout << std::endl;
 
@@ -280,6 +295,11 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         }
 
         int ret = write(dest_sock, client_message, read_size);
+        if (ret != read_size)
+        {
+            // TODO
+            std::cerr << "write less than read!!\n";
+        }
         if (ret < 0)
         {
             perror("write failed!");
