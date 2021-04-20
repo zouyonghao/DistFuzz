@@ -13,7 +13,7 @@ void SychronizeFuzzer(char **argv, string syncdir, string syncid) {
 		exit(-1);
 	}
 
-	while (sd_ent = readdir(sd)) {
+	while ((sd_ent = readdir(sd)) != NULL) {
 		DIR *qd;
 		dirent *qd_ent;
 		string qd_path, qd_synced_path;
