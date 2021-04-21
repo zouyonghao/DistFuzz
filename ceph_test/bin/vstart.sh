@@ -64,6 +64,7 @@ CEPH_ROOT=/home/zyh/ceph/
 CEPH_BUILD_DIR=/home/zyh/ceph/build/
 MGR_PYTHON_PATH=$CEPH_ROOT/src/pybind/mgr
 CEPH_ASOK_DIR=/home/zyh/distributed-system-test/ceph_test/bin/out
+CEPH_PORT=40743
 
 # use CEPH_BUILD_ROOT to vstart from a 'make install'
 if [ -n "$CEPH_BUILD_ROOT" ]; then
@@ -611,7 +612,7 @@ prepare_conf() {
         num ganesha = $GANESHA_DAEMON_NUM
 
 [global]
-        fsid = $(uuidgen)
+        fsid = faef5cf5-afb1-4dbc-a26f-5f94556f2db1
         osd failsafe full ratio = .99
         mon osd full ratio = .99
         mon osd nearfull ratio = .99

@@ -39,14 +39,16 @@ void ProxyServer::accept_connection_handler()
     if (setsockopt(socket_desc, SOL_SOCKET, SO_REUSEADDR, &enable,
                    sizeof(int)) != 0)
     {
-        std::cout << "setsockopt(SO_REUSEADDR) failed\n";
-        exit(-1);
+        std::cerr << "setsockopt(SO_REUSEADDR) failed\n";
+        close(socket_desc);
+        return;
     }
     if (setsockopt(socket_desc, SOL_SOCKET, SO_REUSEPORT, &enable,
                    sizeof(int)) != 0)
     {
-        std::cout << "setsockopt(SO_REUSEPORT) failed\n";
-        exit(-1);
+        std::cerr << "setsockopt(SO_REUSEPORT) failed\n";
+        close(socket_desc);
+        return;
     }
     struct linger linger;
     linger.l_onoff = 1;
@@ -54,8 +56,9 @@ void ProxyServer::accept_connection_handler()
     if (setsockopt(socket_desc, SOL_SOCKET, SO_LINGER, (const char *)&linger,
                    sizeof(linger)) != 0)
     {
-        std::cout << "setsockopt(SO_LINGER) failed\n";
-        exit(-1);
+        std::cerr << "setsockopt(SO_LINGER) failed\n";
+        close(socket_desc);
+        return;
     }
 
     // Prepare the sockaddr_in structure
@@ -116,6 +119,8 @@ void ProxyServer::accept_connection_handler()
         perror("accept failed");
     }
 
+    printf("stoped!\n");
+
     close(socket_desc);
     cleanup(0);
 }
@@ -152,7 +157,7 @@ int ProxyServer::connect_to_server()
     // Connect to remote server
     if (connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0)
     {
-        perror("connect failed. Error");
+        std::cerr << "connect failed.\n";
         return -1;
     }
 
@@ -193,11 +198,11 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                                            DIRECTION direction)
 {
     int read_size;
-    uint8_t client_message[2000];
+    uint8_t client_message[20000];
     bool should_break = false;
     // Receive a message from client
     while (!should_break && running &&
-           (read_size = read(src_sock, client_message, 100)) > 0)
+           (read_size = read(src_sock, client_message, 1000)) > 0)
     {
         std::cout << "read size = " << read_size << "\n";
         // Send the message back to client
@@ -207,14 +212,14 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         //     std::cout << client_message[i];
         // }
         // std::cout << std::endl;
-        
-        std::cout << "\nMessage content original:\n";
-        for (int i = 0; i < read_size; i++)
-        {
-            // std::cout << client_message[i];
-            printf("%x", client_message[i]);
-        }
-        std::cout << "\n";
+
+        // std::cout << "\nMessage content original:\n";
+        // for (int i = 0; i < read_size; i++)
+        // {
+        //     // std::cout << client_message[i];
+        //     printf("%x", client_message[i]);
+        // }
+        // std::cout << "\n";
         for (int i = 0; i < read_size; i++)
         {
             for (auto &s : replace_pairs)
@@ -229,9 +234,10 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                 {
                     std::cout << "Receiving from " << src.target_name
                               << ", send it to " << dest.target_name << "\n";
-                    __dst_event_trigger(("Receiving from " + src.target_name +
-                                         ", send it to " + dest.target_name)
-                                            .c_str());
+                    // __dst_event_trigger(("Receiving from " + src.target_name
+                    // +
+                    //                      ", send it to " + dest.target_name)
+                    //                         .c_str());
                     for (int k = 0; k < dest.size; k++)
                     {
                         printf("%x ", client_message[i]);
@@ -241,12 +247,12 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                 }
             }
         }
-        std::cout << "\nMessage content:\n";
-        for (int i = 0; i < read_size; i++)
-        {
-            // std::cout << client_message[i];
-            printf("%x", client_message[i]);
-        }
+        // std::cout << "\nMessage content:\n";
+        // for (int i = 0; i < read_size; i++)
+        // {
+        //     // std::cout << client_message[i];
+        //     printf("%x", client_message[i]);
+        // }
         std::cout << std::endl;
 
         uint8_t select_random =
@@ -262,8 +268,8 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         {
             uint16_t random = __dst_get_random_uint16_t();
             usleep(random);
-            __dst_event_trigger(
-                ("sleep for " + std::to_string(random) + "n").c_str());
+            // __dst_event_trigger(
+            //     ("sleep for " + std::to_string(random) + "n").c_str());
             break;
         }
         case SUPPORTED_ACTION::LOST:
@@ -284,7 +290,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                 int ret = write(dest_sock, client_message, read_size);
                 if (ret < 0)
                 {
-                    perror("write failed!");
+                    std::cerr << "write failed!\n";
                     should_break = true;
                 }
             });
@@ -302,7 +308,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         }
         if (ret < 0)
         {
-            perror("write failed!");
+            std::cerr << "write failed!\n";
             break;
         }
     }
