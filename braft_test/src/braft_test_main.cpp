@@ -4,9 +4,9 @@
 #include <vector>
 
 #include <dst_kv_store.h>
-#include <dst_operator.hpp>
 #include <dst_random.h>
 #include <log.hpp>
+#include <operator/dst_operator.hpp>
 
 using namespace std::chrono_literals;
 
@@ -19,9 +19,9 @@ int main(int argc, char const *argv[])
     }
 
     uint32_t test_case_count = 0;
-    std::ifstream test_case_count_file("test_case_count");
-    test_case_count_file >> test_case_count;
-    test_case_count_file.close();
+    std::ifstream itest_case_count_file("test_case_count");
+    itest_case_count_file >> test_case_count;
+    itest_case_count_file.close();
     if (is_random_test)
     {
         // prepare random files
@@ -69,65 +69,61 @@ int main(int argc, char const *argv[])
         }
         __dst_init_random();
     }
-    do
+
+    std::cout << "\033[1;31mrunning test case " << test_case_count
+              << "\033[0m\n";
+
+    // start nodes and proxies
+    std::cout << "start nodes and proxies\n";
+    system("./run_fuzz_server.sh");
+
+    std::this_thread::sleep_for(5s);
+
+    // run 20 operations
+    size_t operator_size = Registry<Operator>::getItemVector().size();
+    std::cout << "operator_size = " << operator_size << "\n";
+    for (int i = 0; i < 20; i++)
     {
+        std::this_thread::sleep_for(2s);
+        uint32_t index = __dst_get_random_uint8_t() % operator_size;
+        std::cout << "running operator "
+                  << Registry<Operator>::getItemVector()[index].first << "\n";
+        std::thread t1([index]() {
+            Registry<Operator>::getItemVector()[index].second->_do();
+        });
 
-        std::cout << "\033[1;31mrunning test case " << test_case_count
-                  << "\033[0m\n";
-
-        // start nodes and proxies
-        std::cout << "start nodes and proxies\n";
-        system("./run_fuzz_server.sh");
-
-        std::this_thread::sleep_for(5s);
-
-        // run 20 operations
-        size_t operator_size = Registry<Operator>::getItemVector().size();
-        std::cout << "operator_size = " << operator_size << "\n";
-        for (int i = 0; i < 20; i++)
+        if (__dst_get_random_uint8_t() < 150)
         {
-            std::this_thread::sleep_for(2s);
-            uint32_t index = __dst_get_random_uint8_t() % operator_size;
+            // run another operation
+            index = __dst_get_random_uint8_t() % operator_size;
             std::cout << "running operator "
                       << Registry<Operator>::getItemVector()[index].first
                       << "\n";
-            std::thread t1([index]() {
+            std::thread t2([index]() {
                 Registry<Operator>::getItemVector()[index].second->_do();
             });
-
-            if (__dst_get_random_uint8_t() < 150)
-            {
-                // run another operation
-                index = __dst_get_random_uint8_t() % operator_size;
-                std::cout << "running operator "
-                          << Registry<Operator>::getItemVector()[index].first
-                          << "\n";
-                std::thread t2([index]() {
-                    Registry<Operator>::getItemVector()[index].second->_do();
-                });
-                t2.join();
-            }
-
-            t1.join();
+            t2.join();
         }
 
-        // stop
-        std::cout << "stopping...\n";
-        system("./stop.sh");
-        dst_clear_all();
+        t1.join();
+    }
 
-        // backup test cases
-        std::cout << "backup test cases\n";
-        system(("sh ./backup_test_case.sh " + std::to_string(test_case_count++))
-                   .c_str());
-        std::cout << test_case_count << "\n";
+    // stop
+    std::cout << "stopping...\n";
+    system("./stop.sh");
+    dst_clear_all();
 
-        std::ofstream test_case_count_file("test_case_count");
-        test_case_count_file << test_case_count;
-        test_case_count_file.close();
+    // backup test cases
+    std::cout << "backup test cases\n";
+    system(("sh ./backup_test_case.sh " + std::to_string(test_case_count++))
+               .c_str());
+    std::cout << test_case_count << "\n";
 
-        // std::this_thread::sleep_for(2s);
-    } while (is_random_test);
+    std::ofstream otest_case_count_file("test_case_count");
+    otest_case_count_file << test_case_count;
+    otest_case_count_file.close();
+
+    // std::this_thread::sleep_for(2s);
 
     return 0;
 }

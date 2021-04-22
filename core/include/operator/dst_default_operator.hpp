@@ -1,7 +1,7 @@
 #ifndef DST_DEFAULT_OPERATOR_HPP
 #define DST_DEFAULT_OPERATOR_HPP
 
-#include <dst_operator.hpp>
+#include <operator/dst_operator.hpp>
 
 class SimpleCommandOperator : public Operator
 {
@@ -13,5 +13,7 @@ public:
     bool _do();
     std::string &get_command() { return command; }
 };
+
+const std::string IS_START_KEY = "_is_start?";
 
 #endif
