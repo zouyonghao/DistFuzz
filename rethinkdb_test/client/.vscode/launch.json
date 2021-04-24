@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "get",
+            "request": "launch",
+            "mainClass": "cn.edu.tsinghua.oslab.RethinkDBTestClient",
+            "projectName": "rethinkdb-test-client",
+            "args": ["get"]
+        },
+        {
+            "type": "java",
+            "name": "set",
+            "request": "launch",
+            "mainClass": "cn.edu.tsinghua.oslab.RethinkDBTestClient",
+            "projectName": "rethinkdb-test-client",
+            "args": ["set", "1"]
+        },
+        {
+            "type": "java",
+            "name": "cas",
+            "request": "launch",
+            "mainClass": "cn.edu.tsinghua.oslab.RethinkDBTestClient",
+            "projectName": "rethinkdb-test-client",
+            "args": ["cas", "1", "2"]
+        }
+    ]
+}
