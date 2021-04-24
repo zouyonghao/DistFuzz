@@ -11,7 +11,8 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_library(dst_default_operator SHARED
             src/operator/dst_default_operator.cpp
             src/operator/kill_by_name.cpp
-            src/operator/start_by_name.cpp)
+            src/operator/start_by_name.cpp
+            src/operator/dst_default_client_operator.cpp)
 target_compile_options(dst_default_operator PUBLIC -fPIC)
 
 add_library(dst_event SHARED src/dst_default_event.cpp)
