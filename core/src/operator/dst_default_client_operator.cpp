@@ -7,7 +7,7 @@ bool DefaultClientOperator::_do()
     for (auto &i : need_random_parameters)
     {
         std::string random = std::to_string(__dst_get_random_uint32());
-        command += " -" + i + "=" + random + " ";
+        command += i + random + " ";
         values.push_back(random);
     }
     __dst_event_record(get_invoke_record(values).c_str());

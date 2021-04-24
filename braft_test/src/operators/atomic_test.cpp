@@ -11,10 +11,11 @@ static const std::string UNFINISHED_COMMAND =
 // -atomic_op="cas" -atomic_id=1 -atomic_val=10 -atomic_new_val=12
 REGISTER_OPERATOR(AtomicTestGet,
                   new DefaultClientOperator(UNFINISHED_COMMAND + "get", "read",
-                                         {}));
+                                            {}));
 REGISTER_OPERATOR(AtomicTestSet,
                   new DefaultClientOperator(UNFINISHED_COMMAND + "set", "write",
-                                         {"atomic_val"}));
+                                            {"-atomic_val="}));
 REGISTER_OPERATOR(AtomicTestCas,
                   new DefaultClientOperator(UNFINISHED_COMMAND + "cas", "cas",
-                                         {"atomic_val", "atomic_new_val"}));
+                                            {"-atomic_val=",
+                                             "-atomic_new_val="}));
