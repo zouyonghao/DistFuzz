@@ -1,0 +1,97 @@
+{
+    "proxy_servers": [
+        {
+            "src_ip": "127.0.0.1",
+            "src_port": 6000,
+            "dest_ip": "127.0.0.1",
+            "dest_port": 5000,
+            "delay_time": 0,
+            "replace_mode": "hex",
+            "replace_pairs": [
+                {
+                    "src": "31 72 17",
+                    "src_name": "db2",
+                    "dest": "31 8a 13",
+                    "dest_name": "proxy",
+                    "note": "6002 to 5002"
+                },
+                {
+                    "src": "31 70 17",
+                    "src_name": "db2",
+                    "dest": "31 88 13",
+                    "dest_name": "proxy",
+                    "note": "6002 to 5002"
+                },
+                {
+                    "src": "31 71 17",
+                    "src_name": "db2",
+                    "dest": "31 89 13",
+                    "dest_name": "proxy",
+                    "note": "6002 to 5002"
+                }
+            ]
+        },
+        {
+            "src_ip": "127.0.0.1",
+            "src_port": 6001,
+            "dest_ip": "127.0.0.1",
+            "dest_port": 5001,
+            "delay_time": 0,
+            "replace_mode": "hex",
+            "replace_pairs": [
+                {
+                    "src": "31 70 17",
+                    "src_name": "db2",
+                    "dest": "31 88 13",
+                    "dest_name": "db1",
+                    "note": "6002 to 5002"
+                },
+                {
+                    "src": "31 71 17",
+                    "src_name": "db2",
+                    "dest": "31 89 13",
+                    "dest_name": "db1",
+                    "note": "6002 to 5002"
+                },
+                {
+                    "src": "31 72 17",
+                    "src_name": "db2",
+                    "dest": "31 8a 13",
+                    "dest_name": "db1",
+                    "note": "6002 to 5002"
+                }
+            ]
+        },
+        {
+            "src_ip": "127.0.0.1",
+            "src_port": 5002,
+            "dest_ip": "127.0.0.1",
+            "dest_port": 6002,
+            "delay_time": 0,
+            "replace_mode": "hex",
+            "replace_pairs": [
+                {
+                    "src": "31 8a 13",
+                    "src_name": "db?",
+                    "dest": "31 72 17",
+                    "dest_name": "db2",
+                    "note": "5002 to 6002"
+                },
+                {
+                    "src": "31 88 13",
+                    "src_name": "db?",
+                    "dest": "31 70 17",
+                    "dest_name": "db2",
+                    "note": "5000 to 6000"
+                },
+                {
+                    "src": "31 89 13",
+                    "src_name": "db?",
+                    "dest": "31 71 17",
+                    "dest_name": "db2",
+                    "note": "5001 to 6001"
+                }
+            ]
+        }
+    ]
+}

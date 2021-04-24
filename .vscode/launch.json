@@ -5,6 +5,68 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "rethinkdb_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/rethinkdb/build/release_clang_system/rethinkdb",
+            "args": [
+                "--bind",
+                "127.0.0.1",
+                "--cluster-port",
+                "6002",
+                "--driver-port",
+                "4002",
+                "--http-port",
+                "8082",
+                "-d",
+                "./rethinkdb_data2",
+                "-j",
+                "127.0.0.1:6000"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/rethinkdb_test/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "fuzzer_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/fuzz/fuzzer",
+            "args": [
+                "-i",
+                "input",
+                "-o",
+                "output",
+                "-M",
+                "fuzzer1",
+                "-f",
+                "random.txt",
+                "../../build/braft_test/braft_test_main",
+                "random.txt"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/braft_test/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "ceph_mon_test_gdb",
             "type": "cppdbg",
             "request": "launch",
@@ -148,15 +210,11 @@
             "request": "launch",
             "program": "/home/zyh/distributed-system-test/build/proxy_server/proxy_server",
             "args": [
-                "config.json"
+                "proxy-config.json"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/braft_test/bin",
             "environment": [
-                {
-                    "name": "__DST_ENV_RANDOM_FILE__",
-                    "value": "random.txt"
-                }
             ],
             "externalConsole": false,
             "MIMode": "gdb",

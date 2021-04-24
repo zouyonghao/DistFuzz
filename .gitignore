@@ -17,10 +17,22 @@ ceph_test/bin/dev/
 ceph_test/bin/out/
 ceph_test/bin/keyring
 ceph_test/bin/logrotate.conf
-.gitignore
 ceph_test/bin/dashboard-admin-secret.txt
 ceph_test/bin/log_proxy
 ceph_test/bin/error_cases/1/mgr.x_error.log
 operation_log
 ceph_test/bin/log_proxy copy
 ceph_test/bin/log_event_control
+rethinkdb_test/bin/rethinkdb_data*
+rethinkdb_test/bin/log_event_control
+rethinkdb_test/bin/log_proxy
+rethinkdb_test/client/target
+rethinkdb_test/bin/log*
+rethinkdb_test/bin/test_case*
+rethinkdb_test/bin/output/
+rethinkdb_test/bin/random*
+rethinkdb_test/bin/file_lock
+rethinkdb_test/bin/sync_file
+rethinkdb_test/bin/sync_branch_cov_file
+rethinkdb_test/bin/input/random.txt
+rethinkdb_test/bin/init_random.txt

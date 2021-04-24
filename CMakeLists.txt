@@ -6,5 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 add_subdirectory(proxy_server)
 add_subdirectory(event_control)
 add_subdirectory(core)
-add_subdirectory(braft_test)
 add_subdirectory(fuzz)
+
+add_subdirectory(braft_test)
+add_subdirectory(rethinkdb_test)

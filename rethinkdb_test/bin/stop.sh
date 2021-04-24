@@ -1,0 +1,3 @@
+killall rethinkdb
+killall proxy_server
+killall event_control

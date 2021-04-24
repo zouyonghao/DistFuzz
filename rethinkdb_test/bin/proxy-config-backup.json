@@ -1,0 +1,247 @@
+{
+    "proxy_servers": [
+        {
+            "src_ip": "127.0.0.1",
+            "src_port": 6000,
+            "dest_ip": "127.0.0.1",
+            "dest_port": 5000,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "6000",
+                    "dest": "5000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "6001",
+                    "dest": "5001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "6002",
+                    "dest": "5002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "\u0072\u0017",
+                    "dest": "\u008a\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1\u0071\u0017",
+                    "dest": "127.0.0.1\u0089\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1\u0070\u0017",
+                    "dest": "127.0.0.1\u0088\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:6000",
+                    "dest": "127.0.0.1:5000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:6001",
+                    "dest": "127.0.0.1:5001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:6002",
+                    "dest": "127.0.0.1:5002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00046000",
+                    "dest": "--cluster-port\u00045000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00046001",
+                    "dest": "--cluster-port\u00045001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00046002",
+                    "dest": "--cluster-port\u00045002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                }
+            ]
+        },
+        {
+            "src_ip": "127.0.0.1",
+            "src_port": 6001,
+            "dest_ip": "127.0.0.1",
+            "dest_port": 5001,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "6000",
+                    "dest": "5000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "6001",
+                    "dest": "5001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "6002",
+                    "dest": "5002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1\u0072\u0017\u0003::1\u0072\u0017",
+                    "dest": "127.0.0.1\u008a\u0013\u0003::1\u008a\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1\u0071\u0017\u0003::1\u0071\u0017",
+                    "dest": "127.0.0.1\u0089\u0013\u0003::1\u0089\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1\u0070\u0017\u0003::1\u0070\u0017",
+                    "dest": "127.0.0.1\u0088\u0013\u0003::1\u0088\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:6000",
+                    "dest": "127.0.0.1:5000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:6001",
+                    "dest": "127.0.0.1:5001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:6002",
+                    "dest": "127.0.0.1:5002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00046000",
+                    "dest": "--cluster-port\u00045000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00046001",
+                    "dest": "--cluster-port\u00045001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00046002",
+                    "dest": "--cluster-port\u00045002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                }
+            ]
+        },
+        {
+            "src_ip": "127.0.0.1",
+            "src_port": 5002,
+            "dest_ip": "127.0.0.1",
+            "dest_port": 6002,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "dest": "127.0.0.1\u0072\u0017\u0003::1\u0072\u0017",
+                    "src": "127.0.0.1\u008a\u0013\u0003::1\u008a\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "dest": "127.0.0.1\u0071\u0017\u0003::1\u0071\u0017",
+                    "src": "127.0.0.1\u0089\u0013\u0003::1\u0089\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "dest": "127.0.0.1\u0070\u0017\u0003::1\u0070\u0017",
+                    "src": "127.0.0.1\u0088\u0013\u0003::1\u0088\u0013",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "5000",
+                    "dest": "6000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "5001",
+                    "dest": "6001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "5002",
+                    "dest": "6002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:5000",
+                    "dest": "127.0.0.1:6000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:5001",
+                    "dest": "127.0.0.1:6001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "127.0.0.1:5002",
+                    "dest": "127.0.0.1:6002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00045000",
+                    "dest": "--cluster-port\u00046000",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00045001",
+                    "dest": "--cluster-port\u00046001",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                },
+                {
+                    "src": "--cluster-port\u00045002",
+                    "dest": "--cluster-port\u00046002",
+                    "src_name": "db2",
+                    "dest_name": "db0"
+                }
+            ]
+        }
+    ]
+}

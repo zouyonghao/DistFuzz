@@ -72,7 +72,8 @@
         "concepts": "cpp",
         "ranges": "cpp",
         "stop_token": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "shared_mutex": "cpp"
     },
     "editor.fontSize": 18,
     "cmake.ctest.parallelJobs": 1,
