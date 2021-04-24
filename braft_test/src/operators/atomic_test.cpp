@@ -14,8 +14,8 @@ REGISTER_OPERATOR(AtomicTestGet,
                                             {}));
 REGISTER_OPERATOR(AtomicTestSet,
                   new DefaultClientOperator(UNFINISHED_COMMAND + "set", "write",
-                                            {"-atomic_val="}));
+                                            {" -atomic_val="}));
 REGISTER_OPERATOR(AtomicTestCas,
                   new DefaultClientOperator(UNFINISHED_COMMAND + "cas", "cas",
-                                            {"-atomic_val=",
-                                             "-atomic_new_val="}));
+                                            {" -atomic_val=",
+                                             " -atomic_new_val="}));
