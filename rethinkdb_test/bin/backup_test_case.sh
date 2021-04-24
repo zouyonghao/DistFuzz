@@ -15,6 +15,7 @@ mv operation_log ./test_cases/$1
 { \
     ./check.sh ${PWD}/test_cases/$1/operation_log > ${PWD}/test_cases/$1/check_log 2>&1; \
     if grep -q ^E ./test_cases/$1/log*; then echo "Find errors!"; \
+    elif grep -q Backtrace ./test_cases/$1/log*; then echo "May find error trace!"; \
     elif grep -q "ERROR: AddressSanitizer"; then echo "Find ASan errors!"; \
     elif grep -q true ./test_cases/$1/check_log; then echo "No errors, deleting logs..."; \
         rm -rf ./test_cases/$1; \
