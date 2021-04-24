@@ -5,4 +5,4 @@
 # ./proxy_server 8305 8301 600000   8304 8300 8305 8301 8303 8302 >> log_proxy3 2>&1 &
 # ./proxy_server 8305 8301 0   8304 8300 8305 8301 8303 8302
 
-__DST_ENV_RANDOM_FILE__=random_proxy.txt ../../build/proxy_server/proxy_server ../../configs/proxy-config.json > log_proxy 2>&1 &
+__DST_ENV_RANDOM_FILE__=random_proxy.txt ../../build/proxy_server/proxy_server ./proxy-config.json > log_proxy 2>&1 &

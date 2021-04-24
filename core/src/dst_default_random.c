@@ -4,7 +4,7 @@
 // when the program is shutdown/restart
 static volatile uint32_t fuzz_file_index = 0;
 static uint64_t fuzz_file_length = 0;
-static uint8_t *fuzz_file_array;
+static uint8_t *fuzz_file_array = NULL;
 
 static uint8_t read_byte()
 {
@@ -47,7 +47,18 @@ static void __attribute__((constructor)) init_random_file()
     }
 }
 
-void __dst_init_random() { init_random_file(); }
+void __dst_reinit_random(const char *file_name)
+{
+    printf("Reading random file %s\n", file_name);
+    if (file_name)
+    {
+        if (NULL != fuzz_file_array)
+        {
+            free(fuzz_file_array);
+        }
+        file_to_string(file_name);
+    }
+}
 
 static void __attribute__((destructor)) uninit() { free(fuzz_file_array); }
 

@@ -7,6 +7,8 @@
     },
     "proxy_servers": [
         {
+            "src_ip": "127.0.1.1",
+            "dest_ip": "127.0.1.1",
             "src_port": 8302,
             "dest_port": 8303,
             "delay_time": 0,
@@ -32,6 +34,8 @@
             ]
         },
         {
+            "src_ip": "127.0.1.1",
+            "dest_ip": "127.0.1.1",
             "src_port": 8304,
             "dest_port": 8300,
             "delay_time": 0,
@@ -57,6 +61,8 @@
             ]
         },
         {
+            "src_ip": "127.0.1.1",
+            "dest_ip": "127.0.1.1",
             "src_port": 8305,
             "dest_port": 8301,
             "delay_time": 0,

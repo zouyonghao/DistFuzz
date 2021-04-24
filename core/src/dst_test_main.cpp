@@ -67,7 +67,7 @@ int main(int argc, char const *argv[])
             out.write((const char *)&split_content[0], split_content.size());
             out.close();
         }
-        __dst_init_random();
+        __dst_reinit_random(argv[1]);
     }
 
     std::cout << "\033[1;31mrunning test case " << test_case_count
@@ -111,7 +111,7 @@ int main(int argc, char const *argv[])
     // stop
     std::cout << "stopping...\n";
     system("./stop.sh");
-    dst_clear_all();
+    dst_clear_kv_all();
 
     // backup test cases
     std::cout << "backup test cases\n";
