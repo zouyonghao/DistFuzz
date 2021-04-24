@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
     {
         std::string src_ip = server["src_ip"].GetString();
         int src_port = server["src_port"].GetInt();
-        std::string dest_ip = server["src_ip"].GetString();
+        std::string dest_ip = server["dest_ip"].GetString();
         int dest_port = server["dest_port"].GetInt();
         int delay_time = server["delay_time"].GetInt();
         std::vector<struct replace_pair> _replace_pairs;
@@ -137,6 +137,8 @@ int main(int argc, char *argv[])
                                          delay_time, _replace_pairs);
         proxy_servers.push_back(p);
     }
+
+    std::cout << "proxy_servers size: " << proxy_servers.size() << "\n";
 
     while (true)
     {
