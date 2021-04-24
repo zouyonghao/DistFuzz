@@ -20,7 +20,7 @@ extern "C"
 
     extern const char *dst_get(const char *key);
 
-    extern void dst_clear_all();
+    extern void dst_clear_kv_all();
 
 #ifdef __cplusplus
 }

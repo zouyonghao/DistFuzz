@@ -43,7 +43,7 @@ const char *dst_get(const char *key)
     return EMPTY_STRING.c_str();
 }
 
-void dst_clear_all()
+void dst_clear_kv_all()
 {
     kv.clear();
 }
