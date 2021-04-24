@@ -94,6 +94,12 @@ int main(int argc, char **argv)
             Registry<Instrumentor>::getItemMap()[std::string(i.GetString())]);
     }
 
+    std::vector<std::string> file_blacklist;
+    for (auto &i : document["file_blacklist"].GetArray())
+    {
+        file_blacklist.push_back(i.GetString());
+    }
+
     if (is_assembly_file(argc, argv))
     {
         execvp(CLANG, argv);
@@ -124,6 +130,7 @@ int main(int argc, char **argv)
     bool is_only_link = true;
     bool is_only_compile = false;
     bool is_specified_output_name = false;
+    bool has_black_list_file = false;
     for (int i = 1; i < argc; i++)
     {
         std::string tmp(argv[i]);
@@ -148,7 +155,15 @@ int main(int argc, char **argv)
         else if (ends_with(tmp, ".c") || ends_with(tmp, ".cpp") ||
                  ends_with(tmp, ".cc"))
         {
-            source_files.push_back(std::string(argv[i]));
+            std::string arg_string = std::string(argv[i]);
+            for (auto &black_list_file : file_blacklist)
+            {
+                if (arg_string.find(black_list_file) != std::string::npos)
+                {
+                    has_black_list_file = true;
+                }
+            }
+            source_files.push_back(arg_string);
             is_only_link = false;
         }
 
@@ -161,7 +176,7 @@ int main(int argc, char **argv)
         compile_to_ll_vector.push_back(argv[i]);
     }
 
-    if (is_only_link)
+    if (is_only_link || has_black_list_file)
     {
         for (auto &i : document["additional_link_args"].GetArray())
         {
@@ -188,18 +203,18 @@ int main(int argc, char **argv)
 
         std::vector<std::string> ll_files;
         // instrument
-        for (auto &i : document["instrumentors"].GetArray())
+        for (auto &s : source_files)
         {
-            auto map = Registry<Instrumentor>::getItemMap();
-            if (map.find(i.GetString()) != map.end())
+            std::string ll_file_name =
+                s.substr(s.rfind("/") + 1, s.rfind(".") - s.rfind("/") - 1) +
+                ".ll";
+            ll_files.push_back(ll_file_name);
+
+            for (auto &i : document["instrumentors"].GetArray())
             {
-                for (auto &s : source_files)
+                auto map = Registry<Instrumentor>::getItemMap();
+                if (map.find(i.GetString()) != map.end())
                 {
-                    std::string ll_file_name =
-                        s.substr(s.rfind("/") + 1,
-                                 s.rfind(".") - s.rfind("/") - 1) +
-                        ".ll";
-                    ll_files.push_back(ll_file_name);
                     llvm::LLVMContext ctx;
                     llvm::SMDiagnostic Err;
                     unique_ptr<llvm::Module> module_ptr =
@@ -238,7 +253,10 @@ int main(int argc, char **argv)
         {
             std::cout << i << " ";
         }
-
+        for (auto &i : document["additional_compile_llvm_args"].GetArray())
+        {
+            compile_ll_to_target_vector.push_back(i.GetString());
+        }
         compile_ll_to_target_vector.push_back(nullptr);
         execvp(compile_ll_to_target_vector[0],
                (char *const *)&compile_ll_to_target_vector[0]);
