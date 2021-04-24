@@ -246,8 +246,6 @@ u8 ExecuteCase(string target_path, char **argv, u32 timeout)
                    "allocator_may_return_null=1",
                    0);
 
-            setenv("__DST_ENV_RANDOM_FILE__", "random.txt", 0);
-
             // usleep(995000);
             execv(target_path.c_str(), argv);
             exit(0);
