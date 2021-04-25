@@ -41,11 +41,12 @@ std::string get_result_record(std::string op_name,
                               std::string &last_output)
 {
     std::string value = convert_value_vector(values);
-    if (op_name == "get")
+    if (op_name == "read")
     {
         try
         {
             value = std::to_string(std::stoi(last_output));
+            std::cout << value << "\n";
         }
         catch (const std::exception &e)
         {
@@ -59,6 +60,7 @@ std::string get_result_record(std::string op_name,
 
 bool DefaultClientOperator::_do()
 {
+    std::cout << unfinished_command << "\n";
     std::string command = unfinished_command;
     std::vector<std::string> values;
     for (auto &i : need_random_parameters)

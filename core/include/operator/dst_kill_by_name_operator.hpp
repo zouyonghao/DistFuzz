@@ -1,10 +1,10 @@
 #ifndef DST_KILL_BY_NAME_OPERATOR_HPP
 #define DST_KILL_BY_NAME_OPERATOR_HPP
 
-#include <operator/dst_default_operator.hpp>
 #include <dst_kv_store.h>
+#include <operator/dst_default_operator.hpp>
 
-class KillByName : public Operator
+class KillByName : public CriticalOperator
 {
 private:
     std::string node_name;

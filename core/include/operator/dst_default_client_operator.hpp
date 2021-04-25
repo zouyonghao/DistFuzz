@@ -11,7 +11,7 @@
 
 #include <boost/process.hpp>
 
-class DefaultClientOperator : public Operator
+class DefaultClientOperator : public NormalOperator
 {
 private:
     std::string unfinished_command;
@@ -19,8 +19,9 @@ private:
     std::vector<std::string> need_random_parameters;
 
 public:
-    DefaultClientOperator(std::string _unfinished_command, std::string _atomic_op,
-                       std::vector<std::string> _need_random_parameters)
+    DefaultClientOperator(std::string _unfinished_command,
+                          std::string _atomic_op,
+                          std::vector<std::string> _need_random_parameters)
         : unfinished_command(_unfinished_command), op_name(_atomic_op),
           need_random_parameters(_need_random_parameters)
     {

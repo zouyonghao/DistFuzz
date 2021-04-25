@@ -1,10 +1,10 @@
 #ifndef DST_START_BY_NAME_OPERATOR_HPP
 #define DST_START_BY_NAME_OPERATOR_HPP
 
-#include <operator/dst_default_operator.hpp>
 #include <dst_kv_store.h>
+#include <operator/dst_default_operator.hpp>
 
-class StartByName : public SimpleCommandOperator
+class StartByName : public SimpleCommandOperator, public CriticalOperator
 {
 private:
     std::string node_name;
