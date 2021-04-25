@@ -19,7 +19,6 @@ int __dst_event_trigger(const char *s)
         //                  EventConstant::MAX_QUEUE_MESSAGE_SIZE);
         message_queue mq(open_only, EventConstant::EVENT_QUEUE_ID);
         mq.send(s, strlen(s), 0);
-        std::cout << "only open\n";
     }
     catch (interprocess_exception &ex)
     {
