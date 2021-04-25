@@ -11,6 +11,7 @@
 
 #include <dst_event.h>
 #include <dst_random.h>
+#include <log.hpp>
 
 ProxyServer::ProxyServer(std::string _src_ip, int _src_port,
                          std::string _dest_ip, int _dest_port, int _delay_time,
@@ -258,6 +259,14 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         uint8_t select_random =
             __dst_get_random_uint8_t() % SUPPORTED_ACTION::ACTION_COUNT;
 
+        bool need_dup = false;
+
+        if (skiped_messages < skip_messages)
+        {
+            skiped_messages++;
+            goto WRITE;
+        }
+
         switch (select_random)
         {
         case SUPPORTED_ACTION::NOOP:
@@ -296,10 +305,16 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
             });
             continue;
         }
+        case SUPPORTED_ACTION::DUP:
+        {
+            need_dup = true;
+            break;
+        }
         default:
             break;
         }
 
+    WRITE:
         int ret = write(dest_sock, client_message, read_size);
         if (ret != read_size)
         {
@@ -310,6 +325,11 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         {
             std::cerr << "write failed!\n";
             break;
+        }
+        if (need_dup)
+        {
+            need_dup = false;
+            goto WRITE;
         }
     }
 

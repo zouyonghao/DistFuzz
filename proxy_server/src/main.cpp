@@ -104,7 +104,14 @@ int main(int argc, char *argv[])
         }
     }
 
-    std::cout << "common replace pairs number: " << _common_replace_pairs.size() << "\n";
+    int common_skip_messages = 0;
+    if (document.HasMember("common_skip_messages"))
+    {
+        common_skip_messages = document["common_skip_messages"].GetInt();
+    }
+
+    std::cout << "common replace pairs number: " << _common_replace_pairs.size()
+              << "\n";
 
     std::list<ProxyServer *> proxy_servers;
     for (auto &server : document["proxy_servers"].GetArray())
@@ -135,6 +142,12 @@ int main(int argc, char *argv[])
         }
         ProxyServer *p = new ProxyServer(src_ip, src_port, dest_ip, dest_port,
                                          delay_time, _replace_pairs);
+        int skip_messages = common_skip_messages;
+        if (server.HasMember("skip_messages"))
+        {
+            skip_messages = server["skip_messages"].GetInt();
+        }
+        p->set_skip_messages(skip_messages);
         proxy_servers.push_back(p);
     }
 

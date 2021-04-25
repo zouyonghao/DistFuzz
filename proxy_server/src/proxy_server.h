@@ -14,6 +14,7 @@ enum SUPPORTED_ACTION
     LOST,
     DELAY,
     ASYNC_DELAY, // TODO: think about this argument: async delay is reorder?
+    DUP,
     ACTION_COUNT
 };
 
@@ -33,7 +34,7 @@ struct connection_pair
 struct replace_item
 {
     std::string target_name;
-    char* target_string;
+    char *target_string;
     int size;
 };
 struct replace_pair
@@ -62,6 +63,8 @@ private:
     int dest_port;
     std::vector<struct replace_pair> replace_pairs;
     int delay_time; // deprecated
+    int skip_messages; // skip delay/reorder/drop process for some messages at start
+    int skiped_messages = 0;
 
     std::thread *thread0;
     bool running = true;
@@ -89,6 +92,11 @@ public:
                 int _dest_port, int _delay_time,
                 std::vector<struct replace_pair> _replace_pairs);
     ~ProxyServer();
+
+    void set_skip_messages(int _skip_message)
+    {
+        this->skip_messages = _skip_message;
+    }
 };
 
 #endif
