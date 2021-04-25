@@ -1,0 +1,96 @@
+Reading random file random_node2.txt
+fuzz file open fail.
+Reading random file (null)
+[33m[FUZZ PRINT] shm declare[0m
+[33m[FUZZ PRINT] Can not Get Environment Variable[0m
+[33m[FUZZ PRINT] res_shmCov = (null)[0m
+[33m[FUZZ PRINT] Enter Normal Pattern[0m
+init_in_main success!
+Recursively removing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data2/tmp
+Initializing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data2
+Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+Running on Linux 4.15.0-140-generic x86_64
+Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data2
+Listening for intracluster connections on port 5002
+Connected to server "virtual_lfg" dcfbb269-b46c-4a10-94df-c7f1f074b355
+Listening for client driver connections on port 4002
+Listening for administrative HTTP connections on port 8082
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, "virtual_vjk" 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e
+Connected to server "virtual_use" 422a015f-979e-47f3-bc8b-241c82ce40f6
+A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+==29777==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7fd023eaeec0; bottom 0x7fd01fadd000; size: 0x0000043d1ec0 (71114432)
+False positive error reports may follow
+For details see https://github.com/google/sanitizers/issues/189
+Reading random file random_node2.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
+Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+Running on Linux 4.15.0-140-generic x86_64
+Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data2
+Listening for intracluster connections on port 6002
+Connected to server "virtual_use" 422a015f-979e-47f3-bc8b-241c82ce40f6
+Connected to server "virtual_lfg" dcfbb269-b46c-4a10-94df-c7f1f074b355
+only open
+only open
+Listening for client driver connections on port 4002
+Listening for administrative HTTP connections on port 8082
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, "virtual_vjk" 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e
+Disconnected from server "virtual_lfg" dcfbb269-b46c-4a10-94df-c7f1f074b355
+Connected to server "virtual_lfg" dcfbb269-b46c-4a10-94df-c7f1f074b355
+==30566==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7fba6b216ec0; bottom 0x7fba66ad7000; size: 0x00000473fec0 (74710720)
+False positive error reports may follow
+For details see https://github.com/google/sanitizers/issues/189
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+Disconnected from server "virtual_use" 422a015f-979e-47f3-bc8b-241c82ce40f6
+Connected to server "virtual_use" 422a015f-979e-47f3-bc8b-241c82ce40f6

@@ -1,0 +1,38 @@
+2021-04-25T13:07:06.227143863 0.018056s notice: Recursively removing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1/tmp
+2021-04-25T13:07:06.252657424 0.043571s notice: Initializing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1
+2021-04-25T13:07:06.253341058 0.044253s notice: Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+2021-04-25T13:07:06.266889860 0.057804s notice: Running on Linux 4.15.0-140-generic x86_64
+2021-04-25T13:07:06.270609437 0.061521s notice: Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1
+2021-04-25T13:07:06.416440043 0.207355s info: Automatically using cache size of 2078 MB
+2021-04-25T13:07:06.419953624 0.210866s notice: Listening for intracluster connections on port 5001
+2021-04-25T13:07:06.421272367 0.212189s info: Attempting connection to 2 peers...
+2021-04-25T13:07:06.442600611 0.233513s notice: Connected to server "virtual_lfg" dcfbb269-b46c-4a10-94df-c7f1f074b355
+2021-04-25T13:07:06.444349412 0.235261s notice: Listening for client driver connections on port 4001
+2021-04-25T13:07:06.444586862 0.235499s notice: Connected to server "virtual_vjk" 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e
+2021-04-25T13:07:06.444614230 0.235526s notice: Listening for administrative HTTP connections on port 8081
+2021-04-25T13:07:06.444616455 0.235528s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2021-04-25T13:07:06.444621988 0.235533s notice: Listening on driver addresses: 127.0.0.1, ::1
+2021-04-25T13:07:06.444623790 0.235535s notice: Listening on http addresses: 127.0.0.1, ::1
+2021-04-25T13:07:06.444628525 0.235540s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2021-04-25T13:07:06.444630570 0.235542s notice: Server ready, "virtual_use" 422a015f-979e-47f3-bc8b-241c82ce40f6
+2021-04-25T13:07:08.623071091 2.413983s notice: A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2021-04-25T13:07:26.577587420 20.368639s info: Table 89b88f3c-f9b7-4f58-8c05-a2df59ea4f1e: Added replica on this server.
+2021-04-25T13:07:52.596680321 0.029300s notice: Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+2021-04-25T13:07:52.605903907 0.038519s notice: Running on Linux 4.15.0-140-generic x86_64
+2021-04-25T13:07:52.610489788 0.043103s notice: Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1
+2021-04-25T13:07:52.693620407 0.126237s info: Automatically using cache size of 2047 MB
+2021-04-25T13:07:52.695755976 0.128369s notice: Listening for intracluster connections on port 5001
+2021-04-25T13:07:52.696494520 0.129109s info: Attempting connection to 2 peers...
+2021-04-25T13:07:52.732050993 0.164664s notice: Connected to server "virtual_lfg" dcfbb269-b46c-4a10-94df-c7f1f074b355
+2021-04-25T13:07:52.740765158 0.173378s notice: Listening for client driver connections on port 4001
+2021-04-25T13:07:52.741029512 0.173642s notice: Listening for administrative HTTP connections on port 8081
+2021-04-25T13:07:52.741033606 0.173646s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2021-04-25T13:07:52.741036344 0.173649s notice: Listening on driver addresses: 127.0.0.1, ::1
+2021-04-25T13:07:52.741048461 0.173661s notice: Listening on http addresses: 127.0.0.1, ::1
+2021-04-25T13:07:52.741051109 0.173663s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2021-04-25T13:07:52.741065455 0.173678s notice: Server ready, "virtual_use" 422a015f-979e-47f3-bc8b-241c82ce40f6
+2021-04-25T13:07:54.224283796 1.656897s notice: A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2021-04-25T13:08:08.772766620 16.205384s error: Heartbeat timeout, killing connection to peer 127.0.0.1:32850
+2021-04-25T13:08:08.830957631 16.263571s notice: Connected to server "virtual_vjk" 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e
+2021-04-25T13:08:09.831228980 17.263846s info: Rejected a connection from server 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e since one is open already.
+2021-04-25T13:08:34.199699548 41.632313s notice: Disconnected from server "virtual_vjk" 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e

@@ -1,0 +1,142 @@
+Reading random file random_node1.txt
+fuzz file open fail.
+Reading random file (null)
+[33m[FUZZ PRINT] shm declare[0m
+[33m[FUZZ PRINT] Can not Get Environment Variable[0m
+[33m[FUZZ PRINT] res_shmCov = (null)[0m
+[33m[FUZZ PRINT] Enter Normal Pattern[0m
+init_in_main success!
+Recursively removing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1/tmp
+Initializing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1
+Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+Running on Linux 4.15.0-140-generic x86_64
+Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1
+Listening for intracluster connections on port 5001
+Connected to server "virtual_lfg" dcfbb269-b46c-4a10-94df-c7f1f074b355
+Listening for client driver connections on port 4001
+Connected to server "virtual_vjk" 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e
+Listening for administrative HTTP connections on port 8081
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, "virtual_use" 422a015f-979e-47f3-bc8b-241c82ce40f6
+A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+==29776==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7f07e35d1ec0; bottom 0x7f07df246000; size: 0x00000438bec0 (70827712)
+False positive error reports may follow
+For details see https://github.com/google/sanitizers/issues/189
+Reading random file random_node1.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
+Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+Running on Linux 4.15.0-140-generic x86_64
+Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1
+Listening for intracluster connections on port 5001
+Connected to server "virtual_lfg" dcfbb269-b46c-4a10-94df-c7f1f074b355
+only open
+only open
+Listening for client driver connections on port 4001
+Listening for administrative HTTP connections on port 8081
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, "virtual_use" 422a015f-979e-47f3-bc8b-241c82ce40f6
+==30573==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7fbce8676ec0; bottom 0x7fbce3ed9000; size: 0x00000479dec0 (75095744)
+False positive error reports may follow
+For details see https://github.com/google/sanitizers/issues/189
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+error: Heartbeat timeout, killing connection to peer 127.0.0.1:32850
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+Connected to server "virtual_vjk" 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+only open
+Disconnected from server "virtual_vjk" 9d184c9b-0534-4a71-ab4d-8caf41f8cb9e
