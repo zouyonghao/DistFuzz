@@ -1,0 +1,29 @@
+2021-04-24T20:23:09.632504821 0.016989s notice: Recursively removing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1/tmp
+2021-04-24T20:23:09.660844841 0.045333s notice: Initializing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1
+2021-04-24T20:23:09.675632902 0.060113s notice: Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+2021-04-24T20:23:09.687682988 0.072166s notice: Running on Linux 4.15.0-140-generic x86_64
+2021-04-24T20:23:09.692574366 0.077054s notice: Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data1
+2021-04-24T20:23:09.835922941 0.220404s info: Automatically using cache size of 3192 MB
+2021-04-24T20:23:09.836989217 0.221468s notice: Listening for intracluster connections on port 5001
+2021-04-24T20:23:09.837389903 0.221869s info: Attempting connection to 2 peers...
+2021-04-24T20:23:09.853524257 0.238004s notice: Listening for client driver connections on port 4001
+2021-04-24T20:23:09.854971797 0.239451s notice: Listening for administrative HTTP connections on port 8081
+2021-04-24T20:23:09.854978294 0.239457s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2021-04-24T20:23:09.854979982 0.239459s notice: Listening on driver addresses: 127.0.0.1, ::1
+2021-04-24T20:23:09.854987388 0.239466s notice: Listening on http addresses: 127.0.0.1, ::1
+2021-04-24T20:23:09.854990680 0.239470s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2021-04-24T20:23:09.854995727 0.239475s notice: Server ready, "virtual_f44" f5ea4bbc-a4b8-440b-9bab-a75d4d6af73d
+2021-04-24T20:23:09.855182434 0.239662s notice: Connected to server "virtual_xeq" 549aead8-844b-4f46-8751-afffd35d7b08
+2021-04-24T20:23:11.261582693 1.646063s notice: A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+2021-04-24T20:23:16.621832984 7.006314s notice: Disconnected from server "virtual_xeq" 549aead8-844b-4f46-8751-afffd35d7b08
+2021-04-24T20:23:36.207352148 26.591832s notice: Connected to server "virtual_xeq" 549aead8-844b-4f46-8751-afffd35d7b08
+2021-04-24T20:23:38.442067076 28.826547s info: Table e3e01d27-f5a5-4987-94d0-0fbae4777e77: Starting a new Raft election for term 1.
+2021-04-24T20:23:38.443087691 28.827570s info: Table e3e01d27-f5a5-4987-94d0-0fbae4777e77: Added replica on this server.
+2021-04-24T20:23:38.532125845 28.916606s info: Table e3e01d27-f5a5-4987-94d0-0fbae4777e77: This server is Raft leader for term 1. Latest log index is 0.
+2021-04-24T20:23:47.467274121 37.851755s notice: Disconnected from server "virtual_xeq" 549aead8-844b-4f46-8751-afffd35d7b08
+2021-04-24T20:24:02.437908751 52.822390s notice: Server got SIGTERM from pid 53444, uid 1000; shutting down...
+2021-04-24T20:24:02.438111922 52.822592s notice: Shutting down client connections...
+2021-04-24T20:24:02.439917070 52.824397s notice: All client connections closed.
+2021-04-24T20:24:02.439938064 52.824417s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2021-04-24T20:24:02.461144176 52.845624s notice: Storage engine shut down.
+2021-04-24T20:24:02.483339150 52.867819s error: Failed to shutdown worker process: 'failed to send job function to worker'.  Killing it.

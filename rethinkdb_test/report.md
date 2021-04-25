@@ -282,3 +282,68 @@
         100 [0x22a2f1f]: void boost::detail::variant::invoke_visitor<ql::raw_term_t::source_visitor_t<ql::raw_term_t::each_optarg<ql::make_obj_term_t::make_obj_term_t(ql::compile_env_t*, ql::raw_term_t const&)::{lambda(ql::raw_term_t const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)#1}>(ql::make_obj_term_t::make_obj_term_t(ql::compile_env_t*, ql::raw_term_t const&)::{lambda(ql::raw_term_t const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)#1}&&) const::{lambda(ql::raw_term_t::json_data_t const&)#1}, ql::raw_term_t::each_optarg<{lambda(ql::raw_term_t const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)#1}>({lambda(ql::raw_term_t const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)#1}) const::{lambda(counted_t<ql::generated_term_t> const&)#1}> >::internal_visit<ql::raw_term_t::json_data_t>(ql::make_obj_term_t::make_obj_term_t(ql::compile_env_t*, ql::raw_term_t const&)::{lambda(ql::raw_term_t const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)#1}&, int) at variant.hpp:1048
     error: Exiting.
     ```
+
+5. multiple tables?
+    ```
+    com.rethinkdb.gen.exc.ReqlOpFailedError: Table `test.test` is ambiguous; there are multiple tables with that name.
+        at com.rethinkdb.ErrorBuilder.build(ErrorBuilder.java:79)
+        at com.rethinkdb.net.Response.makeError(Response.java:171)
+        at com.rethinkdb.net.Connection.runQuery(Connection.java:288)
+        at com.rethinkdb.net.Connection.run(Connection.java:332)
+        at com.rethinkdb.net.Connection.run(Connection.java:321)
+        at com.rethinkdb.ast.ReqlAst.run(ReqlAst.java:65)
+        at cn.edu.tsinghua.oslab.RethinkDBTestClient.cas(RethinkDBTestClient.java:74)
+        at cn.edu.tsinghua.oslab.RethinkDBTestClient.main(RethinkDBTestClient.java:105)
+    ```
+
+    known issue: https://github.com/rethinkdb/rethinkdb/issues/4521
+
+6. Guarantee failed
+    ```
+    Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
+    error: Error in thread 6 in src/rpc/connectivity/cluster.cc at line 1348:
+    error: Guarantee failed: [handler != nullptr] Got a message for an unfamiliar tag. Apparently we aren't compatible with the cluster on the other end.
+    Listening on driver addresses: 127.0.0.1, ::1
+    error: Backtrace:
+    Listening on http addresses: 127.0.0.1, ::1
+    To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+    Server ready, "virtual_lt5" e22dca83-aa60-4cf3-af1d-a9aa50d566c8
+    Connected to server "virtual_f6w" d66da52a-54f5-494d-bec3-d85ba6b90fdf
+    error: Sun Apr 25 08:29:44 2021
+        
+        1 [0x7f610b]: __interceptor_backtrace+0x5b at ??:?
+        2 [0x126476e]: backtrace_t::backtrace_t() at backtrace.cc:213
+        3 [0x1267698]: lazy_backtrace_formatter_t::lazy_backtrace_formatter_t() at backtrace.cc:297
+        4 [0x126337a]: format_backtrace[abi:cxx11](bool) at ??:?
+        5 [0x1a8f001]: report_fatal_error(char const*, int, char const*, ...) at errors.cc:86
+        6 [0x1ac008e]: connectivity_cluster_t::run_t::handle(keepalive_tcp_conn_stream_t*, optional<peer_id_t>, optional<peer_address_t>, optional<server_id_t>, auto_drainer_t::lock_t, bool*, int) at cluster.cc:1346
+        7 [0x1ac1890]: connectivity_cluster_t::run_t::connect_to_peer(peer_address_t const*, ip_and_port_t, int, optional<peer_id_t>, optional<server_id_t>, auto_drainer_t::lock_t, bool*, int, co_semaphore_t*) at cluster.cc:360
+        8 [0x1ac6e9a]: /home/zyh/rethinkdb/build/release_clang_system/rethinkdb() [0x1ac6e9a] at 0x1ac6e9a ()
+        9 [0x1ac2534]: connectivity_cluster_t::run_t::join_blocking(peer_address_t const&, optional<peer_id_t>, optional<server_id_t>, int, auto_drainer_t::lock_t) at pmap.hpp:47
+        10 [0x1ad15d7]: callable_action_instance_t<std::_Bind<std::map<ip_and_port_t, join_result_t, std::less<ip_and_port_t>, std::allocator<std::pair<ip_and_port_t const, join_result_t> > > (connectivity_cluster_t::run_t::*(connectivity_cluster_t::run_t*, peer_address_t, r_nullopt_t, r_nullopt_t, int, auto_drainer_t::lock_t))(peer_address_t const&, optional<peer_id_t>, optional<server_id_t>, int, auto_drainer_t::lock_t)> >::run_action() at invoke.h:73
+        11 [0x11b27e4]: coro_t::run() at coroutines.cc:277
+    error: Exiting.
+    ```
+
+    https://github.com/rethinkdb/rethinkdb/issues/3077
+
+7. Grarantee failed
+
+    ```
+    Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
+    error: Error in thread 8 in ./src/containers/map_sentries.hpp at line 70:
+    error: Guarantee failed: [iterator_and_is_new.second] value to be inserted already exists. don't do that.
+    error: Backtrace:
+    error: Sun Apr 25 08:31:58 2021
+        
+        1 [0x7f610b]: __interceptor_backtrace+0x5b at ??:?
+        2 [0x126476e]: backtrace_t::backtrace_t() at backtrace.cc:213
+        3 [0x1267698]: lazy_backtrace_formatter_t::lazy_backtrace_formatter_t() at backtrace.cc:297
+        4 [0x126337a]: format_backtrace[abi:cxx11](bool) at ??:?
+        5 [0x1a8f001]: report_fatal_error(char const*, int, char const*, ...) at errors.cc:86
+        6 [0x1b4190a]: directory_read_manager_t<cluster_directory_metadata_t>::handle_connection(connectivity_cluster_t::connection_t*, auto_drainer_t::lock_t, std::shared_ptr<cluster_directory_metadata_t> const&, fifo_enforcer_state_t, auto_drainer_t::lock_t) at map_sentries.hpp:69
+        7 [0x1b4a841]: void std::__invoke_impl<void, void (directory_read_manager_t<cluster_directory_metadata_t>::*&)(connectivity_cluster_t::connection_t*, auto_drainer_t::lock_t, std::shared_ptr<cluster_directory_metadata_t> const&, fifo_enforcer_state_t, auto_drainer_t::lock_t), directory_read_manager_t<cluster_directory_metadata_t>*&, connectivity_cluster_t::connection_t*&, auto_drainer_t::lock_t&, std::shared_ptr<cluster_directory_metadata_t>&, fifo_enforcer_state_t&, auto_drainer_t::lock_t&>(std::__invoke_memfun_deref, void (directory_read_manager_t<cluster_directory_metadata_t>::*&)(connectivity_cluster_t::connection_t*, auto_drainer_t::lock_t, std::shared_ptr<cluster_directory_metadata_t> const&, fifo_enforcer_state_t, auto_drainer_t::lock_t), directory_read_manager_t<cluster_directory_metadata_t>*&, connectivity_cluster_t::connection_t*&, auto_drainer_t::lock_t&, std::shared_ptr<cluster_directory_metadata_t>&, fifo_enforcer_state_t&, auto_drainer_t::lock_t&) at invoke.h:73
+        8 [0x1b4a0ee]: callable_action_instance_t<std::_Bind<void (directory_read_manager_t<cluster_directory_metadata_t>::*(directory_read_manager_t<cluster_directory_metadata_t>*, connectivity_cluster_t::connection_t*, auto_drainer_t::lock_t, std::shared_ptr<cluster_directory_metadata_t>, fifo_enforcer_state_t, auto_drainer_t::lock_t))(connectivity_cluster_t::connection_t*, auto_drainer_t::lock_t, std::shared_ptr<cluster_directory_metadata_t> const&, fifo_enforcer_state_t, auto_drainer_t::lock_t)> >::run_action() at callable_action.hpp:32
+        9 [0x11b27e4]: coro_t::run() at coroutines.cc:277
+    error: Exiting.
+    ```

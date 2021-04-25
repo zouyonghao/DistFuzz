@@ -1,0 +1,48 @@
+Reading random file random_node0.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
+Recursively removing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data0/tmp
+Initializing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data0
+Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+Running on Linux 4.15.0-140-generic x86_64
+Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data0
+Listening for intracluster connections on port 5000
+Listening for client driver connections on port 4000
+Connected to server "virtual_f44" f5ea4bbc-a4b8-440b-9bab-a75d4d6af73d
+Listening for administrative HTTP connections on port 8080
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, "virtual_xeq" 549aead8-844b-4f46-8751-afffd35d7b08
+A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+warn: We were unable to connect to the following peer, or the --join address does not match the peer's canonical address: 127.0.0.1:5002
+Reading random file random_node0.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
+Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+Running on Linux 4.15.0-140-generic x86_64
+Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data0
+Listening for intracluster connections on port 5000
+Connected to server "virtual_f44" f5ea4bbc-a4b8-440b-9bab-a75d4d6af73d
+Listening for client driver connections on port 4000
+Listening for administrative HTTP connections on port 8080
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, "virtual_xeq" 549aead8-844b-4f46-8751-afffd35d7b08
+Connected to server "virtual_lc0" c432f90e-0560-4be6-ad4c-4f7fc5962f80
+A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+==53158==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7ff6ee117ec0; bottom 0x7ff6e8102000; size: 0x000006015ec0 (100753088)
+False positive error reports may follow
+For details see https://github.com/google/sanitizers/issues/189
+Disconnected from server "virtual_lc0" c432f90e-0560-4be6-ad4c-4f7fc5962f80
+Server got SIGTERM from pid 53293, uid 1000; shutting down...
+Shutting down client connections...
+All client connections closed.
+Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+Storage engine shut down.
+Disconnected from server "virtual_f44" f5ea4bbc-a4b8-440b-9bab-a75d4d6af73d

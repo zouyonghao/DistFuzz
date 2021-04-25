@@ -1,0 +1,105 @@
+Receive message :sleep for 2149n
+Receive message :sleep for 22834n
+Receive message :sleep for 24817n
+Receive message :sleep for 54203n
+Receive message :sleep for 45392n
+Receive message :sleep for 51453n
+Receive message :sleep for 31541n
+Receive message :sleep for 14889n
+Receive need record message: {:process 1230005737, :type :invoke, :f :write, :value 593841400}
+Receive need record message: {:process 1230005737, :type :fail, :f :write, :value 593841400}
+Receive need record message: {:process 1230005737, :type :invoke, :f :write, :value 889805850}
+Receive need record message: {:process 1230005737, :type :fail, :f :write, :value 889805850}
+Receive need record message: {:process 1221613033, :type :invoke, :f :write, :value 980482773}
+Receive need record message: {:process 1221613033, :type :fail, :f :write, :value 980482773}
+Receive message :sleep for 2989n
+Receive message :sleep for 42183n
+Receive message :sleep for 3719n
+Receive message :sleep for 6911n
+Receive message :sleep for 9885n
+Receive need record message: {:process 1230005737, :type :invoke, :f :read, :value nil}
+Receive message :timeout_ms is 1082
+Receive message :timeout_ms is 1127
+Receive message :timeout_ms is 1141
+Receive message :timeout_ms is 1022
+Receive message :sleep for 49872n
+Receive message :timeout_ms is 1120
+Receive message :sleep for 54311n
+Receive message :timeout_ms is 1239
+Receive message :timeout_ms is 1142
+Receive message :timeout_ms is 1213
+Receive message :timeout_ms is 1112
+Receive message :sleep for 3793n
+Receive message :sleep for 24049n
+Receive message :timeout_ms is 1032
+Receive message :timeout_ms is 1154
+Receive message :timeout_ms is 1035
+Receive message :timeout_ms is 1101
+Receive message :timeout_ms is 1076
+Receive message :timeout_ms is 1248
+Receive message :sleep for 57710n
+Receive message :sleep for 65053n
+Receive message :timeout_ms is 1051
+Receive message :timeout_ms is 1225
+Receive message :timeout_ms is 1065
+Receive message :timeout_ms is 1122
+Receive message :timeout_ms is 1019
+Receive message :timeout_ms is 1086
+Receive message :timeout_ms is 1160
+Receive message :timeout_ms is 1197
+Receive message :timeout_ms is 1010
+Receive message :timeout_ms is 1009
+Receive message :timeout_ms is 1154
+Receive message :timeout_ms is 1164
+Receive message :timeout_ms is 1079
+Receive message :timeout_ms is 1232
+Receive message :timeout_ms is 1158
+Receive message :timeout_ms is 1053
+Receive need record message: {:process 1230005737, :type :fail, :f :read, :value nil}
+Receive message :timeout_ms is 1035
+Receive message :timeout_ms is 1009
+Receive message :timeout_ms is 1096
+Receive message :timeout_ms is 1092
+Receive message :timeout_ms is 1171
+Receive message :timeout_ms is 1026
+Receive message :timeout_ms is 1122
+Receive message :timeout_ms is 1039
+Receive message :timeout_ms is 1121
+Receive message :timeout_ms is 1072
+Receive message :timeout_ms is 1249
+Receive message :timeout_ms is 1194
+Receive message :timeout_ms is 1123
+Receive message :timeout_ms is 1224
+Receive message :timeout_ms is 1176
+Receive message :timeout_ms is 1096
+Receive message :timeout_ms is 1099
+Receive message :timeout_ms is 1227
+Receive message :timeout_ms is 1207
+Receive message :timeout_ms is 1212
+Receive message :timeout_ms is 1254
+Receive message :timeout_ms is 1055
+Receive message :timeout_ms is 1146
+Receive message :timeout_ms is 1245
+Receive message :timeout_ms is 1140
+Receive message :timeout_ms is 1169
+Receive message :timeout_ms is 1151
+Receive message :timeout_ms is 1030
+Receive message :timeout_ms is 1150
+Receive message :timeout_ms is 1127
+Receive message :timeout_ms is 1130
+Receive message :timeout_ms is 1133
+Receive message :timeout_ms is 1208
+Receive message :timeout_ms is 1002
+Receive message :timeout_ms is 1002
+Receive message :timeout_ms is 1116
+Receive need record message: {:process 1230005737, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1230005737, :type :fail, :f :read, :value nil}
+Receive message :timeout_ms is 1186
+Receive message :timeout_ms is 1182
+Receive message :timeout_ms is 1190
+Receive message :timeout_ms is 1049
+Receive message :timeout_ms is 1168
+Receive message :timeout_ms is 1127
+Receive message :timeout_ms is 1156
+Receive message :timeout_ms is 1172
+receive sigkill, closing...

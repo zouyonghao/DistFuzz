@@ -1,0 +1,50 @@
+Reading random file random_node2.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
+Recursively removing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data2/tmp
+Initializing directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data2
+Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+Running on Linux 4.15.0-140-generic x86_64
+Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data2
+Listening for intracluster connections on port 6002
+warn: Received invalid clustering header from 127.0.0.1:6000, closing connection -- something might be connecting to the wrong port.
+Listening for client driver connections on port 4002
+Listening for administrative HTTP connections on port 8082
+Listening on cluster addresses: 127.0.0.1, ::1
+Listening on driver addresses: 127.0.0.1, ::1
+Listening on http addresses: 127.0.0.1, ::1
+To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+Server ready, "virtual_lc0" c432f90e-0560-4be6-ad4c-4f7fc5962f80
+Connected to server "virtual_xeq" 549aead8-844b-4f46-8751-afffd35d7b08
+A newer version of the RethinkDB server is available: 2.4.0. You can read the changelog at <https://github.com/rethinkdb/rethinkdb/releases>.
+Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
+error: Error in thread 7 in src/rpc/connectivity/cluster.cc at line 1348:
+error: Guarantee failed: [handler != nullptr] Got a message for an unfamiliar tag. Apparently we aren't compatible with the cluster on the other end.
+error: Backtrace:
+error: Sat Apr 24 20:23:38 2021
+       
+       1 [0x7f610b]: __interceptor_backtrace+0x5b at ??:?
+       2 [0x126476e]: backtrace_t::backtrace_t() at backtrace.cc:213
+       3 [0x1267698]: lazy_backtrace_formatter_t::lazy_backtrace_formatter_t() at backtrace.cc:297
+       4 [0x126337a]: format_backtrace[abi:cxx11](bool) at ??:?
+       5 [0x1a8f001]: report_fatal_error(char const*, int, char const*, ...) at errors.cc:86
+       6 [0x1ac008e]: connectivity_cluster_t::run_t::handle(keepalive_tcp_conn_stream_t*, optional<peer_id_t>, optional<peer_address_t>, optional<server_id_t>, auto_drainer_t::lock_t, bool*, int) at cluster.cc:1346
+       7 [0x1ab6567]: connectivity_cluster_t::run_t::on_new_connection(scoped_ptr_t<linux_tcp_conn_descriptor_t> const&, int, auto_drainer_t::lock_t) at cluster.cc:324
+       8 [0x1ad1151]: std::_Function_handler<void (scoped_ptr_t<linux_tcp_conn_descriptor_t>&), std::_Bind<void (connectivity_cluster_t::run_t::*(connectivity_cluster_t::run_t*, std::_Placeholder<1>, int, auto_drainer_t::lock_t))(scoped_ptr_t<linux_tcp_conn_descriptor_t> const&, int, auto_drainer_t::lock_t)> >::_M_invoke(std::_Any_data const&, scoped_ptr_t<linux_tcp_conn_descriptor_t>&) at invoke.h:73
+       9 [0x119b7e6]: linux_nonthrowing_tcp_listener_t::handle(int) at std_function.h:688
+       10 [0x11b27e4]: coro_t::run() at coroutines.cc:277
+error: Exiting.
+Reading random file random_node2.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
+Running rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))...
+Running on Linux 4.15.0-140-generic x86_64
+Loading data from directory /home/zyh/distributed-system-test/rethinkdb_test/bin/rethinkdb_data2
+Listening for intracluster connections on port 6002
+Directory './rethinkdb_data2' is already in use, perhaps another instance of rethinkdb is using it.
+Reading random file random_node2.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
