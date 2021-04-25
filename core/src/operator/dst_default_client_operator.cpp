@@ -46,11 +46,10 @@ std::string get_result_record(std::string op_name,
         try
         {
             value = std::to_string(std::stoi(last_output));
-            std::cout << value << "\n";
         }
         catch (const std::exception &e)
         {
-            std::cerr << e.what() << '\n';
+            // std::cerr << e.what() << '\n'; // stoi
         }
     }
     return std::string("{:process " + get_thread_id() + ", :type " +
