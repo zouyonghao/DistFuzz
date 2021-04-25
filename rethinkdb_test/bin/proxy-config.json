@@ -1,5 +1,5 @@
 {
-    "common_skip_messages": 10,
+    "common_skip_messages": 20,
     "proxy_servers": [
         {
             "src_ip": "127.0.0.1",
