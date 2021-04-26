@@ -199,7 +199,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                                            DIRECTION direction)
 {
     int read_size;
-    uint8_t client_message[20000];
+    uint8_t client_message[1000];
     bool should_break = false;
     // Receive a message from client
     while (!should_break && running &&
@@ -277,8 +277,8 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         {
             uint16_t random = __dst_get_random_uint16_t();
             usleep(random);
-            // __dst_event_trigger(
-            //     ("sleep for " + std::to_string(random) + "n").c_str());
+            __dst_event_trigger(
+                ("sleep for " + std::to_string(random) + "n").c_str());
             break;
         }
         case SUPPORTED_ACTION::LOST:
@@ -290,13 +290,17 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         //     break;
         case SUPPORTED_ACTION::ASYNC_DELAY:
         {
-            std::async(std::launch::async, [dest_sock, client_message,
+            uint8_t tmp_client_message[1000];
+            for (int i = 0; i < read_size; i++) {
+                tmp_client_message[i] = client_message[i];
+            }
+            std::async(std::launch::async, [dest_sock, tmp_client_message,
                                             read_size, &should_break] {
                 uint16_t random = __dst_get_random_uint16_t();
                 usleep(random);
                 __dst_event_trigger(
                     ("sleep for " + std::to_string(random) + "n").c_str());
-                int ret = write(dest_sock, client_message, read_size);
+                int ret = write(dest_sock, tmp_client_message, read_size);
                 if (ret < 0)
                 {
                     std::cerr << "write failed!\n";

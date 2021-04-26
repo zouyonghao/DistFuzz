@@ -347,3 +347,28 @@
         9 [0x11b27e4]: coro_t::run() at coroutines.cc:277
     error: Exiting.
     ```
+
+8. Guarantee failed: [it->second == nullptr]
+
+    ```
+    Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
+    error: Error in thread 1 in ./src/clustering/generic/registrar.hpp at line 134:
+    error: Guarantee failed: [it->second == nullptr] 
+    error: Backtrace:
+    ==30784==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7f63042caec0; bottom 0x7f62fe293000; size: 0x000006037ec0 (100892352)
+    False positive error reports may follow
+    For details see https://github.com/google/sanitizers/issues/189
+    error: Mon Apr 26 04:10:37 2021
+        
+        1 [0x7f610b]: __interceptor_backtrace+0x5b at ??:?
+        2 [0x126476e]: backtrace_t::backtrace_t() at backtrace.cc:213
+        3 [0x1267698]: lazy_backtrace_formatter_t::lazy_backtrace_formatter_t() at backtrace.cc:297
+        4 [0x126337a]: format_backtrace[abi:cxx11](bool) at ??:?
+        5 [0x1a8f001]: report_fatal_error(char const*, int, char const*, ...) at errors.cc:86
+        6 [0x1289b59]: registrar_t<multi_client_client_business_card_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t> >, multi_client_server_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t>, primary_query_server_t*, primary_query_server_t::client_t>*, multi_client_server_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t>, primary_query_server_t*, primary_query_server_t::client_t>::client_t>::on_create(signal_t*, uuid_u, peer_id_t, multi_client_client_business_card_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t> >) at registrar.hpp:134
+        7 [0x1294725]: std::_Function_handler<void (signal_t*, uuid_u, peer_id_t, multi_client_client_business_card_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t> >), std::_Bind<void (registrar_t<multi_client_client_business_card_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t> >, multi_client_server_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t>, primary_query_server_t*, primary_query_server_t::client_t>*, multi_client_server_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t>, primary_query_server_t*, primary_query_server_t::client_t>::client_t>::*(registrar_t<multi_client_client_business_card_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t> >, multi_client_server_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t>, primary_query_server_t*, primary_query_server_t::client_t>*, multi_client_server_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t>, primary_query_server_t*, primary_query_server_t::client_t>::client_t>*, std::_Placeholder<1>, std::_Placeholder<2>, std::_Placeholder<3>, std::_Placeholder<4>))(signal_t*, uuid_u, peer_id_t, multi_client_client_business_card_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t> >)> >::_M_invoke(std::_Any_data const&, signal_t*&&, uuid_u&&, peer_id_t&&, multi_client_client_business_card_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t> >&&) at std_function.h:302
+        8 [0x1294a1d]: mailbox_t<uuid_u, peer_id_t, multi_client_client_business_card_t<boost::variant<primary_query_bcard_t::read_request_t, primary_query_bcard_t::write_request_t> > >::read_impl_t::read(read_stream_t*, signal_t*) at typed.hpp:51
+        9 [0x1afb4ec]: mailbox_manager_t::mailbox_read_coroutine(threadnum_t, unsigned long, std::vector<char, std::allocator<char> >*, long, mailbox_manager_t::force_yield_t) at mailbox.cc:272
+        10 [0x11b27e4]: coro_t::run() at coroutines.cc:277
+    error: Exiting.
+    ```

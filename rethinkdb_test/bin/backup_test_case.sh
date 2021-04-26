@@ -14,12 +14,16 @@ mv operation_log ./test_cases/$1
 # checking the operation log!
 { \
     ./check.sh ${PWD}/test_cases/$1/operation_log > ${PWD}/test_cases/$1/check_log 2>&1; \
-    if grep -q ^E ./test_cases/$1/log[0-2]; then echo "Find errors!"; \
-    elif grep -q Backtrace ./test_cases/$1/log[0-2]; then echo "May find error trace!"; \
-    elif grep -q "ERROR: AddressSanitizer"; then echo "Find ASan errors!"; \
-    elif grep -q true ./test_cases/$1/check_log; then echo "No errors, deleting logs..."; \
-        rm -rf ./test_cases/$1; \
+    if grep -q ^E ./test_cases/$1/log[0-2]; \
+        then echo "Find errors!"; \
+    elif grep 'error: Error in' ./test_cases/$1/log[0-2] | grep -v "cluster.cc at line 1348"; \
+        then echo "May find error trace and it's not error 6!"; \
+    elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/log[0-2]; \
+        then echo "Find ASan errors!"; \
+    elif grep -q false ./test_cases/$1/check_log; \
+        then echo "Find operation log errors!"; \
     else \
-        echo "Find operation log errors!"; \
+        echo "Seems no errors, deleting logs..."; \
+            rm -rf ./test_cases/$1; \
     fi \
 } &

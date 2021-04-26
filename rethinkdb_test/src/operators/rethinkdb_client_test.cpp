@@ -16,6 +16,7 @@ REGISTER_NORMAL_OPERATOR(RethinkDBSet,
 REGISTER_NORMAL_OPERATOR(RethinkDBCas,
                          new DefaultClientOperator(UNFINISHED_COMMAND + "cas ",
                                                    "cas", {" ", " "}));
-REGISTER_NORMAL_OPERATOR(Init,
-                         new DefaultClientOperator(RETHINKDB_CLIENT + " " + "get ",
-                                                   "read", {}));
+REGISTER_NORMAL_OPERATOR(Init, new DefaultClientOperator("timeout 30 " +
+                                                             RETHINKDB_CLIENT +
+                                                             " " + "get ",
+                                                         "read", {}));
