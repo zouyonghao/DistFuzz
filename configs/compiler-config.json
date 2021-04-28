@@ -12,6 +12,8 @@
         "-fPIC",
         "-fsanitize=address"
     ],
+    "additional_compile_llvm_args": [
+    ],
     "ignored_args": [
         "-O1",
         "-O2",

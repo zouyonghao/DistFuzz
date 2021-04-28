@@ -45,7 +45,7 @@ std::string get_result_record(std::string op_name,
     {
         try
         {
-            value = std::to_string(std::stoi(last_output));
+            value = std::to_string(std::stoll(last_output));
         }
         catch (const std::exception &e)
         {
@@ -59,7 +59,7 @@ std::string get_result_record(std::string op_name,
 
 bool DefaultClientOperator::_do()
 {
-    std::cout << unfinished_command << "\n";
+    // std::cout << unfinished_command << "\n";
     std::string command = unfinished_command;
     std::vector<std::string> values;
     for (auto &i : need_random_parameters)
@@ -72,19 +72,32 @@ bool DefaultClientOperator::_do()
     std::cout << command << "\n";
     // int result = std::system(command.c_str());
 
-    boost::process::ipstream pipe_stream;
-    boost::process::child c(command, boost::process::std_out > pipe_stream);
-    c.wait();
-    int result = c.exit_code();
-
-    std::string tmp;
-    std::string last_output;
-    while (pipe_stream && std::getline(pipe_stream, tmp) && !tmp.empty())
+    try
     {
-        last_output = tmp;
-    }
+        boost::process::ipstream pipe_stream;
+        boost::process::child c(command, boost::process::std_out > pipe_stream);
+        c.wait();
+        int result = c.exit_code();
+        // timeout, killed or force killed
+        if (result == 124 || result == 143 || result == 137)
+        {
+            return result;
+        }
 
-    __dst_event_record(
-        get_result_record(op_name, values, result, last_output).c_str());
-    return result;
+        std::string tmp;
+        std::string last_output;
+        while (pipe_stream && std::getline(pipe_stream, tmp) && !tmp.empty())
+        {
+            last_output = tmp;
+        }
+
+        __dst_event_record(
+            get_result_record(op_name, values, result, last_output).c_str());
+        return result;
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+        return 1;
+    }
 }

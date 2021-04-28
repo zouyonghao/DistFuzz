@@ -22,5 +22,6 @@ ps -ef | grep atomic_server | awk '{print $2}' | xargs kill
 # rm -rf log*
 killall proxy_server
 killall event_control
+killall atomic_test
 
 # ./clear.sh

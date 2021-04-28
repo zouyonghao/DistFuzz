@@ -1,4 +1,6 @@
 {
+    "file_blacklist":[
+    ],
     "instrumentors": [
         "DefaultInstrumentor"
     ],
@@ -8,6 +10,8 @@
     "additional_compile_args": [
         "-g",
         "-fPIC"
+    ],
+    "additional_compile_llvm_args": [
     ],
     "ignored_args": [
         "-O1",
