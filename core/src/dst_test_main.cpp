@@ -10,6 +10,8 @@
 
 using namespace std::chrono_literals;
 
+std::vector<std::thread> threads;
+
 void run_init_operator()
 {
     for (auto &o : Registry<NormalOperator>::getItemVector())
@@ -33,9 +35,13 @@ void run_some_normal_operators(int number)
         std::cout << "running operator "
                   << Registry<NormalOperator>::getItemVector()[index].first
                   << "\n";
-        std::thread t1([index]() {
+        // std::thread t1([index]() {
+        //     Registry<NormalOperator>::getItemVector()[index].second->_do();
+        // });
+
+        threads.push_back(std::thread([index]() {
             Registry<NormalOperator>::getItemVector()[index].second->_do();
-        });
+        }));
 
         if (__dst_get_random_uint8_t() < 150)
         {
@@ -44,12 +50,17 @@ void run_some_normal_operators(int number)
             std::cout << "running operator "
                       << Registry<NormalOperator>::getItemVector()[index].first
                       << "\n";
-            std::thread t2([index]() {
+            // std::thread t2([index]() {
+            //     Registry<NormalOperator>::getItemVector()[index].second->_do();
+            // });
+
+            threads.push_back(std::thread([index]() {
                 Registry<NormalOperator>::getItemVector()[index].second->_do();
-            });
-            t2.join();
+            }));
+            // t2.join();
         }
-        t1.join();
+        // t1.join();
+        std::this_thread::sleep_for(2s);
     }
 }
 
@@ -88,7 +99,7 @@ void split_files(std::string initial_file)
         out.write((const char *)&split_content[0], split_content.size());
         out.close();
     }
-    __dst_reinit_random(initial_file.c_str());
+    __dst_reinit_random("random.txt");
 }
 
 void generate_random_files()
@@ -114,13 +125,16 @@ int main(int argc, char const *argv[])
     std::ifstream itest_case_count_file("test_case_count");
     itest_case_count_file >> test_case_count;
     itest_case_count_file.close();
-    if (is_random_test)
+    if (!getenv("REPLAY"))
     {
-        generate_random_files();
-    }
-    else
-    {
-        split_files(argv[1]);
+        if (is_random_test)
+        {
+            generate_random_files();
+        }
+        else
+        {
+            split_files(argv[1]);
+        }
     }
 
     std::cout << "\033[1;31mrunning test case " << test_case_count
@@ -151,6 +165,9 @@ int main(int argc, char const *argv[])
         t1.join();
     }
 
+    // let it run a while
+    std::this_thread::sleep_for(2s);
+
     std::cout << "stopping...\n";
     system("./stop.sh");
     dst_clear_kv_all();
@@ -163,6 +180,11 @@ int main(int argc, char const *argv[])
     std::ofstream otest_case_count_file("test_case_count");
     otest_case_count_file << test_case_count;
     otest_case_count_file.close();
+
+    for (auto &t : threads)
+    {
+        t.join();
+    }
 
     return 0;
 }
