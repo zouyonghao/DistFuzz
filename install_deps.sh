@@ -1,1 +1,1 @@
-sudo apt install libboost-all-dev rapidjson-dev
+sudo apt install libboost-all-dev rapidjson-dev clang-9
