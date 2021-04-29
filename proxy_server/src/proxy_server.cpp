@@ -327,7 +327,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         }
         if (ret < 0)
         {
-            std::cerr << "write failed!\n";
+            perror("write failed!");
             break;
         }
         if (need_dup)
