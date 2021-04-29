@@ -28,7 +28,7 @@ void run_some_normal_operators(int number)
 {
     size_t operator_size = Registry<NormalOperator>::getItemVector().size();
     std::cout << "normal operator_size = " << operator_size << "\n";
-    for (int i = 0; i < number; i++)
+    for (int i = 0; i < number && operator_size > 0; i++)
     {
         std::this_thread::sleep_for(1s);
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
@@ -151,7 +151,7 @@ int main(int argc, char const *argv[])
 
     size_t operator_size = Registry<CriticalOperator>::getItemVector().size();
     std::cout << "operator_size = " << operator_size << "\n";
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5 && operator_size > 0; i++)
     {
         std::this_thread::sleep_for(2s);
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
