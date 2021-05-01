@@ -5,6 +5,28 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "c-raft_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/raft/example/server",
+            "args": [
+                "./data1",
+                "1"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/c-raft_test/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "rethinkdb_test",
             "type": "cppdbg",
             "request": "launch",
@@ -214,8 +236,7 @@
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/braft_test/bin",
-            "environment": [
-            ],
+            "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [

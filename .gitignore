@@ -37,3 +37,16 @@ rethinkdb_test/bin/sync_branch_cov_file
 rethinkdb_test/bin/input/random.txt
 rethinkdb_test/bin/init_random.txt
 rethinkdb_test/bin/operation_log
+c-raft_test/bin/test_cases/
+c-raft_test/bin/sync_file
+c-raft_test/bin/sync_branch_cov_file
+c-raft_test/bin/test_case_count
+c-raft_test/bin/output/
+c-raft_test/bin/operation_log
+c-raft_test/bin/file_lock
+c-raft_test/bin/c-raft_data0/
+c-raft_test/bin/c-raft_data1/
+c-raft_test/bin/c-raft_data2/
+c-raft_test/bin/log*
+c-raft_test/bin/random*.txt
+c-raft_test/bin/init_random.txt

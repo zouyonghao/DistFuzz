@@ -1,0 +1,85 @@
+{
+    "proxy_servers": [
+        {
+            "src_ip": "127.0.0.1",
+            "dest_ip": "127.0.0.1",
+            "src_port": 9004,
+            "dest_port": 9000,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "9004",
+                    "src_name": "node2",
+                    "dest": "9000",
+                    "dest_name": "node0"
+                },
+                {
+                    "src": "9005",
+                    "src_name": "node2",
+                    "dest": "9001",
+                    "dest_name": "node1"
+                },
+                {
+                    "src": "9003",
+                    "src_name": "proxy",
+                    "dest": "9002",
+                    "dest_name": "node?"
+                }
+            ]
+        },
+        {
+            "src_ip": "127.0.0.1",
+            "dest_ip": "127.0.0.1",
+            "src_port": 9005,
+            "dest_port": 9001,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "9004",
+                    "src_name": "node2",
+                    "dest": "9000",
+                    "dest_name": "node0"
+                },
+                {
+                    "src": "9005",
+                    "src_name": "node2",
+                    "dest": "9001",
+                    "dest_name": "node0"
+                },
+                {
+                    "src": "9003",
+                    "src_name": "proxy",
+                    "dest": "9002",
+                    "dest_name": "node?"
+                }
+            ]
+        },
+        {
+            "src_ip": "127.0.0.1",
+            "dest_ip": "127.0.0.1",
+            "src_port": 9002,
+            "dest_port": 9003,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "9000",
+                    "src_name": "node0",
+                    "dest": "9004",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "9001",
+                    "src_name": "node1",
+                    "dest": "9005",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "9002",
+                    "src_name": "proxy",
+                    "dest": "9003",
+                    "dest_name": "node2"
+                }
+            ]
+        }
+    ]
+}

@@ -10,3 +10,4 @@ add_subdirectory(fuzz)
 
 add_subdirectory(braft_test)
 add_subdirectory(rethinkdb_test)
+add_subdirectory(c-raft_test)
