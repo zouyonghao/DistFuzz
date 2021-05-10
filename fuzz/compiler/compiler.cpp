@@ -153,7 +153,7 @@ int main(int argc, char **argv)
             is_only_compile = true;
         }
         else if (ends_with(tmp, ".c") || ends_with(tmp, ".cpp") ||
-                 ends_with(tmp, ".cc"))
+                 ends_with(tmp, ".cc") || ends_with(tmp, ".cxx"))
         {
             std::string arg_string = std::string(argv[i]);
             for (auto &black_list_file : file_blacklist)
