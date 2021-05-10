@@ -1,0 +1,91 @@
+{
+    "typology": {
+        "node0": "10001 -> 10005",
+        "node1": "10002 -> 10006",
+        "proxy": "10003",
+        "node2": "10004"
+    },
+    "proxy_servers": [
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 10003,
+            "dest_port": 10004,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "10001",
+                    "src_name": "node0",
+                    "dest": "10005",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "10002",
+                    "src_name": "node1",
+                    "dest": "10006",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "10003",
+                    "src_name": "proxy",
+                    "dest": "10004",
+                    "dest_name": "node2"
+                }
+            ]
+        },
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 10005,
+            "dest_port": 10001,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "10005",
+                    "src_name": "node0",
+                    "dest": "10001",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "10006",
+                    "src_name": "node1",
+                    "dest": "10002",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "10004",
+                    "src_name": "proxy",
+                    "dest": "10003",
+                    "dest_name": "node2"
+                }
+            ]
+        },
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 10006,
+            "dest_port": 10002,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "10005",
+                    "src_name": "node0",
+                    "dest": "10001",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "10006",
+                    "src_name": "node1",
+                    "dest": "10002",
+                    "dest_name": "node2"
+                },
+                {
+                    "src": "10004",
+                    "src_name": "proxy",
+                    "dest": "10003",
+                    "dest_name": "node2"
+                }
+            ]
+        }
+    ]
+}
