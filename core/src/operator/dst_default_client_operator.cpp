@@ -93,11 +93,11 @@ bool DefaultClientOperator::_do()
 
         __dst_event_record(
             get_result_record(op_name, values, result, last_output).c_str());
-        return result;
+        return true;
     }
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
-        return 1;
+        return false;
     }
 }
