@@ -73,3 +73,4 @@ nuraft_test/bin/sync_branch_cov_file
 nuraft_test/bin/sync_file
 nuraft_test/bin/test_case_count
 nuraft_test/bin/init_random.txt
+nuraft_test/bin/calcrange:.pipe
