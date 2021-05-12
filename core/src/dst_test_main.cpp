@@ -30,7 +30,7 @@ void run_some_normal_operators(int number)
     std::cout << "normal operator_size = " << operator_size << "\n";
     for (int i = 0; i < number && operator_size > 0; i++)
     {
-        std::this_thread::sleep_for(1s);
+        // std::this_thread::sleep_for(1s);
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
         std::cout << "running operator "
                   << Registry<NormalOperator>::getItemVector()[index].first
@@ -65,7 +65,7 @@ void run_some_normal_operators(int number)
 
 #endif // NO_CONCURRENCY
        // t1.join();
-        std::this_thread::sleep_for(2s);
+        std::this_thread::sleep_for(1s);
     }
 }
 
