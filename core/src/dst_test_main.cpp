@@ -43,6 +43,9 @@ void run_some_normal_operators(int number)
             Registry<NormalOperator>::getItemVector()[index].second->_do();
         }));
 
+#ifndef NO_CONCURRENCY
+
+        std::cout << "run concurrent normal operation\n";
         if (__dst_get_random_uint8_t() < 150)
         {
             // run another operation
@@ -59,7 +62,9 @@ void run_some_normal_operators(int number)
             }));
             // t2.join();
         }
-        // t1.join();
+
+#endif // NO_CONCURRENCY
+       // t1.join();
         std::this_thread::sleep_for(2s);
     }
 }

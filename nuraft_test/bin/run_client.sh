@@ -14,6 +14,7 @@ if [[ $1 == 'set' ]]; then
     fi
     echo "should set $2"
     echo !$2 >calc$LEADER_ID.pipe
+    sleep 0.5
     if tail -n2 calc$LEADER_ID.log | grep succeed; then
         echo "set success"
         echo $2

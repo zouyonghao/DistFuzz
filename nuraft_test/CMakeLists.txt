@@ -21,6 +21,7 @@ file(GLOB NURAFT_TEST_MAIN_SRC
 )
 
 add_executable(nuraft_test_main ${NURAFT_TEST_MAIN_SRC})
+target_compile_definitions(nuraft_test_main PUBLIC -DNO_CONCURRENCY)
 target_link_libraries(nuraft_test_main dst_default_operator dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
 
 
