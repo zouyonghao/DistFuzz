@@ -13,6 +13,8 @@
         "-fsanitize=address"
     ],
     "additional_compile_args": [
+        "-g",
+        "-O0"
     ],
     "additional_compile_llvm_args": [
         "-fsanitize=address"
