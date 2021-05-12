@@ -1,0 +1,114 @@
+55406:C 12 May 2021 08:45:06.853 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+55406:C 12 May 2021 08:45:06.853 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=55406, just started
+55406:C 12 May 2021 08:45:06.853 # Configuration loaded
+55406:M 12 May 2021 08:45:06.854 * monotonic clock: POSIX clock_gettime
+55406:M 12 May 2021 08:45:06.854 * Running mode=standalone, port=5002.
+55406:M 12 May 2021 08:45:06.854 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+55406:M 12 May 2021 08:45:06.854 # Server initialized
+55406:M 12 May 2021 08:45:06.854 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+55406:M 12 May 2021 08:45:06.855 * <redisraft> RedisRaft starting, arguments: raft-log-filename raftlog2.db addr localhost:5002
+55406:M 12 May 2021 08:45:06.856 * Module 'redisraft' loaded from /home/zyh/redisraft/redisraft.so
+55406:M 12 May 2021 08:45:06.861 * Ready to accept connections
+55406:M 12 May 2021 08:45:09.989 * <redisraft> Joined Raft cluster, node id: 1827117383, dbid: 0f52028cdcf01b3e595a1a25da09407e
+55406:M 12 May 2021 08:45:10.183 * <redisraft> State change: Node is now a follower, term 1
+55406:M 12 May 2021 08:45:10.183 * <redisraft> Cluster Membership: term:1 index:0 nodes: id=1827117383,voting=0,active=1,addr=-
+55406:M 12 May 2021 08:45:31.833 * <redisraft> State change: Election starting, node is now a candidate, term 1
+55406:M 12 May 2021 08:45:31.833 * <redisraft> Cluster Membership: term:1 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:33.339 * <redisraft> State change: Election starting, node is now a candidate, term 2
+55406:M 12 May 2021 08:45:33.339 * <redisraft> Cluster Membership: term:2 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:34.741 * <redisraft> State change: Election starting, node is now a candidate, term 3
+55406:M 12 May 2021 08:45:34.742 * <redisraft> Cluster Membership: term:3 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:36.049 * <redisraft> State change: Election starting, node is now a candidate, term 4
+55406:M 12 May 2021 08:45:36.049 * <redisraft> Cluster Membership: term:4 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:38.056 * <redisraft> State change: Election starting, node is now a candidate, term 5
+55406:M 12 May 2021 08:45:38.057 * <redisraft> Cluster Membership: term:5 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:39.870 * <redisraft> State change: Election starting, node is now a candidate, term 6
+55406:M 12 May 2021 08:45:39.870 * <redisraft> Cluster Membership: term:6 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:40.975 * <redisraft> State change: Election starting, node is now a candidate, term 7
+55406:M 12 May 2021 08:45:40.975 * <redisraft> Cluster Membership: term:7 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:42.282 * <redisraft> State change: Election starting, node is now a candidate, term 8
+55406:M 12 May 2021 08:45:42.282 * <redisraft> Cluster Membership: term:8 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:43.383 * <redisraft> State change: Election starting, node is now a candidate, term 9
+55406:M 12 May 2021 08:45:43.384 * <redisraft> Cluster Membership: term:9 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:45.194 * <redisraft> State change: Election starting, node is now a candidate, term 10
+55406:M 12 May 2021 08:45:45.194 * <redisraft> Cluster Membership: term:10 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:46.298 * <redisraft> State change: Election starting, node is now a candidate, term 11
+55406:M 12 May 2021 08:45:46.298 * <redisraft> Cluster Membership: term:11 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:48.002 * <redisraft> State change: Election starting, node is now a candidate, term 12
+55406:M 12 May 2021 08:45:48.003 * <redisraft> Cluster Membership: term:12 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:49.605 * <redisraft> State change: Election starting, node is now a candidate, term 13
+55406:M 12 May 2021 08:45:49.605 * <redisraft> Cluster Membership: term:13 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:51.308 * <redisraft> State change: Election starting, node is now a candidate, term 14
+55406:M 12 May 2021 08:45:51.309 * <redisraft> Cluster Membership: term:14 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:52.612 * <redisraft> State change: Election starting, node is now a candidate, term 15
+55406:M 12 May 2021 08:45:52.613 * <redisraft> Cluster Membership: term:15 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:53.916 * <redisraft> State change: Election starting, node is now a candidate, term 16
+55406:M 12 May 2021 08:45:53.916 * <redisraft> Cluster Membership: term:16 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:55.119 * <redisraft> State change: Election starting, node is now a candidate, term 17
+55406:M 12 May 2021 08:45:55.119 * <redisraft> Cluster Membership: term:17 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:56.722 * <redisraft> State change: Election starting, node is now a candidate, term 18
+55406:M 12 May 2021 08:45:56.722 * <redisraft> Cluster Membership: term:18 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:45:58.527 * <redisraft> State change: Election starting, node is now a candidate, term 19
+55406:M 12 May 2021 08:45:58.527 * <redisraft> Cluster Membership: term:19 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:00.134 * <redisraft> State change: Election starting, node is now a candidate, term 20
+55406:M 12 May 2021 08:46:00.134 * <redisraft> Cluster Membership: term:20 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:01.846 * <redisraft> State change: Election starting, node is now a candidate, term 21
+55406:M 12 May 2021 08:46:01.846 * <redisraft> Cluster Membership: term:21 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:03.349 * <redisraft> State change: Election starting, node is now a candidate, term 22
+55406:M 12 May 2021 08:46:03.349 * <redisraft> Cluster Membership: term:22 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55805:C 12 May 2021 08:46:04.011 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+55805:C 12 May 2021 08:46:04.011 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=55805, just started
+55805:C 12 May 2021 08:46:04.011 # Configuration loaded
+55805:M 12 May 2021 08:46:04.013 * monotonic clock: POSIX clock_gettime
+55805:M 12 May 2021 08:46:04.014 # Warning: Could not create server TCP listening socket *:5002: bind: Address already in use
+55805:M 12 May 2021 08:46:04.014 # Failed listening on port 5002 (TCP), aborting.
+55406:M 12 May 2021 08:46:04.550 * <redisraft> State change: Election starting, node is now a candidate, term 23
+55406:M 12 May 2021 08:46:04.550 * <redisraft> Cluster Membership: term:23 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:05.853 * <redisraft> State change: Election starting, node is now a candidate, term 24
+55406:M 12 May 2021 08:46:05.853 * <redisraft> Cluster Membership: term:24 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:07.856 * <redisraft> State change: Election starting, node is now a candidate, term 25
+55406:M 12 May 2021 08:46:07.856 * <redisraft> Cluster Membership: term:25 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:09.867 * <redisraft> State change: Election starting, node is now a candidate, term 26
+55406:M 12 May 2021 08:46:09.867 * <redisraft> Cluster Membership: term:26 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:11.670 * <redisraft> State change: Election starting, node is now a candidate, term 27
+55406:M 12 May 2021 08:46:11.670 * <redisraft> Cluster Membership: term:27 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:13.475 * <redisraft> State change: Election starting, node is now a candidate, term 28
+55406:M 12 May 2021 08:46:13.475 * <redisraft> Cluster Membership: term:28 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:14.776 * <redisraft> State change: Election starting, node is now a candidate, term 29
+55406:M 12 May 2021 08:46:14.776 * <redisraft> Cluster Membership: term:29 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:16.685 * <redisraft> State change: Election starting, node is now a candidate, term 30
+55406:M 12 May 2021 08:46:16.685 * <redisraft> Cluster Membership: term:30 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:18.090 * <redisraft> State change: Election starting, node is now a candidate, term 31
+55406:M 12 May 2021 08:46:18.090 * <redisraft> Cluster Membership: term:31 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:19.196 * <redisraft> State change: Election starting, node is now a candidate, term 32
+55406:M 12 May 2021 08:46:19.196 * <redisraft> Cluster Membership: term:32 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:20.599 * <redisraft> State change: Election starting, node is now a candidate, term 33
+55406:M 12 May 2021 08:46:20.599 * <redisraft> Cluster Membership: term:33 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:21.700 * <redisraft> State change: Election starting, node is now a candidate, term 34
+55406:M 12 May 2021 08:46:21.700 * <redisraft> Cluster Membership: term:34 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:23.401 * <redisraft> State change: Election starting, node is now a candidate, term 35
+55406:M 12 May 2021 08:46:23.401 * <redisraft> Cluster Membership: term:35 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:25.102 * <redisraft> State change: Election starting, node is now a candidate, term 36
+55406:M 12 May 2021 08:46:25.102 * <redisraft> Cluster Membership: term:36 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:27.007 * <redisraft> State change: Election starting, node is now a candidate, term 37
+55406:M 12 May 2021 08:46:27.007 * <redisraft> Cluster Membership: term:37 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:28.110 * <redisraft> State change: Election starting, node is now a candidate, term 38
+55406:M 12 May 2021 08:46:28.110 * <redisraft> Cluster Membership: term:38 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:30.014 * <redisraft> State change: Election starting, node is now a candidate, term 39
+55406:M 12 May 2021 08:46:30.014 * <redisraft> Cluster Membership: term:39 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:31.920 * <redisraft> State change: Election starting, node is now a candidate, term 40
+55406:M 12 May 2021 08:46:31.920 * <redisraft> Cluster Membership: term:40 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:33.823 * <redisraft> State change: Election starting, node is now a candidate, term 41
+55406:M 12 May 2021 08:46:33.823 * <redisraft> Cluster Membership: term:41 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:35.727 * <redisraft> State change: Election starting, node is now a candidate, term 42
+55406:M 12 May 2021 08:46:35.727 * <redisraft> Cluster Membership: term:42 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:37.736 * <redisraft> State change: Election starting, node is now a candidate, term 43
+55406:M 12 May 2021 08:46:37.736 * <redisraft> Cluster Membership: term:43 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:39.542 * <redisraft> State change: Election starting, node is now a candidate, term 44
+55406:M 12 May 2021 08:46:39.542 * <redisraft> Cluster Membership: term:44 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:M 12 May 2021 08:46:39.574 * <redisraft> State change: Node is now a leader, term 45
+55406:M 12 May 2021 08:46:39.574 * <redisraft> Cluster Membership: term:45 index:9 nodes: id=1827117383,voting=1,active=1,addr=- id=1207130862,voting=1,active=1,addr=localhost:5001 id=120092862,voting=0,active=1,addr=localhost:5003
+55406:signal-handler (1620809215) Received SIGTERM scheduling shutdown...
+55406:M 12 May 2021 08:46:55.052 # User requested shutdown...
+55406:M 12 May 2021 08:46:55.052 # Redis is now ready to exit, bye bye...
+55406:signal-handler (1620809215) Received SIGTERM scheduling shutdown...

@@ -7,3 +7,7 @@ __DST_ENV_RANDOM_FILE__=random_node2.txt $bin_path/redis-server \
     --port 5004 --dbfilename raft3.rdb \
     --loadmodule $lib_path/redisraft.so raft-log-filename raftlog3.db \
     addr localhost:5004 >>redis3.log 2>&1 &
+# __DST_ENV_RANDOM_FILE__=random_node2.txt $bin_path/redis-server \
+#     --port 5003 --dbfilename raft3.rdb \
+#     --loadmodule $lib_path/redisraft.so raft-log-filename raftlog3.db \
+#     addr localhost:5003 >>redis3.log 2>&1 &

@@ -74,9 +74,9 @@ nuraft_test/bin/sync_file
 nuraft_test/bin/test_case_count
 nuraft_test/bin/init_random.txt
 nuraft_test/bin/calcrange:.pipe
-*.db.idx
-*.db
-*.log
+redisraft_test/bin/*.db.idx
+redisraft_test/bin/*.db
+redisraft_test/bin/*.log
 redisraft_test/bin/log_event_control
 redisraft_test/bin/log_proxy
 redisraft_test/bin/operation_log

@@ -267,6 +267,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
             goto WRITE;
         }
 
+        std::cerr << "select_random is " << std::to_string(select_random) << "\n";
         switch (select_random)
         {
         case SUPPORTED_ACTION::NOOP:

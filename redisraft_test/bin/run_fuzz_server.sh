@@ -11,3 +11,4 @@ sleep 3
 redis-cli -p 5001 raft.cluster init
 redis-cli -p 5002 RAFT.CLUSTER JOIN localhost:5001
 redis-cli -p 5004 RAFT.CLUSTER JOIN localhost:5005
+# redis-cli -p 5003 RAFT.CLUSTER JOIN localhost:5001

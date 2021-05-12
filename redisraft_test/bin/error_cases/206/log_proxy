@@ -1,0 +1,671 @@
+Reading random file random_proxy.txt
+common replace pairs number: 0
+src_port = 5003, dest_port = 5004
+src_port = 5005, dest_port = 5001
+src_port = 5006, dest_port = 5002
+proxy_servers size: 3
+Socket created
+bind done
+Waiting for incoming connections...
+Socket created
+bind done
+Waiting for incoming connections...
+Socket created
+bind done
+Waiting for incoming connections...
+Connection accepted, client port is 6829, server port is 5005
+Socket created
+Connected
+Handler assigned
+read size = 56
+Receiving from proxy, send it to node2
+35 30 30 34 
+select_random is 3
+read size = 51
+
+select_random is 4
+Connection accepted, client port is 60066, server port is 5003
+Socket created
+Connected
+Handler assigned
+read size = 950
+
+select_random is 4
+Connection accepted, client port is 61090, server port is 5003
+Socket created
+Connected
+Handler assigned
+read size = 1000
+
+select_random is 2
+closing...
+closing...
+closing...
+write less than read!!
+write failed!: Bad file descriptor
+closing...
+Connection accepted, client port is 62626, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 63650, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 64674, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 163, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 1187, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 2211, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 3235, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 4259, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 5283, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 6307, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 7331, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 8355, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 9379, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 10403, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 11427, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 12451, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 13475, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 14499, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 15523, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 16547, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 17571, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 18595, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 19619, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 20643, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 21667, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 23715, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 24739, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 25763, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 26787, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 27811, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 28835, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 29859, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 30883, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 31907, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 32931, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 33955, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 36003, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 37027, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 38051, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 39075, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 40099, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 41123, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 42147, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 43171, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 44195, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 45219, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 46243, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 47267, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 48291, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 49315, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 50339, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 51363, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 52387, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 53411, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 54435, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 55459, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 56483, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 57507, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 58531, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 59555, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 60579, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 61603, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 62627, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 63651, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 64675, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 1188, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 2212, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 3236, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 4260, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 5284, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 6308, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 7332, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 8356, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 9380, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 10404, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 11428, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 12452, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 13476, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 14500, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 15524, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 16548, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 17572, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 18596, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 19620, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 20644, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 21668, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 22692, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 23716, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 24740, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 25764, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 26788, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 27812, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 28836, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 29860, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 30884, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 31908, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 34980, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 36004, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 37028, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 38052, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 39076, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 40100, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 41124, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 42148, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 43172, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 44196, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 45220, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 46244, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 47268, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 48292, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 49316, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 50340, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 51364, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 52388, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 53412, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 54436, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 55460, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 56484, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 57508, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 58532, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 59556, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 60580, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 61604, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 62628, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 63652, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 64676, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 2213, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 3237, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 4261, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 5285, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 6309, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 7333, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 8357, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 9381, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 10405, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 11429, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 12453, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 13477, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 14501, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 15525, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 16549, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 17573, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 18597, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 19621, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 20645, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 21669, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 22693, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 23717, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 24741, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 25765, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 26789, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 27813, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 28837, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 29861, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 30885, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 33957, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 34981, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 36005, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 37029, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 38053, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 39077, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 40101, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 41125, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 42149, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 43173, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 44197, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 45221, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 46245, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 47269, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 48293, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 49317, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 50341, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 51365, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 52389, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 53413, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 54437, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 55461, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 56485, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 57509, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 58533, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 59557, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 60581, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 61605, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 62629, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 63653, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 64677, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 166, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 1190, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 2214, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 3238, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 4262, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 5286, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 6310, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 7334, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 8358, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 9382, server port is 5003
+Socket created
+connect failed.
+closing...
+Connection accepted, client port is 46251, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 47787, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 48811, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 49835, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 50859, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 52907, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 53931, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 54955, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 55979, server port is 5003
+Socket created
+connect failed.
+Connection accepted, client port is 57003, server port is 5003
+Socket created
+connect failed.
+read size = 91
+
+select_random is 3
+Connection accepted, client port is 58027, server port is 5003
+Socket created
+connect failed.

@@ -1,0 +1,39 @@
+55404:C 12 May 2021 08:45:06.854 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+55404:C 12 May 2021 08:45:06.854 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=55404, just started
+55404:C 12 May 2021 08:45:06.854 # Configuration loaded
+55404:M 12 May 2021 08:45:06.855 * monotonic clock: POSIX clock_gettime
+55404:M 12 May 2021 08:45:06.855 * Running mode=standalone, port=5001.
+55404:M 12 May 2021 08:45:06.855 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+55404:M 12 May 2021 08:45:06.855 # Server initialized
+55404:M 12 May 2021 08:45:06.855 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+55404:M 12 May 2021 08:45:06.856 * <redisraft> RedisRaft starting, arguments: raft-log-filename raftlog1.db addr localhost:5001
+55404:M 12 May 2021 08:45:06.859 * Module 'redisraft' loaded from /home/zyh/redisraft/redisraft.so
+55404:M 12 May 2021 08:45:06.861 * Ready to accept connections
+55404:M 12 May 2021 08:45:09.861 * <redisraft> State change: Node is now a leader, term 0
+55404:M 12 May 2021 08:45:09.861 * <redisraft> Cluster Membership: term:0 index:0 nodes: id=1207130862,voting=1,active=1,addr=-
+55404:M 12 May 2021 08:45:09.882 * <redisraft> Raft Cluster initialized, node id: 1207130862, dbid: 0f52028cdcf01b3e595a1a25da09407e
+55404:signal-handler (1620809129) Received SIGTERM scheduling shutdown...
+55404:M 12 May 2021 08:45:30.079 # User requested shutdown...
+55404:M 12 May 2021 08:45:30.079 # Redis is now ready to exit, bye bye...
+56007:C 12 May 2021 08:46:38.008 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+56007:C 12 May 2021 08:46:38.008 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=56007, just started
+56007:C 12 May 2021 08:46:38.008 # Configuration loaded
+56007:M 12 May 2021 08:46:38.008 * monotonic clock: POSIX clock_gettime
+56007:M 12 May 2021 08:46:38.009 * Running mode=standalone, port=5001.
+56007:M 12 May 2021 08:46:38.009 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+56007:M 12 May 2021 08:46:38.009 # Server initialized
+56007:M 12 May 2021 08:46:38.009 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+56007:M 12 May 2021 08:46:38.009 * <redisraft> RedisRaft starting, arguments: raft-log-filename raftlog1.db addr localhost:5001
+56007:M 12 May 2021 08:46:38.010 * Module 'redisraft' loaded from /home/zyh/redisraft/redisraft.so
+56007:M 12 May 2021 08:46:38.010 * Ready to accept connections
+56007:M 12 May 2021 08:46:38.510 * <redisraft> Loading: Redis loading complete, snapshot NOT LOADED
+56007:M 12 May 2021 08:46:38.510 * <redisraft> Loading: Log loaded, 9 entries, snapshot last term=1, index=0
+56007:M 12 May 2021 08:46:38.510 * <redisraft> Loading: Log starts from snapshot term=1, index=0
+56007:M 12 May 2021 08:46:38.510 * <redisraft> Raft Log: loaded current term=1, vote=-1
+56007:M 12 May 2021 08:46:38.510 * <redisraft> Raft state after applying log: log_count=9, current_idx=9, last_applied_idx=0
+56007:M 12 May 2021 08:46:39.564 * <redisraft> State change: Node is now a follower, term 45
+56007:M 12 May 2021 08:46:39.564 * <redisraft> Cluster Membership: term:45 index:9 nodes: id=1207130862,voting=1,active=1,addr=- id=1827117383,voting=1,active=1,addr=localhost:5002 id=120092862,voting=0,active=1,addr=localhost:5003
+56007:signal-handler (1620809215) Received SIGTERM scheduling shutdown...
+56007:M 12 May 2021 08:46:55.036 # User requested shutdown...
+56007:M 12 May 2021 08:46:55.036 # Redis is now ready to exit, bye bye...
+56007:signal-handler (1620809215) Received SIGTERM scheduling shutdown...
