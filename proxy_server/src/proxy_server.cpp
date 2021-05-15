@@ -206,7 +206,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
            (read_size = read(src_sock, client_message, 1000)) > 0)
     {
         std::cout << "read size = " << read_size << "\n";
-        // Send the message back to client
+        // // Send the message back to client
         // std::cout << "message from " << src_sock << ", size = " << read_size;
         // for (int i = 0; i < read_size; i++)
         // {
@@ -218,7 +218,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         // for (int i = 0; i < read_size; i++)
         // {
         //     // std::cout << client_message[i];
-        //     printf("%x", client_message[i]);
+        //     printf("%x ", client_message[i]);
         // }
         // std::cout << "\n";
         for (int i = 0; i < read_size; i++)

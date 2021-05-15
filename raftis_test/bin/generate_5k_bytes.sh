@@ -1,0 +1,1 @@
+dd if=/dev/urandom of=$1 bs=5K count=1

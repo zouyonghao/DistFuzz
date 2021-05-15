@@ -8,8 +8,6 @@
 #include <log.hpp>
 #include <operator/dst_operator.hpp>
 
-using namespace std::chrono_literals;
-
 std::vector<std::thread> threads;
 
 void run_init_operator()
@@ -65,7 +63,7 @@ void run_some_normal_operators(int number)
 
 #endif // NO_CONCURRENCY
        // t1.join();
-        std::this_thread::sleep_for(1s);
+        std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
 
@@ -148,7 +146,7 @@ int main(int argc, char const *argv[])
     std::cout << "start nodes and proxies\n";
     system("./run_fuzz_server.sh");
 
-    std::this_thread::sleep_for(3s);
+    std::this_thread::sleep_for(std::chrono::seconds(3));
 
     run_init_operator();
 
@@ -158,7 +156,7 @@ int main(int argc, char const *argv[])
     std::cout << "operator_size = " << operator_size << "\n";
     for (int i = 0; i < 5 && operator_size > 0; i++)
     {
-        std::this_thread::sleep_for(2s);
+        std::this_thread::sleep_for(std::chrono::seconds(2));
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
         std::cout << "running operator "
                   << Registry<CriticalOperator>::getItemVector()[index].first
@@ -171,7 +169,7 @@ int main(int argc, char const *argv[])
     }
 
     // let it run a while
-    std::this_thread::sleep_for(2s);
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 
     std::cout << "stopping...\n";
     system("./stop.sh");
