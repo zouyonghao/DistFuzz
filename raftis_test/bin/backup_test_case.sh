@@ -22,7 +22,7 @@ mv operation_log ./test_cases/$1
         echo "Find ASan errors!"
     elif grep -q true ./test_cases/$1/check_log; then
         echo "No errors, deleting logs..."
-        # rm -rf ./test_cases/$1
+        rm -rf ./test_cases/$1
     else
         echo "Find operation log errors!"
     fi
