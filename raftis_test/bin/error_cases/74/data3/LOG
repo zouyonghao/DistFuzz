@@ -1,0 +1,18 @@
+I0517 04:08:04.725072  24606 floyd_impl.cc:329] FloydImpl::Init: Load Membership from option, count: 3
+I0517 04:08:04.725704  24606 floyd_peer_thread.cc:53] Peer::Start Start a peer thread to 127.0.0.1:5005
+I0517 04:08:04.726046  24606 floyd_peer_thread.cc:53] Peer::Start Start a peer thread to 127.0.0.1:5006
+I0517 04:08:04.726393  24606 floyd_impl.cc:270] FloydImpl::InitPeers Floyd start 2 peer thread
+I0517 04:08:04.731755  24606 floyd_impl.cc:364] FloydImpl::Init Floyd started!
+Options
+                 member 0 : 127.0.0.1:5005
+                 member 1 : 127.0.0.1:5006
+                 member 2 : 127.0.0.1:5004
+                 local_ip : 127.0.0.1
+               local_port : 5004
+                     path : ./data3/
+          check_leader_us : 7822845
+             heartbeat_us : 3000000
+ append_entries_size_once : 10240000
+append_entries_count_once : 102400
+              single_mode : false
+I0517 04:08:12.108527  24737 floyd_impl.cc:763] FloydImpl::ReplyRequestVote: Receive Request Vote from 127.0.0.1:5002, Become Follower with current_term_(1) and new_term(0) commit_index(0) last_applied(0)
