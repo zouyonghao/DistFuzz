@@ -5,6 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "raftis_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/raftis_test/raftis_test_main",
+            "args": [
+                "init_random.txt"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/raftis_test/bin",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "c-raft_test",
             "type": "cppdbg",
             "request": "launch",

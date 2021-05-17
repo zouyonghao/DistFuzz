@@ -1,0 +1,202 @@
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==24602==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x0000005a27e6 bp 0x7ffcdba29320 sp 0x7ffcdba29300 T0)
+==24602==The signal is caused by a READ memory access.
+==24602==Hint: address points to the zero page.
+    #0 0x5a27e5  (/root/floyd/floyd/example/redis/output/bin/raftis+0x5a27e5)
+    #1 0x544d39  (/root/floyd/floyd/example/redis/output/bin/raftis+0x544d39)
+    #2 0x545270  (/root/floyd/floyd/example/redis/output/bin/raftis+0x545270)
+    #3 0x54c0cf  (/root/floyd/floyd/example/redis/output/bin/raftis+0x54c0cf)
+    #4 0x54316e  (/root/floyd/floyd/example/redis/output/bin/raftis+0x54316e)
+    #5 0x7f782481bf44  (/lib/x86_64-linux-gnu/libc.so.6+0x21f44)
+    #6 0x495709  (/root/floyd/floyd/example/redis/output/bin/raftis+0x495709)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/root/floyd/floyd/example/redis/output/bin/raftis+0x5a27e5) 
+==24602==ABORTING
+Reading random file random_node0.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
+               member 0 : 127.0.0.1:5001
+               member 1 : 127.0.0.1:5002
+               member 2 : 127.0.0.1:5003
+                 local_ip : 127.0.0.1
+               local_port : 5001
+                     path : ./data1/
+          check_leader_us : 6241530
+             heartbeat_us : 3000000
+ append_entries_size_once : 10240000
+append_entries_count_once : 102400
+              single_mode : false
+Reading random file (null)
+spliting files...
+Reading random file random.txt
+[1;31mrunning test case 74[0m
+start nodes and proxies
+Run init operator
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 1371198083 
+normal operator_size = 3
+running operator RaftisTestGet
+run concurrent normal operation
+running operator Init
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 2678419069 
+running operator Init
+run concurrent normal operation
+running operator RaftisTestSet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3298848309 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 1563927068 
+running operator Init
+run concurrent normal operation
+running operator Init
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3014562748 
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3215881412 
+running operator Init
+run concurrent normal operation
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 2822328017 
+running operator RaftisTestGet
+run concurrent normal operation
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+operator_size = 10
+running operator ForceKillNode2
+normal operator_size = 3
+running operator Init
+run concurrent normal operation
+running operator Init
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3682282195 
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3337378719 
+running operator RaftisTestGet
+run concurrent normal operation
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator RaftisTestSet
+run concurrent normal operation
+running operator Init
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 836637239 
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 721727090 
+running operator Init
+run concurrent normal operation
+running operator RaftisTestSet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 4081860498 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 2478274553 
+running operator Init
+run concurrent normal operation
+running operator RaftisTestGet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 2275213068 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator StartNode0
+normal operator_size = 3
+running operator Init
+node0 already started
+run concurrent normal operation
+running operator RaftisTestGet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3598424090 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator Init
+run concurrent normal operation
+running operator RaftisTestGet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 2234590634 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator Init
+run concurrent normal operation
+running operator RaftisTestGet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3616028743 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator RaftisTestGet
+run concurrent normal operation
+running operator RaftisTestGet
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator RaftisTestGet
+run concurrent normal operation
+running operator Init
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3392687797 
+running operator KillNode1
+normal operator_size = 3
+running operator RaftisTestGet
+node1 already killed!
+run concurrent normal operation
+t/root/distributed-system-test/raftis_test/bin
+mv: cannot stat '*.log': No such file or directory
+Error: Server closed the connection
+Error: Connection reset by peer
+imeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator Init
+run concurrent normal operation
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 328716617 
+running operator Init
+run concurrent normal operation
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3775324571 
+running operator RaftisTestGet
+run concurrent normal operation
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator Init
+run concurrent normal operation
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 4134507951 
+running operator ForceKillNode1
+normal operator_size = 3
+running operator RaftisTestSet
+node1 already killed!
+run concurrent normal operation
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3969287253 
+running operator RaftisTestGet
+run concurrent normal operation
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator RaftisTestSet
+run concurrent normal operation
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 1898476415 
+running operator RaftisTestGet
+run concurrent normal operation
+running operator RaftisTestSet
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3439597497 
+running operator RaftisTestGet
+run concurrent normal operation
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator ForceKillNode2
+normal operator_size = 3
+running operator Init
+node2 already killed!
+run concurrent normal operation
+running operator RaftisTestSet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 787809620 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 2757258743 
+running operator RaftisTestGet
+run concurrent normal operation
+running operator RaftisTestGet
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator Init
+run concurrent normal operation
+running operator RaftisTestGet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 1370088312 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator Init
+run concurrent normal operation
+running operator RaftisTestGet
+timeout 10 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3533852489 
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh get
+running operator RaftisTestSet
+run concurrent normal operation
+timeout 3 bash /root/distributed-system-test/raftis_test/bin/run_client.sh set 3345435535 
+stopping...
+backup test cases
+75
+Reading random file random_node1.txt
+[33m[FUZZ PRINT] shm declare[0m
+shmEnabled!
+init_in_main success!
+               member 0 : 127.0.0.1:5001
+               member 1 : 127.0.0.1:5002
+               member 2 : 127.0.0.1:5003
+                 local_ip : 127.0.0.1
+               local_port : 5002
+                     path : ./data2/
+          check_leader_us : 7357246
+             heartbeat_us : 3000000
+ append_entries_size_once : 10240000
+append_entries_count_once : 102400
+              single_mode : false
+OK
+Find errors!

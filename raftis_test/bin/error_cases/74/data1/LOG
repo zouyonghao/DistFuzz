@@ -1,0 +1,2 @@
+I0517 04:08:04.724961  24602 floyd_impl.cc:329] FloydImpl::Init: Load Membership from option, count: 3
+E0517 04:08:04.725284  24602 floyd_impl.cc:343] FloydImpl::Init worker thread failed to start, ret is 1

@@ -12,7 +12,7 @@
 
 #include <proxy_server.h>
 
-using namespace std::chrono_literals;
+// using namespace std::literals::chrono_literals;
 
 const std::string STRING_REPLACE_MODE = "string";
 const std::string HEX_REPLACE_MODE = "hex";
@@ -39,10 +39,10 @@ struct replace_pair parse_replace_pair(rapidjson::Value &pair,
         std::vector<char> src_replaces;
         int tmp;
         uint8_t u8_tmp;
-        std::istringstream ss(pair["src"].GetString());
-        while (!ss.eof())
+        std::istringstream src_ss(pair["src"].GetString());
+        while (!src_ss.eof())
         {
-            ss >> std::hex >> tmp;
+            src_ss >> std::hex >> tmp;
             u8_tmp = tmp;
             printf("%x ", u8_tmp);
             src_replaces.push_back(u8_tmp);
@@ -53,10 +53,10 @@ struct replace_pair parse_replace_pair(rapidjson::Value &pair,
         std::cout << "size = " << p.src.size << "\n";
 
         std::vector<char> dest_replaces;
-        ss = std::istringstream(pair["dest"].GetString());
-        while (!ss.eof())
+        std::istringstream dest_ss(pair["dest"].GetString());
+        while (!dest_ss.eof())
         {
-            ss >> std::hex >> tmp;
+            dest_ss >> std::hex >> tmp;
             u8_tmp = tmp;
             printf("%x ", u8_tmp);
             dest_replaces.push_back(u8_tmp);
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
 
     while (true)
     {
-        std::this_thread::sleep_for(2s);
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
 
     return 0;
