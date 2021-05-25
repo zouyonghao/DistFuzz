@@ -30,6 +30,7 @@ struct connection_pair
     int dest_sock;
     std::thread *thread1;
     std::thread *thread2;
+    std::mutex lock_for_connection;
 };
 struct replace_item
 {

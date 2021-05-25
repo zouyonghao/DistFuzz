@@ -267,7 +267,8 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
             goto WRITE;
         }
 
-        std::cerr << "select_random is " << std::to_string(select_random) << "\n";
+        std::cerr << "select_random is " << std::to_string(select_random)
+                  << "\n";
         switch (select_random)
         {
         case SUPPORTED_ACTION::NOOP:
@@ -292,13 +293,15 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         case SUPPORTED_ACTION::ASYNC_DELAY:
         {
             uint8_t tmp_client_message[1000];
-            for (int i = 0; i < read_size; i++) {
+            for (int i = 0; i < read_size; i++)
+            {
                 tmp_client_message[i] = client_message[i];
             }
             std::async(std::launch::async, [dest_sock, tmp_client_message,
-                                            read_size, &should_break] {
+                                            read_size, &should_break, cp] {
                 uint16_t random = __dst_get_random_uint16_t();
                 usleep(random);
+                std::lock_guard<std::mutex> lk(cp->lock_for_connection);
                 __dst_event_trigger(
                     ("sleep for " + std::to_string(random) + "n").c_str());
                 int ret = write(dest_sock, tmp_client_message, read_size);
@@ -320,6 +323,8 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         }
 
     WRITE:
+    {
+        std::lock_guard<std::mutex> lk(cp->lock_for_connection);
         int ret = write(dest_sock, client_message, read_size);
         if (ret != read_size)
         {
@@ -331,6 +336,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
             perror("write failed!");
             break;
         }
+    }
         if (need_dup)
         {
             need_dup = false;
