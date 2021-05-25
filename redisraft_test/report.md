@@ -1,5 +1,7 @@
 1. Assertion `(c->flags & REDIS_SUBSCRIBED || c->flags & REDIS_MONITORING)' failed.
 
+    This may be not a bug of redisraft
+
     ```
     20927:C 12 May 2021 02:42:51.216 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
     20927:C 12 May 2021 02:42:51.217 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=20927, just started
