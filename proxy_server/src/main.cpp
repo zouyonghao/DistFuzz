@@ -88,6 +88,12 @@ int main(int argc, char *argv[])
     }
     ifs.close();
 
+    bool debug = false;
+    if (document.HasMember("debug"))
+    {
+        debug = document["debug"].GetBool();
+    }
+
     std::string common_replace_mode = STRING_REPLACE_MODE;
     std::vector<struct replace_pair> _common_replace_pairs;
     if (document.HasMember("common_replace_mode"))
@@ -148,6 +154,10 @@ int main(int argc, char *argv[])
             skip_messages = server["skip_messages"].GetInt();
         }
         p->set_skip_messages(skip_messages);
+        if (debug)
+        {
+            p->enable_debug();
+        }
         proxy_servers.push_back(p);
     }
 

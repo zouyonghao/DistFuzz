@@ -74,6 +74,8 @@ private:
 
     std::list<struct connection_pair *> connection_pairs;
 
+    bool debug = false;
+
     void accept_connection_handler();
 
     int connect_to_server();
@@ -97,6 +99,11 @@ public:
     void set_skip_messages(int _skip_message)
     {
         this->skip_messages = _skip_message;
+    }
+
+    void enable_debug()
+    {
+        debug = true;
     }
 };
 
