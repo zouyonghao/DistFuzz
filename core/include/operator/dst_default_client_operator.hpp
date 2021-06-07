@@ -4,6 +4,7 @@
 #include <dst_event.h>
 #include <dst_random.h>
 #include <operator/dst_default_operator.hpp>
+#include <util/common_uils.hpp>
 
 #include <limits>
 #include <map>
