@@ -1,0 +1,31 @@
+Reading random file random_proxy.txt
+common replace pairs number: 0
+89 13 c0 a8 size = 4
+8d 13 c0 a8 size = 4
+8a 13 c0 a8 size = 4
+8e 13 c0 a8 size = 4
+8b 13 c0 a8 size = 4
+8c 13 c0 a8 size = 4
+src_port = 5003, dest_port = 5004
+8d 13 c0 a8 size = 4
+89 13 c0 a8 size = 4
+8e 13 c0 a8 size = 4
+8a 13 c0 a8 size = 4
+8c 13 c0 a8 size = 4
+8b 13 c0 a8 size = 4
+src_port = 5005, dest_port = 5001
+8d 13 c0 a8 size = 4
+89 13 c0 a8 size = 4
+8e 13 c0 a8 size = 4
+8a 13 c0 a8 size = 4
+8c 13 c0 a8 size = 4
+8b 13 c0 a8 size = 4
+src_port = 5006, dest_port = 5002
+proxy_servers size: 3
+Socket created
+bind done
+Waiting for incoming connections...
+Socket created
+bind done
+Waiting for incoming connections...
+Socket created

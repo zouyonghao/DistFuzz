@@ -1,0 +1,264 @@
+Jun 07 2021 16:48:02 GMT: INFO (as): (as.c:306) <><><><><><><><><><>  Aerospike Community Edition build 5.6.0.4  <><><><><><><><><><>
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # Aerospike database configuration file for deployments using mesh heartbeats.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) service {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	user zyh
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	group zyh
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	paxos-single-replica-limit 0 # Number of nodes where the replica count is automatically reduced to 1.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	pidfile /home/zyh/distributed-system-test/aerospike_test/bin/run/asd2.pid
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	proto-fd-max 15000
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	work-directory run/work2
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	run-as-daemon false
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) mod-lua {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	user-path run/work2/usr/udf/lua
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) logging {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	# Log file must be an absolute path.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	file /home/zyh/distributed-system-test/aerospike_test/bin/run/aerospike2.log {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		context any info
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) network {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	service {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		address 127.0.0.1
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		port 2001
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	heartbeat {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		mode mesh
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		port 5002 # Heartbeat port for this node.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		# List one or more other nodes, one ip-address & port per line:
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		# mesh-seed-address-port 127.0.0.1 3000
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		mesh-seed-address-port 127.0.0.1 5001
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		mesh-seed-address-port 127.0.0.1 5003
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		interval 250
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		timeout 10
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	fabric {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		port 4001
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	info {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		port 3001
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) namespace test {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	replication-factor 2
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	memory-size 4G
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	storage-engine memory
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # namespace bar {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	replication-factor 2
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	memory-size 4G
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	storage-engine memory
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	# To use file storage backing, comment out the line above and use the
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	# following lines instead.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #	storage-engine device {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #		file /opt/aerospike/data/bar.dat
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #		filesize 16G
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #		data-in-memory true # Store data in memory in addition to file.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:4017) system file descriptor limit: 1048576, proto-fd-max: 15000
+Jun 07 2021 16:48:02 GMT: INFO (hardware): (hardware.c:2025) detected 4 CPU(s), 4 core(s), 1 NUMA node(s)
+Jun 07 2021 16:48:02 GMT: INFO (socket): (socket.c:2700) Node port 4001, node ID fa1279b77654202
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:4049) node-id fa1279b77654202
+Jun 07 2021 16:48:02 GMT: INFO (smd): (smd.c:2319) no file 'run/work2/smd/evict.smd' - starting empty
+Jun 07 2021 16:48:02 GMT: INFO (namespace): (namespace_ce.c:88) {test} beginning cold start
+Jun 07 2021 16:48:02 GMT: INFO (smd): (smd.c:2319) no file 'run/work2/smd/truncate.smd' - starting empty
+Jun 07 2021 16:48:02 GMT: INFO (smd): (smd.c:2319) no file 'run/work2/smd/sindex.smd' - starting empty
+Jun 07 2021 16:48:02 GMT: INFO (as): (as.c:366) initializing services...
+Jun 07 2021 16:48:02 GMT: INFO (service): (service.c:168) starting 4 service threads
+Jun 07 2021 16:48:02 GMT: INFO (hb): (hb.c:6788) added new mesh seed 127.0.0.1:5001
+Jun 07 2021 16:48:02 GMT: INFO (hb): (hb.c:6788) added new mesh seed 127.0.0.1:5003
+Jun 07 2021 16:48:02 GMT: WARNING (fabric): (fabric.c:747) no IPv4 addresses configured for fabric
+Jun 07 2021 16:48:02 GMT: CRITICAL (fabric): (fabric.c:373) error creating fabric published endpoint list
+Jun 07 2021 16:48:02 GMT: WARNING (as): (signal.c:218) SIGUSR1 received, aborting Aerospike Community Edition build 5.6.0.4 os ubuntu18.04
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:630) stacktrace: registers: rax 0000000000000000 rbx 000000000000000a rcx 00007f4ce363e817 rdx 0000000000000000 rsi 00007fffc9e2e4e0 rdi 0000000000000002 rbp 0000000000000003 rsp 00007fffc9e2e4e0 r8 0000000000000000 r9 00007fffc9e2e4e0 r10 0000000000000008 r11 0000000000000246 r12 0000000000000004 r13 0000000000000004 r14 0000000000000a00 r15 000055e8cec349e8 rip 00007f4ce363e817
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:643) stacktrace: found 10 frames: 0x18cd64 0xd1f1b 0x7f4ce363e980 0x7f4ce363e817 0x18c76f 0x11d517 0x55275 0x53cf3 0x7f4ce22f4bf7 0x5445a offset 0x55e8ce694000
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 0: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(cf_log_stack_trace+0x115) [0x55e8ce820d64]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 1: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(as_sig_handle_usr1+0x72) [0x55e8ce765f1b]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 2: /lib/x86_64-linux-gnu/libpthread.so.0(+0x12980) [0x7f4ce363e980]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 3: /lib/x86_64-linux-gnu/libpthread.so.0(raise+0xc7) [0x7f4ce363e817]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 4: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(cf_log_write_no_return+0x93) [0x55e8ce82076f]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 5: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(as_fabric_init+0x223) [0x55e8ce7b1517]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 6: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(as_run+0x444) [0x55e8ce6e9275]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 7: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(main+0x9) [0x55e8ce6e7cf3]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f4ce22f4bf7]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 9: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(_start+0x2a) [0x55e8ce6e845a]
+Jun 07 2021 16:48:26 GMT: INFO (as): (as.c:306) <><><><><><><><><><>  Aerospike Community Edition build 5.6.0.4  <><><><><><><><><><>
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # Aerospike database configuration file for deployments using mesh heartbeats.
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) service {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	user zyh
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	group zyh
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	paxos-single-replica-limit 0 # Number of nodes where the replica count is automatically reduced to 1.
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	pidfile /home/zyh/distributed-system-test/aerospike_test/bin/run/asd2.pid
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	proto-fd-max 15000
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	work-directory run/work2
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	run-as-daemon false
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) mod-lua {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	user-path run/work2/usr/udf/lua
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) logging {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	# Log file must be an absolute path.
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	file /home/zyh/distributed-system-test/aerospike_test/bin/run/aerospike2.log {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		context any info
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) network {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	service {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		address 127.0.0.1
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		port 2001
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	heartbeat {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		mode mesh
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		port 5002 # Heartbeat port for this node.
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		# List one or more other nodes, one ip-address & port per line:
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		# mesh-seed-address-port 127.0.0.1 3000
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		mesh-seed-address-port 127.0.0.1 5001
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		mesh-seed-address-port 127.0.0.1 5003
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		interval 250
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		timeout 10
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	fabric {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		port 4001
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	info {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 		port 3001
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) namespace test {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	replication-factor 2
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	memory-size 4G
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 	storage-engine memory
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # namespace bar {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # 	replication-factor 2
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # 	memory-size 4G
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # 	storage-engine memory
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # 	# To use file storage backing, comment out the line above and use the
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # 	# following lines instead.
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # #	storage-engine device {
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # #		file /opt/aerospike/data/bar.dat
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # #		filesize 16G
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # #		data-in-memory true # Store data in memory in addition to file.
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # #	}
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:3990) # }
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:4017) system file descriptor limit: 1048576, proto-fd-max: 15000
+Jun 07 2021 16:48:26 GMT: INFO (hardware): (hardware.c:2025) detected 4 CPU(s), 4 core(s), 1 NUMA node(s)
+Jun 07 2021 16:48:26 GMT: INFO (socket): (socket.c:2700) Node port 4001, node ID fa15cc3e6290c00
+Jun 07 2021 16:48:26 GMT: INFO (config): (cfg.c:4049) node-id fa15cc3e6290c00
+Jun 07 2021 16:48:26 GMT: INFO (smd): (smd.c:2319) no file 'run/work2/smd/evict.smd' - starting empty
+Jun 07 2021 16:48:26 GMT: INFO (namespace): (namespace_ce.c:88) {test} beginning cold start
+Jun 07 2021 16:48:26 GMT: INFO (smd): (smd.c:2319) no file 'run/work2/smd/truncate.smd' - starting empty
+Jun 07 2021 16:48:26 GMT: INFO (smd): (smd.c:2319) no file 'run/work2/smd/sindex.smd' - starting empty
+Jun 07 2021 16:48:26 GMT: INFO (as): (as.c:366) initializing services...
+Jun 07 2021 16:48:26 GMT: INFO (service): (service.c:168) starting 4 service threads
+Jun 07 2021 16:48:26 GMT: INFO (hb): (hb.c:6788) added new mesh seed 127.0.0.1:5001
+Jun 07 2021 16:48:26 GMT: INFO (hb): (hb.c:6788) added new mesh seed 127.0.0.1:5003
+Jun 07 2021 16:48:26 GMT: INFO (fabric): (fabric.c:760) updated fabric published address list to {192.168.223.128:4001}
+Jun 07 2021 16:48:26 GMT: INFO (partition): (partition_balance.c:202) {test} 4096 partitions: found 4096 absent, 0 stored
+Jun 07 2021 16:48:26 GMT: INFO (hb): (hb.c:5518) updated heartbeat published address list to {192.168.223.128:5002}
+Jun 07 2021 16:48:26 GMT: INFO (smd): (smd.c:2319) no file 'run/work2/smd/UDF.smd' - starting empty
+Jun 07 2021 16:48:26 GMT: INFO (batch): (batch.c:760) starting 4 batch-index-threads
+Jun 07 2021 16:48:26 GMT: INFO (health): (health.c:318) starting health monitor thread
+Jun 07 2021 16:48:26 GMT: INFO (fabric): (fabric.c:399) starting 8 fabric send threads
+Jun 07 2021 16:48:26 GMT: INFO (fabric): (fabric.c:413) starting 16 fabric rw channel recv threads
+Jun 07 2021 16:48:26 GMT: INFO (fabric): (fabric.c:413) starting 4 fabric ctrl channel recv threads
+Jun 07 2021 16:48:26 GMT: INFO (fabric): (fabric.c:413) starting 4 fabric bulk channel recv threads
+Jun 07 2021 16:48:26 GMT: INFO (fabric): (fabric.c:413) starting 4 fabric meta channel recv threads
+Jun 07 2021 16:48:26 GMT: INFO (fabric): (fabric.c:425) starting fabric accept thread
+Jun 07 2021 16:48:26 GMT: INFO (hb): (hb.c:6974) initializing mesh heartbeat socket: 0.0.0.0:5002
+Jun 07 2021 16:48:26 GMT: INFO (hb): (hb.c:7003) mtu of the network is 1500
+Jun 07 2021 16:48:26 GMT: INFO (hb): (socket.c:815) Started mesh heartbeat endpoint 0.0.0.0:5002
+Jun 07 2021 16:48:26 GMT: INFO (nsup): (nsup.c:188) starting namespace supervisor threads
+Jun 07 2021 16:48:26 GMT: INFO (service): (service.c:938) starting reaper thread
+Jun 07 2021 16:48:26 GMT: INFO (service): (socket.c:815) Started client endpoint 127.0.0.1:2001
+Jun 07 2021 16:48:26 GMT: INFO (service): (service.c:199) starting accept thread
+Jun 07 2021 16:48:26 GMT: INFO (info-port): (thr_info_port.c:298) starting info port thread
+Jun 07 2021 16:48:26 GMT: INFO (fabric): (socket.c:815) Started fabric endpoint 0.0.0.0:4001
+Jun 07 2021 16:48:26 GMT: INFO (info-port): (socket.c:815) Started info endpoint 0.0.0.0:3001
+Jun 07 2021 16:48:26 GMT: INFO (as): (as.c:410) service ready: soon there will be cake!
+Jun 07 2021 16:48:26 GMT: WARNING (socket): (socket.c:869) Error while connecting: 111 (Connection refused)
+Jun 07 2021 16:48:26 GMT: WARNING (socket): (socket.c:928) Error while connecting socket to 127.0.0.1:5001
+Jun 07 2021 16:48:26 GMT: WARNING (hb): (hb.c:4905) could not create heartbeat connection to node - 127.0.0.1 {127.0.0.1:5001}
+Jun 07 2021 16:48:29 GMT: INFO (clustering): (clustering.c:6355) principal node - forming new cluster with succession list: fa15cc3e6290c00
+Jun 07 2021 16:48:29 GMT: INFO (clustering): (clustering.c:5794) applied new cluster key 3b1467870f17
+Jun 07 2021 16:48:29 GMT: INFO (clustering): (clustering.c:5796) applied new succession list fa15cc3e6290c00
+Jun 07 2021 16:48:29 GMT: INFO (clustering): (clustering.c:5798) applied cluster size 1
+Jun 07 2021 16:48:29 GMT: INFO (exchange): (exchange.c:2319) data exchange started with cluster key 3b1467870f17
+Jun 07 2021 16:48:29 GMT: INFO (exchange): (exchange.c:2671) exchange-compatibility-id: self 10 cluster-min 0 -> 10 cluster-max 0 -> 10
+Jun 07 2021 16:48:29 GMT: INFO (exchange): (exchange.c:3219) received commit command from principal node fa15cc3e6290c00
+Jun 07 2021 16:48:29 GMT: INFO (exchange): (exchange.c:3182) data exchange completed with cluster key 3b1467870f17
+Jun 07 2021 16:48:29 GMT: INFO (partition): (partition_balance.c:1006) {test} replication factor is 1
+Jun 07 2021 16:48:29 GMT: INFO (partition): (partition_balance.c:978) {test} rebalanced: expected-migrations (0,0,0) fresh-partitions 4096
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:169) NODE-ID fa15cc3e6290c00 CLUSTER-SIZE 1
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:251)    cluster-clock: skew-ms 0
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:274)    system: total-cpu-pct 4 user-cpu-pct 2 kernel-cpu-pct 2 free-mem-kbytes 2789372 free-mem-pct 69
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:297)    process: cpu-pct 2 threads (8,59,46,46) heap-kbytes (1117944,1118512,1155072) heap-efficiency-pct 96.8
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:308)    in-progress: info-q 0 rw-hash 0 proxy-hash 0 tree-gc-q 0
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:331)    fds: proto (7,11,4) heartbeat (0,0,0) fabric (0,0,0)
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:339)    heartbeat-received: self 0 foreign 0
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:369)    fabric-bytes-per-second: bulk (0,0) ctrl (0,0) meta (0,0) rw (0,0)
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:432) {test} objects: all 1 master 1 prole 0 non-replica 0
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:494) {test} migrations: complete
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:513) {test} memory-usage: total-bytes 77 index-bytes 64 set-index-bytes 0 sindex-bytes 0 data-bytes 13 used-pct 0.00
+Jun 07 2021 16:48:36 GMT: INFO (info): (ticker.c:649) {test} client: tsvc (0,0) proxy (0,0,0) read (2,0,0,5,0) write (3,0,0,0) delete (0,0,0,0,0) udf (0,0,0,0) lang (0,0,0,0)
+Jun 07 2021 16:48:36 GMT: INFO (info): (hist.c:321) histogram dump: {test}-read (7 total) msec
+Jun 07 2021 16:48:36 GMT: INFO (info): (hist.c:340)  (00: 0000000007)
+Jun 07 2021 16:48:36 GMT: INFO (info): (hist.c:321) histogram dump: {test}-write (3 total) msec
+Jun 07 2021 16:48:36 GMT: INFO (info): (hist.c:340)  (00: 0000000003)
+Jun 07 2021 16:48:36 GMT: WARNING (hb): (hb.c:4905) (repeated:20) could not create heartbeat connection to node - 127.0.0.1 {127.0.0.1:5001}
+Jun 07 2021 16:48:36 GMT: WARNING (socket): (socket.c:869) (repeated:20) Error while connecting: 111 (Connection refused)
+Jun 07 2021 16:48:36 GMT: WARNING (socket): (socket.c:928) (repeated:20) Error while connecting socket to 127.0.0.1:5001
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:169) NODE-ID fa15cc3e6290c00 CLUSTER-SIZE 1
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:251)    cluster-clock: skew-ms 0
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:274)    system: total-cpu-pct 2 user-cpu-pct 2 kernel-cpu-pct 0 free-mem-kbytes 2789028 free-mem-pct 69
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:297)    process: cpu-pct 2 threads (8,59,46,46) heap-kbytes (1117978,1118568,1155072) heap-efficiency-pct 96.8
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:308)    in-progress: info-q 0 rw-hash 0 proxy-hash 0 tree-gc-q 0
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:331)    fds: proto (8,12,4) heartbeat (0,0,0) fabric (0,0,0)
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:339)    heartbeat-received: self 0 foreign 0
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:369)    fabric-bytes-per-second: bulk (0,0) ctrl (0,0) meta (0,0) rw (0,0)
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:432) {test} objects: all 1 master 1 prole 0 non-replica 0
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:494) {test} migrations: complete
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:513) {test} memory-usage: total-bytes 77 index-bytes 64 set-index-bytes 0 sindex-bytes 0 data-bytes 13 used-pct 0.00
+Jun 07 2021 16:48:46 GMT: INFO (info): (ticker.c:649) {test} client: tsvc (0,0) proxy (0,0,0) read (8,0,0,5,0) write (6,0,0,0) delete (0,0,0,0,0) udf (0,0,0,0) lang (0,0,0,0)
+Jun 07 2021 16:48:46 GMT: INFO (info): (hist.c:321) histogram dump: {test}-read (13 total) msec
+Jun 07 2021 16:48:46 GMT: INFO (info): (hist.c:340)  (00: 0000000013)
+Jun 07 2021 16:48:46 GMT: INFO (info): (hist.c:321) histogram dump: {test}-write (6 total) msec
+Jun 07 2021 16:48:46 GMT: INFO (info): (hist.c:340)  (00: 0000000006)
+Jun 07 2021 16:48:46 GMT: WARNING (hb): (hb.c:4905) (repeated:20) could not create heartbeat connection to node - 127.0.0.1 {127.0.0.1:5001}
+Jun 07 2021 16:48:46 GMT: WARNING (socket): (socket.c:869) (repeated:20) Error while connecting: 111 (Connection refused)
+Jun 07 2021 16:48:46 GMT: WARNING (socket): (socket.c:928) (repeated:20) Error while connecting socket to 127.0.0.1:5001
+Jun 07 2021 16:48:47 GMT: INFO (as): (signal.c:203) SIGTERM received, shutting down Aerospike Community Edition build 5.6.0.4 os ubuntu18.04
+Jun 07 2021 16:48:47 GMT: INFO (as): (as.c:435) initiating clean shutdown ...
+Jun 07 2021 16:48:47 GMT: INFO (hb): (hb.c:5824) closing mesh heartbeat sockets
+Jun 07 2021 16:48:47 GMT: INFO (storage): (storage.c:235) {test} storage-engine memory - nothing to do
+Jun 07 2021 16:48:47 GMT: INFO (as): (as.c:446) finished clean shutdown - exiting
