@@ -372,3 +372,16 @@
         10 [0x11b27e4]: coro_t::run() at coroutines.cc:277
     error: Exiting.
     ```
+
+more bugs:
+
+    cat test_cases/*/log[0-2] | grep 'error: Error' | awk '{print $7 $10}' | sort | uniq
+        src/arch/runtime/thread_pool.cc420:
+        ./src/clustering/generic/registrar.hpp134:
+        ./src/concurrency/watchable_map.tcc99:
+        ./src/containers/intrusive_list.hpp175:
+        ./src/containers/map_sentries.hpp70:
+        src/rpc/connectivity/cluster.cc1348:
+        src/rpc/connectivity/cluster.cc395:
+        ./src/rpc/directory/read_manager.tcc48:
+        ./src/rpc/semilattice/semilattice_manager.tcc516:
