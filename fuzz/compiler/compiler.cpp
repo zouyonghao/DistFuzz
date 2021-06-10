@@ -267,6 +267,11 @@ int main(int argc, char **argv)
     // TODO
     ERROR_LOG(
         "Currently we do not support to run compling and linking together.\n");
+
+    for (auto &i : document["additional_link_args"].GetArray())
+    {
+        only_link_vector.push_back(i.GetString());
+    }
     only_link_vector.push_back(nullptr);
     execvp(only_link_vector[0], (char *const *)&only_link_vector[0]);
     perror((std::string("failed to exec ") + CLANG).c_str());

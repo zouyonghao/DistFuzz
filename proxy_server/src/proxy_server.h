@@ -30,6 +30,7 @@ struct connection_pair
     int dest_sock;
     std::thread *thread1;
     std::thread *thread2;
+    std::mutex lock_for_connection;
 };
 struct replace_item
 {
@@ -73,6 +74,8 @@ private:
 
     std::list<struct connection_pair *> connection_pairs;
 
+    bool debug = false;
+
     void accept_connection_handler();
 
     int connect_to_server();
@@ -96,6 +99,11 @@ public:
     void set_skip_messages(int _skip_message)
     {
         this->skip_messages = _skip_message;
+    }
+
+    void enable_debug()
+    {
+        debug = true;
     }
 };
 

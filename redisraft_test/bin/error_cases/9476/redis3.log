@@ -1,0 +1,17 @@
+103915:C 17 May 2021 13:17:02.683 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+103915:C 17 May 2021 13:17:02.683 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=103915, just started
+103915:C 17 May 2021 13:17:02.683 # Configuration loaded
+103915:M 17 May 2021 13:17:02.684 * monotonic clock: POSIX clock_gettime
+103915:M 17 May 2021 13:17:02.684 * Running mode=standalone, port=5004.
+103915:M 17 May 2021 13:17:02.684 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+103915:M 17 May 2021 13:17:02.684 # Server initialized
+103915:M 17 May 2021 13:17:02.684 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+103915:M 17 May 2021 13:17:02.685 * <redisraft> RedisRaft starting, arguments: raft-log-filename raftlog3.db addr localhost:5004
+103915:M 17 May 2021 13:17:02.700 * Module 'redisraft' loaded from /home/zyh/redisraft/redisraft.so
+103915:M 17 May 2021 13:17:02.712 * Ready to accept connections
+104423:C 17 May 2021 13:17:29.782 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+104423:C 17 May 2021 13:17:29.782 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=104423, just started
+104423:C 17 May 2021 13:17:29.782 # Configuration loaded
+104423:M 17 May 2021 13:17:29.783 * monotonic clock: POSIX clock_gettime
+104423:M 17 May 2021 13:17:29.783 # Warning: Could not create server TCP listening socket *:5004: bind: Address already in use
+104423:M 17 May 2021 13:17:29.783 # Failed listening on port 5004 (TCP), aborting.

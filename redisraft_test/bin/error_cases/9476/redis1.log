@@ -1,0 +1,14 @@
+103908:C 17 May 2021 13:17:02.680 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+103908:C 17 May 2021 13:17:02.680 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=103908, just started
+103908:C 17 May 2021 13:17:02.680 # Configuration loaded
+103908:M 17 May 2021 13:17:02.681 * monotonic clock: POSIX clock_gettime
+103908:M 17 May 2021 13:17:02.681 * Running mode=standalone, port=5001.
+103908:M 17 May 2021 13:17:02.681 # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+103908:M 17 May 2021 13:17:02.681 # Server initialized
+103908:M 17 May 2021 13:17:02.681 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+103908:M 17 May 2021 13:17:02.682 * <redisraft> RedisRaft starting, arguments: raft-log-filename raftlog1.db addr localhost:5001
+103908:M 17 May 2021 13:17:02.690 * Module 'redisraft' loaded from /home/zyh/redisraft/redisraft.so
+103908:M 17 May 2021 13:17:02.710 * Ready to accept connections
+103908:M 17 May 2021 13:17:05.688 * <redisraft> State change: Node is now a leader, term 0
+103908:M 17 May 2021 13:17:05.688 * <redisraft> Cluster Membership: term:0 index:0 nodes: id=1527180221,voting=1,active=1,addr=-
+103908:M 17 May 2021 13:17:05.697 * <redisraft> Raft Cluster initialized, node id: 1527180221, dbid: c426ef9403b829dd0c7504b62ac2d789

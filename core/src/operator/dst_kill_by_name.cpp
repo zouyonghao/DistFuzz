@@ -9,7 +9,7 @@ bool KillByName::_do()
     }
     dst_set_bool(key, false);
     return std::system(("ps -ef | grep " + name +
-                        " | head -1 | awk '{print $2}' | xargs kill" +
+                        " | grep -v grep | head -1 | awk '{print $2}' | xargs kill" +
                         (is_force_kill ? " -9" : ""))
                            .c_str()) == 0;
 }

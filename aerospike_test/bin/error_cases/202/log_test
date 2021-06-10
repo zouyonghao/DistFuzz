@@ -1,0 +1,153 @@
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+err(-10) Failed to connect at [src/main/aerospike/as_cluster.c:355]
+aerospike_key_get() returned 2 - 127.0.0.1:2001 AEROSPIKE_ERR_RECORD_NOT_FOUND
+aerospike_key_get() returned 2 - 127.0.0.1:2001 AEROSPIKE_ERR_RECORD_NOT_FOUND
+aerospike_key_get() returned 2 - 127.0.0.1:2001 AEROSPIKE_ERR_RECORD_NOT_FOUND
+aerospike_key_get() returned 2 - 127.0.0.1:2001 AEROSPIKE_ERR_RECORD_NOT_FOUND
+aerospike_key_get() returned 2 - 127.0.0.1:2001 AEROSPIKE_ERR_RECORD_NOT_FOUND
+kill: (102473): No such process
+/home/zyh/distributed-system-test/aerospike_test/bin
+mv: cannot stat 'operation_log': No such file or directory
+Reading random file (null)
+spliting files...
+Reading random file random.txt
+[1;31mrunning test case 202[0m
+start nodes and proxies
+normal operator_size = 2
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeRead
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeWrite
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeRead
+operator_size = 10
+running operator StartNode1
+normal operator_size = 2
+running operator AerospikeRead
+run concurrent normal operation
+node1 already started
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeWrite
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeWrite
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeRead
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeWrite
+running operator KillNode1
+normal operator_size = 2
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeRead
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeRead
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeWrite
+run concurrent normal operation
+running operator StartNode1
+normal operator_size = 2
+running operator AerospikeRead
+run concurrent normal operation
+executing command `./start_node1.sh`
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeRead
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeRead
+running operator ForceKillNode1
+normal operator_size = 2
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeRead
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeRead
+write value is 2429204820
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeRead
+write value is 1491175103
+read value is 1491175103
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeWrite
+write value is 598346967
+read value is 1491175103
+running operator AerospikeRead
+run concurrent normal operation
+read value is 598346967
+running operator ForceKillNode2
+normal operator_size = 2
+running operator AerospikeRead
+node2 already killed!
+run concurrent normal operation
+read value is 598346967
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeRead
+read value is 598346967
+read value is 598346967
+running operator AerospikeWrite
+run concurrent normal operation
+write value is 3963783540
+running operator AerospikeRead
+run concurrent normal operation
+running operator AerospikeRead
+read value is 3963783540
+read value is 3963783540
+running operator AerospikeWrite
+run concurrent normal operation
+running operator AerospikeWrite
+write value is 1125101259
+write value is 3813254554
+stopping...
+backup test cases
+203
+Find CRITIC!

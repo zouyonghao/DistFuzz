@@ -12,7 +12,7 @@
 
 #include <proxy_server.h>
 
-using namespace std::chrono_literals;
+// using namespace std::literals::chrono_literals;
 
 const std::string STRING_REPLACE_MODE = "string";
 const std::string HEX_REPLACE_MODE = "hex";
@@ -39,10 +39,10 @@ struct replace_pair parse_replace_pair(rapidjson::Value &pair,
         std::vector<char> src_replaces;
         int tmp;
         uint8_t u8_tmp;
-        std::istringstream ss(pair["src"].GetString());
-        while (!ss.eof())
+        std::istringstream src_ss(pair["src"].GetString());
+        while (!src_ss.eof())
         {
-            ss >> std::hex >> tmp;
+            src_ss >> std::hex >> tmp;
             u8_tmp = tmp;
             printf("%x ", u8_tmp);
             src_replaces.push_back(u8_tmp);
@@ -53,10 +53,10 @@ struct replace_pair parse_replace_pair(rapidjson::Value &pair,
         std::cout << "size = " << p.src.size << "\n";
 
         std::vector<char> dest_replaces;
-        ss = std::istringstream(pair["dest"].GetString());
-        while (!ss.eof())
+        std::istringstream dest_ss(pair["dest"].GetString());
+        while (!dest_ss.eof())
         {
-            ss >> std::hex >> tmp;
+            dest_ss >> std::hex >> tmp;
             u8_tmp = tmp;
             printf("%x ", u8_tmp);
             dest_replaces.push_back(u8_tmp);
@@ -87,6 +87,12 @@ int main(int argc, char *argv[])
         return -EBADF;
     }
     ifs.close();
+
+    bool debug = false;
+    if (document.HasMember("debug"))
+    {
+        debug = document["debug"].GetBool();
+    }
 
     std::string common_replace_mode = STRING_REPLACE_MODE;
     std::vector<struct replace_pair> _common_replace_pairs;
@@ -148,6 +154,10 @@ int main(int argc, char *argv[])
             skip_messages = server["skip_messages"].GetInt();
         }
         p->set_skip_messages(skip_messages);
+        if (debug)
+        {
+            p->enable_debug();
+        }
         proxy_servers.push_back(p);
     }
 
@@ -155,7 +165,7 @@ int main(int argc, char *argv[])
 
     while (true)
     {
-        std::this_thread::sleep_for(2s);
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
 
     return 0;

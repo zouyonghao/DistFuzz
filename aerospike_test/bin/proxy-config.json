@@ -1,0 +1,104 @@
+{
+    "debug": true,
+    "typology": {
+        "node0": "5001 -> 5005",
+        "node1": "5002 -> 5006",
+        "proxy": "5003",
+        "node2": "5004"
+    },
+    "proxy_servers": [
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 5003,
+            "dest_port": 5004,
+            "delay_time": 0,
+            "replace_mode": "hex",
+            "replace_pairs": [
+                {
+                    "src": "89 13 c0 a8",
+                    "src_name": "node0",
+                    "dest": "8d 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5001 to 5005"
+                },
+                {
+                    "src": "8a 13 c0 a8",
+                    "src_name": "node1",
+                    "dest": "8e 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5002 to 5006"
+                },
+                {
+                    "src": "8b 13 c0 a8",
+                    "src_name": "proxy",
+                    "dest": "8c 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5003 to 5004"
+                }
+            ]
+        },
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 5005,
+            "dest_port": 5001,
+            "delay_time": 0,
+            "replace_mode": "hex",
+            "replace_pairs": [
+                {
+                    "src": "8d 13 c0 a8",
+                    "src_name": "node0",
+                    "dest": "89 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5005 to 5001"
+                },
+                {
+                    "src": "8e 13 c0 a8",
+                    "src_name": "node1",
+                    "dest": "8a 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5006 to 5002"
+                },
+                {
+                    "src": "8c 13 c0 a8",
+                    "src_name": "proxy",
+                    "dest": "8b 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5004 to 5003"
+                }
+            ]
+        },
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 5006,
+            "dest_port": 5002,
+            "delay_time": 0,
+            "replace_mode": "hex",
+            "replace_pairs": [
+                {
+                    "src": "8d 13 c0 a8",
+                    "src_name": "node0",
+                    "dest": "89 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5005 to 5001"
+                },
+                {
+                    "src": "8e 13 c0 a8",
+                    "src_name": "node1",
+                    "dest": "8a 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5006 to 5002"
+                },
+                {
+                    "src": "8c 13 c0 a8",
+                    "src_name": "proxy",
+                    "dest": "8b 13 c0 a8",
+                    "dest_name": "node2",
+                    "note": "5004 to 5003"
+                }
+            ]
+        }
+    ]
+}

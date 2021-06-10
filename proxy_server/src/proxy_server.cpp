@@ -205,22 +205,26 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
     while (!should_break && running &&
            (read_size = read(src_sock, client_message, 1000)) > 0)
     {
-        std::cout << "read size = " << read_size << "\n";
-        // Send the message back to client
-        // std::cout << "message from " << src_sock << ", size = " << read_size;
-        // for (int i = 0; i < read_size; i++)
-        // {
-        //     std::cout << client_message[i];
-        // }
-        // std::cout << std::endl;
+        if (debug)
+        {
+            std::cout << "read size = " << read_size << "\n";
+            // Send the message back to client
+            std::cout << "message in char from " << src_sock
+                      << ", size = " << read_size << "\n";
+            for (int i = 0; i < read_size; i++)
+            {
+                std::cout << client_message[i];
+            }
+            std::cout << std::endl;
 
-        // std::cout << "\nMessage content original:\n";
-        // for (int i = 0; i < read_size; i++)
-        // {
-        //     // std::cout << client_message[i];
-        //     printf("%x", client_message[i]);
-        // }
-        // std::cout << "\n";
+            std::cout << "\nmessage content in bits :\n";
+            for (int i = 0; i < read_size; i++)
+            {
+                // std::cout << client_message[i];
+                printf("%x ", client_message[i]);
+            }
+            std::cout << "\n";
+        }
         for (int i = 0; i < read_size; i++)
         {
             for (auto &s : replace_pairs)
@@ -267,7 +271,8 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
             goto WRITE;
         }
 
-        std::cerr << "select_random is " << std::to_string(select_random) << "\n";
+        std::cerr << "select_random is " << std::to_string(select_random)
+                  << "\n";
         switch (select_random)
         {
         case SUPPORTED_ACTION::NOOP:
@@ -292,22 +297,26 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         case SUPPORTED_ACTION::ASYNC_DELAY:
         {
             uint8_t tmp_client_message[1000];
-            for (int i = 0; i < read_size; i++) {
+            for (int i = 0; i < read_size; i++)
+            {
                 tmp_client_message[i] = client_message[i];
             }
-            std::async(std::launch::async, [dest_sock, tmp_client_message,
-                                            read_size, &should_break] {
-                uint16_t random = __dst_get_random_uint16_t();
-                usleep(random);
-                __dst_event_trigger(
-                    ("sleep for " + std::to_string(random) + "n").c_str());
-                int ret = write(dest_sock, tmp_client_message, read_size);
-                if (ret < 0)
+            std::async(
+                std::launch::async,
+                [dest_sock, tmp_client_message, read_size, &should_break, cp]
                 {
-                    std::cerr << "write failed!\n";
-                    should_break = true;
-                }
-            });
+                    uint16_t random = __dst_get_random_uint16_t();
+                    usleep(random);
+                    std::lock_guard<std::mutex> lk(cp->lock_for_connection);
+                    __dst_event_trigger(
+                        ("sleep for " + std::to_string(random) + "n").c_str());
+                    int ret = write(dest_sock, tmp_client_message, read_size);
+                    if (ret < 0)
+                    {
+                        std::cerr << "write failed!\n";
+                        should_break = true;
+                    }
+                });
             continue;
         }
         case SUPPORTED_ACTION::DUP:
@@ -320,6 +329,8 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         }
 
     WRITE:
+    {
+        std::lock_guard<std::mutex> lk(cp->lock_for_connection);
         int ret = write(dest_sock, client_message, read_size);
         if (ret != read_size)
         {
@@ -331,6 +342,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
             perror("write failed!");
             break;
         }
+    }
         if (need_dup)
         {
             need_dup = false;

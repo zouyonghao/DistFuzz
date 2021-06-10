@@ -1,0 +1,100 @@
+Jun 07 2021 16:48:02 GMT: INFO (as): (as.c:306) <><><><><><><><><><>  Aerospike Community Edition build 5.6.0.4  <><><><><><><><><><>
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # Aerospike database configuration file for deployments using mesh heartbeats.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) service {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	user zyh
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	group zyh
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	paxos-single-replica-limit 0 # Number of nodes where the replica count is automatically reduced to 1.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	pidfile /home/zyh/distributed-system-test/aerospike_test/bin/run/asd3.pid
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	proto-fd-max 15000
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	work-directory run/work3
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	run-as-daemon false
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) mod-lua {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	user-path run/work3/usr/udf/lua
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) logging {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	# Log file must be an absolute path.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	file /home/zyh/distributed-system-test/aerospike_test/bin/run/aerospike3.log {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		context any info
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) network {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	service {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		address 127.0.0.1
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		port 2002
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	heartbeat {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		mode mesh
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		port 5004 # Heartbeat port for this node.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		# List one or more other nodes, one ip-address & port per line:
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		# mesh-seed-address-port 127.0.0.1 3000
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		mesh-seed-address-port 127.0.0.1 5005
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		mesh-seed-address-port 127.0.0.1 5006
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		interval 250
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		timeout 10
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	fabric {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		port 4002
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	info {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 		port 3002
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) namespace test {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	replication-factor 2
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	memory-size 4G
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 	storage-engine memory
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # namespace bar {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	replication-factor 2
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	memory-size 4G
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	storage-engine memory
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) 
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	# To use file storage backing, comment out the line above and use the
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # 	# following lines instead.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #	storage-engine device {
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #		file /opt/aerospike/data/bar.dat
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #		filesize 16G
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #		data-in-memory true # Store data in memory in addition to file.
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # #	}
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:3990) # }
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:4017) system file descriptor limit: 1048576, proto-fd-max: 15000
+Jun 07 2021 16:48:02 GMT: INFO (hardware): (hardware.c:2025) detected 4 CPU(s), 4 core(s), 1 NUMA node(s)
+Jun 07 2021 16:48:02 GMT: INFO (socket): (socket.c:2700) Node port 4002, node ID fa2279b77654202
+Jun 07 2021 16:48:02 GMT: INFO (config): (cfg.c:4049) node-id fa2279b77654202
+Jun 07 2021 16:48:02 GMT: INFO (smd): (smd.c:2319) no file 'run/work3/smd/evict.smd' - starting empty
+Jun 07 2021 16:48:02 GMT: INFO (namespace): (namespace_ce.c:88) {test} beginning cold start
+Jun 07 2021 16:48:02 GMT: INFO (smd): (smd.c:2319) no file 'run/work3/smd/truncate.smd' - starting empty
+Jun 07 2021 16:48:02 GMT: INFO (smd): (smd.c:2319) no file 'run/work3/smd/sindex.smd' - starting empty
+Jun 07 2021 16:48:02 GMT: INFO (as): (as.c:366) initializing services...
+Jun 07 2021 16:48:02 GMT: INFO (service): (service.c:168) starting 4 service threads
+Jun 07 2021 16:48:02 GMT: INFO (hb): (hb.c:6788) added new mesh seed 127.0.0.1:5005
+Jun 07 2021 16:48:02 GMT: INFO (hb): (hb.c:6788) added new mesh seed 127.0.0.1:5006
+Jun 07 2021 16:48:02 GMT: WARNING (fabric): (fabric.c:747) no IPv4 addresses configured for fabric
+Jun 07 2021 16:48:02 GMT: CRITICAL (fabric): (fabric.c:373) error creating fabric published endpoint list
+Jun 07 2021 16:48:02 GMT: WARNING (as): (signal.c:218) SIGUSR1 received, aborting Aerospike Community Edition build 5.6.0.4 os ubuntu18.04
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:630) stacktrace: registers: rax 0000000000000000 rbx 000000000000000a rcx 00007f81356a4817 rdx 0000000000000000 rsi 00007ffd1fe467a0 rdi 0000000000000002 rbp 0000000000000003 rsp 00007ffd1fe467a0 r8 0000000000000000 r9 00007ffd1fe467a0 r10 0000000000000008 r11 0000000000000246 r12 0000000000000004 r13 0000000000000004 r14 0000000000000a00 r15 000055af36b8c9e8 rip 00007f81356a4817
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:643) stacktrace: found 10 frames: 0x18cd64 0xd1f1b 0x7f81356a4980 0x7f81356a4817 0x18c76f 0x11d517 0x55275 0x53cf3 0x7f813435abf7 0x5445a offset 0x55af365ec000
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 0: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(cf_log_stack_trace+0x115) [0x55af36778d64]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 1: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(as_sig_handle_usr1+0x72) [0x55af366bdf1b]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 2: /lib/x86_64-linux-gnu/libpthread.so.0(+0x12980) [0x7f81356a4980]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 3: /lib/x86_64-linux-gnu/libpthread.so.0(raise+0xc7) [0x7f81356a4817]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 4: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(cf_log_write_no_return+0x93) [0x55af3677876f]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 5: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(as_fabric_init+0x223) [0x55af36709517]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 6: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(as_run+0x444) [0x55af36641275]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 7: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(main+0x9) [0x55af3663fcf3]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f813435abf7]
+Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 9: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(_start+0x2a) [0x55af3664045a]
