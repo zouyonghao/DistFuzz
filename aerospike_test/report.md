@@ -17,3 +17,13 @@
     Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 8: /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f90bdf51bf7]
     Jun 07 2021 16:48:02 GMT: WARNING (as): (log.c:653) stacktrace: frame 9: /home/zyh/aerospike-server/target/Linux-x86_64/bin/asd(_start+0x2a) [0x5574204c345a]
     ```
+
+    https://github.com/aerospike/aerospike-server/issues/27
+
+2. Read old data?
+
+    test_cases/1547
+    https://github.com/aerospike/aerospike-server/issues/30
+
+    stale read
+    community version does not support this, while enterprise version does.
