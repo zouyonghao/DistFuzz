@@ -131,3 +131,5 @@ aerospike_test/bin/file_lock
 aerospike_test/bin/test_case_count
 aerospike_test/bin/test_cases/
 *.pid
+clickhouse_test/bin/run/
+clickhouse_test/bin/zookeeper/data/
