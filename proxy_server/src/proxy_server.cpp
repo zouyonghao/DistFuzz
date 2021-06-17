@@ -303,18 +303,23 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
             }
             std::async(
                 std::launch::async,
-                [dest_sock, tmp_client_message, read_size, &should_break, cp]
+                [dest_sock, tmp_client_message, read_size, &should_break, cp,
+                 this]
                 {
                     uint16_t random = __dst_get_random_uint16_t();
                     usleep(random);
                     std::lock_guard<std::mutex> lk(cp->lock_for_connection);
                     __dst_event_trigger(
                         ("sleep for " + std::to_string(random) + "n").c_str());
-                    int ret = write(dest_sock, tmp_client_message, read_size);
-                    if (ret < 0)
+                    if (do_write)
                     {
-                        std::cerr << "write failed!\n";
-                        should_break = true;
+                        int ret =
+                            write(dest_sock, tmp_client_message, read_size);
+                        if (ret < 0)
+                        {
+                            std::cerr << "write failed!\n";
+                            should_break = true;
+                        }
                     }
                 });
             continue;
@@ -331,16 +336,19 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
     WRITE:
     {
         std::lock_guard<std::mutex> lk(cp->lock_for_connection);
-        int ret = write(dest_sock, client_message, read_size);
-        if (ret != read_size)
+        if (do_write)
         {
-            // TODO
-            std::cerr << "write less than read!!\n";
-        }
-        if (ret < 0)
-        {
-            perror("write failed!");
-            break;
+            int ret = write(dest_sock, client_message, read_size);
+            if (ret != read_size)
+            {
+                // TODO
+                std::cerr << "write less than read!!\n";
+            }
+            if (ret < 0)
+            {
+                perror("write failed!");
+                break;
+            }
         }
     }
         if (need_dup)

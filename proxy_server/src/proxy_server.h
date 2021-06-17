@@ -75,6 +75,7 @@ private:
     std::list<struct connection_pair *> connection_pairs;
 
     bool debug = false;
+    bool do_write = true;
 
     void accept_connection_handler();
 
@@ -104,6 +105,11 @@ public:
     void enable_debug()
     {
         debug = true;
+    }
+
+    void disable_write()
+    {
+        do_write = false;
     }
 };
 

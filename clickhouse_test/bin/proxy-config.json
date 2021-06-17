@@ -1,0 +1,63 @@
+{
+    "do_write": true,
+    "debug": false,
+    "typology": {
+        "node0": "9009 -> 9013",
+        "node1": "9010 -> 9014",
+        "node2": "9012 -> 9011",
+        "zookeeper": "2182 -> 2181"
+    },
+    "proxy_servers": [
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 2182,
+            "dest_port": 2181,
+            "delay_time": 0,
+            "replace_pairs": [
+                {
+                    "src": "9012",
+                    "src_name": "node2",
+                    "dest": "9011",
+                    "dest_name": "zookeeper"
+                },
+                {
+                    "src": "9013",
+                    "src_name": "node2",
+                    "dest": "9014",
+                    "dest_name": "zookeeper"
+                },
+                {
+                    "src": "9014",
+                    "src_name": "node2",
+                    "dest": "9010",
+                    "dest_name": "zookeeper"
+                }
+            ]
+        },
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 9013,
+            "dest_port": 9009,
+            "delay_time": 0,
+            "replace_pairs": []
+        },
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 9014,
+            "dest_port": 9010,
+            "delay_time": 0,
+            "replace_pairs": []
+        },
+        {
+            "src_ip": "0.0.0.0",
+            "dest_ip": "0.0.0.0",
+            "src_port": 9011,
+            "dest_port": 9012,
+            "delay_time": 0,
+            "replace_pairs": []
+        }
+    ]
+}

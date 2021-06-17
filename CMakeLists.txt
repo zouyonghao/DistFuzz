@@ -16,3 +16,4 @@ add_subdirectory(raftis_test)
 
 add_subdirectory(rethinkdb_test)
 add_subdirectory(aerospike_test)
+add_subdirectory(clickhouse_test)

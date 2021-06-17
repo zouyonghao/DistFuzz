@@ -94,6 +94,12 @@ int main(int argc, char *argv[])
         debug = document["debug"].GetBool();
     }
 
+    bool do_write = true;
+    if (document.HasMember("do_write"))
+    {
+        debug = document["do_write"].GetBool();
+    }
+
     std::string common_replace_mode = STRING_REPLACE_MODE;
     std::vector<struct replace_pair> _common_replace_pairs;
     if (document.HasMember("common_replace_mode"))
@@ -157,6 +163,10 @@ int main(int argc, char *argv[])
         if (debug)
         {
             p->enable_debug();
+        }
+        if (false == do_write)
+        {
+            p->disable_write();
         }
         proxy_servers.push_back(p);
     }

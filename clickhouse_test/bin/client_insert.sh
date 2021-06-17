@@ -1,0 +1,1 @@
+/home/zyh/ClickHouse/build/programs/clickhouse-client -c $1 -q "insert into test.test values ($2, $3);"
