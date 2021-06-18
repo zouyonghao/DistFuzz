@@ -281,7 +281,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
         }
         case SUPPORTED_ACTION::DELAY:
         {
-            uint16_t random = __dst_get_random_uint16_t();
+            uint32_t random = __dst_get_random_uint32();
             usleep(random);
             __dst_event_trigger(
                 ("sleep for " + std::to_string(random) + "n").c_str());
@@ -306,7 +306,7 @@ void ProxyServer::receive_and_send_handler(struct connection_pair *cp,
                 [dest_sock, tmp_client_message, read_size, &should_break, cp,
                  this]
                 {
-                    uint16_t random = __dst_get_random_uint16_t();
+                    uint32_t random = __dst_get_random_uint32();
                     usleep(random);
                     std::lock_guard<std::mutex> lk(cp->lock_for_connection);
                     __dst_event_trigger(

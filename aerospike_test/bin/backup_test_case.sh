@@ -24,6 +24,10 @@ mv operation_log ./test_cases/$1
         echo "Find CRITIC!"
     elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/run/*.log; then
         echo "Find ASan errors!"
+    elif grep -q "AddressSanitizer" ./test_cases/$1/run/log*; then
+        echo "Find ASan errors!"
+    elif grep -q "AddressSanitizer" ./test_cases/$1/run/*log; then
+        echo "Find ASan errors!"
     elif grep -q true ./test_cases/$1/check_log; then
         echo "No errors, deleting logs..."
         rm -rf ./test_cases/$1

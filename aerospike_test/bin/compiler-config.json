@@ -1,8 +1,5 @@
 {
-    "file_blacklist":[
-        "mutex",
-        "jemalloc"
-    ],
+    "file_blacklist": [],
     "instrumentors": [
         "DefaultInstrumentor"
     ],
@@ -22,8 +19,7 @@
         "-Wno-error",
         "-fsanitize=address"
     ],
-    "additional_compile_llvm_args": [
-    ],
+    "additional_compile_llvm_args": [],
     "ignored_args": [
         "-Wall",
         "-O1",
