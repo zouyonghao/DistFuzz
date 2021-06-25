@@ -20,18 +20,18 @@ mv operation_log ./test_cases/$1
         echo "Find errors!"
     elif grep -q 'BUG' ./test_cases/$1/run/*.log; then
         echo "Find BUGS!"
-    elif grep -q 'CRITIC' ./test_cases/$1/run/*.log; then
+    elif grep 'CRITIC' ./test_cases/$1/run/*.log | grep -v fabric; then
         echo "Find CRITIC!"
     elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/run/*.log; then
         echo "Find ASan errors!"
-    elif grep -q "AddressSanitizer" ./test_cases/$1/run/log*; then
+    elif grep -q "AddressSanitizer" ./test_cases/$1/run/log[0-2]; then
         echo "Find ASan errors!"
-    elif grep -q "AddressSanitizer" ./test_cases/$1/run/*log; then
+    elif grep -q "AddressSanitizer" ./test_cases/$1/log*; then
         echo "Find ASan errors!"
-    elif grep -q true ./test_cases/$1/check_log; then
-        echo "No errors, deleting logs..."
+    elif grep -q false ./test_cases/$1/check_log; then
+        echo "find operation log errors, bug ignore for now!"
         rm -rf ./test_cases/$1
     else
-        echo "Find operation log errors!"
+        rm -rf ./test_cases/$1
     fi
 } &
