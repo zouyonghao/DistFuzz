@@ -373,6 +373,26 @@
     error: Exiting.
     ```
 
+9. Guarantee failed: [peer.ips().size() > 0]
+
+    ```
+    Version: rethinkdb 2.3.6-fallback (CLANG 9.0.0 (tags/RELEASE_900/final))
+    error: Error in thread 36 in src/rpc/connectivity/cluster.cc at line 395:
+    error: Guarantee failed: [peer.ips().size() > 0]
+    error: Backtrace:
+    error: Tue Jun 29 02:11:10 2021
+
+        1 [0x7f411b]: __interceptor_backtrace+0x5b at ??:?
+        2 [0x9ff22e]: backtrace_t::backtrace_t() at backtrace.cc:213
+        3 [0xa01e48]: lazy_backtrace_formatter_t::lazy_backtrace_formatter_t() at backtrace.cc:297
+        4 [0x9fde3a]: format_backtrace[abi:cxx11](bool) at ??:?
+        5 [0x13268f1]: report_fatal_error(char const*, int, char const*, ...) at errors.cc:86
+        6 [0x135215b]: connectivity_cluster_t::run_t::join_blocking(peer_address_t const&, optional<peer_id_t>, optional<server_id_t>, int, auto_drainer_t::lock_t) at cluster.cc:395
+        7 [0xf68075]: /home/zyh/rethinkdb/build/release_clang_system//rethinkdb() [0xf68075] at 0xf68075 ()
+        8 [0x8d2c04]: coro_t::run() at coroutines.cc:277
+    error: Exiting.
+    ```
+
 more bugs:
 
     cat test_cases/*/log[0-2] | grep 'error: Error' | awk '{print $7 $10}' | sort | uniq
