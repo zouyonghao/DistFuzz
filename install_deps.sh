@@ -1,4 +1,4 @@
-sudo apt install libboost-all-dev rapidjson-dev clang-9 libssl-dev libleveldb-dev libgflags-dev libprotobuf-dev libprotoc-dev protobuf-compiler libleveldb-dev
+sudo apt install libboost-all-dev rapidjson-dev clang-9 libssl-dev libleveldb-dev libgflags-dev libprotobuf-dev libprotoc-dev protobuf-compiler libleveldb-dev autoconf libbsd-dev
 
 # install aerospike client
 wget https://download.aerospike.com/artifacts/aerospike-client-c/5.2.0/aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz
