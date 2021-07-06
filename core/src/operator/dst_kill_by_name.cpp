@@ -8,8 +8,7 @@ bool KillByName::_do()
         return true;
     }
     dst_set_bool(key, false);
-    return std::system(("ps -ef | grep " + name +
-                        " | grep -v grep | head -1 | awk '{print $2}' | xargs kill" +
+    return std::system(("ps -ef | grep " + name + " | grep -v grep | head -1 | awk '{print $2}' | xargs kill" +
                         (is_force_kill ? " -9" : ""))
                            .c_str()) == 0;
 }

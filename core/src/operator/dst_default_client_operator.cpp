@@ -34,8 +34,7 @@ bool DefaultClientOperator::_do()
             last_output = tmp;
         }
 
-        __dst_event_record(
-            get_result_record(op_name, op_vector, result, last_output).c_str());
+        __dst_event_record(get_result_record(op_name, op_vector, result, last_output).c_str());
         return true;
     }
     catch (const std::exception &e)

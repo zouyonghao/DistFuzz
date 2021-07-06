@@ -6,10 +6,7 @@ static std::map<std::string, std::string> kv;
 
 static std::string EMPTY_STRING = "";
 
-void dst_set_bool(const char *key, int value)
-{
-    kv[std::string(key)] = std::to_string(value);
-}
+void dst_set_bool(const char *key, int value) { kv[std::string(key)] = std::to_string(value); }
 
 int dst_get_bool_or_not_exist(const char *key)
 {
@@ -29,10 +26,7 @@ int dst_exist(const char *key)
     return false;
 }
 
-void dst_set(const char *key, const char *value)
-{
-    kv[std::string(key)] = std::string(value);
-}
+void dst_set(const char *key, const char *value) { kv[std::string(key)] = std::string(value); }
 
 const char *dst_get(const char *key)
 {
@@ -43,7 +37,4 @@ const char *dst_get(const char *key)
     return EMPTY_STRING.c_str();
 }
 
-void dst_clear_kv_all()
-{
-    kv.clear();
-}
+void dst_clear_kv_all() { kv.clear(); }

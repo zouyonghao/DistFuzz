@@ -31,6 +31,5 @@ int __dst_event_trigger(const char *s)
 
 int __dst_event_record(const char *s)
 {
-    return __dst_event_trigger(
-        (EventConstant::NEED_RECORD_MESSAGE_PREFIX + std::string(s)).c_str());
+    return __dst_event_trigger((EventConstant::NEED_RECORD_MESSAGE_PREFIX + std::string(s)).c_str());
 }

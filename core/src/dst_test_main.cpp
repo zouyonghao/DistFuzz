@@ -30,16 +30,12 @@ void run_some_normal_operators(int number)
     {
         // std::this_thread::sleep_for(1s);
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
-        std::cout << "running operator "
-                  << Registry<NormalOperator>::getItemVector()[index].first
-                  << "\n";
+        std::cout << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
         // std::thread t1([index]() {
         //     Registry<NormalOperator>::getItemVector()[index].second->_do();
         // });
 
-        threads.push_back(std::thread([index]() {
-            Registry<NormalOperator>::getItemVector()[index].second->_do();
-        }));
+        threads.push_back(std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); }));
 
 #ifndef NO_CONCURRENCY
 
@@ -48,22 +44,19 @@ void run_some_normal_operators(int number)
         {
             // run another operation
             index = __dst_get_random_uint8_t() % operator_size;
-            std::cout << "running operator "
-                      << Registry<NormalOperator>::getItemVector()[index].first
-                      << "\n";
+            std::cout << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
             // std::thread t2([index]() {
             //     Registry<NormalOperator>::getItemVector()[index].second->_do();
             // });
 
-            threads.push_back(std::thread([index]() {
-                Registry<NormalOperator>::getItemVector()[index].second->_do();
-            }));
+            threads.push_back(
+                std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); }));
             // t2.join();
         }
 
 #endif // NO_CONCURRENCY
        // t1.join();
-        // std::this_thread::sleep_for(std::chrono::seconds(1));
+       // std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
 
@@ -87,18 +80,15 @@ void split_files(std::string initial_file)
         exit(-1);
     }
     std::cout << "spliting files...\n";
-    std::vector<std::string> write_files{"random_node0.txt", "random_node1.txt",
-                                         "random_node2.txt", "random_proxy.txt",
+    std::vector<std::string> write_files{"random_node0.txt", "random_node1.txt", "random_node2.txt", "random_proxy.txt",
                                          "random.txt"};
     uint64_t average_length = content.size() / (write_files.size());
     for (int f_index = 0; f_index < write_files.size(); f_index++)
     {
         std::vector<char> split_content;
-        std::copy(content.begin() + average_length * f_index,
-                  content.begin() + average_length * (f_index + 1),
+        std::copy(content.begin() + average_length * f_index, content.begin() + average_length * (f_index + 1),
                   std::back_inserter(split_content));
-        std::ofstream out(write_files[f_index],
-                          std::ios::out | std::ios::binary);
+        std::ofstream out(write_files[f_index], std::ios::out | std::ios::binary);
         out.write((const char *)&split_content[0], split_content.size());
         out.close();
     }
@@ -140,8 +130,7 @@ int main(int argc, char const *argv[])
         }
     }
 
-    std::cout << "\033[1;31mrunning test case " << test_case_count
-              << "\033[0m\n";
+    std::cout << "\033[1;31mrunning test case " << test_case_count << "\033[0m\n";
 
     std::cout << "start nodes and proxies\n";
     system("./run_fuzz_server.sh");
@@ -158,12 +147,8 @@ int main(int argc, char const *argv[])
     {
         std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
-        std::cout << "running operator "
-                  << Registry<CriticalOperator>::getItemVector()[index].first
-                  << "\n";
-        std::thread t1([index]() {
-            Registry<CriticalOperator>::getItemVector()[index].second->_do();
-        });
+        std::cout << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
+        std::thread t1([index]() { Registry<CriticalOperator>::getItemVector()[index].second->_do(); });
         run_some_normal_operators(5);
         t1.join();
     }
@@ -176,8 +161,7 @@ int main(int argc, char const *argv[])
     dst_clear_kv_all();
 
     std::cout << "backup test cases\n";
-    system(("sh ./backup_test_case.sh " + std::to_string(test_case_count++))
-               .c_str());
+    system(("sh ./backup_test_case.sh " + std::to_string(test_case_count++)).c_str());
     std::cout << test_case_count << "\n";
 
     std::ofstream otest_case_count_file("test_case_count");
