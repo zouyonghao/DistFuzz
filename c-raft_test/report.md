@@ -32,3 +32,30 @@
     ==81620==ABORTING
 
     ```
+
+3. AddressSanitizer: bad-free
+
+    ```
+    ==24124==WARNING: AddressSanitizer failed to allocate 0x312e302e302e3732 bytes
+    =================================================================
+    ==24124==ERROR: AddressSanitizer: attempting free on address which was not malloc()-ed: 0x611000001618 in thread T0
+        #0 0x4934fd  (/home/zyh/raft/example/server+0x4934fd)
+        #1 0x7fb7421e92dc  (/home/zyh/raft/.libs/libraft.so.0+0xe2dc) src/heap.c:65
+        #2 0x7fb742205bba  (/home/zyh/raft/.libs/libraft.so.0+0x2abba) src/uv_encoding.c:371
+        #3 0x7fb74220cb5a  (/home/zyh/raft/.libs/libraft.so.0+0x31b5a) src/uv_recv.c:260
+        #4 0x7fb742c7e5ce  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0x155ce)
+        #5 0x7fb742c7f33b  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0x1633b)
+        #6 0x7fb742c8433f  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0x1b33f)
+        #7 0x7fb742c74cc7  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0xbcc7)
+        #8 0x4c3e4f  (/home/zyh/raft/example/server+0x4c3e4f)
+        #9 0x7fb74142abf6  (/lib/x86_64-linux-gnu/libc.so.6+0x21bf6)
+        #10 0x41b879  (/home/zyh/raft/example/server+0x41b879)
+
+    0x611000001618 is located 152 bytes inside of 200-byte region [0x611000001580,0x611000001648)
+    allocated by thread T0 here:
+        #0 0x49377d  (/home/zyh/raft/example/server+0x49377d)
+        #1 0x7fb74220c2c9  (/home/zyh/raft/.libs/libraft.so.0+0x312c9) src/uv_recv.c:347
+
+    SUMMARY: AddressSanitizer: bad-free (/home/zyh/raft/example/server+0x4934fd)
+    ==24124==ABORTING
+    ```
