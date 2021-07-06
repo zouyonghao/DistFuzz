@@ -63,7 +63,7 @@ void run_some_normal_operators(int number)
 
 #endif // NO_CONCURRENCY
        // t1.join();
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        // std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
 
