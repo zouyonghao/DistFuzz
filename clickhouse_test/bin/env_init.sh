@@ -1,5 +1,3 @@
-mkdir -p run/zookeeper
-
 sleep 5
 
 /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q "CREATE DATABASE test"
