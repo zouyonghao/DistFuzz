@@ -14,7 +14,7 @@
 
 class DefaultClientOperator : public NormalOperator
 {
-private:
+protected:
     std::string unfinished_command;
     std::string op_name;
     std::vector<std::string> need_random_parameters;

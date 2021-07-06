@@ -1,0 +1,1 @@
+/home/zyh/ClickHouse/build/programs/clickhouse-client -c $1 -q "CREATE DATABASE testdb ENGINE = Replicated('/clickhouse/databases/$2', '$3', '$4');"

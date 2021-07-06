@@ -1,0 +1,1 @@
+/usr/share/zookeeper/bin/zkCli.sh <<<END rmr /clickhouse

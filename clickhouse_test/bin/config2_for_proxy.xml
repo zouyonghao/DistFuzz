@@ -21,14 +21,14 @@
 
             [1]: https://github.com/pocoproject/poco/blob/poco-1.9.4-release/Foundation/include/Poco/Logger.h#L105-L114
         -->
-        <level>trace</level>
+        <level>fatal</level>
         <log>run/log2</log>
         <errorlog>run/err_log2</errorlog>
         <!-- Rotation policy
              See https://github.com/pocoproject/poco/blob/poco-1.9.4-release/Foundation/include/Poco/FileChannel.h#L54-L85
           -->
-        <size>1000M</size>
-        <count>10</count>
+        <size>10M</size>
+        <count>1</count>
         <!-- <console>1</console> --> <!-- Default behavior is autodetection (log to console if not daemon mode and is tty) -->
 
         <!-- Per level overrides (legacy):
