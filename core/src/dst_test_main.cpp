@@ -146,7 +146,7 @@ int main(int argc, char const *argv[])
     std::cout << "start nodes and proxies\n";
     system("./run_fuzz_server.sh");
 
-    std::this_thread::sleep_for(std::chrono::seconds(3));
+    // std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
     run_init_operator();
 
@@ -156,7 +156,7 @@ int main(int argc, char const *argv[])
     std::cout << "operator_size = " << operator_size << "\n";
     for (int i = 0; i < 5 && operator_size > 0; i++)
     {
-        std::this_thread::sleep_for(std::chrono::seconds(2));
+        std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
         std::cout << "running operator "
                   << Registry<CriticalOperator>::getItemVector()[index].first
@@ -169,7 +169,7 @@ int main(int argc, char const *argv[])
     }
 
     // let it run a while
-    std::this_thread::sleep_for(std::chrono::seconds(2));
+    std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
     std::cout << "stopping...\n";
     system("./stop.sh");
