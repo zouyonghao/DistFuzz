@@ -1,0 +1,106 @@
+2021-07-06 21:46:36,216 - INFO  [main:QuorumPeerConfig@134] - Reading configuration from: zookeeper/zoo.cfg
+2021-07-06 21:46:36,217 - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3
+2021-07-06 21:46:36,218 - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0
+2021-07-06 21:46:36,218 - INFO  [main:DatadirCleanupManager@101] - Purge task is not scheduled.
+2021-07-06 21:46:36,218 - WARN  [main:QuorumPeerMain@113] - Either no config or no quorum defined in config, running  in standalone mode
+2021-07-06 21:46:36,223 - INFO  [main:QuorumPeerConfig@134] - Reading configuration from: zookeeper/zoo.cfg
+2021-07-06 21:46:36,223 - INFO  [main:ZooKeeperServerMain@96] - Starting server
+2021-07-06 21:46:36,227 - INFO  [main:Environment@100] - Server environment:zookeeper.version=3.4.10-3--1, built on Sat, 03 Feb 2018 14:58:02 -0800
+2021-07-06 21:46:36,227 - INFO  [main:Environment@100] - Server environment:host.name=a123dcab2d6a
+2021-07-06 21:46:36,227 - INFO  [main:Environment@100] - Server environment:java.version=11.0.11
+2021-07-06 21:46:36,227 - INFO  [main:Environment@100] - Server environment:java.vendor=Ubuntu
+2021-07-06 21:46:36,227 - INFO  [main:Environment@100] - Server environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2021-07-06 21:46:36,228 - INFO  [main:Environment@100] - Server environment:java.class.path=/etc/zookeeper/conf:/usr/share/java/jline.jar:/usr/share/java/log4j-1.2.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/xmlParserAPIs.jar:/usr/share/java/netty.jar:/usr/share/java/slf4j-api.jar:/usr/share/java/slf4j-log4j12.jar:/usr/share/java/zookeeper.jar
+2021-07-06 21:46:36,228 - INFO  [main:Environment@100] - Server environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2021-07-06 21:46:36,228 - INFO  [main:Environment@100] - Server environment:java.io.tmpdir=/tmp
+2021-07-06 21:46:36,228 - INFO  [main:Environment@100] - Server environment:java.compiler=<NA>
+2021-07-06 21:46:36,228 - INFO  [main:Environment@100] - Server environment:os.name=Linux
+2021-07-06 21:46:36,228 - INFO  [main:Environment@100] - Server environment:os.arch=amd64
+2021-07-06 21:46:36,228 - INFO  [main:Environment@100] - Server environment:os.version=4.15.0-147-generic
+2021-07-06 21:46:36,228 - INFO  [main:Environment@100] - Server environment:user.name=zyh
+2021-07-06 21:46:36,229 - INFO  [main:Environment@100] - Server environment:user.home=/home/zyh
+2021-07-06 21:46:36,229 - INFO  [main:Environment@100] - Server environment:user.dir=/home/zyh/distributed-system-test/clickhouse_test/bin
+2021-07-06 21:46:36,232 - INFO  [main:ZooKeeperServer@829] - tickTime set to 2000
+2021-07-06 21:46:36,232 - INFO  [main:ZooKeeperServer@838] - minSessionTimeout set to -1
+2021-07-06 21:46:36,232 - INFO  [main:ZooKeeperServer@847] - maxSessionTimeout set to -1
+2021-07-06 21:46:36,237 - INFO  [main:NIOServerCnxnFactory@89] - binding to port 0.0.0.0/0.0.0.0:2181
+2021-07-06 21:46:43,978 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:39468
+2021-07-06 21:46:43,984 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@896] - Connection request from old client /127.0.0.1:39468; will be dropped if server is in r-o mode
+2021-07-06 21:46:43,985 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@942] - Client attempting to establish new session at /127.0.0.1:39468
+2021-07-06 21:46:43,987 - INFO  [SyncThread:0:FileTxnLog@203] - Creating new log file: log.1
+2021-07-06 21:46:43,993 - INFO  [SyncThread:0:ZooKeeperServer@687] - Established session 0x17a7dc983540000 with negotiated timeout 30000 for client /127.0.0.1:39468
+2021-07-06 21:46:43,994 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:39470
+2021-07-06 21:46:43,995 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@896] - Connection request from old client /127.0.0.1:39470; will be dropped if server is in r-o mode
+2021-07-06 21:46:43,995 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@942] - Client attempting to establish new session at /127.0.0.1:39470
+2021-07-06 21:46:44,001 - INFO  [SyncThread:0:ZooKeeperServer@687] - Established session 0x17a7dc983540001 with negotiated timeout 30000 for client /127.0.0.1:39470
+2021-07-06 21:46:44,003 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540001 type:create cxid:0x1 zxid:0x5 txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-06 21:46:44,004 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540001 type:create cxid:0x2 zxid:0x7 txntype:-1 reqpath:n/a Error Path:/clickhouse/task_queue Error:KeeperErrorCode = NodeExists for /clickhouse/task_queue
+2021-07-06 21:46:44,005 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540001 type:create cxid:0x3 zxid:0x8 txntype:-1 reqpath:n/a Error Path:/clickhouse/task_queue/ddl Error:KeeperErrorCode = NodeExists for /clickhouse/task_queue/ddl
+2021-07-06 21:46:44,032 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:39478
+2021-07-06 21:46:47,346 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540001 type:create cxid:0x7 zxid:0x9 txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-06 21:46:47,744 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x7 zxid:0x19 txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-06 21:46:47,745 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x8 zxid:0x1a txntype:-1 reqpath:n/a Error Path:/clickhouse/tables Error:KeeperErrorCode = NodeExists for /clickhouse/tables
+2021-07-06 21:46:47,746 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x9 zxid:0x1b txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01 Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01
+2021-07-06 21:46:47,751 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x11 zxid:0x1d txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01/test/quorum Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/quorum
+2021-07-06 21:46:47,752 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x12 zxid:0x1e txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01/test/quorum/parallel Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/quorum/parallel
+2021-07-06 21:46:47,753 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x13 zxid:0x1f txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01/test/quorum/last_part Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/quorum/last_part
+2021-07-06 21:46:47,753 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x14 zxid:0x20 txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01/test/quorum/failed_parts Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/quorum/failed_parts
+2021-07-06 21:46:47,756 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x17 zxid:0x23 txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01/test/mutations Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/mutations
+2021-07-06 21:46:47,757 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x19 zxid:0x25 txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01/test/alter_partition_version Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/alter_partition_version
+2021-07-06 21:46:54,043 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:39878
+2021-07-06 21:47:04,054 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:40348
+2021-07-06 21:47:14,065 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:40756
+2021-07-06 21:47:24,075 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:41142
+2021-07-06 21:47:34,086 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:41554
+2021-07-06 21:47:44,096 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@192] - Accepted socket connection from /127.0.0.1:41968
+2021-07-06 21:47:44,097 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@896] - Connection request from old client /127.0.0.1:41968; will be dropped if server is in r-o mode
+2021-07-06 21:47:44,097 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@942] - Client attempting to establish new session at /127.0.0.1:41968
+2021-07-06 21:47:44,098 - INFO  [SyncThread:0:ZooKeeperServer@687] - Established session 0x17a7dc983540002 with negotiated timeout 30000 for client /127.0.0.1:41968
+2021-07-06 21:47:44,099 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@749] - Received packet at server of unknown type 0
+2021-07-06 21:47:44,100 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540002 type:create cxid:0x1 zxid:0x2b txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-06 21:47:44,100 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1044] - Closed socket connection for client /127.0.0.1:41968 which had sessionid 0x17a7dc983540002
+2021-07-06 21:47:44,346 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@648] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:create cxid:0x87 zxid:0x2c txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-06 21:47:44,350 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@514] - Invalid path /clickhouse/databases/XyY?h"B|??p??J?;??y,?0d|E;??yEZC?V?g??}r?^ with session 0x17a7dc983540000, reason: Invalid path string "/clickhouse/databases/XyY?h"B|??p??J?;??y,?0d|E;??yEZC?V?g??}r?^" caused by invalid charater @22
+2021-07-06 21:47:44,351 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@595] - Got user-level KeeperException when processing sessionid:0x17a7dc983540000 type:multi cxid:0x89 zxid:0x2e txntype:-1 reqpath:n/a aborting remaining multi ops. Error Path:/clickhouse/databases/XyY?h"B|??p??J?;??y,?0d|E;??yEZC?V?g??}r?^ Error:KeeperErrorCode = BadArguments for /clickhouse/databases/XyY?h"B|??p??J?;??y,?0d|E;??yEZC?V?g??}r?^
+2021-07-06 21:47:44,488 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@368] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x0, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:241)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-07-06 21:47:44,490 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1044] - Closed socket connection for client /127.0.0.1:39878 (no session established for client)
+2021-07-06 21:47:44,490 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@368] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x0, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:241)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-07-06 21:47:44,491 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1044] - Closed socket connection for client /127.0.0.1:40756 (no session established for client)
+2021-07-06 21:47:44,491 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@368] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x0, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:241)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-07-06 21:47:44,492 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1044] - Closed socket connection for client /127.0.0.1:40348 (no session established for client)
+2021-07-06 21:47:44,492 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@368] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x0, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:241)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-07-06 21:47:44,493 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1044] - Closed socket connection for client /127.0.0.1:41142 (no session established for client)
+2021-07-06 21:47:44,493 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@368] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x0, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:241)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-07-06 21:47:44,493 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1044] - Closed socket connection for client /127.0.0.1:41554 (no session established for client)
+2021-07-06 21:47:44,493 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@368] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x0, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:241)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-07-06 21:47:44,493 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1044] - Closed socket connection for client /127.0.0.1:39478 (no session established for client)
+2021-07-06 21:47:44,502 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@368] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x17a7dc983540001, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:241)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-07-06 21:47:44,503 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1044] - Closed socket connection for client /127.0.0.1:39470 which had sessionid 0x17a7dc983540001
