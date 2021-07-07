@@ -105,4 +105,4 @@ REGISTER_NORMAL_OPERATOR(ClickHouseSelectRandom1,
 REGISTER_NORMAL_OPERATOR(ClickHouseSelectRandom2,
                          new ClickHouseCommonOperator("bash client_select_random.sh config2.xml ", {"", ""}));
 
-REGISTER_NORMAL_OPERATOR(ClearZookeeperData, new ClickHouseCommonOperator("bash clear_zk_data", {}));
+REGISTER_NORMAL_OPERATOR(ClearZookeeperData, new ClickHouseCommonOperator("bash clear_zk_data.sh", {}));
