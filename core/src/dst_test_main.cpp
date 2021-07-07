@@ -95,40 +95,19 @@ void split_files(std::string initial_file)
     __dst_reinit_random("random.txt");
 }
 
-void generate_random_files()
-{
-    // prepare random files
-    std::cout << "prepare random files\n";
-    system("./generate_1m_bytes.sh random_node0.txt");
-    system("./generate_1m_bytes.sh random_node1.txt");
-    system("./generate_1m_bytes.sh random_node2.txt");
-    system("./generate_1m_bytes.sh random_proxy.txt");
-    // system("./generate_1m_bytes.sh random.txt");
-}
-
 int main(int argc, char const *argv[])
 {
-    bool is_random_test = true;
-    if (argc > 1)
+    if (argc < 1)
     {
-        is_random_test = false;
+        std::cout << "Usage: xxx_test_main random_file\n";
+        exit(-1);
     }
 
     uint32_t test_case_count = 0;
     std::ifstream itest_case_count_file("test_case_count");
     itest_case_count_file >> test_case_count;
     itest_case_count_file.close();
-    if (!getenv("REPLAY"))
-    {
-        if (is_random_test)
-        {
-            generate_random_files();
-        }
-        else
-        {
-            split_files(argv[1]);
-        }
-    }
+    split_files(argv[1]);
 
     std::cout << "\033[1;31mrunning test case " << test_case_count << "\033[0m\n";
 

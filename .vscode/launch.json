@@ -5,6 +5,32 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "click_house_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/distributed-system-test/build/clickhouse_test/clickhouse_test_main",
+            "args": [
+                "init_random.txt"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/clickhouse_test/bin",
+            "environment": [
+                {
+                    "name": "REPLAY",
+                    "value": "true"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "raftis_test",
             "type": "cppdbg",
             "request": "launch",
