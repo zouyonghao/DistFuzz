@@ -16,12 +16,12 @@
 
 # source shflags from current directory
 
-killall clickhouse-server
+killall clickhouse-server &
 ps -ef | grep clickhouse-server | grep -v grep | awk '{print $2}' | xargs kill -9
 # rm -rf data*
 # rm -rf log*
-killall proxy_server
-killall event_control
+killall proxy_server &
+killall event_control &
 # killall atomic_test
-./zkServer.sh stop
+./zkServer.sh stop &
 ps -ef | grep java | grep zookeeper | awk '{print $2}' | xargs kill -9

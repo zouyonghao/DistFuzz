@@ -137,6 +137,9 @@ int main(int argc, char const *argv[])
 
     std::cout << "stopping...\n";
     system("./stop.sh");
+
+    run_some_normal_operators(5);
+
     dst_clear_kv_all();
 
     std::cout << "backup test cases\n";
