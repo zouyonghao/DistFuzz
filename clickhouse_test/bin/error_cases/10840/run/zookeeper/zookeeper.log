@@ -1,0 +1,61 @@
+2021-07-13 11:39:36,095 - INFO  [main:QuorumPeerConfig@136] - Reading configuration from: zookeeper/zoo.cfg
+2021-07-13 11:39:36,097 - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3
+2021-07-13 11:39:36,097 - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0
+2021-07-13 11:39:36,097 - INFO  [main:DatadirCleanupManager@101] - Purge task is not scheduled.
+2021-07-13 11:39:36,097 - WARN  [main:QuorumPeerMain@116] - Either no config or no quorum defined in config, running  in standalone mode
+2021-07-13 11:39:36,103 - INFO  [main:QuorumPeerConfig@136] - Reading configuration from: zookeeper/zoo.cfg
+2021-07-13 11:39:36,103 - INFO  [main:ZooKeeperServerMain@98] - Starting server
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:zookeeper.version=3.4.13-5build1--1, built on Tue, 18 Feb 2020 10:26:56 +0100
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:host.name=ssrvm
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:java.version=11.0.11
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:java.vendor=Ubuntu
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:java.class.path=/etc/zookeeper/conf:/usr/share/java/jline.jar:/usr/share/java/log4j-1.2.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/xmlParserAPIs.jar:/usr/share/java/netty.jar:/usr/share/java/slf4j-api.jar:/usr/share/java/slf4j-log4j12.jar:/usr/share/java/zookeeper.jar
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:java.io.tmpdir=/tmp
+2021-07-13 11:39:36,113 - INFO  [main:Environment@100] - Server environment:java.compiler=<NA>
+2021-07-13 11:39:36,114 - INFO  [main:Environment@100] - Server environment:os.name=Linux
+2021-07-13 11:39:36,114 - INFO  [main:Environment@100] - Server environment:os.arch=amd64
+2021-07-13 11:39:36,114 - INFO  [main:Environment@100] - Server environment:os.version=5.4.0-77-generic
+2021-07-13 11:39:36,114 - INFO  [main:Environment@100] - Server environment:user.name=zyh
+2021-07-13 11:39:36,114 - INFO  [main:Environment@100] - Server environment:user.home=/home/zyh
+2021-07-13 11:39:36,114 - INFO  [main:Environment@100] - Server environment:user.dir=/home/zyh/distributed-system-test/clickhouse_test/bin
+2021-07-13 11:39:36,119 - INFO  [main:ZooKeeperServer@836] - tickTime set to 2000
+2021-07-13 11:39:36,119 - INFO  [main:ZooKeeperServer@845] - minSessionTimeout set to -1
+2021-07-13 11:39:36,119 - INFO  [main:ZooKeeperServer@854] - maxSessionTimeout set to -1
+2021-07-13 11:39:36,124 - INFO  [main:ServerCnxnFactory@117] - Using org.apache.zookeeper.server.NIOServerCnxnFactory as server connection factory
+2021-07-13 11:39:36,127 - INFO  [main:NIOServerCnxnFactory@89] - binding to port 0.0.0.0/0.0.0.0:2181
+2021-07-13 11:39:37,700 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@215] - Accepted socket connection from /127.0.0.1:59260
+2021-07-13 11:39:37,705 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@903] - Connection request from old client /127.0.0.1:59260; will be dropped if server is in r-o mode
+2021-07-13 11:39:37,706 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@949] - Client attempting to establish new session at /127.0.0.1:59260
+2021-07-13 11:39:37,706 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@215] - Accepted socket connection from /127.0.0.1:59264
+2021-07-13 11:39:37,707 - INFO  [SyncThread:0:FileTxnLog@213] - Creating new log file: log.207
+2021-07-13 11:39:37,707 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@903] - Connection request from old client /127.0.0.1:59264; will be dropped if server is in r-o mode
+2021-07-13 11:39:37,707 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@949] - Client attempting to establish new session at /127.0.0.1:59264
+2021-07-13 11:39:37,710 - INFO  [SyncThread:0:ZooKeeperServer@694] - Established session 0x1002aec67e30000 with negotiated timeout 30000 for client /127.0.0.1:59260
+2021-07-13 11:39:37,711 - INFO  [SyncThread:0:ZooKeeperServer@694] - Established session 0x1002aec67e30001 with negotiated timeout 30000 for client /127.0.0.1:59264
+2021-07-13 11:39:37,715 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30000 type:create cxid:0x1 zxid:0x209 txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-13 11:39:37,715 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30001 type:create cxid:0x1 zxid:0x20a txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-13 11:39:37,717 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30000 type:create cxid:0x2 zxid:0x20b txntype:-1 reqpath:n/a Error Path:/clickhouse/task_queue Error:KeeperErrorCode = NodeExists for /clickhouse/task_queue
+2021-07-13 11:39:37,718 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30000 type:create cxid:0x3 zxid:0x20c txntype:-1 reqpath:n/a Error Path:/clickhouse/task_queue/ddl Error:KeeperErrorCode = NodeExists for /clickhouse/task_queue/ddl
+2021-07-13 11:39:37,718 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30001 type:create cxid:0x2 zxid:0x20d txntype:-1 reqpath:n/a Error Path:/clickhouse/task_queue Error:KeeperErrorCode = NodeExists for /clickhouse/task_queue
+2021-07-13 11:39:37,718 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@215] - Accepted socket connection from /127.0.0.1:59266
+2021-07-13 11:39:37,719 - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@903] - Connection request from old client /127.0.0.1:59266; will be dropped if server is in r-o mode
+2021-07-13 11:39:37,719 - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@949] - Client attempting to establish new session at /127.0.0.1:59266
+2021-07-13 11:39:37,720 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30001 type:create cxid:0x3 zxid:0x20f txntype:-1 reqpath:n/a Error Path:/clickhouse/task_queue/ddl Error:KeeperErrorCode = NodeExists for /clickhouse/task_queue/ddl
+2021-07-13 11:39:37,721 - INFO  [SyncThread:0:ZooKeeperServer@694] - Established session 0x1002aec67e30002 with negotiated timeout 30000 for client /127.0.0.1:59266
+2021-07-13 11:39:37,721 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30002 type:create cxid:0x1 zxid:0x210 txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-13 11:39:37,722 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30002 type:create cxid:0x2 zxid:0x211 txntype:-1 reqpath:n/a Error Path:/clickhouse/task_queue Error:KeeperErrorCode = NodeExists for /clickhouse/task_queue
+2021-07-13 11:39:37,723 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30002 type:create cxid:0x3 zxid:0x212 txntype:-1 reqpath:n/a Error Path:/clickhouse/task_queue/ddl Error:KeeperErrorCode = NodeExists for /clickhouse/task_queue/ddl
+2021-07-13 11:39:38,057 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30000 type:create cxid:0x7 zxid:0x213 txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-13 11:39:38,060 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30000 type:create cxid:0x8 zxid:0x214 txntype:-1 reqpath:n/a Error Path:/clickhouse/tables Error:KeeperErrorCode = NodeExists for /clickhouse/tables
+2021-07-13 11:39:38,062 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30000 type:create cxid:0x9 zxid:0x215 txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01 Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01
+2021-07-13 11:39:38,069 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@596] - Got user-level KeeperException when processing sessionid:0x1002aec67e30000 type:multi cxid:0x10 zxid:0x216 txntype:-1 reqpath:n/a aborting remaining multi ops. Error Path:/clickhouse/tables/01/test/replicas/01 Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/replicas/01
+2021-07-13 11:39:38,773 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30002 type:create cxid:0x7 zxid:0x217 txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-13 11:39:38,774 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30002 type:create cxid:0x8 zxid:0x218 txntype:-1 reqpath:n/a Error Path:/clickhouse/tables Error:KeeperErrorCode = NodeExists for /clickhouse/tables
+2021-07-13 11:39:38,776 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30002 type:create cxid:0x9 zxid:0x219 txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01 Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01
+2021-07-13 11:39:38,780 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@596] - Got user-level KeeperException when processing sessionid:0x1002aec67e30002 type:multi cxid:0x10 zxid:0x21a txntype:-1 reqpath:n/a aborting remaining multi ops. Error Path:/clickhouse/tables/01/test/replicas/02 Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/replicas/02
+2021-07-13 11:39:39,489 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30001 type:create cxid:0x7 zxid:0x21b txntype:-1 reqpath:n/a Error Path:/clickhouse Error:KeeperErrorCode = NodeExists for /clickhouse
+2021-07-13 11:39:39,492 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30001 type:create cxid:0x8 zxid:0x21c txntype:-1 reqpath:n/a Error Path:/clickhouse/tables Error:KeeperErrorCode = NodeExists for /clickhouse/tables
+2021-07-13 11:39:39,494 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@653] - Got user-level KeeperException when processing sessionid:0x1002aec67e30001 type:create cxid:0x9 zxid:0x21d txntype:-1 reqpath:n/a Error Path:/clickhouse/tables/01 Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01
+2021-07-13 11:39:39,540 - INFO  [ProcessThread(sid:0 cport:2181)::PrepRequestProcessor@596] - Got user-level KeeperException when processing sessionid:0x1002aec67e30001 type:multi cxid:0x10 zxid:0x21e txntype:-1 reqpath:n/a aborting remaining multi ops. Error Path:/clickhouse/tables/01/test/replicas/03 Error:KeeperErrorCode = NodeExists for /clickhouse/tables/01/test/replicas/03
