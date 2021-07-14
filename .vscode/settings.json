@@ -101,7 +101,8 @@
         "**/.git/subtree-cache/**": true,
         "**/node_modules/*/**": true,
         "**/.hg/store/**": true,
-        "**/bin/test_cases/*/**": true
+        "**/bin/test_cases/*/**": true,
+        "clickhouse_test/bin": true
     },
     "cmake.configureOnOpen": false
 }

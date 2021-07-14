@@ -1,13 +1,5 @@
+./run_fuzz_server_normal.sh
 
-./start_event_control.sh
-./start_proxy_server.sh
+# ./run_fuzz_server_with_checkpoint.sh
 
-mkdir -p run/zookeeper
-
-./zkServer.sh start
-
-./start_node0.sh
-./start_node1.sh
-./start_node2.sh
-
-./env_init.sh
+# ./run_fuzz_server_with_checkpoint_tmpfs.sh

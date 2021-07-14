@@ -1,8 +1,9 @@
 mkdir -p test_cases/$1
+mkdir -p test_cases/$1/run
 
 pwd
 
-mv run ./test_cases/$1
+mv run/* ./test_cases/$1/run
 mv log* ./test_cases/$1
 mv *log ./test_cases/$1
 mv random_node0.txt ./test_cases/$1

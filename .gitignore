@@ -145,3 +145,14 @@ clickhouse_test/bin/log_proxy
 clickhouse_test/bin/log_event_control
 clickhouse_test/bin/init_random.txt
 clickhouse_test/bin/test_case_count
+clickhouse_test/bin/checkpoint_folder0
+clickhouse_test/bin/checkpoint_folder1
+clickhouse_test/bin/checkpoint_folder2
+clickhouse_test/bin/run_backup
+*.img
+clickhouse_test/bin/checkpoint_folder0_tmpfs
+clickhouse_test/bin/checkpoint_folder1_tmpfs
+clickhouse_test/bin/checkpoint_folder2_tmpfs
+clickhouse_test/bin/run_backup_tmpfs
+clickhouse_test/bin/test_boot_time_l
+clickhouse_test/bin/test_boot_time_result
