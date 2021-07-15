@@ -93,7 +93,9 @@
         "ios": "cpp",
         "locale": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "semaphore.h": "c",
+        "pthread.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {

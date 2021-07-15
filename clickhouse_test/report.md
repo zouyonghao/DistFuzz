@@ -37,18 +37,7 @@
 
     https://github.com/ClickHouse/ClickHouse/issues/26015
 
-2. unknown Fatal log
-
-    ```
-    2021.07.06 21:47:44.354027 [ 31070 ] {} <Fatal> BaseDaemon: ########################################
-    2021.07.06 21:47:44.354499 [ 31070 ] {} <Fatal> BaseDaemon: (version 21.3.14.1, build id: DD9B04F1C9692020) (from thread 30668) (query_id: 4a8433d1-dbf8-40c1-b11d-0f289c64abcc) Received signal Aborted (6)
-    2021.07.06 21:47:44.354637 [ 31070 ] {} <Fatal> BaseDaemon: 
-    2021.07.06 21:47:44.354762 [ 31070 ] {} <Fatal> BaseDaemon: Stack trace: 0x7fcb858bbfb7
-    2021.07.06 21:47:44.354969 [ 31070 ] {} <Fatal> BaseDaemon: 0. gsignal @ 0x3efb7 in /lib/x86_64-linux-gnu/libc-2.27.so
-    2021.07.06 21:47:44.521930 [ 30644 ] {} <Fatal> Application: Child process was terminated by signal 9 (KILL). If it is not done by 'forcestop' command or manually, the possible cause is OOM Killer (see 'dmesg' and look at the '/var/log/kern.log' for the details).
-    ```
-
-3. Floating point inexact result
+2. Floating point inexact result
 
     ```
     2021.07.13 13:15:11.454496 [ 1260320 ] {} <Fatal> BaseDaemon: ########################################
@@ -74,4 +63,34 @@
     2021.07.13 13:15:13.643524 [ 1260320 ] {} <Fatal> BaseDaemon: 20. __libc_start_main @ 0x270b3 in /usr/lib/x86_64-linux-gnu/libc-2.31.so
     2021.07.13 13:15:15.151588 [ 1260320 ] {} <Fatal> BaseDaemon: 21. _start @ 0x96aaebe in /home/zyh/ClickHouse/build/programs/clickhouse
     2021.07.13 13:15:15.528260 [ 1260320 ] {} <Fatal> BaseDaemon: Calculated checksum of the binary: 882453FA8105E1C51307CA7A2BF62ADA. There is no information about the reference checksum.
+    ```
+
+    error_cases/10840/run/log0
+    可能是 checkpoint 的问题？
+    https://github.com/ClickHouse/ClickHouse/issues/26300
+
+3. create db fatal log
+
+    ```
+    2021.07.14 23:21:42.995190 [ 4704 ] {} <Fatal> BaseDaemon: ########################################
+    2021.07.14 23:21:42.995686 [ 4704 ] {} <Fatal> BaseDaemon: (version 21.3.14.1, build id: CB01F09E927CD981) (from thread 4395) (query_id: 99582031-2502-4321-8db3-57a21c918a1f) Received signal Aborted (6)
+    2021.07.14 23:21:42.995820 [ 4704 ] {} <Fatal> BaseDaemon: 
+    2021.07.14 23:21:42.996014 [ 4704 ] {} <Fatal> BaseDaemon: Stack trace: 0x7ffa68b33fb7 0x7ffa68b35921 0x7ffa68b2548a 0x7ffa68b25502 0x1f1c0812 0x1f1db8ba 0x2075db02 0x20759ae4 0x220a1360 0x220bdae0 0x23565ae4 0x23566680 0x23bc5f56 0x23bbe00f 0x23bbb8c7 0x7ffa683376db 0x7ffa68c1671f
+    2021.07.14 23:21:42.996249 [ 4704 ] {} <Fatal> BaseDaemon: 4. raise @ 0x3efb7 in /lib/x86_64-linux-gnu/libc-2.27.so
+    2021.07.14 23:21:42.996390 [ 4704 ] {} <Fatal> BaseDaemon: 5. abort @ 0x40921 in /lib/x86_64-linux-gnu/libc-2.27.so
+    2021.07.14 23:21:42.996511 [ 4704 ] {} <Fatal> BaseDaemon: 6. ? @ 0x3048a in /lib/x86_64-linux-gnu/libc-2.27.so
+    2021.07.14 23:21:42.996625 [ 4704 ] {} <Fatal> BaseDaemon: 7. ? @ 0x30502 in /lib/x86_64-linux-gnu/libc-2.27.so
+    2021.07.14 23:21:43.649950 [ 4704 ] {} <Fatal> BaseDaemon: 8. /home/zyh/ClickHouse/build/../src/Interpreters/InterpreterCreateQuery.cpp:0: DB::InterpreterCreateQuery::createDatabase(DB::ASTCreateQuery&) @ 0x1f1c0812 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:44.133904 [ 4704 ] {} <Fatal> BaseDaemon: 9. /home/zyh/ClickHouse/build/../src/Interpreters/InterpreterCreateQuery.cpp:1195: DB::InterpreterCreateQuery::execute() @ 0x1f1db8ba in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:44.578330 [ 4704 ] {} <Fatal> BaseDaemon: 10. /home/zyh/ClickHouse/build/../src/Interpreters/executeQuery.cpp:550: DB::executeQueryImpl(char const*, char const*, DB::Context&, bool, DB::QueryProcessingStage::Enum, bool, DB::ReadBuffer*) @ 0x2075db02 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:45.050821 [ 4704 ] {} <Fatal> BaseDaemon: 11. /home/zyh/ClickHouse/build/../src/Interpreters/executeQuery.cpp:908: DB::executeQuery(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, DB::Context&, bool, DB::QueryProcessingStage::Enum, bool) @ 0x20759ae4 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:45.622976 [ 4704 ] {} <Fatal> BaseDaemon: 12. /home/zyh/ClickHouse/build/../src/Server/TCPHandler.cpp:290: DB::TCPHandler::runImpl() @ 0x220a1360 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:46.151861 [ 4704 ] {} <Fatal> BaseDaemon: 13. /home/zyh/ClickHouse/build/../src/Server/TCPHandler.cpp:1531: DB::TCPHandler::run() @ 0x220bdae0 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:46.225748 [ 4704 ] {} <Fatal> BaseDaemon: 14. /home/zyh/ClickHouse/build/../contrib/poco/Net/src/TCPServerConnection.cpp:43: Poco::Net::TCPServerConnection::start() @ 0x23565ae4 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:46.319305 [ 4704 ] {} <Fatal> BaseDaemon: 15. /home/zyh/ClickHouse/build/../contrib/poco/Net/src/TCPServerDispatcher.cpp:113: Poco::Net::TCPServerDispatcher::run() @ 0x23566680 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:46.408383 [ 4704 ] {} <Fatal> BaseDaemon: 16. /home/zyh/ClickHouse/build/../contrib/poco/Foundation/src/ThreadPool.cpp:199: Poco::PooledThread::run() @ 0x23bc5f56 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:46.488643 [ 4704 ] {} <Fatal> BaseDaemon: 17. /home/zyh/ClickHouse/build/../contrib/poco/Foundation/src/Thread.cpp:56: Poco::(anonymous namespace)::RunnableHolder::run() @ 0x23bbe00f in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:46.567789 [ 4704 ] {} <Fatal> BaseDaemon: 18. /home/zyh/ClickHouse/build/../contrib/poco/Foundation/src/Thread_POSIX.cpp:345: Poco::ThreadImpl::runnableEntry(void*) @ 0x23bbb8c7 in /home/zyh/ClickHouse/build/programs/clickhouse
+    2021.07.14 23:21:46.567965 [ 4704 ] {} <Fatal> BaseDaemon: 19. start_thread @ 0x76db in /lib/x86_64-linux-gnu/libpthread-2.27.so
+    2021.07.14 23:21:46.568054 [ 4704 ] {} <Fatal> BaseDaemon: 20. clone @ 0x12171f in /lib/x86_64-linux-gnu/libc-2.27.so
     ```
