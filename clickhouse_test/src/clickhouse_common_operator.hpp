@@ -18,12 +18,14 @@ public:
         std::vector<std::string> op_vector;
         for (auto &i : need_random_parameters)
         {
-            std::string random = "";
-            int random_length = __dst_get_random_uint8_t();
-            for (int tmp_i = 0; tmp_i < random_length; tmp_i++)
+            uint32_t random_length = __dst_get_random_uint8_t();
+            std::string random(__dst_get_random_string(random_length));
+            std::cout << "get random string: ";
+            for (int i = 0; i < random.length(); i++)
             {
-                random += __dst_get_random_uint8_t();
+                std::cout << std::hex << static_cast<int>(random[i]) << " ";
             }
+            std::cout << "\n";
             command += i + random + " ";
             op_vector.push_back(random);
         }

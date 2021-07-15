@@ -1,10 +1,12 @@
 #include <dst_random.h>
+#include <pthread.h>
 
 // TODO: this variable should be put into the shared memory to keep its value
 // when the program is shutdown/restart
 static volatile uint32_t fuzz_file_index = 0;
 static uint64_t fuzz_file_length = 0;
 static uint8_t *fuzz_file_array = NULL;
+static pthread_mutex_t lock;
 
 static uint8_t read_byte()
 {
@@ -62,18 +64,27 @@ void __dst_reinit_random(const char *file_name)
 
 static void __attribute__((destructor)) uninit() { free(fuzz_file_array); }
 
-uint8_t __dst_get_random_uint8_t() { return read_byte(); }
+uint8_t __dst_get_random_uint8_t()
+{
+    pthread_mutex_lock(&lock);
+    uint8_t result = read_byte();
+    pthread_mutex_unlock(&lock);
+    return result;
+}
 
 uint16_t __dst_get_random_uint16_t()
 {
+    pthread_mutex_lock(&lock);
     uint16_t result = read_byte();
     result <<= 8u;
     result |= read_byte();
+    pthread_mutex_unlock(&lock);
     return result;
 }
 
 uint32_t __dst_get_random_uint32()
 {
+    pthread_mutex_lock(&lock);
     uint32_t result = read_byte();
     result <<= 8u;
     result |= read_byte();
@@ -81,5 +92,18 @@ uint32_t __dst_get_random_uint32()
     result |= read_byte();
     result <<= 8u;
     result |= read_byte();
+    pthread_mutex_unlock(&lock);
+    return result;
+}
+
+char *__dst_get_random_string(uint32_t length)
+{
+    char *result = malloc(length);
+    pthread_mutex_lock(&lock);
+    for (uint32_t i = 0; i < length; i++)
+    {
+        result[i] = read_byte();
+    }
+    pthread_mutex_unlock(&lock);
     return result;
 }

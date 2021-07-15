@@ -37,6 +37,8 @@ extern "C"
 
     extern void __dst_reinit_random(const char *file_name);
 
+    extern char *__dst_get_random_string(uint32_t length);
+
 #ifdef __cplusplus
 }
 #endif
