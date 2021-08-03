@@ -156,3 +156,7 @@ clickhouse_test/bin/checkpoint_folder2_tmpfs
 clickhouse_test/bin/run_backup_tmpfs
 clickhouse_test/bin/test_boot_time_l
 clickhouse_test/bin/test_boot_time_result
+braft_test/bin/user_level_tcp/data0
+braft_test/bin/user_level_tcp/data1
+braft_test/bin/user_level_tcp/data2
+braft_test/bin/user_level_tcp/log*

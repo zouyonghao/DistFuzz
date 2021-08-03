@@ -104,7 +104,8 @@
         "**/node_modules/*/**": true,
         "**/.hg/store/**": true,
         "**/bin/test_cases/*/**": true,
-        "clickhouse_test/bin": true
+        "clickhouse_test/bin": true,
+        "**/data*": true
     },
     "cmake.configureOnOpen": false
 }

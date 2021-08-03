@@ -314,6 +314,67 @@
                     "ignoreFailures": true
                 }
             ]
-        }
+        },
+        {
+            "name": "braft_tldk",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/zyh/braft/example/atomic/atomic_server",
+            "args": [
+                "-reuse_addr",
+                "-reuse_port",
+                "-ip=1.1.2.1",
+                "-port=8301",
+                "-conf=\"1.1.1.1:8300:0,1.1.2.1:8301:0,1.1.1.1:8302:0,\"",
+                "-data_path=\"./data1\""
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/braft_test/bin/user_level_tcp",
+            // ASAN_OPTIONS=detect_leaks=0 LD_PRELOAD=/home/zyh/tldk/libtldk.so NODE_NAME=node1
+            "environment": [
+                {
+                    "name": "ASAN_OPTIONS",
+                    "value": "detect_leaks=0"
+                },
+                {
+                    "name": "LD_PRELOAD",
+                    "value": "/home/zyh/tldk-20201029/libtldk.so"
+                },
+                {
+                    "name": "NODE_NAME",
+                    "value": "node1"
+                },
+                {
+                    "name": "DPDK_IP",
+                    "value": "1.1.1.4"
+                },
+                {
+                    "name": "DPDK_IP_MASK",
+                    "value": "24"
+                },
+                {
+                    "name": "DPDK_IP_GATEWAY",
+                    "value": "1.1.1.3"
+                },
+                {
+                    "name": "DPDK_VINC",
+                    "value": "--vdev=virtio_user0,path=/dev/vhost-net,queue_size=1024,iface=veth1"
+                },
+                {
+                    "name": "DPDK_PARAMS",
+                    "value": "--file-prefix=node1"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${workspaceFolder}/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
     ]
 }
