@@ -14,20 +14,22 @@ ip l s br-veth1 up
 ip l s br-veth2 master br0
 ip l s br-veth2 up
 
-ip a a 10.0.1.4/24 dev veth0
-ip a a 10.0.1.5/24 dev veth1
-ip a a 10.0.1.6/24 dev veth2
+ip a a 10.0.1.1/24 dev veth0
+ip a a 10.0.1.2/24 dev veth1
+ip a a 10.0.1.3/24 dev veth2
 ip l s veth0 up
 ip l s veth1 up
 ip l s veth2 up
 
-echo 1 > /proc/sys/net/ipv4/conf/veth1/accept_local
 echo 1 > /proc/sys/net/ipv4/conf/veth0/accept_local
+echo 1 > /proc/sys/net/ipv4/conf/veth1/accept_local
 echo 1 > /proc/sys/net/ipv4/conf/veth2/accept_local
 echo 0 > /proc/sys/net/ipv4/conf/all/rp_filter
 echo 0 > /proc/sys/net/ipv4/conf/veth0/rp_filter
 echo 0 > /proc/sys/net/ipv4/conf/veth1/rp_filter
 echo 0 > /proc/sys/net/ipv4/conf/veth2/rp_filter
+
+ip route add 10.0.1.4/32 via 10.0.1.2 dev veth1
 
 iptables -A FORWARD -i br0 -j ACCEPT
 
