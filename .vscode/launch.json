@@ -338,7 +338,7 @@
                 },
                 {
                     "name": "LD_PRELOAD",
-                    "value": "/home/zyh/tldk-20201029/libtldk.so"
+                    "value": "/home/zyh/tldk/libtldk.so"
                 },
                 {
                     "name": "NODE_NAME",
@@ -362,7 +362,63 @@
                 },
                 {
                     "name": "DPDK_PARAMS",
-                    "value": "--file-prefix=node1"
+                    "value": "--file-prefix=node1 --no-huge --no-hpet"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "${workspaceFolder}/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "test_network_delay_server",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/test/test_network_delay_server",
+            "args": [
+                "10.0.1.4", "8300"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/test",
+            // ASAN_OPTIONS=detect_leaks=0 LD_PRELOAD=/home/zyh/tldk/libtldk.so NODE_NAME=node1
+            "environment": [
+                {
+                    "name": "ASAN_OPTIONS",
+                    "value": "detect_leaks=0"
+                },
+                {
+                    "name": "LD_PRELOAD",
+                    "value": "/home/zyh/tldk/libtldk.so"
+                },
+                {
+                    "name": "NODE_NAME",
+                    "value": "node1"
+                },
+                {
+                    "name": "DPDK_IP",
+                    "value": "10.0.1.4"
+                },
+                {
+                    "name": "DPDK_IP_MASK",
+                    "value": "24"
+                },
+                {
+                    "name": "DPDK_IP_GATEWAY",
+                    "value": "10.0.1.1"
+                },
+                {
+                    "name": "DPDK_VINC",
+                    "value": "--vdev=virtio_user0,path=/dev/vhost-net,queue_size=1024,iface=veth0"
+                },
+                {
+                    "name": "DPDK_PARAMS",
+                    "value": "--file-prefix=node0 --no-huge -m128"
                 }
             ],
             "externalConsole": false,

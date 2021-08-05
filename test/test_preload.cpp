@@ -1,0 +1,157 @@
+#include <dlfcn.h>
+#include <dst_random.h>
+#include <stdio.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+#include <functional>
+#include <future>
+
+ssize_t (*k_send)(int sockfd, const void *buf, size_t len, int flags);
+ssize_t (*k_sendto)(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
+                    socklen_t addrlen);
+ssize_t (*k_sendmsg)(int sockfd, const struct msghdr *msg, int flags);
+ssize_t (*k_write)(int fd, const void *buf, size_t count);
+ssize_t (*k_writev)(int fd, const struct iovec *iov, int iovcnt);
+
+#define INIT_FUNC(func, handle, type)                                                                                  \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        k_##func = (type)dlsym(handle, #func);                                                                         \
+        if ((error = dlerror()) != NULL)                                                                               \
+        {                                                                                                              \
+            perror(#func "is not init");                                                                               \
+        }                                                                                                              \
+    } while (0)
+
+static void __attribute__((constructor)) symbol_init(void)
+{
+    void *handle;
+    char *error;
+
+    handle = dlopen("libc.so.6", RTLD_NOW);
+    error = dlerror();
+    if (!handle)
+    {
+        fprintf(stderr, "%s\n", error);
+        exit(EXIT_FAILURE);
+    }
+    INIT_FUNC(send, handle, ssize_t(*)(int sockfd, const void *buf, size_t len, int flags));
+    INIT_FUNC(sendto, handle,
+              ssize_t(*)(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
+                         socklen_t addrlen));
+    INIT_FUNC(sendmsg, handle, ssize_t(*)(int sockfd, const struct msghdr *msg, int flags));
+    INIT_FUNC(write, handle, ssize_t(*)(int fd, const void *buf, size_t count));
+    INIT_FUNC(writev, handle, ssize_t(*)(int fd, const struct iovec *iov, int iovcnt));
+}
+
+enum SUPPORTED_ACTION
+{
+    NOOP,
+    // REORDER,
+    LOST,
+    DELAY,
+    ASYNC_DELAY, // TODO: think about this argument: async delay is reorder?
+    DUP,
+    ACTION_COUNT
+};
+
+ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::function<ssize_t()> kernel_func)
+{
+    static std::mutex lock_for_write;
+
+    fprintf(stderr, "%s called.\n", func_name);
+    static unsigned int val = 0;
+    static unsigned int val_len = sizeof(val);
+    if (0 != getsockopt(fd, SOL_SOCKET, SO_TYPE, &val, &val_len))
+    {
+        // this is not a socket file descriptor
+        return kernel_func();
+    }
+
+    // this is a socket file descriptor
+    uint8_t select_random = __dst_get_random_uint8_t() % ACTION_COUNT;
+    fprintf(stderr, "action is %d\n", select_random);
+    switch (select_random)
+    {
+    case NOOP:
+    {
+        break;
+    }
+    case DELAY:
+    {
+        uint32_t random = __dst_get_random_uint32();
+        usleep(random);
+        // __dst_event_trigger(
+        //     ("sleep for " + std::to_string(random) + "n").c_str());
+        break;
+    }
+    case LOST:
+    {
+        return length;
+    }
+    case ASYNC_DELAY:
+    {
+        std::async(std::launch::async,
+                   [length, kernel_func]
+                   {
+                       uint32_t random = __dst_get_random_uint32();
+                       usleep(random);
+                       std::lock_guard<std::mutex> lk(lock_for_write);
+                       // __dst_event_trigger(
+                       //     ("sleep for " + std::to_string(random) + "n").c_str());
+
+                       ssize_t real_write = kernel_func();
+                       if (real_write < length)
+                       {
+                           fprintf(stderr, "MAY WRITE MULTI TIMES, DANGEROUS!\n");
+                       }
+                   });
+
+        return length;
+    }
+    case DUP:
+    {
+        ssize_t real_write = kernel_func();
+        if (real_write < length)
+        {
+            fprintf(stderr, "MAY WRITE MULTI TIMES, DANGEROUS!\n");
+        }
+        break;
+    }
+    default:
+        break;
+    }
+
+    std::lock_guard<std::mutex> lk(lock_for_write);
+    ssize_t real_write = kernel_func();
+    if (real_write < length)
+    {
+        fprintf(stderr, "MAY WRITE MULTI TIMES, DANGEROUS!\n");
+    }
+    return real_write;
+}
+
+/* for send */
+extern "C" ssize_t send(int sockfd, const void *buf, size_t len, int flags);
+
+extern "C" ssize_t sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
+                          socklen_t addrlen);
+
+extern "C" ssize_t sendmsg(int sockfd, const struct msghdr *msg, int flags);
+
+extern "C" ssize_t write(int fd, const void *buf, size_t count)
+{
+    return handle_random_event("write", fd, count, std::bind(k_write, fd, buf, count));
+}
+
+extern "C" ssize_t writev(int fd, const struct iovec *iov, int iovcnt)
+{
+    ssize_t length = 0;
+    for (int i = 0; i < iovcnt; i++)
+    {
+        length += iov[i].iov_len;
+    }
+    return handle_random_event("writev", fd, length, std::bind(k_writev, fd, iov, iovcnt));
+}
