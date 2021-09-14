@@ -1,18 +1,22 @@
-#include <dlfcn.h>
-#include <dst_random.h>
 #include <stdio.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <dlfcn.h>
+#include <dst_random.h>
+
 #include <functional>
 #include <future>
+
+#include <arpa/inet.h>
+#include <netinet/in.h>
 
 ssize_t (*k_send)(int sockfd, const void *buf, size_t len, int flags);
 ssize_t (*k_sendto)(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
                     socklen_t addrlen);
 ssize_t (*k_sendmsg)(int sockfd, const struct msghdr *msg, int flags);
-ssize_t (*k_write)(int fd, const void *buf, size_t count);
+ssize_t (*k_write)(int fd, const void *buf, size_t len);
 ssize_t (*k_writev)(int fd, const struct iovec *iov, int iovcnt);
 
 #define INIT_FUNC(func, handle, type)                                                                                  \
@@ -61,7 +65,7 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
 {
     static std::mutex lock_for_write;
 
-    fprintf(stderr, "%s called.\n", func_name);
+    // fprintf(stderr, "%s called.\n", func_name);
     static unsigned int val = 0;
     static unsigned int val_len = sizeof(val);
     if (0 != getsockopt(fd, SOL_SOCKET, SO_TYPE, &val, &val_len))
@@ -70,9 +74,36 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
         return kernel_func();
     }
 
+    sockaddr_in addr;
+    socklen_t len = sizeof(addr);
+    getsockname(fd, (struct sockaddr *)&addr, &len);
+
+    // fprintf(stderr, "Local IP address is: %s\n", inet_ntoa(addr.sin_addr));
+    // fprintf(stderr, "socket port is %d\n", addr.sin_port);
+
+    getpeername(fd, (struct sockaddr *)&addr, &len);
+    // fprintf(stderr, "peer IP address is: %s\n", inet_ntoa(addr.sin_addr));
+    // fprintf(stderr, "socket peer port is %d\n", addr.sin_port);
+
+    in_addr addr_cmp;
+    inet_aton("127.0.0.1", &addr_cmp);
+
+    if (addr_cmp.s_addr == addr.sin_addr.s_addr)
+    {
+        // be careful when process this...
+        // fprintf(stderr, "peer IP address equals, skip...\n");
+        return kernel_func();
+    }
+
+    // decease the probability of action
+    if (__dst_get_random_uint8_t() < 200)
+    {
+        return kernel_func();
+    }
+
     // this is a socket file descriptor
     uint8_t select_random = __dst_get_random_uint8_t() % ACTION_COUNT;
-    fprintf(stderr, "action is %d\n", select_random);
+    // fprintf(stderr, "action is %d\n", select_random);
     switch (select_random)
     {
     case NOOP:
@@ -134,16 +165,30 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
 }
 
 /* for send */
-extern "C" ssize_t send(int sockfd, const void *buf, size_t len, int flags);
-
-extern "C" ssize_t sendto(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
-                          socklen_t addrlen);
-
-extern "C" ssize_t sendmsg(int sockfd, const struct msghdr *msg, int flags);
-
-extern "C" ssize_t write(int fd, const void *buf, size_t count)
+extern "C" ssize_t send(int fd, const void *buf, size_t len, int flags)
 {
-    return handle_random_event("write", fd, count, std::bind(k_write, fd, buf, count));
+    return handle_random_event("send", fd, len, std::bind(k_send, fd, buf, len, flags));
+}
+
+extern "C" ssize_t sendto(int fd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
+                          socklen_t addrlen)
+{
+    return handle_random_event("sendto", fd, len, std::bind(k_sendto, fd, buf, len, flags, dest_addr, addrlen));
+}
+
+extern "C" ssize_t sendmsg(int fd, const struct msghdr *msg, int flags)
+{
+    ssize_t length = 0;
+    for (int i = 0; i < msg->msg_iovlen; i++)
+    {
+        length += msg->msg_iov[i].iov_len;
+    }
+    return handle_random_event("sendmsg", fd, length, std::bind(k_sendmsg, fd, msg, flags));
+}
+
+extern "C" ssize_t write(int fd, const void *buf, size_t len)
+{
+    return handle_random_event("write", fd, len, std::bind(k_write, fd, buf, len));
 }
 
 extern "C" ssize_t writev(int fd, const struct iovec *iov, int iovcnt)

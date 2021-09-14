@@ -55,9 +55,9 @@ void run_some_normal_operators(int number)
         }
 
 #endif // NO_CONCURRENCY
-       // t1.join();
-       // std::this_thread::sleep_for(std::chrono::seconds(1));
+        //    t1.join();
     }
+    std::this_thread::sleep_for(std::chrono::seconds(3));
 }
 
 void split_files(std::string initial_file)

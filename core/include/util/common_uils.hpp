@@ -34,17 +34,14 @@ static std::string convert_value_vector(std::vector<std::string> &op_vector)
     }
 }
 
-static std::string get_invoke_record(std::string op_name,
-                                     std::vector<std::string> &op_vector)
+static std::string get_invoke_record(std::string op_name, std::vector<std::string> &op_vector, int thread_id)
 {
-    return std::string("{:process " + get_thread_id() +
-                       ", :type :invoke, :f :" + op_name + ", :value " +
+    return std::string("{:process " + std::to_string(thread_id) + ", :type :invoke, :f :" + op_name + ", :value " +
                        convert_value_vector(op_vector) + "}");
 }
 
-static std::string get_result_record(std::string op_name,
-                                     std::vector<std::string> &op_vector,
-                                     int result, const std::string last_output)
+static std::string get_result_record(std::string op_name, std::vector<std::string> &op_vector, int result,
+                                     const std::string last_output, int thread_id)
 {
     std::string value = convert_value_vector(op_vector);
     if (op_name == "read")
@@ -58,8 +55,7 @@ static std::string get_result_record(std::string op_name,
             // std::cerr << e.what() << '\n'; // stoi
         }
     }
-    return std::string("{:process " + get_thread_id() + ", :type " +
-                       std::string(result == 0 ? ":ok" : ":fail") +
+    return std::string("{:process " + std::to_string(thread_id) + ", :type " + std::string(result == 0 ? ":ok" : ":fail") +
                        ", :f :" + op_name + ", :value " + value + "}");
 }
 

@@ -18,3 +18,5 @@ add_subdirectory(rethinkdb_test)
 add_subdirectory(aerospike_test)
 add_subdirectory(clickhouse_test)
 add_subdirectory(test)
+
+add_subdirectory(preload_module)

@@ -2,6 +2,7 @@
 
 bool DefaultClientOperator::_do()
 {
+    int random_thread_id = random() % INT_MAX;
     // std::cout << unfinished_command << "\n";
     std::string command = unfinished_command;
     std::vector<std::string> op_vector;
@@ -11,8 +12,8 @@ bool DefaultClientOperator::_do()
         command += i + random + " ";
         op_vector.push_back(random);
     }
-    __dst_event_record(get_invoke_record(op_name, op_vector).c_str());
-    std::cout << command << "\n";
+    __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
+    std::cerr << command << "\n";
     // int result = std::system(command.c_str());
 
     try
@@ -34,11 +35,12 @@ bool DefaultClientOperator::_do()
             last_output = tmp;
         }
 
-        __dst_event_record(get_result_record(op_name, op_vector, result, last_output).c_str());
+        __dst_event_record(get_result_record(op_name, op_vector, result, last_output, random_thread_id).c_str());
         return true;
     }
     catch (const std::exception &e)
     {
+        std::cerr << "Fail to spawn a child process." << '\n';
         std::cerr << e.what() << '\n';
         return false;
     }
