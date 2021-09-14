@@ -45,7 +45,7 @@ s32 dev_null_fd;
 string sync_id = "";
 string sync_dir = "";
 string sync_state = "";
-bool skip_deterministic = false;
+bool skip_deterministic = true;
 int sync_cov = 1;
 u8 *sync_cov_ptr = NULL;
 int sync_cov_length = MAP_SIZE; // can change
