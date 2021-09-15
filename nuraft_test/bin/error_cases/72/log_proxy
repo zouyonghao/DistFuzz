@@ -1,0 +1,23 @@
+Reading random file random_proxy.txt
+common replace pairs number: 0
+src_port = 10003, dest_port = 10004
+src_port = 10005, dest_port = 10001
+src_port = 10006, dest_port = 10002
+Socket created
+Socket created
+bind done
+Socket createdWaiting for incoming connections...
+
+proxy_servers size: 3
+bind done
+Waiting for incoming connections...
+bind done
+Waiting for incoming connections...
+Connection accepted, client port is 41665, server port is 10003
+Socket created
+Connected
+Handler assigned
+Receiving from node0, send it to node2
+31 30 30 30 31 Receiving from node1, send it to node2
+31 30 30 30 32 
+select_random is 3

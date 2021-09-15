@@ -1,0 +1,79 @@
+Receive message :Got timeout value: 351
+Receive message :Got timeout value: 277
+Receive message :Got timeout value: 206
+Receive message :Got timeout value: 324
+Receive message :Got timeout value: 236
+Receive message :Got timeout value: 320
+Receive need record message: {:process 1804289383, :type :invoke, :f :write, :value 3413344854}
+Receive need record message: {:process 1804289383, :type :fail, :f :write, :value 3413344854}
+Receive need record message: {:process 846930886, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1681692777, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1714636915, :type :invoke, :f :write, :value 2063683138}
+Receive need record message: {:process 1957747793, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 424238335, :type :invoke, :f :write, :value 1983279438}
+Receive need record message: {:process 1957747793, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 1681692777, :type :ok, :f :read, :value nil}
+Receive message :Got timeout value: 244
+Receive message :Got timeout value: 216
+Receive need record message: {:process 846930886, :type :ok, :f :read, :value nil}
+Receive need record message: {:process 1714636915, :type :fail, :f :write, :value 2063683138}
+Receive need record message: {:process 424238335, :type :fail, :f :write, :value 1983279438}
+Receive message :Got timeout value: 295
+Receive message :Got timeout value: 226
+Receive message :Got timeout value: 289
+Receive message :Got timeout value: 362
+Receive message :Got timeout value: 372
+Receive message :Got timeout value: 350
+Receive message :Got timeout value: 346
+Receive message :Got timeout value: 239
+Receive need record message: {:process 719885386, :type :invoke, :f :write, :value 3679583949}
+Receive need record message: {:process 1649760492, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 596516649, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1189641421, :type :invoke, :f :write, :value 2801805460}
+Receive need record message: {:process 1025202362, :type :invoke, :f :write, :value 1209519962}
+Receive need record message: {:process 1189641421, :type :fail, :f :write, :value 2801805460}
+Receive need record message: {:process 1025202362, :type :fail, :f :write, :value 1209519962}
+Receive need record message: {:process 596516649, :type :ok, :f :read, :value nil}
+Receive need record message: {:process 1649760492, :type :ok, :f :read, :value nil}
+Receive need record message: {:process 719885386, :type :fail, :f :write, :value 3679583949}
+Receive need record message: {:process 1350490027, :type :invoke, :f :write, :value 992294398}
+Receive need record message: {:process 783368690, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1102520059, :type :invoke, :f :write, :value 273604893}
+Receive need record message: {:process 2044897763, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1967513926, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 2044897763, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 1967513926, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 1350490027, :type :fail, :f :write, :value 992294398}
+Receive need record message: {:process 1102520059, :type :fail, :f :write, :value 273604893}
+Receive need record message: {:process 783368690, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 1365180540, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1540383426, :type :invoke, :f :write, :value 992798509}
+Receive need record message: {:process 304089172, :type :invoke, :f :write, :value 2193927283}
+Receive need record message: {:process 1303455736, :type :invoke, :f :write, :value 292966422}
+Receive need record message: {:process 35005211, :type :invoke, :f :write, :value 4165680068}
+Receive need record message: {:process 1303455736, :type :fail, :f :write, :value 292966422}
+Receive need record message: {:process 1365180540, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 1540383426, :type :fail, :f :write, :value 992798509}
+Receive need record message: {:process 304089172, :type :fail, :f :write, :value 2193927283}
+Receive need record message: {:process 35005211, :type :fail, :f :write, :value 4165680068}
+Receive need record message: {:process 521595368, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 294702567, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1726956429, :type :invoke, :f :write, :value 3750852258}
+Receive need record message: {:process 336465782, :type :invoke, :f :write, :value 1785869427}
+Receive need record message: {:process 861021530, :type :invoke, :f :write, :value 2292705554}
+Receive need record message: {:process 861021530, :type :fail, :f :write, :value 2292705554}
+Receive need record message: {:process 1726956429, :type :fail, :f :write, :value 3750852258}
+Receive need record message: {:process 294702567, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 521595368, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 336465782, :type :fail, :f :write, :value 1785869427}
+Receive need record message: {:process 278722862, :type :invoke, :f :write, :value 817800197}
+Receive need record message: {:process 233665123, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 2145174067, :type :invoke, :f :read, :value nil}
+Receive need record message: {:process 1101513929, :type :invoke, :f :write, :value 389193676}
+Receive need record message: {:process 468703135, :type :invoke, :f :write, :value 1354519443}
+Receive need record message: {:process 2145174067, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 278722862, :type :fail, :f :write, :value 817800197}
+Receive need record message: {:process 233665123, :type :ok, :f :read, :value 0}
+Receive need record message: {:process 468703135, :type :fail, :f :write, :value 1354519443}
+Receive need record message: {:process 1101513929, :type :fail, :f :write, :value 389193676}
+receive sigkill, closing...
