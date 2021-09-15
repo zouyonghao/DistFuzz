@@ -20,7 +20,7 @@ mv operation_log ./test_cases/$1
 
 # checking the operation log!
 {
-    ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
+    # ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
     if grep -q ^E ./test_cases/$1/log*; then
         echo "Find errors!"
     # elif [[ $CHECK_RAFT_LOG_ERROR == 1 ]]; then
@@ -29,10 +29,12 @@ mv operation_log ./test_cases/$1
         echo "Find ASan errors!"
     elif grep -q "DANGEROUS" ./test_cases/$1/log[0-2]; then
         echo "Find DANGEROUS!"
-    elif grep -q true ./test_cases/$1/check_log; then
+    # elif grep -q true ./test_cases/$1/check_log; then
+    #     echo "No errors, deleting logs..."
+    #     rm -rf ./test_cases/$1
+    else
+        # echo "Find operation log errors!"
         echo "No errors, deleting logs..."
         rm -rf ./test_cases/$1
-    else
-        echo "Find operation log errors!"
     fi
 } &

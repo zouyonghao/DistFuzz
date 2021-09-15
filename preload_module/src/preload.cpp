@@ -88,6 +88,7 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
     in_addr addr_cmp;
     inet_aton("127.0.0.1", &addr_cmp);
 
+    // If the IP is from 127.0.0.1, then treat it as a client.
     if (addr_cmp.s_addr == addr.sin_addr.s_addr)
     {
         // be careful when process this...
@@ -120,7 +121,7 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
     }
     case LOST:
     {
-        return length;
+        return __dst_get_random_uint8_t() % 2 == 0 ? length : 0;
     }
     case ASYNC_DELAY:
     {
