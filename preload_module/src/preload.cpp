@@ -64,11 +64,10 @@ enum SUPPORTED_ACTION
 
 ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::function<ssize_t()> kernel_func)
 {
-    static std::mutex lock_for_write;
 
     // fprintf(stderr, "%s called.\n", func_name);
-    static unsigned int val = 0;
-    static unsigned int val_len = sizeof(val);
+    unsigned int val = 0;
+    unsigned int val_len = sizeof(val);
     if (0 != getsockopt(fd, SOL_SOCKET, SO_TYPE, &val, &val_len))
     {
         // this is not a socket file descriptor
@@ -103,6 +102,7 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
         return kernel_func();
     }
 
+    static std::mutex lock_for_write;
     // this is a socket file descriptor
     uint8_t select_random = __dst_get_random_uint8_t() % ACTION_COUNT;
     // fprintf(stderr, "action is %d\n", select_random);
