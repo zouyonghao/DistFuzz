@@ -4,4 +4,4 @@ killall server
 killall proxy_server
 killall event_control
 
-rm -rf ./data*
+# rm -rf ./c-raft_da ta*

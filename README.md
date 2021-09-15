@@ -21,3 +21,18 @@
 `rethinkdb` 编译时需要联网下载部分组件
 
 `ClickHouse` 暂未在 71.37 的 `docker` 中运行，仅在 71.79 的虚拟机上运行
+
+**新增项目**
+
+添加新测试项目时需要增加、修改的文件：
+
+1. run_server_normal.sh
+   一般是用于测试应用是否能正常启动
+
+2. run_fuzz_server.sh
+   启动开始测试需要的所有服务 （TODO:改为在main里控制）
+
+3. start_server[0-2].sh
+   启动单个server
+
+4. Operators

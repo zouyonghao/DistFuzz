@@ -135,6 +135,8 @@ int main(int argc, char const *argv[])
     // let it run a while
     std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
+    // TODO: check server availability
+
     std::cout << "stopping...\n";
     system("./stop.sh");
 

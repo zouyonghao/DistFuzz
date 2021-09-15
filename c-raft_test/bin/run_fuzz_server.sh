@@ -1,5 +1,5 @@
 ./start_event_control.sh
-./start_proxy_server.sh
+# ./start_proxy_server.sh
 
 touch log0
 touch log1
