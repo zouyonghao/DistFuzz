@@ -35,4 +35,5 @@
 3. start_server[0-2].sh
    启动单个server
 
-4. Operators
+4. operators
+   一般需要实现多个，包括启动/停止等

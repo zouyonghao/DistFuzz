@@ -48,6 +48,7 @@ static void __attribute__((constructor)) symbol_init(void)
     INIT_FUNC(sendmsg, handle, ssize_t(*)(int sockfd, const struct msghdr *msg, int flags));
     INIT_FUNC(write, handle, ssize_t(*)(int fd, const void *buf, size_t count));
     INIT_FUNC(writev, handle, ssize_t(*)(int fd, const struct iovec *iov, int iovcnt));
+    fprintf(stderr, "symbol_init success!\n");
 }
 
 enum SUPPORTED_ACTION

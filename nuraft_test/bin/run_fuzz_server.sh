@@ -14,7 +14,7 @@
 ./start_node2.sh
 
 sleep 1
-echo add 2 localhost:10002 > calc1.pipe
+echo add 2 127.0.1.1:10002 > calc1.pipe
 sleep 1
-echo add 3 localhost:10003 > calc1.pipe
+echo add 3 127.0.1.1:10003 > calc1.pipe
 

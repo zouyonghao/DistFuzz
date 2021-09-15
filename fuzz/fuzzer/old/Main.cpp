@@ -393,7 +393,7 @@ int main(int argc, char **argv)
         }
         if (access(file_lock.c_str(), 0) != 0)
         { // file_lock does not exist
-            cout << file_lock << " does not exist, create it";
+            cout << file_lock << " does not exist, create it\n";
             ofstream f_lock(file_lock, ios::out);
             f_lock << "file_lock";
             f_lock.close();

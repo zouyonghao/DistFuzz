@@ -6,7 +6,11 @@ fi
 
 echo st >calc$GET_A_SERVER_ID.pipe
 if [[ $1 == 'set' ]]; then
-    LEADER_ID=$(tail -n 5 calc$GET_A_SERVER_ID.log | head -n 1 | awk '{print $3}')
+    LEADER_ID=$(tail -n 5 calc$GET_A_SERVER_ID.log | grep leader | head -n 1 | awk '{print $3}')
+    if [ -z "$LEADER_ID" ]; then
+        echo "LEADER_ID is empty"
+        exit -1
+    fi
     echo "leader is $LEADER_ID"
     if [[ $LEADER_ID == -1 ]]; then
         echo "no leader is found"
