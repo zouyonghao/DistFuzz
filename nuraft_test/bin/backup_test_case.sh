@@ -20,6 +20,8 @@ mv operation_log ./test_cases/$1
         echo "Find errors!"
     elif grep -q "AddressSanitizer" ./test_cases/$1/*.log; then
         echo "Find ASan errors!"
+    elif grep -q "ThreadSanitizer" ./test_cases/$1/*.log; then
+        echo "Find TSan errors!"
     elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/srv[1-3].log; then
         echo "Find ASan errors!"
     # elif grep -q true ./test_cases/$1/check_log; then
