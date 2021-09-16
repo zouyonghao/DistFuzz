@@ -8,7 +8,7 @@ echo $GET_A_SERVER_ID
 
 LEADER_ID=
 
-MESSAGE=$(redis-cli -p $GET_A_SERVER_ID get a)
+MESSAGE=$(redis-cli -h 127.0.1.1 -p $GET_A_SERVER_ID get a)
 echo "MESSAGE is $MESSAGE"
 if echo $MESSAGE | grep CLUSTERDOWN; then
     echo "CLUSTERDOWN"
@@ -23,7 +23,7 @@ echo "LEADER_ID is $LEADER_ID"
 
 if [[ $1 == 'set' ]]; then
     echo "should set $2"
-    if redis-cli -p $LEADER_ID set a $2 | grep OK; then
+    if redis-cli -h 127.0.1.1 -p $LEADER_ID set a $2 | grep OK; then
         echo "set success"
         echo $2
     else
@@ -32,6 +32,6 @@ if [[ $1 == 'set' ]]; then
     fi
 else
     echo "should get"
-    VALUE=$(redis-cli -p $LEADER_ID get a)
+    VALUE=$(redis-cli -h 127.0.1.1 -p $LEADER_ID get a)
     echo $VALUE
 fi
