@@ -5,7 +5,7 @@
         "DefaultInstrumentor"
     ],
     "additional_link_args": [
-        "/tmp/default_instrument_lib.c.o",
+        "/home/zyh/distributed-system-test/build/fuzz/CMakeFiles/default_instrument_lib.dir/instrumentor_lib/default_instrument_lib.c.o",
         "/home/zyh/distributed-system-test/build/core/libdst_random.so",
         "-Wl,-rpath=/home/zyh/distributed-system-test/build/core/",
         "/home/zyh/distributed-system-test/build/core/libdst_event.so",
