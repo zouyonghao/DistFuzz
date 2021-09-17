@@ -17,7 +17,7 @@ public class RethinkDBTestClient {
     public RethinkDBTestClient() {
         for (int port : PORTS) {
             try {
-                conn = r.connection().hostname("127.0.0.1").port(port).timeout(3).connect();
+                conn = r.connection().hostname("127.0.1.1").port(port).timeout(3).connect();
                 System.out.println("Connect success!");
                 break;
             } catch (Exception e) {
