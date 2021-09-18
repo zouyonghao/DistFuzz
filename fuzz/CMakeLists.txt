@@ -5,7 +5,7 @@ find_package(Threads REQUIRED)
 include_directories(src)
 include_directories(${CMAKE_SOURCE_DIR}/core/include)
 
-set(LLVM_DIST_PATH "/usr/lib/llvm-9"
+set(LLVM_DIST_PATH "/usr/lib/llvm-11"
     CACHE STRING "LLVM distribution install path")
 
 set(LLVM_DIR ${LLVM_DIST_PATH}/lib/cmake/llvm)
@@ -38,11 +38,11 @@ include_directories(include)
 # target_link_libraries(default_instrumentor ${LLVM_LIBS})
 
 add_executable(default_compiler compiler/compiler.cpp instrumentor/default_instrumentor.cpp)
-target_compile_definitions(default_compiler PUBLIC -DCLANG="clang-9")
+target_compile_definitions(default_compiler PUBLIC -DCLANG="clang-11")
 target_link_libraries(default_compiler ${LLVM_LIBS})
 
 add_executable(default_compiler++ compiler/compiler.cpp instrumentor/default_instrumentor.cpp)
-target_compile_definitions(default_compiler++ PUBLIC -DCLANG="clang++-9")
+target_compile_definitions(default_compiler++ PUBLIC -DCLANG="clang++-11")
 target_link_libraries(default_compiler++ ${LLVM_LIBS})
 
 add_library(default_instrument_lib OBJECT instrumentor_lib/default_instrument_lib.c)

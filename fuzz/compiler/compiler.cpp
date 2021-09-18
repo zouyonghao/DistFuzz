@@ -230,7 +230,7 @@ int main(int argc, char **argv)
                     std::error_code ec;
                     llvm::raw_ostream *out =
                         new llvm::raw_fd_ostream(llvm::StringRef(ll_file_name),
-                                                 ec, llvm::sys::fs::F_None);
+                                                 ec);
                     module_ptr->print(*out, nullptr);
                 }
             }

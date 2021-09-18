@@ -22,6 +22,13 @@
 
 `ClickHouse` 暂未在 71.37 的 `docker` 中运行，仅在 71.79 的虚拟机上运行
 
+
+`ClickHouse` 代码位于`ftp`上，使用下列方法获取
+
+```
+smbclient '\\166.111.139.139\workspace' -N -c 'prompt OFF; cd zyh; mget ClickHouse_21.9.2.17.tar.gz'
+```
+
 **新增项目**
 
 添加新测试项目时需要增加、修改的文件：
