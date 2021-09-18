@@ -21,7 +21,7 @@ target_link_libraries(clickhouse_test_main
      ${Boost_LIBRARIES})
 
 file(GLOB CLICKHOUSE_TEST_OPERATORS_SRC
-     "src/operators/*.cpp"
+     "src/keeper_operators/*.cpp"
      ${CMAKE_SOURCE_DIR}/core/test/dst_operator_test.cpp
 )
 

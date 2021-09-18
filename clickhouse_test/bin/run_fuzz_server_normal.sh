@@ -1,21 +1,10 @@
 bin_path=/home/zyh/ClickHouse/build/programs
 
-mkdir -p run/zookeeper
+mkdir run
 
-./zkServer.sh start
-
-export CLICKHOUSE_WATCHDOG_ENABLE=0
-$bin_path/clickhouse-server --config config0.xml &
-$bin_path/clickhouse-server --config config1.xml &
-$bin_path/clickhouse-server --config config2.xml &
-
-timeout 10 ./ensure_nodes.sh
-
-/home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q "CREATE DATABASE test"
-/home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q "CREATE TABLE test.test (key UInt32, v UInt32) ENGINE=ReplicatedMergeTree('/clickhouse/tables/{shard}/test', '{replica}') ORDER BY key"
-
-/home/zyh/ClickHouse/build/programs/clickhouse-client -c config1.xml -q "CREATE DATABASE test"
-/home/zyh/ClickHouse/build/programs/clickhouse-client -c config1.xml -q "CREATE TABLE test.test (key UInt32, v UInt32) ENGINE=ReplicatedMergeTree('/clickhouse/tables/{shard}/test', '{replica}') ORDER BY key"
-
-/home/zyh/ClickHouse/build/programs/clickhouse-client -c config2.xml -q "CREATE DATABASE test"
-/home/zyh/ClickHouse/build/programs/clickhouse-client -c config2.xml -q "CREATE TABLE test.test (key UInt32, v UInt32) ENGINE=ReplicatedMergeTree('/clickhouse/tables/{shard}/test', '{replica}') ORDER BY key"
+LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
+$bin_path/clickhouse-keeper --config enable_keeper1.xml > run/cmd_log1 2>&1 &
+LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
+$bin_path/clickhouse-keeper --config enable_keeper2.xml > run/cmd_log2 2>&1 &
+LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
+$bin_path/clickhouse-keeper --config enable_keeper3.xml > run/cmd_log3 2>&1 &

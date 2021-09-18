@@ -33,7 +33,7 @@ smbclient '\\166.111.139.139\workspace' -N -c 'prompt OFF; cd zyh; mget ClickHou
 
 添加新测试项目时需要增加、修改的文件：
 
-1. run_server_normal.sh
+1. run_fuzz_server_normal.sh
    一般是用于测试应用是否能正常启动
 
 2. run_fuzz_server.sh
@@ -44,3 +44,6 @@ smbclient '\\166.111.139.139\workspace' -N -c 'prompt OFF; cd zyh; mget ClickHou
 
 4. operators
    一般需要实现多个，包括启动/停止等
+
+5. backup_test_case.sh
+   用于备份和检查相关日志、数据

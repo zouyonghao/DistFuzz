@@ -160,3 +160,6 @@ braft_test/bin/user_level_tcp/data0
 braft_test/bin/user_level_tcp/data1
 braft_test/bin/user_level_tcp/data2
 braft_test/bin/user_level_tcp/log*
+clickhouse_test/bin/enable_keeper1-preprocessed.xml
+clickhouse_test/bin/enable_keeper3-preprocessed.xml
+clickhouse_test/bin/enable_keeper2-preprocessed.xml
