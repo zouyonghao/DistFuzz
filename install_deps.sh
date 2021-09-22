@@ -12,6 +12,7 @@ sudo apt-get install \
     libleveldb-dev \
     autoconf \
     libbsd-dev \
+    libprotobuf-dev libprotobuf-c-dev protobuf-c-compiler protobuf-compiler python3-protobuf python3-future libnl-3-dev libcap-dev \
     redis -y > /dev/null && echo "apt-get dependencies success!"
 
 # install aerospike client
