@@ -1,4 +1,6 @@
 1. Logic error
+   **An expected behavior, but the server should not crash.**
+
     ```
     2021.07.06 03:33:04.593550 [ 84719 ] {} <Fatal> : Logical error: 'It's new replica, but database is not empty'.
     2021.07.06 03:33:04.594935 [ 84725 ] {} <Fatal> BaseDaemon: ########################################
@@ -38,6 +40,7 @@
     https://github.com/ClickHouse/ClickHouse/issues/26015
 
 2. Floating point inexact result
+    **Not a bug**
 
     ```
     2021.07.13 13:15:11.454496 [ 1260320 ] {} <Fatal> BaseDaemon: ########################################
@@ -94,3 +97,5 @@
     2021.07.14 23:21:46.567965 [ 4704 ] {} <Fatal> BaseDaemon: 19. start_thread @ 0x76db in /lib/x86_64-linux-gnu/libpthread-2.27.so
     2021.07.14 23:21:46.568054 [ 4704 ] {} <Fatal> BaseDaemon: 20. clone @ 0x12171f in /lib/x86_64-linux-gnu/libc-2.27.so
     ```
+
+    https://github.com/ClickHouse/ClickHouse/issues/29255
