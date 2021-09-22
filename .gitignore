@@ -163,3 +163,8 @@ braft_test/bin/user_level_tcp/log*
 clickhouse_test/bin/enable_keeper1-preprocessed.xml
 clickhouse_test/bin/enable_keeper3-preprocessed.xml
 clickhouse_test/bin/enable_keeper2-preprocessed.xml
+clickhouse_test/bin/log_test_err
+clickhouse_test/bin/sync_branch_cov_file
+clickhouse_test/bin/sync_file
+clickhouse_test/bin/output
+clickhouse_test/bin/file_lock

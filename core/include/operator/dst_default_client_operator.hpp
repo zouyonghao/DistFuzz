@@ -21,9 +21,9 @@ protected:
 
 public:
     DefaultClientOperator(std::string _unfinished_command,
-                          std::string _atomic_op,
+                          std::string _op_name,
                           std::vector<std::string> _need_random_parameters)
-        : unfinished_command(_unfinished_command), op_name(_atomic_op),
+        : unfinished_command(_unfinished_command), op_name(_op_name),
           need_random_parameters(_need_random_parameters)
     {
     }

@@ -11,7 +11,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 file(GLOB CLICKHOUSE_TEST_MAIN_SRC
      "src/*.cpp"
-     "src/operators/*.cpp"
+     "src/keeper_operators/*.cpp"
      ${CMAKE_SOURCE_DIR}/core/src/dst_test_main.cpp
 )
 

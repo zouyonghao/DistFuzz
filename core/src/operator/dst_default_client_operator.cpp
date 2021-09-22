@@ -12,7 +12,8 @@ bool DefaultClientOperator::_do()
         command += i + random + " ";
         op_vector.push_back(random);
     }
-    __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
+    if (!op_name.empty()) // TODO: create another simple operator that just call a command.
+        __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
     std::cerr << command << "\n";
     // int result = std::system(command.c_str());
 
@@ -32,10 +33,11 @@ bool DefaultClientOperator::_do()
         std::string last_output;
         while (pipe_stream && std::getline(pipe_stream, tmp) && !tmp.empty())
         {
+            // std::cout << tmp << "\n";
             last_output = tmp;
         }
-
-        __dst_event_record(get_result_record(op_name, op_vector, result, last_output, random_thread_id).c_str());
+        if (!op_name.empty())
+            __dst_event_record(get_result_record(op_name, op_vector, result, last_output, random_thread_id).c_str());
         return true;
     }
     catch (const std::exception &e)
