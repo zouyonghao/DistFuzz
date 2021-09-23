@@ -1,4 +1,5 @@
 set -e
+sudo apt update
 sudo apt-get install \
     libboost-all-dev \
     rapidjson-dev \
@@ -13,6 +14,7 @@ sudo apt-get install \
     autoconf \
     libbsd-dev \
     libprotobuf-dev libprotobuf-c-dev protobuf-c-compiler protobuf-compiler python3-protobuf python3-future libnl-3-dev libcap-dev \
+    lsb-release wget software-properties-common \
     redis -y > /dev/null && echo "apt-get dependencies success!"
 
 # install aerospike client
@@ -48,4 +50,15 @@ else
     git clone http://166.111.139.139:7800/zyh/criu.git
     cd criu
     make && echo "install criu success!"
+fi
+
+cd
+if clang-11 --version > /dev/null; then
+    echo "clang-11 is installed, skip."
+else
+    echo "installing clang-11..."
+    wget https://apt.llvm.org/llvm.sh
+    chmod +x llvm.sh
+    sudo ./llvm.sh 11
+    echo "install clang and llvm 11 success!"
 fi
