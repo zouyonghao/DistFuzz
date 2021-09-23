@@ -6,6 +6,8 @@
 #      -DENABLE_TESTS=OFF \
 #      -DSANITIZE=address
 
+cp compiler-config.json /tmp/
+
 export CC=/home/zyh/distributed-system-test/build/fuzz/default_compiler CXX=/home/zyh/distributed-system-test/build/fuzz/default_compiler++
 cmake ..  \
         -DCMAKE_BUILD_TYPE=Debug     \
