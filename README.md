@@ -18,10 +18,11 @@
 
 `floyd` 需要使用 `ubuntu 14.04`，`docker` 镜像为 `ubuntu_14.04_dst_floyd`
 
+`redisraft` 需要 `clang-9`，因此必须修改本项目的`CMakeLists.txt`为`llvm-9`和`clang-9`
+
 `rethinkdb` 编译时需要联网下载部分组件
 
 `ClickHouse` 暂未在 71.37 的 `docker` 中运行，仅在 71.79 的虚拟机上运行
-
 
 `ClickHouse` 代码位于`ftp`上，使用下列方法获取
 
