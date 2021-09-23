@@ -78,6 +78,7 @@ int main(int argc, char **argv)
         if (std::getenv("CALNG_VERSION") != NULL)
         {
             clang_exe = std::getenv("CLANG_VERSION");
+            std::cout << "use " << clang_exe << "\n";
         }
     }
     else
@@ -113,13 +114,13 @@ int main(int argc, char **argv)
 
     if (is_assembly_file(argc, argv))
     {
-        execvp(CLANG, argv);
-        perror((std::string("failed to exec ") + CLANG).c_str());
+        execvp(clang_exe.c_str(), argv);
+        perror((std::string("failed to exec ") + clang_exe).c_str());
         exit(-1);
     }
 
-    std::vector<const char *> only_link_vector{CLANG};
-    std::vector<const char *> compile_to_ll_vector{CLANG, "-S", "-emit-llvm"};
+    std::vector<const char *> only_link_vector{clang_exe.c_str()};
+    std::vector<const char *> compile_to_ll_vector{clang_exe.c_str(), "-S", "-emit-llvm"};
 
     for (auto &i : document["additional_compile_args"].GetArray())
     {
@@ -194,7 +195,7 @@ int main(int argc, char **argv)
         }
         only_link_vector.push_back(nullptr);
         execvp(only_link_vector[0], (char *const *)&only_link_vector[0]);
-        perror((std::string("failed to exec ") + CLANG).c_str());
+        perror((std::string("failed to exec ") + clang_exe).c_str());
         exit(-1);
     }
 
@@ -240,7 +241,7 @@ int main(int argc, char **argv)
             }
         }
 
-        std::vector<const char *> compile_ll_to_target_vector{CLANG, "-c", "-fPIC", "-O0", "-g"};
+        std::vector<const char *> compile_ll_to_target_vector{clang_exe.c_str(), "-c", "-fPIC", "-O0", "-g"};
         for (auto &i : ll_files)
         {
             compile_ll_to_target_vector.push_back(i.c_str());
@@ -275,7 +276,7 @@ int main(int argc, char **argv)
     }
     only_link_vector.push_back(nullptr);
     execvp(only_link_vector[0], (char *const *)&only_link_vector[0]);
-    perror((std::string("failed to exec ") + CLANG).c_str());
+    perror((std::string("failed to exec ") + clang_exe.c_str()).c_str());
     exit(-1);
 
     return 0;
