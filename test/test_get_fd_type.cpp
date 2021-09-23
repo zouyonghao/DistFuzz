@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 
     FILE *f = fopen(".", "r");
     int fd = fileno(f);
-    if (ret = getsockopt(fd, SOL_SOCKET, SO_TYPE, &val, &val_len))
+    if ((ret = getsockopt(fd, SOL_SOCKET, SO_TYPE, &val, &val_len)) > 0)
     {
         perror("getsockopt fail");
     }

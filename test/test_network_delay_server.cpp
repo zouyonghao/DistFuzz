@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
     // fcntl(server_socket, F_SETFL, fcntl(server_socket, F_GETFL, 0) | O_NONBLOCK);
 
     c = sizeof(struct sockaddr_in);
-    while (client_socket = accept(server_socket, (struct sockaddr *)&client_addr, (socklen_t *)&c))
+    while ((client_socket = accept(server_socket, (struct sockaddr *)&client_addr, (socklen_t *)&c)) > 0)
     {
         uint8_t client_message[1000];
         clock_t begin = clock();
