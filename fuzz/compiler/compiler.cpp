@@ -75,7 +75,7 @@ int main(int argc, char **argv)
     if (clang_exe.find("++") == std::string::npos)
     {
         // compile for C
-        if (std::getenv("CALNG_VERSION") != NULL)
+        if (std::getenv("CLANG_VERSION") != NULL)
         {
             clang_exe = std::getenv("CLANG_VERSION");
             std::cout << "use " << clang_exe << "\n";
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
     else
     {
         // compile for C++
-        if (std::getenv("CALNG++_VERSION") != NULL)
+        if (std::getenv("CLANG++_VERSION") != NULL)
         {
             clang_exe = std::getenv("CLANG++_VERSION");
         }
