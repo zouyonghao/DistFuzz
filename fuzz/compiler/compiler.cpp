@@ -27,18 +27,13 @@
 using namespace std;
 
 #ifndef CLANG
-#ifdef __cplusplus
-#define CLANG "clang++"
-#else
 #define CLANG "clang"
-#endif
 #endif
 
 inline bool is_assembly_file(int argc, char **argv)
 {
     string last_arg = argv[argc - 1];
-    if (last_arg.rfind(".s") == last_arg.length() - 2 ||
-        last_arg.rfind(".S") == last_arg.length() - 2)
+    if (last_arg.rfind(".s") == last_arg.length() - 2 || last_arg.rfind(".S") == last_arg.length() - 2)
     {
         return true;
     }
@@ -76,6 +71,23 @@ inline bool is_should_ignored(std::string &tmp, rapidjson::Value &ignored_args)
 
 int main(int argc, char **argv)
 {
+    std::string clang_exe = CLANG;
+    if (clang_exe.find("++") == std::string::npos)
+    {
+        // compile for C
+        if (std::getenv("CALNG_VERSION") != NULL)
+        {
+            clang_exe = std::getenv("CLANG_VERSION");
+        }
+    }
+    else
+    {
+        // compile for C++
+        if (std::getenv("CALNG++_VERSION") != NULL)
+        {
+            clang_exe = std::getenv("CLANG++_VERSION");
+        }
+    }
     std::ifstream ifs("/tmp/compiler-config.json");
     rapidjson::IStreamWrapper isw(ifs);
     rapidjson::Document document;
@@ -90,8 +102,7 @@ int main(int argc, char **argv)
     std::vector<Instrumentor *> instrumentors;
     for (auto &i : document["instrumentors"].GetArray())
     {
-        instrumentors.push_back(
-            Registry<Instrumentor>::getItemMap()[std::string(i.GetString())]);
+        instrumentors.push_back(Registry<Instrumentor>::getItemMap()[std::string(i.GetString())]);
     }
 
     std::vector<std::string> file_blacklist;
@@ -152,8 +163,7 @@ int main(int argc, char **argv)
         {
             is_only_compile = true;
         }
-        else if (ends_with(tmp, ".c") || ends_with(tmp, ".cpp") ||
-                 ends_with(tmp, ".cc") || ends_with(tmp, ".cxx"))
+        else if (ends_with(tmp, ".c") || ends_with(tmp, ".cpp") || ends_with(tmp, ".cc") || ends_with(tmp, ".cxx"))
         {
             std::string arg_string = std::string(argv[i]);
             for (auto &black_list_file : file_blacklist)
@@ -194,8 +204,7 @@ int main(int argc, char **argv)
         if (fork() == 0)
         {
             compile_to_ll_vector.push_back(nullptr);
-            execvp(compile_to_ll_vector[0],
-                   (char *const *)&compile_to_ll_vector[0]);
+            execvp(compile_to_ll_vector[0], (char *const *)&compile_to_ll_vector[0]);
             perror("Failed to compile sources to .ll files.");
             exit(-1);
         }
@@ -205,9 +214,7 @@ int main(int argc, char **argv)
         // instrument
         for (auto &s : source_files)
         {
-            std::string ll_file_name =
-                s.substr(s.rfind("/") + 1, s.rfind(".") - s.rfind("/") - 1) +
-                ".ll";
+            std::string ll_file_name = s.substr(s.rfind("/") + 1, s.rfind(".") - s.rfind("/") - 1) + ".ll";
             ll_files.push_back(ll_file_name);
 
             for (auto &i : document["instrumentors"].GetArray())
@@ -217,8 +224,7 @@ int main(int argc, char **argv)
                 {
                     llvm::LLVMContext ctx;
                     llvm::SMDiagnostic Err;
-                    unique_ptr<llvm::Module> module_ptr =
-                        llvm::parseIRFile(ll_file_name, Err, ctx);
+                    unique_ptr<llvm::Module> module_ptr = llvm::parseIRFile(ll_file_name, Err, ctx);
                     if (!module_ptr)
                     {
                         llvm::errs() << "ParseIRFile failed\n";
@@ -228,16 +234,13 @@ int main(int argc, char **argv)
                     map[i.GetString()]->do_instrument(module_ptr.get());
 
                     std::error_code ec;
-                    llvm::raw_ostream *out =
-                        new llvm::raw_fd_ostream(llvm::StringRef(ll_file_name),
-                                                 ec);
+                    llvm::raw_ostream *out = new llvm::raw_fd_ostream(llvm::StringRef(ll_file_name), ec);
                     module_ptr->print(*out, nullptr);
                 }
             }
         }
 
-        std::vector<const char *> compile_ll_to_target_vector{
-            CLANG, "-c", "-fPIC", "-O0", "-g"};
+        std::vector<const char *> compile_ll_to_target_vector{CLANG, "-c", "-fPIC", "-O0", "-g"};
         for (auto &i : ll_files)
         {
             compile_ll_to_target_vector.push_back(i.c_str());
@@ -258,15 +261,13 @@ int main(int argc, char **argv)
             compile_ll_to_target_vector.push_back(i.GetString());
         }
         compile_ll_to_target_vector.push_back(nullptr);
-        execvp(compile_ll_to_target_vector[0],
-               (char *const *)&compile_ll_to_target_vector[0]);
+        execvp(compile_ll_to_target_vector[0], (char *const *)&compile_ll_to_target_vector[0]);
         perror("Failed to compile .ll files to target.");
         exit(-1);
     }
 
     // TODO
-    ERROR_LOG(
-        "Currently we do not support to run compling and linking together.\n");
+    ERROR_LOG("Currently we do not support to run compling and linking together.\n");
 
     for (auto &i : document["additional_link_args"].GetArray())
     {
