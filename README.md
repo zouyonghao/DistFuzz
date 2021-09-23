@@ -30,6 +30,15 @@
 smbclient '\\166.111.139.139\workspace' -N -c 'prompt OFF; cd zyh; mget ClickHouse_21.9.2.17.tar.gz'
 ```
 
+`ClickHouse` 需要新版本`cmake`，使用如下方式安装
+
+```
+wget https://github.com/Kitware/CMake/releases/download/v3.21.3/cmake-3.21.3-linux-x86_64.sh
+chmod +x cmake-3.21.3-linux-x86_64.sh
+./cmake-3.21.3-linux-x86_64.sh
+修改 .bashrc，加入cmake执行路径
+```
+
 **新增项目**
 
 添加新测试项目时需要增加、修改的文件：
