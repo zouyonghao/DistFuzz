@@ -76,7 +76,7 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
 
     sockaddr_in addr;
     socklen_t len = sizeof(addr);
-    getsockname(fd, (struct sockaddr *)&addr, &len);
+    // getsockname(fd, (struct sockaddr *)&addr, &len);
 
     // fprintf(stderr, "Local IP address is: %s\n", inet_ntoa(addr.sin_addr));
     // fprintf(stderr, "socket port is %d\n", addr.sin_port);
@@ -85,14 +85,16 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
     // fprintf(stderr, "peer IP address is: %s\n", inet_ntoa(addr.sin_addr));
     // fprintf(stderr, "socket peer port is %d\n", addr.sin_port);
 
+    // server must use ip 127.0.1.1
     in_addr addr_cmp;
-    inet_aton("127.0.0.1", &addr_cmp);
+    inet_aton("127.0.1.1", &addr_cmp);
 
-    // If the IP is from 127.0.0.1, then treat it as a client.
-    if (addr_cmp.s_addr == addr.sin_addr.s_addr)
+    // If the IP is not from 127.0.1.1, then treat it as a client.
+    // FIXME: This still can not distinguish the client perfectly
+    if (addr_cmp.s_addr != addr.sin_addr.s_addr)
     {
         // be careful when process this...
-        // fprintf(stderr, "peer IP address equals, skip...\n");
+        fprintf(stderr, "peer IP address not equals to 127.0.1.1, skip...\n");
         return kernel_func();
     }
 
