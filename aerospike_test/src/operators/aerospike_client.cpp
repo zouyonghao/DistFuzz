@@ -27,9 +27,9 @@ public:
     AerospikeClient(ACTION_TYPE _action_type) : action_type(_action_type)
     {
         as_config_init(&config);
-        as_config_add_host(&config, "127.0.0.1", 2000);
-        as_config_add_host(&config, "127.0.0.1", 2001);
-        as_config_add_host(&config, "127.0.0.1", 2002);
+        as_config_add_host(&config, "127.0.1.1", 2000);
+        as_config_add_host(&config, "127.0.1.1", 2001);
+        as_config_add_host(&config, "127.0.1.1", 2002);
         aerospike_init(&as, &config);
         as_key_init_str(&key, "test", "test-set", "test-key");
     }
@@ -44,6 +44,8 @@ public:
             fprintf(stderr, "err(%d) %s at [%s:%d]\n", err.code, err.message, err.file, err.line);
             return false;
         }
+
+        fprintf(stderr, "connect success!\n");
 
         std::string op_name;
         std::vector<std::string> op_vector;

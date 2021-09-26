@@ -94,7 +94,7 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
     if (addr_cmp.s_addr != addr.sin_addr.s_addr)
     {
         // be careful when process this...
-        fprintf(stderr, "peer IP address not equals to 127.0.1.1, skip...\n");
+        // fprintf(stderr, "peer IP address not equals to 127.0.1.1, skip...\n");
         return kernel_func();
     }
 
