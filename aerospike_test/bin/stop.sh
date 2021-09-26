@@ -1,6 +1,6 @@
 #!/bin/bash
 killall asd
-ps -ef | grep redis-server | awk '{print $2}' | xargs kill
+ps -ef | grep asd | awk '{print $2}' | xargs kill
 # rm -rf data*
 # rm -rf log*
 killall proxy_server
