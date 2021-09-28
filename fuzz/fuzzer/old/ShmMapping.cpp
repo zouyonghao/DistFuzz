@@ -24,6 +24,16 @@ static s32 variable_count_shmid;
 #define BRANCH_TRACE_SHM_ENV_VAR	"AFLCplusplus_BRANCH_TRACE_SHM_ID"
 static s32 branch_trace_shmid;
 
+// count the number of state change
+#define CONCURRENT_FUNCTION_SHM_ENV_VAR "AFLCplusplus_CONCURRENT_FUNCTION_SHMD_ID"
+static s32 concurrent_function_shmid;
+
+#define CONCURRENT_MUTEX_SHM_ENV_VAR "AFLCplusplus_CONCURRENT_MUTEX_SHMD_ID"
+static s32 concurrent_mutex_shmid;
+
+#define TICK_NUM_SHM_ENV_VAR "AFLCplusplus_TICK_NUM_SHMD_ID"
+static s32 tick_num_shmid;
+
 static s32 SingleShmSetup(u8 *& mem_ptr, u32 mem_size, string env_var) {
 	s32 shm_id = shmget(IPC_PRIVATE, mem_size, IPC_CREAT|IPC_EXCL|0600);
 	if (shm_id < 0) {
@@ -54,6 +64,20 @@ void ShmSetup(void) {
 
 	branch_trace_shmid = SingleShmSetup(branchTraceBit, MAP_SIZE, BRANCH_TRACE_SHM_ENV_VAR);
 
+	concurrent_function_shmid = SingleShmSetup(concurrentFunctionCountVar, sizeof(u64), CONCURRENT_FUNCTION_SHM_ENV_VAR);
+	tick_num_shmid = SingleShmSetup(tickNum, sizeof(u64), TICK_NUM_SHM_ENV_VAR);
+	u8 *tmp;
+	concurrent_mutex_shmid = SingleShmSetup(tmp, sizeof(pthread_mutex_t), CONCURRENT_MUTEX_SHM_ENV_VAR);
+	concurrentFunctionMutex = (pthread_mutex_t *) tmp;
+	pthread_mutexattr_t mat_l;
+	pthread_mutexattr_init(&mat_l);
+	if (pthread_mutexattr_setpshared(&mat_l, PTHREAD_PROCESS_SHARED) != 0)
+	{
+		perror("pthread_mutexattr_setpshared");
+		exit(-1);
+	}
+	pthread_mutex_init(concurrentFunctionMutex, &mat_l);
+
 	// error_size_shmId = SingleShmSetup(errorMap, MAX_MAP_SIZE, ERROR_MAP_SHM_ENV_VAR);
 	error_list_shmId = SingleShmSetup(errorList, MAX_LIST_SIZE, ERROR_LIST_SHM_ENV_VAR);
 	error_traced_shmId = SingleShmSetup(errorTraced, MAX_LIST_SIZE, ERROR_TRACED_SHM_ENV_VAR);
@@ -77,6 +101,12 @@ void ShmRemove(void) {
 	shmctl(control_matrix_shmid, IPC_RMID, NULL);
 	shmctl(adjacency_matrix_shmid, IPC_RMID, NULL);
 	shmctl(travel_matrix_shmid, IPC_RMID, NULL);
+	shmctl(global_state_shmid, IPC_RMID, NULL);
+	shmctl(variable_count_shmid, IPC_RMID, NULL);
+	shmctl(branch_trace_shmid, IPC_RMID, NULL);
+	shmctl(concurrent_function_shmid, IPC_RMID, NULL);
+	shmctl(tick_num_shmid, IPC_RMID, NULL);
+	shmctl(concurrent_mutex_shmid, IPC_RMID, NULL);
 }
 
 u8 *multi_proc_shm_create(string shm_file, int mem_size) {

@@ -18,6 +18,10 @@ u8 *variableStateChangeCount;
 u8 *branchTraceBit;
 u8 *virginMapForBranchTraceBit;
 
+u8 *concurrentFunctionCountVar;
+u8 *tickNum;
+pthread_mutex_t *concurrentFunctionMutex;
+
 bool isBranchCoverage = false;
 
 // TODO: optimize to module

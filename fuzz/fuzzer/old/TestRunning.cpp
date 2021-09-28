@@ -210,6 +210,8 @@ u8 ExecuteCase(string target_path, char **argv, u32 timeout)
     child_timed_out = false;
 
     *((u32 *)variableStateChangeCount) = 0;
+    *((u64 *)concurrentFunctionCountVar) = 0;
+    pthread_mutex_unlock(concurrentFunctionMutex);
     cout << "Execute !!" << endl;
     memset(globalTraceBit, 0, MAP_SIZE * sizeof(u8));
     memset(errorTraced, 0, MAX_LIST_SIZE * sizeof(u8));
