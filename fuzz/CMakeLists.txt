@@ -37,11 +37,13 @@ include_directories(include)
 # add_library(default_instrumentor instrumentor/default_instrumentor.cpp)
 # target_link_libraries(default_instrumentor ${LLVM_LIBS})
 
-add_executable(default_compiler compiler/compiler.cpp instrumentor/default_instrumentor.cpp instrumentor/process_concurrent_coverage_instrumentor.cpp)
+add_executable(default_compiler compiler/compiler.cpp instrumentor/default_instrumentor.cpp instrumentor/process_concurrent_coverage_instrumentor.cpp
+                instrumentor/process_tick_instrumentor.cpp)
 target_compile_definitions(default_compiler PUBLIC -DCLANG="clang-11")
 target_link_libraries(default_compiler ${LLVM_LIBS})
 
-add_executable(default_compiler++ compiler/compiler.cpp instrumentor/default_instrumentor.cpp instrumentor/process_concurrent_coverage_instrumentor.cpp)
+add_executable(default_compiler++ compiler/compiler.cpp instrumentor/default_instrumentor.cpp instrumentor/process_concurrent_coverage_instrumentor.cpp
+                instrumentor/process_tick_instrumentor.cpp)
 target_compile_definitions(default_compiler++ PUBLIC -DCLANG="clang++-11")
 target_link_libraries(default_compiler++ ${LLVM_LIBS})
 

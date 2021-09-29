@@ -34,6 +34,16 @@ static s32 concurrent_mutex_shmid;
 #define TICK_NUM_SHM_ENV_VAR "AFLCplusplus_TICK_NUM_SHMD_ID"
 static s32 tick_num_shmid;
 
+#define THREAD_ID_VEC_SIZE 20000u
+#define RAW_THREAD_ID_VEC_SHM_ENV_VAR "AFLCplusplus_RAW_THREAD_ID_VEC_SHMD_ID"
+static s32 raw_thread_id_vec_shmid;
+
+#define THREAD_ID_VEC_SHM_ENV_VAR "AFLCplusplus_THREAD_ID_VEC_SHMD_ID"
+static s32 thread_id_vec_shmid;
+
+#define THREAD_COUNT_SHM_ENV_VAR "AFLCplusplus_THREAD_COUNT_SHMD_ID"
+static s32 thread_count_shmid;
+
 static s32 SingleShmSetup(u8 *& mem_ptr, u32 mem_size, string env_var) {
 	s32 shm_id = shmget(IPC_PRIVATE, mem_size, IPC_CREAT|IPC_EXCL|0600);
 	if (shm_id < 0) {
@@ -65,7 +75,6 @@ void ShmSetup(void) {
 	branch_trace_shmid = SingleShmSetup(branchTraceBit, MAP_SIZE, BRANCH_TRACE_SHM_ENV_VAR);
 
 	concurrent_function_shmid = SingleShmSetup(concurrentFunctionCountVar, sizeof(u64), CONCURRENT_FUNCTION_SHM_ENV_VAR);
-	tick_num_shmid = SingleShmSetup(tickNum, sizeof(u64), TICK_NUM_SHM_ENV_VAR);
 	u8 *tmp;
 	concurrent_mutex_shmid = SingleShmSetup(tmp, sizeof(pthread_mutex_t), CONCURRENT_MUTEX_SHM_ENV_VAR);
 	concurrentFunctionMutex = (pthread_mutex_t *) tmp;
@@ -77,6 +86,16 @@ void ShmSetup(void) {
 		exit(-1);
 	}
 	pthread_mutex_init(concurrentFunctionMutex, &mat_l);
+
+	tick_num_shmid = SingleShmSetup(tickNum, sizeof(u64), TICK_NUM_SHM_ENV_VAR);
+	raw_thread_id_vec_shmid = SingleShmSetup(tmp, sizeof(u32) * THREAD_ID_VEC_SIZE, RAW_THREAD_ID_VEC_SHM_ENV_VAR);
+	raw_thread_id_vec = (u32 *)tmp;
+
+	thread_id_vec_shmid = SingleShmSetup(tmp, sizeof(u32) * THREAD_ID_VEC_SIZE, THREAD_ID_VEC_SHM_ENV_VAR);
+	thread_id_vec = (u32 *)tmp;
+
+	thread_count_shmid = SingleShmSetup(tmp, sizeof(u32), THREAD_COUNT_SHM_ENV_VAR);
+	thread_count = (u32 *)tmp;
 
 	// error_size_shmId = SingleShmSetup(errorMap, MAX_MAP_SIZE, ERROR_MAP_SHM_ENV_VAR);
 	error_list_shmId = SingleShmSetup(errorList, MAX_LIST_SIZE, ERROR_LIST_SHM_ENV_VAR);

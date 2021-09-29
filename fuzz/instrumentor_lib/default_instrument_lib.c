@@ -19,6 +19,10 @@
 #define BRANCH_TRACE_SHM_ENV_VAR "AFLCplusplus_BRANCH_TRACE_SHM_ID"
 #define CONCURRENT_FUNCTION_SHM_ENV_VAR "AFLCplusplus_CONCURRENT_FUNCTION_SHMD_ID"
 #define CONCURRENT_MUTEX_SHM_ENV_VAR "AFLCplusplus_CONCURRENT_MUTEX_SHMD_ID"
+#define TICK_NUM_SHM_ENV_VAR "AFLCplusplus_TICK_NUM_SHMD_ID"
+#define RAW_THREAD_ID_VEC_SHM_ENV_VAR "AFLCplusplus_RAW_THREAD_ID_VEC_SHMD_ID"
+#define THREAD_ID_VEC_SHM_ENV_VAR "AFLCplusplus_THREAD_ID_VEC_SHMD_ID"
+#define THREAD_COUNT_SHM_ENV_VAR "AFLCplusplus_THREAD_COUNT_SHMD_ID"
 
 #define FORSRV_FD 198
 
@@ -41,6 +45,13 @@ static u64 *concurrentFunctionCountVar;
 static u64 *tickNum;
 static pthread_mutex_t *concurrentFunctionMutex;
 
+static u32 *node_id_vec;
+static u32 *node_count;
+
+static u32 *raw_thread_id_vec; // the thread id from system
+static u32 *thread_id_vec;     // the thread id allocated by fuzzer
+static u32 *thread_count;
+
 static u8 shmEnable = 0;
 
 static u8 init_done = 0;
@@ -50,9 +61,45 @@ __thread u64 *call_stack;
 __thread u32 stack_top = 0;
 __thread u32 stack_size = 0;
 
-void tick(u32 curLoc)
+void ProcessTick(u32 curLoc)
 {
-    // pid_t x = syscall(__NR_gettid); // pid would change during each execution
+    if (init_done == 0)
+        return;
+
+    // printf("111\n");
+    if (shmEnable == 0)
+        return;
+    pid_t raw_thread_id = syscall(__NR_gettid); // pid would change during each execution
+    pthread_mutex_lock(concurrentFunctionMutex);
+    u8 is_new_thread = 1;
+    u32 thread_id;
+    for (u32 i = 0; i < *thread_count; i++)
+    {
+        if (raw_thread_id_vec[i] == raw_thread_id)
+        {
+            is_new_thread = 0;
+            thread_id = thread_id_vec[i];
+            break;
+        }
+    }
+
+    if (is_new_thread)
+    {
+        fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, *thread_count);
+
+        thread_id = *thread_count;
+        raw_thread_id_vec[*thread_count] = raw_thread_id;
+        thread_id_vec[*thread_count] = thread_id;
+        (*thread_count)++;
+        fprintf(stderr, "we have a new thread, raw_thread_id is %d, thread_id is %d\n", raw_thread_id, thread_id);
+    }
+    pthread_mutex_unlock(concurrentFunctionMutex);
+
+    (*tickNum)++;
+    fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, *thread_count);
+    while ((*tickNum) % (*thread_count) != thread_id)
+        ; // wait until we can continue
+    fprintf(stderr, "we are executing basic block %d\n", curLoc);
 }
 
 void FuncEnterRecord(u32 curLoc)
@@ -162,6 +209,10 @@ void ShmDeclare(void)
     char *res_shmBranch = getenv(BRANCH_TRACE_SHM_ENV_VAR);
     char *res_shmConcurrent = getenv(CONCURRENT_FUNCTION_SHM_ENV_VAR);
     char *res_shmMutex = getenv(CONCURRENT_MUTEX_SHM_ENV_VAR);
+    char *res_tickNum = getenv(TICK_NUM_SHM_ENV_VAR);
+    char *res_rawThreadIdVec = getenv(RAW_THREAD_ID_VEC_SHM_ENV_VAR);
+    char *res_threadIdVec = getenv(THREAD_ID_VEC_SHM_ENV_VAR);
+    char *res_threadCount = getenv(THREAD_COUNT_SHM_ENV_VAR);
 
     if (!res_shmCov || !res_shmBranch || !res_shmConcurrent || !res_shmMutex)
     {
@@ -189,6 +240,21 @@ void ShmDeclare(void)
 
         shmId = atoi(res_shmMutex);
         concurrentFunctionMutex = (pthread_mutex_t *)shmat((int)shmId, NULL, 0);
+
+        shmId = atoi(res_tickNum);
+        tickNum = (u64 *)shmat((int)shmId, NULL, 0);
+        *tickNum = 0;
+
+        shmId = atoi(res_rawThreadIdVec);
+        // raw_thread_id_vec = (u32 *)shmat((int)shmId, NULL, 0);
+        node_id_vec = (u32 *)shmat((int)shmId, NULL, 0);
+
+        shmId = atoi(res_threadIdVec);
+        thread_id_vec = (u32 *)shmat((int)shmId, NULL, 0);
+
+        shmId = atoi(res_threadCount);
+        // thread_count = (u32 *)shmat((int)shmId, NULL, 0);
+        node_count = (u32 *)shmat((int)shmId, NULL, 0);
 
         shmEnable = 1;
         printf("shmEnabled!\n");
@@ -273,6 +339,10 @@ void __attribute__((constructor)) __init_share_memory__(void)
     if (!init_done)
     {
         ShmDeclare();
+        pthread_mutex_lock(concurrentFunctionMutex);
+        node_id_vec[*node_count] = atoi(getenv("NODE_ID"));
+        (*node_count)++;
+        pthread_mutex_unlock(concurrentFunctionMutex);
         init_done = 1;
     }
     printf("init_in_main success!\n");

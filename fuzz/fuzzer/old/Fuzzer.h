@@ -146,6 +146,10 @@ extern u8 *concurrentFunctionCountVar;
 extern u8 *tickNum;
 extern pthread_mutex_t *concurrentFunctionMutex;
 
+extern u32 *raw_thread_id_vec;
+extern u32 *thread_id_vec;
+extern u32 *thread_count;
+
 extern bool isBranchCoverage;
 
 extern bitset<MAP_SIZE> timeoutTrace;
