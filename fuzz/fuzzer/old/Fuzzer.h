@@ -144,11 +144,11 @@ extern u8 *virginMapForBranchTraceBit;
 
 extern u8 *concurrentFunctionCountVar;
 extern u8 *tickNum;
-extern pthread_mutex_t *concurrentFunctionMutex;
+extern pthread_mutex_t *multiProcessMutex;
 
-extern u32 *raw_thread_id_vec;
-extern u32 *thread_id_vec;
-extern u32 *thread_count;
+// extern u32 *raw_thread_id_vec;
+// extern u32 *thread_id_vec;
+// extern u32 *thread_count;
 
 extern bool isBranchCoverage;
 

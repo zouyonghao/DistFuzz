@@ -43,14 +43,17 @@ static u8 *trace; // share memory
 static u8 *branchTraceBit;
 static u64 *concurrentFunctionCountVar;
 static u64 *tickNum;
-static pthread_mutex_t *concurrentFunctionMutex;
+static pthread_mutex_t *multiProcessMutex;
+static pthread_mutex_t singleProcessMutex = PTHREAD_MUTEX_INITIALIZER;
+static u64 threadTickNum = 0;
+static u32 node_id;
 
 static u32 *node_id_vec;
-static u32 *node_count;
+static u32 node_count = 3;
 
-static u32 *raw_thread_id_vec; // the thread id from system
-static u32 *thread_id_vec;     // the thread id allocated by fuzzer
-static u32 *thread_count;
+static u32 raw_thread_id_vec[1000]; // the thread id from system
+static u32 thread_id_vec[1000];     // the thread id allocated by fuzzer
+static u32 thread_count = 0;
 
 static u8 shmEnable = 0;
 
@@ -69,11 +72,21 @@ void ProcessTick(u32 curLoc)
     // printf("111\n");
     if (shmEnable == 0)
         return;
+
+    pthread_mutex_lock(multiProcessMutex);
+    (*tickNum)++;
+    pthread_mutex_unlock(multiProcessMutex);
+    // TODO: what should we do if a node dies?
+    fprintf(stderr, "we are executing basic block %d, node_id is %d, node_count is %d\n", curLoc, node_id, node_count);
+    while ((*tickNum) % (node_count) != node_id)
+        ; // wait until we can continue
+    // fprintf(stderr, "we are executing basic block %d\n", curLoc);
+
     pid_t raw_thread_id = syscall(__NR_gettid); // pid would change during each execution
-    pthread_mutex_lock(concurrentFunctionMutex);
+    pthread_mutex_lock(&singleProcessMutex);
     u8 is_new_thread = 1;
     u32 thread_id;
-    for (u32 i = 0; i < *thread_count; i++)
+    for (u32 i = 0; i < thread_count; i++)
     {
         if (raw_thread_id_vec[i] == raw_thread_id)
         {
@@ -83,23 +96,26 @@ void ProcessTick(u32 curLoc)
         }
     }
 
-    if (is_new_thread)
+    if (is_new_thread) // TODO: instrument pthread_create call here!
     {
-        fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, *thread_count);
+        // fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, thread_count);
 
-        thread_id = *thread_count;
-        raw_thread_id_vec[*thread_count] = raw_thread_id;
-        thread_id_vec[*thread_count] = thread_id;
-        (*thread_count)++;
-        fprintf(stderr, "we have a new thread, raw_thread_id is %d, thread_id is %d\n", raw_thread_id, thread_id);
+        thread_id = thread_count;
+        raw_thread_id_vec[thread_count] = raw_thread_id;
+        thread_id_vec[thread_count] = thread_id;
+        thread_count++;
+        fprintf(stderr, "we have a new thread, thread_id is %d\n", thread_id);
     }
-    pthread_mutex_unlock(concurrentFunctionMutex);
-
-    (*tickNum)++;
-    fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, *thread_count);
-    while ((*tickNum) % (*thread_count) != thread_id)
-        ; // wait until we can continue
-    fprintf(stderr, "we are executing basic block %d\n", curLoc);
+    // let a new thread execute first
+    else
+    {
+        threadTickNum++;
+        // TODO: what should we do if a thread dies?
+        while (threadTickNum % (thread_count) != thread_id)
+            ; // wait until we can continue
+    }
+    pthread_mutex_unlock(&singleProcessMutex);
+    fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, thread_count);
 }
 
 void FuncEnterRecord(u32 curLoc)
@@ -109,7 +125,7 @@ void FuncEnterRecord(u32 curLoc)
     // printf("111\n");
     if (shmEnable == 0)
         return;
-    pthread_mutex_lock(concurrentFunctionMutex);
+    pthread_mutex_lock(multiProcessMutex);
     if (stack_size == 0)
     {
         call_stack = (u64 *)calloc(INIT_STACK_SIZE, sizeof(u64));
@@ -134,7 +150,7 @@ void FuncEnterRecord(u32 curLoc)
     }
     (*concurrentFunctionCountVar) += curLoc;
     call_stack[stack_top++] = curLoc;
-    pthread_mutex_unlock(concurrentFunctionMutex);
+    pthread_mutex_unlock(multiProcessMutex);
 }
 
 void FuncExitRecord(u32 curLoc)
@@ -149,7 +165,7 @@ void FuncExitRecord(u32 curLoc)
         fprintf(stderr, "call_stack is NULL!\n");
     }
 
-    pthread_mutex_lock(concurrentFunctionMutex);
+    pthread_mutex_lock(multiProcessMutex);
     if (stack_top > 0)
     {
         while (stack_top > 0 && curLoc != call_stack[stack_top - 1])
@@ -181,7 +197,7 @@ void FuncExitRecord(u32 curLoc)
     {
         fprintf(stderr, "A thread called func exit without enter a func! %d\n", curLoc);
     }
-    pthread_mutex_unlock(concurrentFunctionMutex);
+    pthread_mutex_unlock(multiProcessMutex);
 }
 
 void CoverageRecord(u32 curLoc)
@@ -210,9 +226,9 @@ void ShmDeclare(void)
     char *res_shmConcurrent = getenv(CONCURRENT_FUNCTION_SHM_ENV_VAR);
     char *res_shmMutex = getenv(CONCURRENT_MUTEX_SHM_ENV_VAR);
     char *res_tickNum = getenv(TICK_NUM_SHM_ENV_VAR);
-    char *res_rawThreadIdVec = getenv(RAW_THREAD_ID_VEC_SHM_ENV_VAR);
-    char *res_threadIdVec = getenv(THREAD_ID_VEC_SHM_ENV_VAR);
-    char *res_threadCount = getenv(THREAD_COUNT_SHM_ENV_VAR);
+    // char *res_rawThreadIdVec = getenv(RAW_THREAD_ID_VEC_SHM_ENV_VAR);
+    // char *res_threadIdVec = getenv(THREAD_ID_VEC_SHM_ENV_VAR);
+    // char *res_threadCount = getenv(THREAD_COUNT_SHM_ENV_VAR);
 
     if (!res_shmCov || !res_shmBranch || !res_shmConcurrent || !res_shmMutex)
     {
@@ -223,8 +239,8 @@ void ShmDeclare(void)
         trace = (u8 *)malloc(MAP_SIZE * sizeof(u8));
         branchTraceBit = (u8 *)malloc(MAP_SIZE * sizeof(u8));
         concurrentFunctionCountVar = (u64 *)malloc(sizeof(u64));
-        concurrentFunctionMutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-        pthread_mutex_init(concurrentFunctionMutex, NULL);
+        multiProcessMutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+        pthread_mutex_init(multiProcessMutex, NULL);
     }
     else
     {
@@ -239,22 +255,22 @@ void ShmDeclare(void)
         *concurrentFunctionCountVar = 0;
 
         shmId = atoi(res_shmMutex);
-        concurrentFunctionMutex = (pthread_mutex_t *)shmat((int)shmId, NULL, 0);
+        multiProcessMutex = (pthread_mutex_t *)shmat((int)shmId, NULL, 0);
 
         shmId = atoi(res_tickNum);
         tickNum = (u64 *)shmat((int)shmId, NULL, 0);
         *tickNum = 0;
 
-        shmId = atoi(res_rawThreadIdVec);
+        // shmId = atoi(res_rawThreadIdVec);
         // raw_thread_id_vec = (u32 *)shmat((int)shmId, NULL, 0);
-        node_id_vec = (u32 *)shmat((int)shmId, NULL, 0);
+        // node_id_vec = (u32 *)shmat((int)shmId, NULL, 0);
 
-        shmId = atoi(res_threadIdVec);
-        thread_id_vec = (u32 *)shmat((int)shmId, NULL, 0);
+        // shmId = atoi(res_threadIdVec);
+        // thread_id_vec = (u32 *)shmat((int)shmId, NULL, 0);
 
-        shmId = atoi(res_threadCount);
+        // shmId = atoi(res_threadCount);
         // thread_count = (u32 *)shmat((int)shmId, NULL, 0);
-        node_count = (u32 *)shmat((int)shmId, NULL, 0);
+        // node_count = (u32 *)shmat((int)shmId, NULL, 0);
 
         shmEnable = 1;
         printf("shmEnabled!\n");
@@ -339,10 +355,11 @@ void __attribute__((constructor)) __init_share_memory__(void)
     if (!init_done)
     {
         ShmDeclare();
-        pthread_mutex_lock(concurrentFunctionMutex);
-        node_id_vec[*node_count] = atoi(getenv("NODE_ID"));
-        (*node_count)++;
-        pthread_mutex_unlock(concurrentFunctionMutex);
+        pthread_mutex_lock(multiProcessMutex);
+        node_id = atoi(getenv("NODE_ID"));
+        // node_id_vec[*node_count] = node_id;
+        // (*node_count)++;
+        pthread_mutex_unlock(multiProcessMutex);
         init_done = 1;
     }
     printf("init_in_main success!\n");

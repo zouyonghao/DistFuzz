@@ -20,11 +20,11 @@ u8 *virginMapForBranchTraceBit;
 
 u8 *concurrentFunctionCountVar;
 u8 *tickNum;
-pthread_mutex_t *concurrentFunctionMutex;
+pthread_mutex_t *multiProcessMutex;
 
-u32 *raw_thread_id_vec;
-u32 *thread_id_vec;
-u32 *thread_count;
+// u32 *raw_thread_id_vec;
+// u32 *thread_id_vec;
+// u32 *thread_count;
 
 bool isBranchCoverage = false;
 

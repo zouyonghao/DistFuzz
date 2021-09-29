@@ -155,6 +155,20 @@ public:
                         insert_exit_function_points.push_back(ri);
                         // llvm::errs() << "we have function enter!\n";
                     }
+
+                    llvm::CallInst *ci = llvm::dyn_cast<llvm::CallInst>(inst);
+                    if (ci != nullptr)
+                    {
+                        llvm::Function *called = ci->getCalledFunction();
+                        if (called == nullptr)
+                            continue;
+
+                        if ("pthread_exit" == called->getName().str())
+                        {
+                            llvm::errs() << "we have pthread_exit inst!\n";
+                            insert_exit_function_points.push_back(ri);
+                        }
+                    }
                 }
             }
 
