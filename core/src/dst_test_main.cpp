@@ -25,17 +25,16 @@ void run_init_operator()
 void run_some_normal_operators(int number)
 {
     size_t operator_size = Registry<NormalOperator>::getItemVector().size();
-    std::cout << "normal operator_size = " << operator_size << "\n";
+    std::cerr << "normal operator_size = " << operator_size << "\n";
     for (int i = 0; i < number && operator_size > 0; i++)
     {
         // std::this_thread::sleep_for(1s);
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
         std::cout << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
-        // std::thread t1([index]() {
-        //     Registry<NormalOperator>::getItemVector()[index].second->_do();
-        // });
+        std::thread t1([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); });
 
-        threads.push_back(std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); }));
+        // threads.push_back(std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do();
+        // }));
 
 #ifndef NO_CONCURRENCY
 
@@ -45,19 +44,17 @@ void run_some_normal_operators(int number)
             // run another operation
             index = __dst_get_random_uint8_t() % operator_size;
             std::cout << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
-            // std::thread t2([index]() {
-            //     Registry<NormalOperator>::getItemVector()[index].second->_do();
-            // });
+            std::thread t2([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); });
 
-            threads.push_back(
-                std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); }));
-            // t2.join();
+            // threads.push_back(
+            //     std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); }));
+            t2.join();
         }
 
 #endif // NO_CONCURRENCY
-        //    t1.join();
+        t1.join();
     }
-    std::this_thread::sleep_for(std::chrono::seconds(3));
+    // std::this_thread::sleep_for(std::chrono::seconds(3));
 }
 
 void split_files(std::string initial_file)
@@ -109,38 +106,34 @@ int main(int argc, char const *argv[])
     itest_case_count_file.close();
     split_files(argv[1]);
 
-    std::cout << "\033[1;31mrunning test case " << test_case_count << "\033[0m\n";
-
-    std::cout << "start nodes and proxies\n";
+    std::cerr << "\033[1;31mrunning test case " << test_case_count << "\033[0m\n";
+    std::cerr << "start nodes....\n";
     system("./run_fuzz_server.sh");
 
-    // std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
+    std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
     run_init_operator();
-
-    run_some_normal_operators(5);
+    run_some_normal_operators(2);
 
     size_t operator_size = Registry<CriticalOperator>::getItemVector().size();
     std::cout << "operator_size = " << operator_size << "\n";
-    for (int i = 0; i < 5 && operator_size > 0; i++)
+    for (int i = 0; i < 2 && operator_size > 0; i++)
     {
         std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
         std::cout << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
-        std::thread t1([index]() { Registry<CriticalOperator>::getItemVector()[index].second->_do(); });
-        run_some_normal_operators(5);
-        t1.join();
+        Registry<CriticalOperator>::getItemVector()[index].second->_do();
+        run_some_normal_operators(2);
     }
 
     // let it run a while
     std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
     // TODO: check server availability
-
-    std::cout << "stopping...\n";
+    std::cerr << "stopping...\n";
     system("./stop.sh");
 
-    run_some_normal_operators(5);
+    run_some_normal_operators(2);
 
     dst_clear_kv_all();
 

@@ -5,7 +5,7 @@ static const std::string ATOMIC_TEST =
 static const std::string ATOMIC_CONF =
     "127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0,";
 static const std::string UNFINISHED_COMMAND =
-    "timeout 3 " + ATOMIC_TEST + " -conf=" + ATOMIC_CONF + " -atomic_op=";
+    "timeout 2 " + ATOMIC_TEST + " -conf=" + ATOMIC_CONF + " -atomic_op=";
 // static const std::string UNFINISHED_COMMAND =
 //     ATOMIC_TEST + " -conf=" + ATOMIC_CONF + " -atomic_op=";
 

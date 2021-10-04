@@ -46,7 +46,7 @@ static u64 *tickNum;
 static pthread_mutex_t *multiProcessMutex;
 static pthread_mutex_t singleProcessMutex = PTHREAD_MUTEX_INITIALIZER;
 static u32 threadTickNum = 0;
-static u32 node_id;
+static int32_t node_id = -1;
 
 static u32 *node_id_vec;
 static u32 node_count = 3;
@@ -174,6 +174,10 @@ void ProcessTick(u32 curLoc)
 
 void FuncSequenceRecord(u32 curLoc)
 {
+    if (node_id < 0)
+    {
+        return;
+    }
     curLoc += node_id;
     if (init_done == 0)
         return;
@@ -439,8 +443,11 @@ void __attribute__((constructor)) __init_share_memory__(void)
     {
         ShmDeclare();
         pthread_mutex_lock(multiProcessMutex);
-        node_id = atoi(getenv("NODE_ID"));
-        fprintf(stderr, "node_id is : %u\n", node_id);
+        if (getenv("NODE_ID") != NULL)
+        {
+            node_id = atoi(getenv("NODE_ID"));
+            fprintf(stderr, "node_id is : %u\n", node_id);
+        }
         // node_id_vec[*node_count] = node_id;
         // (*node_count)++;
         pthread_mutex_unlock(multiProcessMutex);
