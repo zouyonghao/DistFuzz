@@ -172,7 +172,7 @@ void ProcessTick(u32 curLoc)
     // fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, thread_count);
 }
 
-void FuncEnterRecordSequence(u32 curLoc)
+void FuncSequenceRecord(u32 curLoc)
 {
     curLoc += node_id;
     if (init_done == 0)
@@ -180,13 +180,24 @@ void FuncEnterRecordSequence(u32 curLoc)
     // printf("111\n");
     if (shmEnable == 0)
         return;
+    // TODO: remove the lock by async the operations
     pthread_mutex_lock(multiProcessMutex);
+    // // NOTE: This is not the sequence coverage, this is the coverage of
+    // // jumping between different node function
+    // u64 index = ((*concurrentFunctionCountVar) ^ curLoc) % MAP_SIZE;
+    // if (branchTraceBit[index] < 255)
+    // {
+    //     branchTraceBit[index]++;
+    // }
+    // (*concurrentFunctionCountVar) = curLoc >> 1;
+    //
+
     u64 index = ((*concurrentFunctionCountVar) ^ curLoc) % MAP_SIZE;
     if (branchTraceBit[index] < 255)
     {
         branchTraceBit[index]++;
     }
-    (*concurrentFunctionCountVar) = curLoc >> 1;
+    (*concurrentFunctionCountVar) = ((*concurrentFunctionCountVar) ^ curLoc) >> 1;
     pthread_mutex_unlock(multiProcessMutex);
 }
 
