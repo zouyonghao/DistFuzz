@@ -45,14 +45,14 @@ static u64 *concurrentFunctionCountVar;
 static u64 *tickNum;
 static pthread_mutex_t *multiProcessMutex;
 static pthread_mutex_t singleProcessMutex = PTHREAD_MUTEX_INITIALIZER;
-static u64 threadTickNum = 0;
+static u32 threadTickNum = 0;
 static u32 node_id;
 
 static u32 *node_id_vec;
 static u32 node_count = 3;
 
-static u32 raw_thread_id_vec[1000]; // the thread id from system
-static u32 thread_id_vec[1000];     // the thread id allocated by fuzzer
+static u64 raw_thread_id_vec[1000] = {0u}; // the thread id from system
+// static u32 thread_id_vec[1000];           // the thread id allocated by fuzzer
 static u32 thread_count = 0;
 
 static u8 shmEnable = 0;
@@ -64,6 +64,23 @@ __thread u64 *call_stack;
 __thread u32 stack_top = 0;
 __thread u32 stack_size = 0;
 
+__thread u8 is_new_thread = 1;
+
+u32 thread_exists(pthread_t thread_id)
+{
+    char path[100];
+    FILE *fp;
+    sprintf(path, "/proc/%d/task/%lu/comm", getpid(), thread_id);
+    fp = fopen(path, "r");
+    if (fp != NULL)
+    {
+        fclose(fp);
+        return 1;
+    }
+    fprintf(stderr, "thread %ld dose not exist now.\n", thread_id);
+    return 0;
+}
+
 void ProcessTick(u32 curLoc)
 {
     if (init_done == 0)
@@ -73,49 +90,104 @@ void ProcessTick(u32 curLoc)
     if (shmEnable == 0)
         return;
 
+    u64 raw_thread_id = syscall(__NR_gettid); // pid would change during each execution
+
     pthread_mutex_lock(multiProcessMutex);
     (*tickNum)++;
     pthread_mutex_unlock(multiProcessMutex);
     // TODO: what should we do if a node dies?
-    fprintf(stderr, "we are executing basic block %d, node_id is %d, node_count is %d\n", curLoc, node_id, node_count);
-    while ((*tickNum) % (node_count) != node_id)
-        ; // wait until we can continue
-    // fprintf(stderr, "we are executing basic block %d\n", curLoc);
-
-    pid_t raw_thread_id = syscall(__NR_gettid); // pid would change during each execution
-    pthread_mutex_lock(&singleProcessMutex);
-    u8 is_new_thread = 1;
-    u32 thread_id;
-    for (u32 i = 0; i < thread_count; i++)
+    // fprintf(stderr, "we are executing basic block %d, node_id is %d, node_count is %d\n", curLoc, node_id,
+    // node_count);
+    u64 wait_count = 0;
+    while ((*tickNum) % (node_count) != node_id) // wait until we can continue
     {
-        if (raw_thread_id_vec[i] == raw_thread_id)
+        wait_count++;
+        if (wait_count % 10000000u == 0)
         {
-            is_new_thread = 0;
-            thread_id = thread_id_vec[i];
-            break;
+            // fprintf(stderr, "we have wait for %ld cycles\n", wait_count);
+            // fprintf(stderr, "Threads: ");
+            // for (int i = 0; i < thread_count; i++)
+            // {
+            //     fprintf(stderr, "%u ", raw_thread_id_vec[i]);
+            // }
+            // fprintf(stderr, "thread %lu get stucked at %d\n", raw_thread_id, curLoc);
         }
+    }
+
+    // fprintf(stderr, "thread %lu is executing basic block %d\n", raw_thread_id, curLoc);
+    if (is_new_thread && !thread_exists(raw_thread_id))
+    {
+        fprintf(stderr, "we have a new thread %lu but thread_exists does not think so.\n", raw_thread_id);
+    }
+    // fprintf(stderr, "thread %lu try to get lock\n", raw_thread_id);
+    pthread_mutex_lock(&singleProcessMutex);
+    for (u32 i = 0; i < thread_count;)
+    {
+        if (!thread_exists(raw_thread_id_vec[i]))
+        {
+            thread_count--;
+            for (u32 j = i; j < thread_count; j++)
+            {
+                raw_thread_id_vec[j] = raw_thread_id_vec[j + 1];
+            }
+            fprintf(stderr, "thread %lu dose not exist now, current thread_cout is : %u\n", raw_thread_id_vec[i],
+                    thread_count);
+        }
+        else
+        {
+            i++;
+        }
+        // fprintf(stderr, "i = %d.\n", i);
     }
 
     if (is_new_thread) // TODO: instrument pthread_create call here!
     {
-        // fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, thread_count);
-
-        thread_id = thread_count;
         raw_thread_id_vec[thread_count] = raw_thread_id;
-        thread_id_vec[thread_count] = thread_id;
         thread_count++;
-        fprintf(stderr, "we have a new thread, thread_id is %d\n", thread_id);
+        is_new_thread = 0;
+        fprintf(stderr, "we have a new thread %lu.\n", raw_thread_id);
     }
-    // let a new thread execute first
-    else
-    {
-        threadTickNum++;
-        // TODO: what should we do if a thread dies?
-        while (threadTickNum % (thread_count) != thread_id)
-            ; // wait until we can continue
-    }
+
+    threadTickNum++;
     pthread_mutex_unlock(&singleProcessMutex);
-    fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, thread_count);
+    // fprintf(stderr, "thread %lu unlocked\n", raw_thread_id);
+    // TODO: what should we do if a thread dies?
+    wait_count = 0;
+    while (raw_thread_id_vec[threadTickNum % thread_count] != raw_thread_id)
+    {
+        // wait until we can continue
+        wait_count++;
+        if (wait_count % 10000000u == 0)
+        {
+            // fprintf(stderr, "we have wait for %ld cycles\n", wait_count);
+            // fprintf(stderr, "Threads: ");
+            // for (int i = 0; i < thread_count; i++)
+            // {
+            //     fprintf(stderr, "%u ", raw_thread_id_vec[i]);
+            // }
+            // fprintf(stderr, "thread %lu get stucked at %d\n", raw_thread_id, curLoc);
+        }
+        // usleep(0);
+    }
+    // fprintf(stderr, "we are executing basic block %d, thread_count is %d\n", curLoc, thread_count);
+}
+
+void FuncEnterRecordSequence(u32 curLoc)
+{
+    curLoc += node_id;
+    if (init_done == 0)
+        return;
+    // printf("111\n");
+    if (shmEnable == 0)
+        return;
+    pthread_mutex_lock(multiProcessMutex);
+    u64 index = ((*concurrentFunctionCountVar) ^ curLoc) % MAP_SIZE;
+    if (branchTraceBit[index] < 255)
+    {
+        branchTraceBit[index]++;
+    }
+    (*concurrentFunctionCountVar) = curLoc >> 1;
+    pthread_mutex_unlock(multiProcessMutex);
 }
 
 void FuncEnterRecord(u32 curLoc)
@@ -357,6 +429,7 @@ void __attribute__((constructor)) __init_share_memory__(void)
         ShmDeclare();
         pthread_mutex_lock(multiProcessMutex);
         node_id = atoi(getenv("NODE_ID"));
+        fprintf(stderr, "node_id is : %u\n", node_id);
         // node_id_vec[*node_count] = node_id;
         // (*node_count)++;
         pthread_mutex_unlock(multiProcessMutex);

@@ -3,15 +3,17 @@
 #include <llvm/IR/Instructions.h>
 
 static const std::string blacklist_functions[] = {"asan", "gnu", "cxx", "llvm", "clang", "sanitizer"};
-static const std::string whitelist_functions[] = {};
+static const std::string whitelist_functions[] = {
+    // "heartbeat",
+    "snapshot", "request"};
 static bool inject_function_exit = false;
 
-class ProcessConcurrentCoverageInstrumentor : public Instrumentor
+class ProcessFunctionSequenceCoverageInstrumentor : public Instrumentor
 {
 private:
 public:
-    ProcessConcurrentCoverageInstrumentor() : Instrumentor() {}
-    ~ProcessConcurrentCoverageInstrumentor();
+    ProcessFunctionSequenceCoverageInstrumentor() : Instrumentor() {}
+    ~ProcessFunctionSequenceCoverageInstrumentor();
 
     virtual std::vector<llvm::Instruction *> get_locations(llvm::Module *m) override
     {
@@ -31,10 +33,10 @@ public:
         llvm::FunctionType *FuncTy =
             llvm::FunctionType::get(llvm::Type::getVoidTy(m->getContext()), FuncTy_args, false);
 
-        llvm::Function *func = m->getFunction("FuncEnterRecord");
+        llvm::Function *func = m->getFunction("FuncEnterRecordSequence");
         if (!func)
         {
-            func = llvm::Function::Create(FuncTy, llvm::GlobalValue::ExternalLinkage, "FuncEnterRecord", m);
+            func = llvm::Function::Create(FuncTy, llvm::GlobalValue::ExternalLinkage, "FuncEnterRecordSequence", m);
             func->setCallingConv(llvm::CallingConv::C);
             llvm::AttributeList func_Add_PAL;
             func->setAttributes(func_Add_PAL);
@@ -43,27 +45,27 @@ public:
         return func;
     }
 
-    llvm::Function *get_func_exit_function(llvm::Module *m)
-    {
-        // Initialize paramater's type
-        llvm::IntegerType *Integer = llvm::IntegerType::get(m->getContext(), 32);
-        std::vector<llvm::Type *> FuncTy_args;
-        FuncTy_args.push_back(Integer);
-        // FuncTy_args.push_back(Integer);
-        llvm::FunctionType *FuncTy =
-            llvm::FunctionType::get(llvm::Type::getVoidTy(m->getContext()), FuncTy_args, false);
+    // llvm::Function *get_func_exit_function(llvm::Module *m)
+    // {
+    //     // Initialize paramater's type
+    //     llvm::IntegerType *Integer = llvm::IntegerType::get(m->getContext(), 32);
+    //     std::vector<llvm::Type *> FuncTy_args;
+    //     FuncTy_args.push_back(Integer);
+    //     // FuncTy_args.push_back(Integer);
+    //     llvm::FunctionType *FuncTy =
+    //         llvm::FunctionType::get(llvm::Type::getVoidTy(m->getContext()), FuncTy_args, false);
 
-        llvm::Function *func = m->getFunction("FuncExitRecord");
-        if (!func)
-        {
-            func = llvm::Function::Create(FuncTy, llvm::GlobalValue::ExternalLinkage, "FuncExitRecord", m);
-            func->setCallingConv(llvm::CallingConv::C);
-            llvm::AttributeList func_Add_PAL;
-            func->setAttributes(func_Add_PAL);
-        }
+    //     llvm::Function *func = m->getFunction("FuncExitRecord");
+    //     if (!func)
+    //     {
+    //         func = llvm::Function::Create(FuncTy, llvm::GlobalValue::ExternalLinkage, "FuncExitRecord", m);
+    //         func->setCallingConv(llvm::CallingConv::C);
+    //         llvm::AttributeList func_Add_PAL;
+    //         func->setAttributes(func_Add_PAL);
+    //     }
 
-        return func;
-    }
+    //     return func;
+    // }
 
     void insert_entry_function(std::vector<llvm::Instruction *> &insert_entry_function_points, unsigned int rand_num,
                                llvm::Module *m)
@@ -82,22 +84,22 @@ public:
         }
     }
 
-    void insert_exit_function(std::vector<llvm::Instruction *> &insert_exit_function_points, unsigned int rand_num,
-                              llvm::Module *m)
-    {
-        for (llvm::Instruction *ri : insert_exit_function_points)
-        {
-            auto exit_function = get_func_exit_function(m);
-            llvm::ConstantInt *rand_int = llvm::ConstantInt::get(m->getContext(), llvm::APInt(32, rand_num));
-            // Prepare parameters for MyCovCal
-            std::vector<llvm::Value *> parameters;
-            parameters.push_back(rand_int);
+    // void insert_exit_function(std::vector<llvm::Instruction *> &insert_exit_function_points, unsigned int rand_num,
+    //                           llvm::Module *m)
+    // {
+    //     for (llvm::Instruction *ri : insert_exit_function_points)
+    //     {
+    //         auto exit_function = get_func_exit_function(m);
+    //         llvm::ConstantInt *rand_int = llvm::ConstantInt::get(m->getContext(), llvm::APInt(32, rand_num));
+    //         // Prepare parameters for MyCovCal
+    //         std::vector<llvm::Value *> parameters;
+    //         parameters.push_back(rand_int);
 
-            llvm::CallInst *mycall = llvm::CallInst::Create(exit_function, parameters, "", ri);
-            mycall->setCallingConv(llvm::CallingConv::C);
-            mycall->setTailCall(false);
-        }
-    }
+    //         llvm::CallInst *mycall = llvm::CallInst::Create(exit_function, parameters, "", ri);
+    //         mycall->setCallingConv(llvm::CallingConv::C);
+    //         mycall->setTailCall(false);
+    //     }
+    // }
 
     virtual void do_instrument(llvm::Module *m) override
     {
@@ -123,7 +125,7 @@ public:
                     break;
                 }
             }
-            if (!whitelist_functions->empty() && !is_in_whitelist)
+            if (!is_in_whitelist)
             {
                 continue;
             }
@@ -194,16 +196,19 @@ public:
                 llvm::errs() << "we do not have entry in function " << func_i.getName() << "!\n";
                 exit(-1);
             }
-            if (!has_exit)
-            {
-                llvm::errs() << "we do not have ret in function " << func_i.getName() << "!\n";
-                continue;
-            }
+            // if (!has_exit)
+            // {
+            //     llvm::errs() << "we do not have ret in function " << func_i.getName() << "!\n";
+            //     continue;
+            // }
             unsigned int rand_num = rand();
             insert_entry_function(insert_entry_function_points, rand_num, m);
-            insert_exit_function(insert_exit_function_points, rand_num, m);
+            // if (inject_function_exit)
+            // {
+            //     insert_exit_function(insert_exit_function_points, rand_num, m);
+            // }
         }
     }
 };
 
-REGISTER_INSTRUMENTOR(ProcessConcurrentCoverageInstrumentor, new ProcessConcurrentCoverageInstrumentor());
+REGISTER_INSTRUMENTOR(ProcessFunctionSequenceCoverageInstrumentor, new ProcessFunctionSequenceCoverageInstrumentor());
