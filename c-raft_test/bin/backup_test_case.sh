@@ -27,6 +27,10 @@ mv operation_log ./test_cases/$1
     #     echo "Check raft log failed!"
     elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/log[0-2]; then
         echo "Find ASan errors!"
+	if grep -q "0x81c9b" ./test_cases/$1/log[0-2]; then
+		echo "Find a duplicated case"
+		rm -rf ./test_cases/$1
+	fi
     # elif grep -q true ./test_cases/$1/check_log; then
     #     echo "No errors, deleting logs..."
     #     rm -rf ./test_cases/$1
