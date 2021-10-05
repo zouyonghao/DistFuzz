@@ -13,10 +13,13 @@ sudo apt-get install \
     libleveldb-dev \
     autoconf \
     libbsd-dev \
+    libnet-dev \
+    psmisc \
     libprotobuf-dev libprotobuf-c-dev protobuf-c-compiler protobuf-compiler python3-protobuf python3-future libnl-3-dev libcap-dev \
     lsb-release wget software-properties-common \
     redis -y > /dev/null && echo "apt-get dependencies success!"
 
+cd
 # install aerospike client
 if ls /usr/include/aerospike > /dev/null; then
     echo "aerospike client is installed, skip."
@@ -38,7 +41,7 @@ else
     wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
     sudo mv lein /usr/bin/
     sudo chmod +x /usr/bin/lein
-    sudo apt install default-jdk
+    sudo apt install default-jdk -y > /dev/null
     echo "install lein success!"
 fi
 
