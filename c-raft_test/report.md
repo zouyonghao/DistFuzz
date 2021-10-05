@@ -10,6 +10,8 @@
 
     https://github.com/canonical/raft/issues/199
 
+    fixed.
+
 2. AddressSanitizer:DEADLYSIGNAL
     ```
     AddressSanitizer:DEADLYSIGNAL
@@ -58,4 +60,70 @@
 
     SUMMARY: AddressSanitizer: bad-free (/home/zyh/raft/example/server+0x4934fd)
     ==24124==ABORTING
+    ```
+
+    https://github.com/canonical/raft/issues/219
+
+    fixed.
+
+4. heap-buffer-overflow
+
+    ```
+    =================================================================
+    ==11599==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000000250 at pc 0x7f553b99a8e3 bp 0x7ffcf8dee520 sp 0x7ffcf8dee518
+    READ of size 8 at 0x602000000250 thread T0
+        #0 0x7f553b99a8e2  (/home/zyh/raft/.libs/libraft.so.0+0x808e2) byte.h:133
+        #1 0x7f553b99bc9b  (/home/zyh/raft/.libs/libraft.so.0+0x81c9b) uv_encoding.c:390
+        #2 0x7f553b99ad61  (/home/zyh/raft/.libs/libraft.so.0+0x80d61) uv_encoding.c:477
+        #3 0x7f553b9b438e  (/home/zyh/raft/.libs/libraft.so.0+0x9a38e) uv_recv:260
+        #4 0x7f553c4475ce  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0x155ce)
+        #5 0x7f553c44833b  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0x1633b)
+        #6 0x7f553c44d33f  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0x1b33f)
+        #7 0x7f553c43dcc7  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0xbcc7)
+        #8 0x4c6542  (/home/zyh/raft/example/server+0x4c6542) example/server.c:473
+        #9 0x7f553ab6bbf6  (/lib/x86_64-linux-gnu/libc.so.6+0x21bf6)
+        #10 0x41bfe9  (/home/zyh/raft/example/server+0x41bfe9)
+
+    0x602000000252 is located 0 bytes to the right of 2-byte region [0x602000000250,0x602000000252)
+    allocated by thread T0 here:
+        #0 0x49605d  (/home/zyh/raft/example/server+0x49605d)
+        #1 0x7f553b94daf4  (/home/zyh/raft/.libs/libraft.so.0+0x33af4) heap.c:10
+        #2 0x7f553b94d4fa  (/home/zyh/raft/.libs/libraft.so.0+0x334fa) heap.c:57
+        #3 0x7f553b9b36b5  (/home/zyh/raft/.libs/libraft.so.0+0x996b5) uv_recv.c:144
+        #4 0x7f553c4474a7  (/usr/lib/x86_64-linux-gnu/libuv.so.1+0x154a7)
+
+    SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/zyh/raft/.libs/libraft.so.0+0x808e2)
+    Shadow bytes around the buggy address:
+    0x0c047fff7ff0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0x0c047fff8000: fa fa fd fd fa fa 00 fa fa fa 00 07 fa fa fd fd
+    0x0c047fff8010: fa fa fd fd fa fa fd fd fa fa 00 07 fa fa 00 07
+    0x0c047fff8020: fa fa 00 07 fa fa 03 fa fa fa fd fd fa fa fd fd
+    0x0c047fff8030: fa fa 00 07 fa fa fd fd fa fa fd fd fa fa 00 07
+    =>0x0c047fff8040: fa fa fd fd fa fa 00 07 fa fa[02]fa fa fa fa fa
+    0x0c047fff8050: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+    0x0c047fff8060: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+    0x0c047fff8070: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+    0x0c047fff8080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+    0x0c047fff8090: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+    Shadow byte legend (one shadow byte represents 8 application bytes):
+    Addressable:           00
+    Partially addressable: 01 02 03 04 05 06 07
+    Heap left redzone:       fa
+    Freed heap region:       fd
+    Stack left redzone:      f1
+    Stack mid redzone:       f2
+    Stack right redzone:     f3
+    Stack after return:      f5
+    Stack use after scope:   f8
+    Global redzone:          f9
+    Global init order:       f6
+    Poisoned by user:        f7
+    Container overflow:      fc
+    Array cookie:            ac
+    Intra object redzone:    bb
+    ASan internal:           fe
+    Left alloca redzone:     ca
+    Right alloca redzone:    cb
+    Shadow gap:              cc
+    ==11599==ABORTING
     ```
