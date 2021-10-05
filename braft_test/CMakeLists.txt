@@ -22,7 +22,7 @@ file(GLOB BRAFT_TEST_MAIN_SRC
 
 add_executable(braft_test_main ${BRAFT_TEST_MAIN_SRC})
 target_link_libraries(braft_test_main dst_default_operator dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
-
+target_compile_options(braft_test_main PUBLIC -DNO_CONCURRENCY)
 
 add_executable(braft_operator_test ${BRAFT_TEST_OPERATORS_SRC})
 target_link_libraries(braft_operator_test dst_default_operator dst_random dst_default_kv dst_event ${Boost_LIBRARIES})

@@ -1,6 +1,6 @@
 
 ./start_event_control.sh
-./start_proxy_server.sh
+# ./start_proxy_server.sh
 
 mkdir -p run/log
 mkdir -p run/work1/smd

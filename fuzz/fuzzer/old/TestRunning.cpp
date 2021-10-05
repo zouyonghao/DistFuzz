@@ -210,6 +210,10 @@ u8 ExecuteCase(string target_path, char **argv, u32 timeout)
     child_timed_out = false;
 
     *((u32 *)variableStateChangeCount) = 0;
+    *((u64 *)concurrentFunctionCountVar) = 0;
+    // *((u32 *)thread_count) = 0;
+    *((u64 *)tickNum) = 0;
+    pthread_mutex_unlock(multiProcessMutex);
     cout << "Execute !!" << endl;
     memset(globalTraceBit, 0, MAP_SIZE * sizeof(u8));
     memset(errorTraced, 0, MAX_LIST_SIZE * sizeof(u8));
@@ -795,7 +799,11 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
     // cout << CountBytes(globalTraceBit) << endl;
     if (isBranchCoverage)
     {
-        newBitFlag = branchBitFlag;
+        if (!newBitFlag)
+        {
+            newBitFlag |= branchBitFlag;
+        }
+        // newBitFlag = branchBitFlag;
     }
     // printf("newBitFlag %d\n", newBitFlag);
 #ifndef NO_CONCURRENCY_FUZZ

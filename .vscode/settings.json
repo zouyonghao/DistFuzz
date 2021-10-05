@@ -1,5 +1,8 @@
 {
     "files.associations": {
+        "log1": "plaintext",
+        "log0": "plaintext",
+        "log2": "plaintext",
         "thread": "cpp",
         "mutex": "cpp",
         "iosfwd": "cpp",
@@ -96,7 +99,9 @@
         "stack": "cpp",
         "semaphore.h": "c",
         "pthread.h": "c",
-        "types.h": "c"
+        "types.h": "c",
+        "constants.h": "c",
+        "*.def": "cpp"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
@@ -106,6 +111,7 @@
         "**/.hg/store/**": true,
         "**/bin/test_cases/*/**": true,
         "clickhouse_test/bin": true,
+        "**/braft_test/bin/**": true,
         "**/data*": true
     },
     "cmake.configureOnOpen": false

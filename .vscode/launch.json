@@ -118,9 +118,9 @@
                 "-M",
                 "fuzzer1",
                 "-f",
-                "random.txt",
-                "../../build/braft_test/braft_test_main",
-                "random.txt"
+                "init_random.txt",
+                "/bin/bash",
+                "${workspaceFolder}/braft_test/bin/run_test.sh"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/braft_test/bin",

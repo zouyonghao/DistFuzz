@@ -28,6 +28,8 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+#include <pthread.h>
+
 #include "constants.h"
 
 using namespace std;
@@ -123,6 +125,7 @@ typedef struct matrix_element
 } matrix_element;
 
 #ifndef __MAIN__
+#define __MAIN__
 extern seed_container queue;
 extern seed_container::iterator queueCur;
 extern seed_container::iterator queueTop[MAP_SIZE];
@@ -138,6 +141,14 @@ extern u8 *globalStateBit;
 extern u8 *variableStateChangeCount;
 extern u8 *branchTraceBit;
 extern u8 *virginMapForBranchTraceBit;
+
+extern u8 *concurrentFunctionCountVar;
+extern u8 *tickNum;
+extern pthread_mutex_t *multiProcessMutex;
+
+// extern u32 *raw_thread_id_vec;
+// extern u32 *thread_id_vec;
+// extern u32 *thread_count;
 
 extern bool isBranchCoverage;
 
@@ -215,7 +226,7 @@ extern set<u64> unreachable_control_matrix;
 extern int concurrency_test_time;
 extern int skip_since_travel;
 extern int skip_since_unreachable;
-#endif
+#endif // end __MAIN__
 
 // in Main.cpp
 

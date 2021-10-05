@@ -1,0 +1,28 @@
+{
+    "file_blacklist":[],
+    "instrumentors": [
+        "ProcessConcurrentCoverageInstrumentor",
+        "DefaultInstrumentor"
+    ],
+    "additional_link_args": [
+        "/home/zyh/distributed-system-test/build/fuzz/CMakeFiles/default_instrument_lib.dir/instrumentor_lib/default_instrument_lib.c.o",
+        "/home/zyh/distributed-system-test/build/core/libdst_random.so",
+        "-Wl,-rpath=/home/zyh/distributed-system-test/build/core/",
+        "/home/zyh/distributed-system-test/build/core/libdst_event.so",
+        "-Wl,-rpath=/home/zyh/distributed-system-test/build/core/",
+        "-fsanitize=address"
+    ],
+    "additional_compile_args": [
+        "-g",
+        "-O0",
+        "-fsanitize=address"
+    ],
+    "additional_compile_llvm_args": [
+    ],
+    "ignored_args": [
+        "-Wall",
+        "-O1",
+        "-O2",
+        "-O3"
+    ]
+}

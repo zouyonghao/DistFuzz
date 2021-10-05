@@ -168,3 +168,7 @@ clickhouse_test/bin/sync_branch_cov_file
 clickhouse_test/bin/sync_file
 clickhouse_test/bin/output
 clickhouse_test/bin/file_lock
+test/tmp.c
+test/tmp.cpp
+test/tmp.ll
+test/tmp.o

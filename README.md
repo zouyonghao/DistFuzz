@@ -4,15 +4,16 @@
 
 一般对应项目中包含 `build.sh`，直接使用即可
 
-| 项目          | 目录名     | 对应git                                                                          |
-| ------------- | ---------- | -------------------------------------------------------------------------------- |
-| braft         | braft      | http://166.111.139.139:7800/zyh/braft, http://166.111.139.139:7800/zyh/brpc      |
-| c-raft        | **raft**   | http://166.111.139.139:7800/zyh/craft                                            |
-| nuraft        | **NuRaft** | http://166.111.139.139:7800/zyh/nuraft                                           |
-| redisraft     | redisraft  | http://166.111.139.139:7800/zyh/redisraft, http://166.111.139.139:7800/zyh/redis |
-| floyd(raftis) | floyd      | https://github.com/Qihoo360/floyd                                                |
-| rethinkdb     | rethinkdb  | http://166.111.139.139:7800/zyh/rethinkdb                                        |
-| ClickHouse    | ClickHouse | https://github.com/ClickHouse/ClickHouse.git                                     |
+| 项目          | 目录名           | 对应git                                                                          |
+| ------------- | ---------------- | -------------------------------------------------------------------------------- |
+| braft         | braft            | http://166.111.139.139:7800/zyh/braft, http://166.111.139.139:7800/zyh/brpc      |
+| c-raft        | **raft**         | http://166.111.139.139:7800/zyh/craft                                            |
+| nuraft        | **NuRaft**       | http://166.111.139.139:7800/zyh/nuraft                                           |
+| redisraft     | redisraft        | http://166.111.139.139:7800/zyh/redisraft, http://166.111.139.139:7800/zyh/redis |
+| floyd(raftis) | floyd            | https://github.com/Qihoo360/floyd                                                |
+| rethinkdb     | rethinkdb        | http://166.111.139.139:7800/zyh/rethinkdb                                        |
+| ClickHouse    | ClickHouse       | https://github.com/ClickHouse/ClickHouse.git                                     |
+| aerospike     | aerospike-server | http://166.111.139.139:7800/zyh/aerospike-server.git                             |
 
 **注意**
 

@@ -23,9 +23,11 @@ mv operation_log ./test_cases/$1
     # ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
     if grep -q ^E ./test_cases/$1/log*; then
         echo "Find errors!"
+    elif grep -q ^F ./test_cases/$1/log[0-2]; then
+        echo "Find fatals!"
     # elif [[ $CHECK_RAFT_LOG_ERROR == 1 ]]; then
     #     echo "Check raft log failed!"
-    elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/log[0-2]; then
+    elif grep -q "AddressSanitizer" ./test_cases/$1/log*; then
         echo "Find ASan errors!"
     elif grep -q "DANGEROUS" ./test_cases/$1/log[0-2]; then
         echo "Find DANGEROUS!"
