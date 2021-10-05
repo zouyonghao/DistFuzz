@@ -38,5 +38,5 @@ mv operation_log ./test_cases/$1
         echo "No errors, deleting logs..."
         rm -rf ./test_cases/$1
     fi
-    rm -rf ./test_cases/$i/c-raft_data*
+    rm -rf ./test_cases/$1/c-raft_data*
 } &
