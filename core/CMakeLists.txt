@@ -2,7 +2,7 @@
 set(SOURCE_DIR src)
 
 find_package(Threads REQUIRED)
-find_package(Boost REQUIRED COMPONENTS)
+find_package(Boost REQUIRED COMPONENTS system)
 
 include_directories(include)
 include_directories(src)
@@ -30,3 +30,6 @@ target_compile_options(dst_default_kv PUBLIC -fPIC)
 # unit test
 add_executable(dst_test_default_kv test/dst_test_kv.cpp)
 target_link_libraries(dst_test_default_kv pthread ${Boost_LIBRARIES} rt dst_default_kv)
+
+add_executable(dst_test_node_manager test/dst_test_node_manager.cpp)
+target_link_libraries(dst_test_node_manager pthread rt dst_default_kv ${Boost_LIBRARIES})

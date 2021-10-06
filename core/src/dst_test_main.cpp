@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <dst_kv_store.h>
+#include <dst_node_manager.hpp>
 #include <dst_random.h>
 #include <log.hpp>
 #include <operator/dst_operator.hpp>
@@ -108,7 +109,10 @@ int main(int argc, char const *argv[])
 
     std::cerr << "\033[1;31mrunning test case " << test_case_count << "\033[0m\n";
     std::cerr << "start nodes....\n";
-    system("./run_fuzz_server.sh");
+    // replace with a node manager
+    NodeManager* nm = Registry<NodeManager>::getItemVector()[0].second;
+    nm->start_all();
+    // system("./run_fuzz_server.sh");
 
     std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
@@ -129,9 +133,11 @@ int main(int argc, char const *argv[])
     // let it run a while
     std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
-    // TODO: check server availability
+    // check server availability
+    nm->check();
     std::cerr << "stopping...\n";
-    system("./stop.sh");
+    // system("./stop.sh");
+    nm->stop_all();
 
     run_some_normal_operators(2);
 
