@@ -36,7 +36,7 @@ static void file_to_string(const char *filename)
     else
     {
         printf("fuzz file open fail.\n");
-        exit(0);
+        exit(-1);
     }
 }
 

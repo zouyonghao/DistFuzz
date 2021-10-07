@@ -14,6 +14,4 @@ public:
     std::string &get_command() { return command; }
 };
 
-const std::string IS_START_KEY = "_is_start?";
-
 #endif

@@ -172,3 +172,4 @@ test/tmp.c
 test/tmp.cpp
 test/tmp.ll
 test/tmp.o
+random_node*

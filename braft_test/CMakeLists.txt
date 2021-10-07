@@ -15,7 +15,7 @@ file(GLOB BRAFT_TEST_OPERATORS_SRC
 )
 
 file(GLOB BRAFT_TEST_MAIN_SRC
-     "src/*.cpp"
+     "src/node_manager.cpp"
      "src/operators/*.cpp"
      ${CMAKE_SOURCE_DIR}/core/src/dst_test_main.cpp
 )

@@ -25,17 +25,6 @@ public:
         return true;
     }
 
-    static T *create(const std::string &name)
-    {
-        auto map = getItemMap();
-        if (map.find(name) == map.end())
-        {
-            return nullptr;
-        }
-
-        return map[name];
-    }
-
     // Use Meyer's singleton to prevent SIOF
     static ItemMap &getItemMap()
     {
@@ -47,6 +36,23 @@ public:
     {
         static ItemVector vector;
         return vector;
+    }
+};
+
+template <typename T> class SingletonRegistry
+{
+public:
+    static bool add(const std::string &name, T *target)
+    {
+        getItem() = target;
+        return true;
+    }
+
+    // Use Meyer's singleton to prevent SIOF
+    static T *&getItem()
+    {
+        static T *item;
+        return item;
     }
 };
 

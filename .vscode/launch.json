@@ -5,6 +5,31 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "dst_test_node_manager",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/core/dst_test_node_manager",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [
+                {
+                    "name": "LLDB_DEBUGSERVER_PATH",
+                    "value": "/usr/bin/lldb-server-11"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "miDebuggerPath": "/usr/bin/lldb-mi"
+        },
+        {
             "name": "click_house_test",
             "type": "cppdbg",
             "request": "launch",
@@ -189,7 +214,7 @@
             "request": "launch",
             "program": "/home/zyh/distributed-system-test/build/braft_test/braft_test_main",
             "args": [
-                "report.md"
+                "init_random.txt"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/braft_test/bin",
@@ -382,7 +407,8 @@
             "request": "launch",
             "program": "${workspaceFolder}/build/test/test_network_delay_server",
             "args": [
-                "10.0.1.4", "8300"
+                "10.0.1.4",
+                "8300"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/test",
