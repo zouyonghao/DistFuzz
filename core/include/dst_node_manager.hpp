@@ -173,7 +173,7 @@ private:
     bool start_process(NodeInfo &ni)
     {
         std::string node_id_str = std::to_string(ni.node_id);
-        boost::process::environment env;
+        boost::process::environment env = boost::this_process::environment();
         env["LD_PRELOAD"] = PRELOAD_LIB_PATH;
         env["__DST_ENV_RANDOM_FILE__"] = "random_node" + node_id_str;
         env["NODE_NAME"] = "node" + node_id_str;
