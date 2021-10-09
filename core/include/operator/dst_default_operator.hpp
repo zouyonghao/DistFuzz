@@ -3,7 +3,7 @@
 
 #include <operator/dst_operator.hpp>
 
-class SimpleCommandOperator : public Operator
+class SimpleCommandOperator : public NormalOperator
 {
 private:
     std::string command;

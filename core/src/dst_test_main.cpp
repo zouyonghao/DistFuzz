@@ -143,6 +143,12 @@ int main(int argc, char const *argv[])
         abort();
     }
 
+    /* set node count for client operator */
+    for (auto &i : Registry<NormalOperator>::getItemVector())
+    {
+        i.second->node_count = node_count;
+    }
+
     std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
     run_init_operator();
@@ -166,6 +172,7 @@ int main(int argc, char const *argv[])
     if (!nm->check())
     {
         std::cerr << "check failed!\n";
+        backup_testcase(test_case_count);
         abort();
     }
     std::cerr << "stopping...\n";

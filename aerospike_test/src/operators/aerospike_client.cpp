@@ -55,20 +55,20 @@ public:
         case ACTION_TYPE::READ:
         {
             op_name = "read";
-            __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
+            // __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
 
             as_record *p_rec = NULL;
             static const char *bins[] = {"test-bin", NULL};
             if (aerospike_key_select(&as, &err, NULL, &key, bins, &p_rec) != AEROSPIKE_OK || p_rec == NULL)
             {
                 fprintf(stderr, "aerospike_key_get() returned %d - %s\n", err.code, err.message);
-                __dst_event_record(get_result_record(op_name, op_vector, -1, "FAIL", random_thread_id).c_str());
+                // __dst_event_record(get_result_record(op_name, op_vector, -1, "FAIL", random_thread_id).c_str());
                 return false;
             }
             char *val_as_str = as_val_tostring(as_bin_get_value(p_rec->bins.entries));
             printf("read value is %s\n", val_as_str);
 
-            __dst_event_record(get_result_record(op_name, op_vector, 0, val_as_str, random_thread_id).c_str());
+            // __dst_event_record(get_result_record(op_name, op_vector, 0, val_as_str, random_thread_id).c_str());
             free(val_as_str);
             as_record_destroy(p_rec);
             break;
@@ -78,7 +78,7 @@ public:
             op_name = "write";
             uint32_t random = __dst_get_random_uint32();
             op_vector.push_back(std::to_string(random));
-            __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
+            // __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
 
             as_record rec;
             as_record_inita(&rec, 1);
@@ -96,7 +96,7 @@ public:
                 if (err.code != AEROSPIKE_ERR_TIMEOUT)
                 {
                     printf("write failed!\n");
-                    __dst_event_record(get_result_record(op_name, op_vector, -1, "FAIL", random_thread_id).c_str());
+                    // __dst_event_record(get_result_record(op_name, op_vector, -1, "FAIL", random_thread_id).c_str());
                 }
                 else
                 {
@@ -104,7 +104,7 @@ public:
                 }
                 return false;
             }
-            __dst_event_record(get_result_record(op_name, op_vector, 0, "", random_thread_id).c_str());
+            // __dst_event_record(get_result_record(op_name, op_vector, 0, "", random_thread_id).c_str());
             as_record_destroy(&rec);
             break;
         }

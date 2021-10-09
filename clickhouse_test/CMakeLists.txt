@@ -1,9 +1,6 @@
 
 set(SOURCE_DIR src)
 
-find_package(Threads REQUIRED)
-find_package(Boost REQUIRED COMPONENTS system)
-
 include_directories(src)
 include_directories(include)
 include_directories(${CMAKE_SOURCE_DIR}/core/include)
@@ -29,3 +26,6 @@ add_executable(clickhouse_operator_test ${CLICKHOUSE_TEST_OPERATORS_SRC})
 target_link_libraries(clickhouse_operator_test
      dst_default_operator dst_random dst_default_kv dst_event
      ${Boost_LIBRARIES})
+
+enable_testing()
+add_subdirectory(tests)

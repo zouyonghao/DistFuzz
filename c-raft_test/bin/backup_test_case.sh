@@ -10,10 +10,7 @@ pwd
 
 mv log* ./test_cases/$1
 mv c-raft_data* ./test_cases/$1
-mv random_node0.txt ./test_cases/$1
-mv random_node1.txt ./test_cases/$1
-mv random_node2.txt ./test_cases/$1
-mv random_proxy.txt ./test_cases/$1
+mv random_node* ./test_cases/$1
 mv random.txt ./test_cases/$1
 mv init_random.txt ./test_cases/$1
 mv operation_log ./test_cases/$1

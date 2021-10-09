@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-class EchoConfigurationGenerator : public ConfigurationGenerator
+class EchoConfigurationGenerator : public ServerConfigurationGenerator
 {
     std::string get_configure_string(uint32_t node_id, uint32_t node_count)
     {

@@ -1,9 +1,6 @@
 
 set(SOURCE_DIR src)
 
-find_package(Threads REQUIRED)
-find_package(Boost REQUIRED COMPONENTS system)
-
 include_directories(src)
 include_directories(include)
 include_directories(${CMAKE_SOURCE_DIR}/core/include)

@@ -1,9 +1,14 @@
-#include <operator/dst_default_client_operator.hpp>
+#include <dst_random.h>
+#include <operator/dst_operator.hpp>
 
-// TODO: create another simple operator that just call a command.
-REGISTER_NORMAL_OPERATOR(ClickHouseDeleteData0,
-                         new DefaultClientOperator("rm -rf run/log1", "", {}));
-REGISTER_NORMAL_OPERATOR(ClickHouseDeleteData1,
-                         new DefaultClientOperator("rm -rf run/log2", "", {}));
-REGISTER_NORMAL_OPERATOR(ClickHouseDeleteData2,
-                         new DefaultClientOperator("rm -rf run/log3", "", {}));
+class RandomDeleteFolderOperator : public NormalOperator
+{
+public:
+    bool _do()
+    {
+        int result = system(("rm -rf run/log" + std::to_string(__dst_get_random_uint8_t() % node_count)).c_str());
+        return result == 0;
+    }
+};
+
+REGISTER_NORMAL_OPERATOR(RandomDeleteFolderOperator, new RandomDeleteFolderOperator);

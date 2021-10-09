@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+#include <dst_configuration_generator.hpp>
 #include <dst_registry.hpp>
 
 #define PRELOAD_LIB_PATH "/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so"
@@ -27,19 +28,13 @@ struct NodeInfo
     boost::process::child *process = nullptr;
 };
 
-class ConfigurationGenerator
-{
-public:
-    virtual std::string get_configure_string(uint32_t node_id, uint32_t node_count) = 0;
-};
-
 class NodeManager
 {
 public:
     uint32_t node_count;
-    ConfigurationGenerator *configuration_generator;
+    ServerConfigurationGenerator *configuration_generator;
 
-    NodeManager(ConfigurationGenerator *_configuration_generator)
+    NodeManager(ServerConfigurationGenerator *_configuration_generator)
         : configuration_generator(_configuration_generator), node_count(DEFAULT_NODE_COUNT)
     {
     }
