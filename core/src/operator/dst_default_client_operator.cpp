@@ -20,28 +20,33 @@ bool DefaultClientOperator::_do()
     std::string command;
     uint32_t random_num1;
     uint32_t random_num2;
-    std::string invoke_string =
+    std::string invoke_record_string =
         "{:process " + std::to_string(random_thread_id) + ", :type :invoke, :f :" + OP_NAME_STR[op_name] + ", :value ";
     switch (op_name)
     {
     case OP_READ:
-        command = configuration_generator->get_read_configure_string(node_count);
-        invoke_string += "nil";
+        command = configuration_generator->get_configure_string(OP_READ, node_count);
+        invoke_record_string += "nil";
         break;
     case OP_WRITE:
         random_num1 = __dst_get_random_uint32();
-        command = configuration_generator->get_write_configure_string(node_count, random_num1);
-        invoke_string += std::to_string(random_num1);
+        command = configuration_generator->get_configure_string(OP_WRITE, node_count, random_num1);
+        invoke_record_string += std::to_string(random_num1);
         break;
     case OP_CAS:
         random_num1 = __dst_get_random_uint32();
         random_num2 = __dst_get_random_uint32();
-        command = configuration_generator->get_cas_configure_string(node_count, random_num1, random_num2);
-        invoke_string += "[" + std::to_string(random_num1) + " " + std::to_string(random_num2) + "]";
+        command = configuration_generator->get_configure_string(OP_CAS, node_count, random_num1, random_num2);
+        invoke_record_string += "[" + std::to_string(random_num1) + " " + std::to_string(random_num2) + "]";
         break;
     }
-    invoke_string += "}";
-    __dst_event_record(invoke_string.c_str());
+    if (command.empty())
+    {
+        std::cerr << OP_NAME_STR[op_name] << " is not supported!\n";
+        return false;
+    }
+    invoke_record_string += "}";
+    __dst_event_record(invoke_record_string.c_str());
 
     std::cerr << command << "\n";
 
@@ -57,23 +62,23 @@ bool DefaultClientOperator::_do()
             return result;
         }
 
-        std::string result_string = "{:process " + std::to_string(random_thread_id) + ", :type " +
-                                    std::string(result == 0 ? ":ok" : ":fail") + ", :f :" + OP_NAME_STR[op_name] +
-                                    ", :value ";
+        std::string result_record_string = "{:process " + std::to_string(random_thread_id) + ", :type " +
+                                           std::string(result == 0 ? ":ok" : ":fail") +
+                                           ", :f :" + OP_NAME_STR[op_name] + ", :value ";
         switch (op_name)
         {
         case OP_READ:
-            result_string += std::to_string(std::stoll(get_last_output(pipe_stream)));
+            result_record_string += std::to_string(std::stoll(get_last_output(pipe_stream)));
             break;
         case OP_WRITE:
-            result_string += std::to_string(random_num1);
+            result_record_string += std::to_string(random_num1);
             break;
         case OP_CAS:
-            result_string += "[" + std::to_string(random_num1) + " " + std::to_string(random_num2) + "]";
+            result_record_string += "[" + std::to_string(random_num1) + " " + std::to_string(random_num2) + "]";
             break;
         }
-        result_string += "}";
-        __dst_event_record(result_string.c_str());
+        result_record_string += "}";
+        __dst_event_record(result_record_string.c_str());
         return true;
     }
     catch (const std::exception &e)

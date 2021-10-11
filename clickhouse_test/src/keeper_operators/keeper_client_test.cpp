@@ -1,10 +1,6 @@
-// #include <operator/dst_default_client_operator.hpp>
+#include <keeper_configuration_generator.hpp>
 
-// static const std::string ZK_CLIENT =
-//     "/usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:9181,127.0.1.1:9182,127.0.1.1:9183 ";
-// static const std::string UNFINISHED_COMMAND = "timeout 5 " + ZK_CLIENT + " ";
+static ClientConfigurationGenerator *keeper_client_configuration_generator = new KeeperClientConfigurationGenerator();
 
-// REGISTER_NORMAL_OPERATOR(KeeperGet, new DefaultClientOperator(UNFINISHED_COMMAND + "get /a", "read", {}));
-// REGISTER_NORMAL_OPERATOR(KeeperSet, new DefaultClientOperator(UNFINISHED_COMMAND + "set /a", "write", {" "}));
-// // REGISTER_NORMAL_OPERATOR(KeeperCas, new DefaultClientOperator(UNFINISHED_COMMAND + "cas ", "cas", {" ", " "}));
-// // REGISTER_NORMAL_OPERATOR(Init, new DefaultClientOperator("timeout 30 " + ZK_CLIENT + " " + "create /a null", "read", {}));
+REGISTER_NORMAL_OPERATOR(KeeperGet, new DefaultClientOperator(OP_READ, keeper_client_configuration_generator));
+REGISTER_NORMAL_OPERATOR(KeeperSet, new DefaultClientOperator(OP_WRITE, keeper_client_configuration_generator));

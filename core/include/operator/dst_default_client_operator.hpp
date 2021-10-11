@@ -22,12 +22,13 @@ enum OP_NAME
 
 static const std::string OP_NAME_STR[] = {"read", "write", "cas"};
 
+/* The ClientConfigurationGenerator for each system
+ * return an empty string if some operations are not supported
+ */
 class ClientConfigurationGenerator
 {
 public:
-    virtual std::string get_read_configure_string(uint32_t node_count) = 0;
-    virtual std::string get_write_configure_string(uint32_t node_count, uint32_t value) = 0;
-    virtual std::string get_cas_configure_string(uint32_t node_count, uint32_t old_value, uint32_t new_value) = 0;
+    virtual std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...) = 0;
 };
 
 /* The default client operator
