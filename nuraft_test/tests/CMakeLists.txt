@@ -1,0 +1,3 @@
+add_executable(test_nuraft_configuration_generator test_configuration_generator.cpp)
+target_link_libraries(test_nuraft_configuration_generator  ${Boost_LIBRARIES})
+add_test(test_nuraft_configuration_generator test_nuraft_configuration_generator)

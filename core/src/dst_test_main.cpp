@@ -13,12 +13,17 @@ std::vector<std::thread> threads;
 
 void run_init_operator()
 {
-    for (auto &o : Registry<NormalOperator>::getItemVector())
+    for (auto o = Registry<NormalOperator>::getItemVector().begin();
+         o != Registry<NormalOperator>::getItemVector().end(); o++)
     {
-        if (o.first == INIT_OPERATOR_NAME)
+        if (o->first == INIT_OPERATOR_NAME)
         {
             std::cout << "Run init operator\n";
-            o.second->_do();
+            o->second->_do();
+            /* remove the init operator after it is executed */
+            Registry<NormalOperator>::getItemVector().erase(o);
+            Registry<NormalOperator>::getItemMap().erase(INIT_OPERATOR_NAME);
+            break;
         }
     }
 }
@@ -60,7 +65,7 @@ void run_some_normal_operators(int number)
 
 void split_files(std::string &initial_file, uint32_t node_count)
 {
-    // split the file into several files
+    /* split the file into several files */
     std::vector<char> content;
     std::ifstream file(initial_file, std::ios::binary);
     if (file)

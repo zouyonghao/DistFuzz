@@ -162,10 +162,7 @@ public:
         }
     }
 
-private:
-    std::vector<NodeInfo> node_processes;
-
-    bool start_process(NodeInfo &ni)
+    virtual bool start_process(NodeInfo &ni)
     {
         std::string node_id_str = std::to_string(ni.node_id);
         boost::process::environment env = boost::this_process::environment();
@@ -184,6 +181,9 @@ private:
                                                boost::process::std_err > err_log_file, env);
         return true;
     }
+
+private:
+    std::vector<NodeInfo> node_processes;
 };
 
 #define REGISTER_NODE_MANAGER(node_manager_name, node_manager)                                                         \

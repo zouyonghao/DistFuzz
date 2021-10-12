@@ -24,3 +24,6 @@ target_link_libraries(nuraft_test_main dst_default_operator dst_random dst_defau
 
 add_executable(nuraft_operator_test ${NURAFT_TEST_OPERATORS_SRC})
 target_link_libraries(nuraft_operator_test dst_default_operator dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
+
+enable_testing()
+add_subdirectory(tests)

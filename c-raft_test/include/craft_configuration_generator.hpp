@@ -23,7 +23,7 @@ public:
         {
             config += std::to_string(BASE_PORT + i) + " ";
         }
-        /* TODO: should we do this operation here? */
+        /** TODO: should we do this operation here? */
         init_data_dir(node_id);
         return config;
     }

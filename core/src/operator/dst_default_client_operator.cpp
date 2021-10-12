@@ -7,7 +7,7 @@ std::string get_last_output(boost::process::ipstream &pipe_stream)
     std::string tmp;
     while (pipe_stream && std::getline(pipe_stream, tmp) && !tmp.empty())
     {
-        // std::cout << tmp << "\n";
+        std::cout << tmp << "\n";
         last_output = tmp;
     }
     return last_output;
