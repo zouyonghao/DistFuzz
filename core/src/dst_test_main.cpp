@@ -130,6 +130,8 @@ int main(int argc, char const *argv[])
     std::string random_file(argv[1]);
     split_files(random_file, node_count);
 
+    size_t critical_operator_size = Registry<CriticalOperator>::getItemVector().size();
+
     std::cerr << "\033[1;31mrunning test case " << test_case_count << "\033[0m\n";
     std::cerr << "start nodes....\n";
     /* We should only have 1 NodeManager. */
@@ -137,15 +139,13 @@ int main(int argc, char const *argv[])
     if (nm == nullptr)
     {
         std::cerr << "failed to get NodeManager\n";
-        abort();
+        goto STOP;
     }
     nm->set_node_count(node_count);
     if (!nm->start_all())
     {
-        std::cerr << "start nodes failed!\n";
-        nm->stop_all();
-        backup_testcase(test_case_count);
-        abort();
+        std::cout << "check failed!\n";
+        goto STOP;
     }
 
     /* set node count for client operator */
@@ -159,12 +159,11 @@ int main(int argc, char const *argv[])
     run_init_operator();
     run_some_normal_operators(2);
 
-    size_t operator_size = Registry<CriticalOperator>::getItemVector().size();
-    std::cout << "operator_size = " << operator_size << "\n";
-    for (int i = 0; i < 2 && operator_size > 0; i++)
+    std::cout << "critical_operator_size = " << critical_operator_size << "\n";
+    for (int i = 0; i < 2 && critical_operator_size > 0; i++)
     {
         std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
-        uint32_t index = __dst_get_random_uint8_t() % operator_size;
+        uint32_t index = __dst_get_random_uint8_t() % critical_operator_size;
         std::cout << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
         Registry<CriticalOperator>::getItemVector()[index].second->_do();
         run_some_normal_operators(2);
@@ -176,10 +175,11 @@ int main(int argc, char const *argv[])
     // check server availability
     if (!nm->check())
     {
-        std::cerr << "check failed!\n";
-        backup_testcase(test_case_count);
-        abort();
+        std::cout << "check failed!\n";
+        goto STOP;
     }
+
+STOP:
     std::cerr << "stopping...\n";
     nm->stop_all();
 

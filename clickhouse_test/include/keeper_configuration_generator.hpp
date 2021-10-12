@@ -87,7 +87,8 @@ public:
         }
         case OP_CAS:
             /* currently not supported */
-            return "";
+            configure_string = "";
+            break;
         default:
             break;
         }

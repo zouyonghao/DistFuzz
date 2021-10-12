@@ -7,7 +7,7 @@ std::string get_last_output(boost::process::ipstream &pipe_stream)
     std::string tmp;
     while (pipe_stream && std::getline(pipe_stream, tmp) && !tmp.empty())
     {
-        std::cout << tmp << "\n";
+        std::cerr << tmp << "\n";
         last_output = tmp;
     }
     return last_output;
@@ -71,9 +71,13 @@ bool DefaultClientOperator::_do()
             result_record_string += std::to_string(std::stoll(get_last_output(pipe_stream)));
             break;
         case OP_WRITE:
+            /* just print the std out to debug */
+            get_last_output(pipe_stream);
             result_record_string += std::to_string(random_num1);
             break;
         case OP_CAS:
+            /* just print the std out to debug */
+            get_last_output(pipe_stream);
             result_record_string += "[" + std::to_string(random_num1) + " " + std::to_string(random_num2) + "]";
             break;
         }
