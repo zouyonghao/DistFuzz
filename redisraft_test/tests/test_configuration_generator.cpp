@@ -15,9 +15,9 @@ void test_client_configuration_generator()
 {
     RedisraftClientConfigurationGenerator nccg;
     assert(nccg.get_configure_string(OP_READ, 3) ==
-           "timeout 2 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh get");
+           "timeout 3 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh get");
     assert(nccg.get_configure_string(OP_WRITE, 3, 0) ==
-           "timeout 2 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh set 0");
+           "timeout 3 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh set 0");
 }
 
 int main()
