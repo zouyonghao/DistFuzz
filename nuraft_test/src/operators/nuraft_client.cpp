@@ -18,6 +18,7 @@ public:
             std::cerr << "init command is " << command << "\n";
             system(command.c_str());
         }
+        return true;
     }
 };
 
