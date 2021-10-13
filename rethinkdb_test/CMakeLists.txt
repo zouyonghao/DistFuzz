@@ -18,8 +18,11 @@ file(GLOB RETHINKDB_TEST_MAIN_SRC
 )
 
 add_executable(rethinkdb_test_main ${RETHINKDB_TEST_MAIN_SRC})
+target_compile_options(rethinkdb_test_main PUBLIC -DNO_CONCURRENCY)
 target_link_libraries(rethinkdb_test_main dst_default_operator dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
-
 
 add_executable(rethinkdb_operator_test ${RETHINKDB_TEST_OPERATORS_SRC})
 target_link_libraries(rethinkdb_operator_test dst_default_operator dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
+
+enable_testing()
+add_subdirectory(tests)
