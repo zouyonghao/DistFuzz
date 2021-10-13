@@ -185,6 +185,9 @@ STOP:
 
     run_some_normal_operators(2);
 
+    /* we still need using kill to stop all process clearly */
+    system("bash stop.sh");
+
     dst_clear_kv_all();
 
     backup_testcase(test_case_count);
