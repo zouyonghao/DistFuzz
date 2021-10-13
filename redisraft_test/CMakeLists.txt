@@ -1,4 +1,3 @@
-
 set(SOURCE_DIR src)
 
 include_directories(src)

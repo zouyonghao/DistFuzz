@@ -1,3 +1,3 @@
 add_executable(test_craft_configuration_generator test_configuration_generator.cpp)
-target_link_libraries(test_craft_configuration_generator  ${Boost_LIBRARIES} pthread)
+target_link_libraries(test_craft_configuration_generator ${Boost_LIBRARIES} pthread)
 add_test(test_craft_configuration_generator test_craft_configuration_generator)
