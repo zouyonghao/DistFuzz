@@ -18,7 +18,7 @@ bool RandomStart::_do()
         std::cerr << "all nodes are alive.\n";
         return true;
     }
-    return nm->start_node(stopped_nodes[__dst_get_random_uint8_t() % nm->node_count]->node_id);
+    return nm->start_node(stopped_nodes[__dst_get_random_uint8_t() % stopped_nodes.size()]->node_id);
 }
 
 REGISTER_CRITICAL_OPERATOR(RandomStart, new RandomStart);

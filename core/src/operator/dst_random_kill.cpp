@@ -18,7 +18,7 @@ bool RandomKill::_do()
         std::cerr << "all nodes are stopped.\n";
         return true;
     }
-    return nm->stop_node(alive_nodes[__dst_get_random_uint8_t() % nm->node_count]->node_id);
+    return nm->stop_node(alive_nodes[__dst_get_random_uint8_t() % alive_nodes.size()]->node_id);
 }
 
 REGISTER_CRITICAL_OPERATOR(RandomKill, new RandomKill);
