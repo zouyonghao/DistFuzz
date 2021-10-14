@@ -17,6 +17,7 @@ file(GLOB AEROSPIKE_TEST_MAIN_SRC
 )
 
 add_executable(aerospike_test_main ${AEROSPIKE_TEST_MAIN_SRC})
+target_compile_options(aerospike_test_main PUBLIC -DNO_CONCURRENCY -DRUN_NORMAL_OPERATOR_COUNT=5 -DRUN_CRITICAL_OPERATOR_COUNT=3)
 target_link_libraries(aerospike_test_main
      dst_default_operator dst_random dst_default_kv dst_event
      aerospike ssl crypto dl m z
@@ -37,3 +38,6 @@ target_link_libraries(aerospike_client_test
      dst_default_operator dst_default_kv dst_event
      aerospike ssl crypto dl m z
      ${Boost_LIBRARIES})
+
+enable_testing()
+add_subdirectory(tests)

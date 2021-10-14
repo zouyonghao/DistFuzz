@@ -1,41 +1,46 @@
 #include <aerospike/aerospike.h>
 #include <aerospike/aerospike_key.h>
 
-#include <operator/dst_default_operator.hpp>
+#include <operator/dst_default_client_operator.hpp>
 #include <util/common_uils.hpp>
 
 #include <dst_event.h>
 #include <dst_random.h>
 
-enum class ACTION_TYPE
-{
-    READ,
-    WRITE,
-    CAS
-};
+#define SERVICE_BASE_PORT 2000
 
 class AerospikeClient : public NormalOperator
 {
 private:
-    ACTION_TYPE action_type;
+    OP_NAME op_name;
 
     as_config config;
     aerospike as;
     as_key key;
 
+    bool is_initialized = false;
+
 public:
-    AerospikeClient(ACTION_TYPE _action_type) : action_type(_action_type)
+    AerospikeClient(OP_NAME _op_name) : op_name(_op_name) {}
+
+    void init()
     {
         as_config_init(&config);
-        as_config_add_host(&config, "127.0.1.1", 2000);
-        as_config_add_host(&config, "127.0.1.1", 2001);
-        as_config_add_host(&config, "127.0.1.1", 2002);
+        for (int i = 0; i < node_count; i++)
+        {
+            as_config_add_host(&config, "127.0.1.1", SERVICE_BASE_PORT + i);
+        }
         aerospike_init(&as, &config);
         as_key_init_str(&key, "test", "test-set", "test-key");
+        is_initialized = true;
     }
 
     bool _do() override
     {
+        if (!is_initialized)
+        {
+            init();
+        }
 
         int random_thread_id = random() % INT_MAX;
         as_error err;
@@ -47,14 +52,10 @@ public:
 
         fprintf(stderr, "connect success!\n");
 
-        std::string op_name;
-        std::vector<std::string> op_vector;
-
-        switch (action_type)
+        switch (op_name)
         {
-        case ACTION_TYPE::READ:
+        case OP_READ:
         {
-            op_name = "read";
             // __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
 
             as_record *p_rec = NULL;
@@ -73,16 +74,14 @@ public:
             as_record_destroy(p_rec);
             break;
         }
-        case ACTION_TYPE::WRITE:
+        case OP_WRITE:
         {
-            op_name = "write";
             uint32_t random = __dst_get_random_uint32();
-            op_vector.push_back(std::to_string(random));
             // __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
 
             as_record rec;
             as_record_inita(&rec, 1);
-            printf("write value is %s\n", op_vector[0].c_str());
+            printf("write value is %d\n", random);
             as_record_set_int64(&rec, "test-bin", random);
 
             as_policy_write wpol;
@@ -108,10 +107,7 @@ public:
             as_record_destroy(&rec);
             break;
         }
-        case ACTION_TYPE::CAS:
-            op_name = "cas";
-            op_vector.push_back(std::to_string(__dst_get_random_uint32()));
-            op_vector.push_back(std::to_string(__dst_get_random_uint32()));
+        case OP_CAS:
             // TODO
             break;
         }
@@ -122,7 +118,7 @@ public:
     ~AerospikeClient() { aerospike_destroy(&as); }
 };
 
-REGISTER_NORMAL_OPERATOR(AerospikeRead, new AerospikeClient(ACTION_TYPE::READ));
-REGISTER_NORMAL_OPERATOR(AerospikeWrite, new AerospikeClient(ACTION_TYPE::WRITE));
+REGISTER_NORMAL_OPERATOR(AerospikeRead, new AerospikeClient(OP_READ));
+REGISTER_NORMAL_OPERATOR(AerospikeWrite, new AerospikeClient(OP_WRITE));
 // REGISTER_NORMAL_OPERATOR(AerospikeCas, new
 // AerospikeClient(ACTION_TYPE::CAS));

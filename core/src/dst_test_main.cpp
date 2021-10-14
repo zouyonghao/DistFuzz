@@ -9,6 +9,14 @@
 #include <log.hpp>
 #include <operator/dst_operator.hpp>
 
+#ifndef RUN_NORMAL_OPERATOR_COUNT
+#define RUN_NORMAL_OPERATOR_COUNT 2
+#endif
+
+#ifndef RUN_CRITICAL_OPERATOR_COUNT
+#define RUN_CRITICAL_OPERATOR_COUNT 2
+#endif
+
 std::vector<std::thread> threads;
 
 void run_init_operator()
@@ -157,16 +165,18 @@ int main(int argc, char const *argv[])
     std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
     run_init_operator();
-    run_some_normal_operators(2);
+    std::cout << "normal operator run count = " << RUN_NORMAL_OPERATOR_COUNT << "\n";
+    run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
 
     std::cout << "critical_operator_size = " << critical_operator_size << "\n";
-    for (int i = 0; i < 2 && critical_operator_size > 0; i++)
+    std::cout << "critical_operator run count = " << RUN_CRITICAL_OPERATOR_COUNT << "\n";
+    for (int i = 0; i < RUN_CRITICAL_OPERATOR_COUNT && critical_operator_size > 0; i++)
     {
         std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
         uint32_t index = __dst_get_random_uint8_t() % critical_operator_size;
         std::cout << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
         Registry<CriticalOperator>::getItemVector()[index].second->_do();
-        run_some_normal_operators(2);
+        run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
     }
 
     // let it run a while
@@ -183,7 +193,7 @@ STOP:
     std::cerr << "stopping...\n";
     nm->stop_all();
 
-    run_some_normal_operators(2);
+    run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
 
     /* we still need using kill to stop all process clearly */
     system("bash stop.sh");
