@@ -171,3 +171,5 @@ test/tmp.o
 random_node*
 log*
 aerospike_test/bin/aerospike_conf*
+cmake-build-debug
+.idea
