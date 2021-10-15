@@ -17,11 +17,16 @@ file(GLOB CRAFT_TEST_MAIN_SRC
 )
 
 add_executable(c-raft_test_main ${CRAFT_TEST_MAIN_SRC})
-target_link_libraries(c-raft_test_main dst_default_operator dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
+target_link_libraries(c-raft_test_main
+        -Wl,--whole-archive dst_default_operator
+        -Wl,--no-whole-archive dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
 target_compile_options(c-raft_test_main PUBLIC -DNO_CONCURRENCY)
 
 add_executable(c-raft_operator_test ${CRAFT_TEST_OPERATORS_SRC})
-target_link_libraries(c-raft_operator_test dst_default_operator dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
+target_link_libraries(c-raft_operator_test
+        -Wl,--whole-archive dst_default_operator
+        -Wl,--no-whole-archive dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
 
+add_library(craft_operator_lib src/operators/sleep_operator.cpp)
 enable_testing()
 add_subdirectory(tests)

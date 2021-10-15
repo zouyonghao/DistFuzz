@@ -16,8 +16,8 @@
 
 #define CONFIG_FILE_PIECE_MOD_1 "\nmod-lua {\n"
 /* Add user-path */
-#define USRE_PATH_PREFIX "\tuser-path run/work"
-#define USRE_PATH_SUFFIX "/usr/udf/lua\n"
+#define USER_PATH_PREFIX "\tuser-path run/work"
+#define USER_PATH_SUFFIX "/usr/udf/lua\n"
 #define CONFIG_FILE_PIECE_MOD_2 "}\n"
 
 #define CONFIG_FILE_PIECE_LOGGING_1 "\nlogging {\n"
@@ -62,7 +62,7 @@
 class AerospikeConfigurationGenerator : public ServerConfigurationGenerator
 {
 public:
-    void init_config_file(uint32_t node_id, uint32_t node_count)
+    static void init_config_file(uint32_t node_id, uint32_t node_count)
     {
         std::string node_id_str = std::to_string(node_id);
         std::string file_content = CONFIG_FILE_PIECE_SERVICE_1;
@@ -71,7 +71,7 @@ public:
         file_content += CONFIG_FILE_PIECE_SERVICE_2;
 
         file_content += CONFIG_FILE_PIECE_MOD_1;
-        file_content += USRE_PATH_PREFIX + node_id_str + USRE_PATH_SUFFIX;
+        file_content += USER_PATH_PREFIX + node_id_str + USER_PATH_SUFFIX;
         file_content += CONFIG_FILE_PIECE_MOD_2;
 
         file_content += CONFIG_FILE_PIECE_LOGGING_1;
@@ -114,7 +114,7 @@ public:
         config_file.close();
     }
 
-    void init_working_dir(uint32_t node_id)
+    static void init_working_dir(uint32_t node_id)
     {
         std::string node_id_str = std::to_string(node_id);
         // system(("mkdir -p run/log" + node_id_str).c_str());
@@ -123,7 +123,7 @@ public:
         system(("mkdir -p run/work" + node_id_str + "/usr/udf/lua").c_str());
     }
 
-    std::string get_configure_string(uint32_t node_id, uint32_t node_count)
+    std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
         /** TODO: should we do this operation here? */
         init_config_file(node_id, node_count);
