@@ -13,7 +13,7 @@ class NoopOperator : public SimpleCommandOperator, public CriticalOperator
 {
 public:
     NoopOperator() : SimpleCommandOperator("echo do nothing") {}
-    bool _do() { return ::SimpleCommandOperator::_do(); }
+    bool _do() override { return ::SimpleCommandOperator::_do(); }
 };
 
 REGISTER_CRITICAL_OPERATOR(NoopOperator, new NoopOperator);

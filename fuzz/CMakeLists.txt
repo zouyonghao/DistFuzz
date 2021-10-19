@@ -1,7 +1,6 @@
 
 set(SOURCE_DIR src)
 
-find_package(Threads REQUIRED)
 include_directories(src)
 include_directories(${CMAKE_SOURCE_DIR}/core/include)
 
@@ -56,7 +55,6 @@ file(GLOB FUZZER_SRC
      "fuzzer/old/*.cpp"
 )
 
-find_package(Threads REQUIRED)
 add_executable(fuzzer ${FUZZER_SRC})
 target_compile_definitions(fuzzer PUBLIC -DNO_FUZZING_ERROR -DNO_CONCURRENCY_FUZZ)
 target_link_libraries(fuzzer pthread)

@@ -3,6 +3,11 @@ project(distributed_system_test)
 
 set(CMAKE_CXX_STANDARD 14)
 
+include(CTest)
+
+find_package(Threads REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
+
 add_subdirectory(proxy_server)
 add_subdirectory(event_control)
 add_subdirectory(core)

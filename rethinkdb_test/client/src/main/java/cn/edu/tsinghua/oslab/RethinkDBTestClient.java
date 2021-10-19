@@ -6,18 +6,19 @@ import com.rethinkdb.RethinkDB;
 import com.rethinkdb.net.Connection;
 
 public class RethinkDBTestClient {
-    private static final int[] PORTS = { 4000, 4001, 4002 };
+    private static final int BASE_DRIVER_PORT = 4000;
 
     private static final String QUERY_KEY = "the_key";
     private static final String FIELD_KEY = "the_field_key";
 
     public RethinkDB r = RethinkDB.r;
     public Connection conn = null;
+    public long nodeCount = 3;
 
     public RethinkDBTestClient() {
-        for (int port : PORTS) {
+        for (int i = 0; i < nodeCount; i++) {
             try {
-                conn = r.connection().hostname("127.0.1.1").port(port).timeout(3).connect();
+                conn = r.connection().hostname("127.0.1.1").port(BASE_DRIVER_PORT + i).timeout(2).connect();
                 System.out.println("Connect success!");
                 break;
             } catch (Exception e) {
@@ -88,21 +89,23 @@ public class RethinkDBTestClient {
         RethinkDBTestClient c = new RethinkDBTestClient();
         c.init();
         if (args.length < 1) {
-            System.out.println("usage: java -jar xxx.jar get/set/cas ...");
+            System.out.println("usage: java -jar xxx.jar nodeCount get/set/cas ...");
             System.exit(1);
         }
 
         int result = 0;
+        c.nodeCount = Long.parseLong(args[0]);
+        System.out.println("Node count is " + c.nodeCount);
 
-        switch (args[0]) {
+        switch (args[1]) {
         case "get":
             result = c.get();
             break;
         case "set":
-            result = c.set(Long.parseLong(args[1]));
+            result = c.set(Long.parseLong(args[2]));
             break;
         case "cas":
-            result = c.cas(Long.parseLong(args[1]), Long.parseLong(args[2]));
+            result = c.cas(Long.parseLong(args[2]), Long.parseLong(args[3]));
             break;
         }
 

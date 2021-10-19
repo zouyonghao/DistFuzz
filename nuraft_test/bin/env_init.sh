@@ -1,6 +1,6 @@
-mkfifo calc1.pipe
-mkfifo calc2.pipe
-mkfifo calc3.pipe
-sleep infinity > calc1.pipe &
-sleep infinity > calc2.pipe &
-sleep infinity > calc3.pipe &
+./start_event_control.sh
+for i in $(seq 1 $1); do
+    # echo $i
+    mkfifo calc$i.pipe
+    sleep infinity > calc$i.pipe &
+done

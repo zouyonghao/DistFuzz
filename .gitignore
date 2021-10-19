@@ -56,12 +56,9 @@ nuraft_test/bin/operation_log
 nuraft_test/bin/calc3.log
 nuraft_test/bin/calc2.log
 nuraft_test/bin/calc1.log
-nuraft_test/bin/srv1.log
-nuraft_test/bin/srv3.log
-nuraft_test/bin/srv2.log
+nuraft_test/bin/*.log
 nuraft_test/bin/output/
 nuraft_test/bin/test_cases/
-nuraft_test/bin/calcindex:.pipe
 nuraft_test/bin/file_lock
 nuraft_test/bin/log_test
 nuraft_test/bin/random_node0.txt
@@ -73,8 +70,7 @@ nuraft_test/bin/sync_branch_cov_file
 nuraft_test/bin/sync_file
 nuraft_test/bin/test_case_count
 nuraft_test/bin/init_random.txt
-nuraft_test/bin/calcrange:.pipe
-nuraft_test/bin/calc.pipe
+nuraft_test/bin/calc*.pipe
 redisraft_test/bin/*.db.idx
 redisraft_test/bin/*.db
 redisraft_test/bin/*.log
@@ -172,3 +168,8 @@ test/tmp.c
 test/tmp.cpp
 test/tmp.ll
 test/tmp.o
+random_node*
+log*
+aerospike_test/bin/aerospike_conf*
+cmake-build-debug
+.idea

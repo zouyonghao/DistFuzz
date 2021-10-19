@@ -1,2 +1,1 @@
-rm *.db
-rm *.db.idx
+killall event_control

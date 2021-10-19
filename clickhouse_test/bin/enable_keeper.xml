@@ -1,0 +1,24 @@
+<yandex>
+    <listen_host>127.0.1.1</listen_host>
+    <logger>
+        <level>error</level>
+        <log>run/run_log1</log>
+        <errorlog>run/err_log1</errorlog>
+        <size>10M</size>
+        <count>1</count>
+    </logger>
+    <keeper_server>
+        <tcp_port>9181</tcp_port>
+        <server_id>1</server_id>
+        <log_storage_path>run/log1</log_storage_path>
+        <snapshot_storage_path>run/snapshot1</snapshot_storage_path>
+
+        <coordination_settings>
+            <operation_timeout_ms>500</operation_timeout_ms>
+            <session_timeout_ms>1000</session_timeout_ms>
+            <raft_logs_level>trace</raft_logs_level>
+            <startup_timeout>3000000000</startup_timeout>
+            <quorum_reads>true</quorum_reads>
+        </coordination_settings>
+    </keeper_server>
+</yandex>

@@ -6,6 +6,6 @@ killall atomic_server
 # rm -rf log*
 # killall proxy_server
 killall event_control
-killall atomic_test
+# killall atomic_test
 
 # ./clear.sh

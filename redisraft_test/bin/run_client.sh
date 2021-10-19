@@ -1,10 +1,11 @@
-GET_A_SERVER_ID=$(ps -ef | grep redis | grep redis-server | head -n 1 | awk '{print substr($9, 3)}')
+GET_A_SERVER_ID=$(ps -ef | grep redis | grep -v grep | grep redis-server | head -n 1 | awk '{print substr($9, 11)}')
 if [[ $GET_A_SERVER_ID == '' ]]; then
     echo "no survive server"
     exit -1
 fi
 
-echo $GET_A_SERVER_ID
+# ps -ef | grep redis | grep -v grep | grep redis-server | head -n 1
+# echo $GET_A_SERVER_ID
 
 LEADER_ID=
 

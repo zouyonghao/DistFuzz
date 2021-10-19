@@ -8,11 +8,11 @@ sleep infinity > calc2.pipe &
 sleep infinity > calc3.pipe &
 
 LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
-$bin_path/calc_server 1 127.0.1.1:10001 < calc1.pipe >> calc1.log 2>&1 &
+$bin_path/calc_server 1 127.0.1.1:10001 < calc1.pipe >> log0_0.log 2>&1 &
 LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
-$bin_path/calc_server 2 127.0.1.1:10002 < calc2.pipe >> calc2.log 2>&1 &
+$bin_path/calc_server 2 127.0.1.1:10002 < calc2.pipe >> log1_0.log 2>&1 &
 LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
-$bin_path/calc_server 3 127.0.1.1:10003 < calc3.pipe >> calc3.log 2>&1 &
+$bin_path/calc_server 3 127.0.1.1:10003 < calc3.pipe >> log2_0.log 2>&1 &
 
 sleep 1
 echo add 2 127.0.1.1:10002 > calc1.pipe
