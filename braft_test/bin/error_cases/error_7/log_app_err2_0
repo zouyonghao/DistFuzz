@@ -1,0 +1,1192 @@
+symbol_init success!
+node_id is : 2
+I1020 17:36:39.672440  7082 /home/zyh/Desktop/incubator-brpc/src/brpc/server.cpp:1046] Server[braft::RaftStatImpl+braft::FileServiceImpl+braft::RaftServiceImpl+braft::CliServiceImpl+example::AtomicServiceImpl] is serving on port=8302.
+I1020 17:36:39.672742  7082 /home/zyh/Desktop/incubator-brpc/src/brpc/server.cpp:1049] Check out http://pc:8302 in web browser.
+I1020 17:36:39.673853  7082 /home/zyh/braft/src/braft/log.cpp:674] Use crc32c as the checksum type of appending entries
+W1020 17:36:39.673915  7082 /home/zyh/braft/src/braft/protobuf_file.cpp:91] open file failed, path: ./data2/log/log_meta: FILE_ERROR_NOT_FOUND
+W1020 17:36:39.673939  7082 /home/zyh/braft/src/braft/log.cpp:685] ./data2/log is empty
+I1020 17:36:39.683274  7082 /home/zyh/braft/src/braft/log.cpp:1136] log save_meta ./data2/log/log_meta first_log_index: 1 time: 9269
+W1020 17:36:39.683394  7082 /home/zyh/braft/src/braft/protobuf_file.cpp:91] open file failed, path: ./data2/raft_meta/raft_meta: FILE_ERROR_NOT_FOUND
+I1020 17:36:39.683480  7082 /home/zyh/braft/src/braft/raft_meta.cpp:521] Loaded single stable meta, path ./data2/raft_meta term 1 votedfor 0.0.0.0:0:0 time: 28
+I1020 17:36:39.683613  7082 /home/zyh/braft/src/braft/snapshot.cpp:460] Deleting ./data2/snapshot/temp
+W1020 17:36:39.683723  7082 /home/zyh/braft/src/braft/protobuf_file.cpp:91] open file failed, path: ./data2/raft_meta/raft_meta: FILE_ERROR_NOT_FOUND
+I1020 17:36:39.683745  7082 /home/zyh/braft/src/braft/raft_meta.cpp:521] Loaded single stable meta, path ./data2/raft_meta term 1 votedfor 0.0.0.0:0:0 time: 21
+I1020 17:36:39.683798  7082 /home/zyh/braft/src/braft/node.cpp:587] node Atomic:127.0.1.1:8302:0 init, term: 1 last_log_id: (index=0,term=0) conf: 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0,127.0.1.1:8303:0,127.0.1.1:8304:0 old_conf: 
+I1020 17:36:39.686751  7082 /home/zyh/braft/example/atomic/server.cpp:518] Atomic service is running on 0.0.0.0:8302
+I1020 17:36:40.878426  7167 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8300:0 in term 2 current_term 1 granted 1
+[33mYou are running in a fuzzing environment[0m
+I1020 17:36:40.879827  7169 /home/zyh/braft/src/braft/node.cpp:2049] node Atomic:127.0.1.1:8302:0 received RequestVote from 127.0.1.1:8300:0 in term 2 current_term 1
+I1020 17:36:40.898232  7169 /home/zyh/braft/src/braft/raft_meta.cpp:546] Saved single stable meta, path ./data2/raft_meta term 2 votedfor 0.0.0.0:0:0 time: 18277
+I1020 17:36:40.900760  7169 /home/zyh/braft/src/braft/raft_meta.cpp:546] Saved single stable meta, path ./data2/raft_meta term 2 votedfor 127.0.1.1:8300:0 time: 2442
+I1020 17:36:40.907958  7133 /home/zyh/braft/example/atomic/server.cpp:321] Node start following { leader_id=127.0.1.1:8300:0, term=2, status=Follower receives message from new leader with the same term.}
+I1020 17:36:40.909259  7140 /home/zyh/braft/src/braft/log.cpp:108] Created new segment `./data2/log/log_inprogress_00000000000000000001' with fd=10
+I1020 17:36:40.927825  7133 /home/zyh/braft/example/atomic/server.cpp:315] Configuration of this group is 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0,127.0.1.1:8303:0,127.0.1.1:8304:0
+I1020 17:36:42.256659  7122 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8303:0 in term 3 current_term 2 granted 1
+I1020 17:36:42.257521  7167 /home/zyh/braft/src/braft/node.cpp:2049] node Atomic:127.0.1.1:8302:0 received RequestVote from 127.0.1.1:8303:0 in term 3 current_term 2
+I1020 17:36:42.257607  7149 /home/zyh/braft/example/atomic/server.cpp:318] Node stops following { leader_id=127.0.1.1:8300:0, term=2, status=Raft node receives higher term request_vote_request.}
+I1020 17:36:42.263606  7167 /home/zyh/braft/src/braft/raft_meta.cpp:546] Saved single stable meta, path ./data2/raft_meta term 3 votedfor 0.0.0.0:0:0 time: 6010
+I1020 17:36:42.275074  7167 /home/zyh/braft/src/braft/raft_meta.cpp:546] Saved single stable meta, path ./data2/raft_meta term 3 votedfor 127.0.1.1:8303:0 time: 11318
+I1020 17:36:42.276092  7122 /home/zyh/braft/example/atomic/server.cpp:321] Node start following { leader_id=127.0.1.1:8303:0, term=3, status=Follower receives message from new leader with the same term.}
+I1020 17:36:42.296003  7167 /home/zyh/braft/example/atomic/server.cpp:315] Configuration of this group is 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0,127.0.1.1:8303:0,127.0.1.1:8304:0
+W1020 17:36:42.331131  7169 /home/zyh/braft/src/braft/node.cpp:2246] node Atomic:127.0.1.1:8302:0 ignore stale AppendEntries from 127.0.1.1:8300:0 in term 2 current_term 3
+I1020 17:36:43.606338  7167 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8301:0 in term 4 current_term 3 granted 1
+I1020 17:36:43.607027  7169 /home/zyh/braft/src/braft/node.cpp:2049] node Atomic:127.0.1.1:8302:0 received RequestVote from 127.0.1.1:8301:0 in term 4 current_term 3
+I1020 17:36:43.607139  7140 /home/zyh/braft/example/atomic/server.cpp:318] Node stops following { leader_id=127.0.1.1:8303:0, term=3, status=Raft node receives higher term request_vote_request.}
+I1020 17:36:43.614185  7169 /home/zyh/braft/src/braft/raft_meta.cpp:546] Saved single stable meta, path ./data2/raft_meta term 4 votedfor 0.0.0.0:0:0 time: 7093
+I1020 17:36:43.622395  7169 /home/zyh/braft/src/braft/raft_meta.cpp:546] Saved single stable meta, path ./data2/raft_meta term 4 votedfor 127.0.1.1:8301:0 time: 8038
+I1020 17:36:43.623282  7133 /home/zyh/braft/example/atomic/server.cpp:321] Node start following { leader_id=127.0.1.1:8301:0, term=4, status=Follower receives message from new leader with the same term.}
+I1020 17:36:43.643331  7133 /home/zyh/braft/example/atomic/server.cpp:315] Configuration of this group is 127.0.1.1:8300:0,127.0.1.1:8301:0,127.0.1.1:8302:0,127.0.1.1:8303:0,127.0.1.1:8304:0
+I1020 17:36:45.361105  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:45.361175  7166 /home/zyh/braft/example/atomic/server.cpp:318] Node stops following { leader_id=127.0.1.1:8301:0, term=4, status=Lost connection from leader 127.0.1.1:8301:0}
+I1020 17:36:45.361975  7133 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+W1020 17:36:45.561616  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:45.561810  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:45.561815  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:45.592949  7140 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+I1020 17:36:45.701920  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:45.702681  7133 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+W1020 17:36:45.902375  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:45.902428  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:45.902384  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:45.982796  7169 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+I1020 17:36:46.145562  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:46.146572  7133 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+W1020 17:36:46.346071  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:46.346205  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:46.346238  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:46.412388  7167 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+I1020 17:36:46.510432  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:46.511191  7133 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+W1020 17:36:46.710733  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:46.710833  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:46.710899  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:46.842883  7140 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+I1020 17:36:46.848073  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:46.848704  7122 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+W1020 17:36:47.048393  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:47.048408  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:47.048393  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:36:47.066392  7169 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+I1020 17:36:47.122602  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:47.123213  7133 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+I1020 17:36:47.284979  7122 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+W1020 17:36:47.322899  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:47.322915  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:47.322942  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:47.434113  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:47.434693  7167 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+W1020 17:36:47.634421  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:47.634459  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:47.634475  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:47.649607  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:47.650170  7140 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+I1020 17:36:47.727460  7133 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+W1020 17:36:47.849914  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:47.849914  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:47.849922  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:47.933103  7167 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+I1020 17:36:48.062095  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:48.062840  7140 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+I1020 17:36:48.257844  7133 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+W1020 17:36:48.262429  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:48.262425  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:48.262490  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:48.412642  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+I1020 17:36:48.413490  7122 /home/zyh/braft/src/braft/node.cpp:1446] node Atomic:127.0.1.1:8302:0 received PreVoteResponse from 127.0.1.1:8304:0 term 4 granted 1
+I1020 17:36:48.610304  7140 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8302:0 received PreVote from 127.0.1.1:8304:0 in term 5 current_term 4 granted 1
+W1020 17:36:48.612961  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:48.613052  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:48.613077  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:48.745341  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:48.745748  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1030 addr=127.0.1.1:8304} (0x0x6310000c9400): Connection refused
+W1020 17:36:48.945670  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:48.945717  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:48.945721  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:49.046813  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:49.047300  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=662 addr=127.0.1.1:8304} (0x0x63100008f400): Connection refused
+W1020 17:36:49.247222  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:49.247222  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:49.247222  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:49.300371  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:49.300793  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=908 addr=127.0.1.1:8304} (0x0x6310000b6000): Connection refused
+W1020 17:36:49.500704  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:49.500704  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:49.500744  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:49.502877  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:49.503305  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=800 addr=127.0.1.1:8304} (0x0x6310000a4800): Connection refused
+W1020 17:36:49.703180  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:49.703233  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:49.703180  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:36:49.799351  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:49.799745  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1035 addr=127.0.1.1:8304} (0x0x6310000c9e00): Connection refused
+W1020 17:36:49.999723  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:49.999723  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:49.999740  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:50.108842  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:50.109273  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=807 addr=127.0.1.1:8304} (0x0x6310000a5600): Connection refused
+W1020 17:36:50.309210  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:50.309217  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:50.309210  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:50.413317  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:50.413824  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=664 addr=127.0.1.1:8304} (0x0x63100008f800): Connection refused
+W1020 17:36:50.613608  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:50.613713  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:50.613719  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:50.632906  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:50.633507  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1042 addr=127.0.1.1:8304} (0x0x6310000cac00): Connection refused
+W1020 17:36:50.833338  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:50.833408  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:50.833436  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:51.025574  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:51.026074  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=671 addr=127.0.1.1:8304} (0x0x631000090600): Connection refused
+W1020 17:36:51.225969  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:51.225976  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:51.226006  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:51.479177  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:51.479606  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=813 addr=127.0.1.1:8304} (0x0x6310000a6200): Connection refused
+W1020 17:36:51.679515  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:51.679520  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:51.679566  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:51.682640  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:51.683037  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=678 addr=127.0.1.1:8304} (0x0x631000091400): Connection refused
+W1020 17:36:51.882963  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:51.882963  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:51.882963  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:52.042146  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:52.042616  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935496 addr=127.0.1.1:8304:59680} (0x0x6310000b5800): Connection refused
+W1020 17:36:52.242524  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:52.242594  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:52.242594  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:52.296746  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:52.297309  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=685 addr=127.0.1.1:8304} (0x0x631000092200): Connection refused
+W1020 17:36:52.497169  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:52.497210  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:52.497209  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:52.637418  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:52.637854  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=818 addr=127.0.1.1:8304} (0x0x6310000a6c00): Connection refused
+W1020 17:36:52.837741  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:52.837791  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:52.837793  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:52.950948  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:52.951433  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1044 addr=127.0.1.1:8304} (0x0x6310000cb000): Connection refused
+W1020 17:36:53.151347  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:53.151359  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:53.151360  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:53.385509  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:53.386148  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=824 addr=127.0.1.1:8304} (0x0x6310000a7800): Connection refused
+W1020 17:36:53.585941  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:53.585965  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:53.585992  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:53.757143  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:53.757700  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=913 addr=127.0.1.1:8304} (0x0x6310000b6a00): Connection refused
+W1020 17:36:53.957506  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:53.957576  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:53.957681  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:53.957770  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:53.958121  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=689 addr=127.0.1.1:8304} (0x0x631000092a00): Connection refused
+W1020 17:36:54.158052  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:54.158085  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:54.158058  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:36:54.158182  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:54.158612  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1048 addr=127.0.1.1:8304} (0x0x6310000cb800): Connection refused
+W1020 17:36:54.358476  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:54.358479  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:54.358565  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:54.358627  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:54.359144  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=829 addr=127.0.1.1:8304} (0x0x6310000a8200): Connection refused
+W1020 17:36:54.558976  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:54.559029  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:54.559071  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:54.559174  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:54.559707  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=920 addr=127.0.1.1:8304} (0x0x6310000b7800): Connection refused
+W1020 17:36:54.759581  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:54.759608  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:54.759632  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:54.759706  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:54.760158  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=834 addr=127.0.1.1:8304} (0x0x6310000a8c00): Connection refused
+W1020 17:36:54.960047  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:54.960098  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:54.960047  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:54.960208  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:54.960587  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=693 addr=127.0.1.1:8304} (0x0x631000093200): Connection refused
+W1020 17:36:55.160536  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:55.160574  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:55.160536  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:36:55.160681  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:55.161097  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=926 addr=127.0.1.1:8304} (0x0x6310000b8400): Connection refused
+W1020 17:36:55.361019  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:55.361019  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:55.361092  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:55.361135  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:55.361620  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=933 addr=127.0.1.1:8304} (0x0x6310000b9200): Connection refused
+W1020 17:36:55.561494  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:55.561494  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:55.561562  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:55.561669  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:55.562072  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=698 addr=127.0.1.1:8304} (0x0x631000093c00): Connection refused
+W1020 17:36:55.761989  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:55.762000  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:55.762030  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:55.762117  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:55.762626  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=705 addr=127.0.1.1:8304} (0x0x631000094a00): Connection refused
+W1020 17:36:55.962542  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:55.962542  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:55.962600  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:55.962686  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:55.963300  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=838 addr=127.0.1.1:8304} (0x0x6310000a9400): Connection refused
+W1020 17:36:56.163150  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:56.163165  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:56.163233  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:56.163353  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:56.163908  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870102 addr=127.0.1.1:8304:35328} (0x0x6310000b7400): Connection refused
+W1020 17:36:56.363754  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:56.363804  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:56.363802  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:56.363952  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:56.364337  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=712 addr=127.0.1.1:8304} (0x0x631000095800): Connection refused
+W1020 17:36:56.564270  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:56.564270  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:56.564270  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:56.564323  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:56.564805  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1055 addr=127.0.1.1:8304} (0x0x6310000cc600): Connection refused
+W1020 17:36:56.764673  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:56.764727  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:56.764742  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:56.764861  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:56.765216  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1061 addr=127.0.1.1:8304} (0x0x6310000cd200): Connection refused
+W1020 17:36:56.965190  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:56.965185  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:56.965199  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:56.965256  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:56.965705  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935646 addr=127.0.1.1:8304} (0x0x6310000cc400): Connection refused
+W1020 17:36:57.165572  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:57.165643  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:57.165651  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:57.165671  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:57.166046  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870108 addr=127.0.1.1:8304:35354} (0x0x6310000b8000): Connection refused
+W1020 17:36:57.365975  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:57.365975  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:57.366017  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:57.366098  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:57.366587  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=940 addr=127.0.1.1:8304} (0x0x6310000ba000): Connection refused
+W1020 17:36:57.566500  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:57.566521  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:57.566614  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:57.566644  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:57.567027  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935299 addr=127.0.1.1:8304} (0x0x631000094e00): Connection refused
+W1020 17:36:57.766980  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:57.766982  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:57.767019  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:57.767083  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:57.767517  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804692 addr=127.0.1.1:8304:35336} (0x0x6310000b7000): Connection refused
+W1020 17:36:57.967420  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:57.967420  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:57.967484  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:57.967582  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:57.968048  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1066 addr=127.0.1.1:8304} (0x0x6310000cdc00): Connection refused
+W1020 17:36:58.167930  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:58.167931  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:58.167986  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:58.168102  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:58.168489  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935645 addr=127.0.1.1:8304:56298} (0x0x6310000cc200): Connection refused
+I1020 17:36:58.192946  7166 /home/zyh/braft/src/braft/node.cpp:922] node Atomic:127.0.1.1:8302:0 starts to do snapshot
+I1020 17:36:58.199418  7166 /home/zyh/braft/src/braft/snapshot.cpp:638] Deleting ./data2/snapshot/snapshot_00000000000000000003
+I1020 17:36:58.199436  7166 /home/zyh/braft/src/braft/snapshot.cpp:644] Renaming ./data2/snapshot/temp to ./data2/snapshot/snapshot_00000000000000000003
+I1020 17:36:58.199495  7166 /home/zyh/braft/src/braft/snapshot_executor.cpp:234] node Atomic:127.0.1.1:8302:0 snapshot_save_done, last_included_index=3 last_included_term=4
+W1020 17:36:58.368481  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:58.368493  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:58.368481  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:36:58.368588  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:58.368929  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1074 addr=127.0.1.1:8304} (0x0x6310000cec00): Connection refused
+W1020 17:36:58.568980  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:58.568980  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:36:58.568980  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:58.568980  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:58.569376  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935291 addr=127.0.1.1:8304} (0x0x631000093e00): Connection refused
+W1020 17:36:58.769334  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:58.769335  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:58.769387  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:58.769417  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:58.769782  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870234 addr=127.0.1.1:8304:59970} (0x0x6310000cbc00): Connection refused
+W1020 17:36:58.969664  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:58.969665  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:58.969695  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:58.969812  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:58.970294  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935520 addr=127.0.1.1:8304} (0x0x6310000b8800): Connection refused
+W1020 17:36:59.170137  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:59.170137  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:59.170206  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:59.170311  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:59.170780  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935430 addr=127.0.1.1:8304} (0x0x6310000a9400): Connection refused
+W1020 17:36:59.370630  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:59.370653  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:59.370715  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:59.370828  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:59.371153  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=946 addr=127.0.1.1:8304} (0x0x6310000bac00): Connection refused
+W1020 17:36:59.571130  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:59.571130  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:59.571144  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:59.571238  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:59.571538  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1078 addr=127.0.1.1:8304} (0x0x6310000cf400): Connection refused
+W1020 17:36:59.771491  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:59.771491  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:36:59.771513  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:36:59.771606  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:59.771935  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=953 addr=127.0.1.1:8304} (0x0x6310000bba00): Connection refused
+W1020 17:36:59.971879  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:36:59.971904  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:36:59.971879  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:36:59.971957  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:36:59.972386  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=843 addr=127.0.1.1:8304} (0x0x6310000a9e00): Connection refused
+W1020 17:37:00.172207  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:00.172235  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:00.172236  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:00.172441  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:00.172787  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=960 addr=127.0.1.1:8304} (0x0x6310000bc800): Connection refused
+W1020 17:37:00.372752  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:00.372752  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:00.372766  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:00.372846  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:00.373265  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=850 addr=127.0.1.1:8304} (0x0x6310000aac00): Connection refused
+W1020 17:37:00.573129  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:00.573129  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:00.573202  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:00.573263  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:00.573602  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870116 addr=127.0.1.1:8304:56400} (0x0x6310000b9000): Connection refused
+W1020 17:37:00.773513  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:00.773528  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:00.773519  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:00.773618  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:00.773962  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=857 addr=127.0.1.1:8304} (0x0x6310000aba00): Connection refused
+W1020 17:37:00.973899  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:00.973899  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:00.973899  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:00.974017  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:00.974420  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=42949673776 addr=127.0.1.1:8304:35310} (0x0x6310000a6800): Connection refused
+W1020 17:37:01.174257  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:01.174270  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:01.174327  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:01.174436  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:01.174766  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=963 addr=127.0.1.1:8304} (0x0x6310000bce00): Connection refused
+W1020 17:37:01.374674  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:01.374707  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:01.374713  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:01.374744  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:01.375038  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=970 addr=127.0.1.1:8304} (0x0x6310000bdc00): Connection refused
+W1020 17:37:01.575017  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:01.575017  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:01.575038  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:01.575018  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:01.575387  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935511 addr=127.0.1.1:8304} (0x0x6310000b7600): Connection refused
+W1020 17:37:01.775346  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:01.775398  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:01.775364  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:01.775430  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:01.775826  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935550 addr=127.0.1.1:8304:56458} (0x0x6310000bc400): Connection refused
+W1020 17:37:01.975639  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:01.975692  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:01.975647  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:01.975835  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:01.976186  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=976 addr=127.0.1.1:8304} (0x0x6310000be800): Connection refused
+W1020 17:37:02.176100  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:02.176101  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:02.176102  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:02.176141  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:02.176431  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1083 addr=127.0.1.1:8304} (0x0x6310000cfe00): Connection refused
+W1020 17:37:02.376422  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:02.376422  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:02.376442  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:02.376487  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:02.376864  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=34359739279 addr=127.0.1.1:8304:60122} (0x0x6310000b6600): Connection refused
+W1020 17:37:02.576801  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:02.576809  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:02.576840  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:02.576919  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:02.577354  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1090 addr=127.0.1.1:8304} (0x0x6310000d0c00): Connection refused
+W1020 17:37:02.777235  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:02.777257  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:02.777257  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:02.777408  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:02.777742  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=863 addr=127.0.1.1:8304} (0x0x6310000ac600): Connection refused
+W1020 17:37:02.977629  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:02.977631  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:02.977708  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:02.977826  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:02.978167  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1096 addr=127.0.1.1:8304} (0x0x6310000d1800): Connection refused
+W1020 17:37:03.178089  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:03.178135  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:03.178094  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:03.178089  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:03.178457  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935689 addr=127.0.1.1:8304} (0x0x6310000d1a00): Connection refused
+W1020 17:37:03.378434  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:03.378434  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:03.378435  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:03.378465  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:03.378909  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1103 addr=127.0.1.1:8304} (0x0x6310000d2600): Connection refused
+W1020 17:37:03.578799  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:03.578812  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:03.578845  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:03.578943  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:03.579254  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=978 addr=127.0.1.1:8304} (0x0x6310000bec00): Connection refused
+W1020 17:37:03.779193  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:03.779193  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:03.779276  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:03.779277  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:03.779654  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1111 addr=127.0.1.1:8304} (0x0x6310000d3600): Connection refused
+W1020 17:37:03.979538  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:03.979538  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:03.979610  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:03.979709  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:03.980204  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935454 addr=127.0.1.1:8304} (0x0x6310000ac400): Connection refused
+W1020 17:37:04.180040  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:04.180091  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:04.180154  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:04.180260  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:04.180676  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=983 addr=127.0.1.1:8304} (0x0x6310000bf600): Connection refused
+W1020 17:37:04.380539  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:04.380538  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:04.380582  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:04.380713  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:04.381057  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804736 addr=127.0.1.1:8304:56500} (0x0x6310000bc800): Connection refused
+W1020 17:37:04.581041  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:04.581041  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:04.581041  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:04.581070  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:04.581483  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=990 addr=127.0.1.1:8304} (0x0x6310000c0400): Connection refused
+W1020 17:37:04.781416  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:04.781416  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:04.781416  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:04.781528  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:04.781957  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935569 addr=127.0.1.1:8304} (0x0x6310000bea00): Connection refused
+W1020 17:37:04.981883  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:04.981883  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:04.981953  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:04.982036  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:04.982552  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935459 addr=127.0.1.1:8304:56584} (0x0x6310000ace00): Connection refused
+W1020 17:37:05.182373  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:05.182418  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:05.182469  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:05.182611  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:05.183016  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804868 addr=127.0.1.1:8304:60248} (0x0x6310000d1000): Connection refused
+W1020 17:37:05.382899  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:05.382923  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:05.382943  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:05.383081  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:05.383436  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804624 addr=127.0.1.1:8304:35588} (0x0x6310000aa800): Connection refused
+W1020 17:37:05.583357  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:05.583413  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:05.583357  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:05.583357  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:05.583705  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=993 addr=127.0.1.1:8304} (0x0x6310000c0a00): Connection refused
+W1020 17:37:05.783623  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:05.783676  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:05.783681  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:05.783764  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:05.784114  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935561 addr=127.0.1.1:8304} (0x0x6310000bda00): Connection refused
+W1020 17:37:05.984016  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:05.984061  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:05.984069  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:05.984118  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:05.984494  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1117 addr=127.0.1.1:8304} (0x0x6310000d4200): Connection refused
+W1020 17:37:06.184378  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:06.184378  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:06.184384  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:06.184467  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:06.184775  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804463 addr=127.0.1.1:8304:56186} (0x0x631000092600): Connection refused
+W1020 17:37:06.384703  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:06.384753  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:06.384709  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:06.384849  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:06.385132  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1124 addr=127.0.1.1:8304} (0x0x6310000d5000): Connection refused
+W1020 17:37:06.585087  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:06.585087  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:06.585149  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:06.585178  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:06.585497  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935678 addr=127.0.1.1:8304:60188} (0x0x6310000d0400): Connection refused
+W1020 17:37:06.785464  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:06.785456  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:06.785464  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:06.785534  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:06.785935  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804764 addr=127.0.1.1:8304:60314} (0x0x6310000c0000): Connection refused
+W1020 17:37:06.985840  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:06.985871  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:06.985847  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:06.985946  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:06.986441  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935422 addr=127.0.1.1:8304} (0x0x6310000a8400): Connection refused
+W1020 17:37:07.186356  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:07.186356  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:07.186356  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:07.186488  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:07.186990  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935448 addr=127.0.1.1:8304} (0x0x6310000ab800): Connection refused
+W1020 17:37:07.386841  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:07.386918  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:07.386955  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:07.387062  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:07.387544  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=999 addr=127.0.1.1:8304} (0x0x6310000c1600): Connection refused
+W1020 17:37:07.587354  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:07.587460  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:07.587477  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:07.587608  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:07.587915  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1128 addr=127.0.1.1:8304} (0x0x6310000d5800): Connection refused
+W1020 17:37:07.787884  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:07.787884  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:07.787950  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:07.787881  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:07.788279  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1006 addr=127.0.1.1:8304} (0x0x6310000c2400): Connection refused
+W1020 17:37:07.988240  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:07.988252  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:07.988262  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:07.988333  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:07.988759  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935641 addr=127.0.1.1:8304} (0x0x6310000cba00): Connection refused
+W1020 17:37:08.188589  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:08.188589  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:08.188611  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:08.188772  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:08.189078  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1134 addr=127.0.1.1:8304} (0x0x6310000d6400): Connection refused
+W1020 17:37:08.389004  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:08.389018  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:08.389033  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:08.389108  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:08.389409  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804816 addr=127.0.1.1:8304:56160} (0x0x6310000ca800): Connection refused
+W1020 17:37:08.589360  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:08.589366  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:08.589365  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:08.589413  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:08.589716  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1011 addr=127.0.1.1:8304} (0x0x6310000c2e00): Connection refused
+W1020 17:37:08.789665  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:08.789698  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:08.789711  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:08.789825  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:08.790131  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935415 addr=127.0.1.1:8304} (0x0x6310000a7600): Connection refused
+W1020 17:37:08.990085  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:08.990121  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:08.990091  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:08.990171  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:08.990445  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1138 addr=127.0.1.1:8304} (0x0x6310000d6c00): Connection refused
+W1020 17:37:09.190430  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:09.190425  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:09.190513  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:09.190436  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:09.190834  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1018 addr=127.0.1.1:8304} (0x0x6310000c3c00): Connection refused
+W1020 17:37:09.390756  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:09.390756  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:09.390789  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:09.390838  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:09.391118  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804579 addr=127.0.1.1:8304:56136} (0x0x6310000a4e00): Connection refused
+W1020 17:37:09.591142  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:09.591180  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:09.591142  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:09.591159  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:09.591667  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935607 addr=127.0.1.1:8304} (0x0x6310000c3600): Connection refused
+W1020 17:37:09.791542  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:09.791586  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:09.791591  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:09.791731  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:09.792158  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1143 addr=127.0.1.1:8304} (0x0x6310000d7600): Connection refused
+W1020 17:37:09.992063  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:09.992063  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:09.992117  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:09.992193  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:09.992653  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870009 addr=127.0.1.1:8304} (0x0x6310000a7a00): Connection refused
+W1020 17:37:10.192547  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:10.192575  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:10.192602  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:10.192706  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:10.193057  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935601 addr=127.0.1.1:8304:56810} (0x0x6310000c2a00): Connection refused
+W1020 17:37:10.392987  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:10.392987  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:10.393037  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:10.393104  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:10.393420  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1149 addr=127.0.1.1:8304} (0x0x6310000d8200): Connection refused
+W1020 17:37:10.593322  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:10.593322  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:10.593395  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:10.593482  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:10.593806  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870304 addr=127.0.1.1:8304:60382} (0x0x6310000d4800): Connection refused
+W1020 17:37:10.793752  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:10.793752  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:10.793752  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:10.793830  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:10.794114  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=34359739401 addr=127.0.1.1:8304:56844} (0x0x6310000c9a00): Connection refused
+W1020 17:37:10.994022  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:10.994148  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:10.994154  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:10.994157  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:10.994498  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935502 addr=127.0.1.1:8304} (0x0x6310000b6400): Connection refused
+W1020 17:37:11.194411  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935407 addr=127.0.1.1:8300} (0x0x6310000a6600): Connection timed out
+W1020 17:37:11.194466  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:11.194468  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:11.194563  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:11.194888  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935443 addr=127.0.1.1:8304} (0x0x6310000aae00): Connection refused
+W1020 17:37:11.394819  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:11.394840  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:11.394866  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:11.394882  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:11.395283  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=42949674000 addr=127.0.1.1:8304:56160} (0x0x6310000ca800): Connection refused
+W1020 17:37:11.595173  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=17179869999 addr=127.0.1.1:8300} (0x0x6310000a6600): Connection timed out
+W1020 17:37:11.595205  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:11.595206  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:11.595292  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:11.595647  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1154 addr=127.0.1.1:8304} (0x0x6310000dcc00): Connection refused
+W1020 17:37:11.795514  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:11.795607  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:11.795649  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:11.795753  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:11.796138  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1162 addr=127.0.1.1:8304} (0x0x6310000ddc00): Connection refused
+W1020 17:37:11.996032  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=1156 addr=127.0.1.1:8300} (0x0x6310000dd000): Connection timed out
+W1020 17:37:11.996067  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:11.996067  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:11.996137  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:11.996542  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935551 addr=127.0.1.1:8304} (0x0x6310000bc600): Connection refused
+W1020 17:37:12.196422  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935752 addr=127.0.1.1:8300:56950} (0x0x6310000dd800): Connection timed out
+W1020 17:37:12.196503  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:12.196515  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:12.196604  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:12.196971  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1169 addr=127.0.1.1:8304} (0x0x6310000dea00): Connection refused
+W1020 17:37:12.396850  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:12.396940  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:12.396958  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:12.397011  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:12.397419  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935600 addr=127.0.1.1:8304} (0x0x6310000c2800): Connection refused
+W1020 17:37:12.597315  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=34359739054 addr=127.0.1.1:8300:60590} (0x0x631000092400): Connection timed out
+W1020 17:37:12.597357  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:12.597363  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:12.597504  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:12.597815  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1176 addr=127.0.1.1:8304} (0x0x6310000df800): Connection refused
+W1020 17:37:12.797741  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:12.797861  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:12.797862  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:12.797948  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:12.798253  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1183 addr=127.0.1.1:8304} (0x0x6310000e0600): Connection refused
+W1020 17:37:12.998175  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935768 addr=127.0.1.1:8300} (0x0x6310000df800): Connection timed out
+W1020 17:37:12.998190  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:12.998210  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:12.998304  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:12.998659  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935727 addr=127.0.1.1:8304} (0x0x6310000d6600): Connection refused
+W1020 17:37:13.198562  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935764 addr=127.0.1.1:8300:60614} (0x0x6310000df000): Connection timed out
+W1020 17:37:13.198610  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:13.198635  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:13.198656  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:13.198975  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1190 addr=127.0.1.1:8304} (0x0x6310000e1400): Connection refused
+W1020 17:37:13.398914  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:13.398976  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:13.398990  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:13.399013  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:13.401541  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804591 addr=127.0.1.1:8304} (0x0x6310000a6600): Connection refused
+W1020 17:37:13.601505  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=25769804690 addr=127.0.1.1:8300:60632} (0x0x6310000b6c00): Connection timed out
+W1020 17:37:13.601515  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:13.601548  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:13.601576  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:13.601891  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935269 addr=127.0.1.1:8304} (0x0x631000091200): Connection refused
+W1020 17:37:13.801850  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:13.801850  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=25769804936 addr=127.0.1.1:8300:57018} (0x0x6310000dd800): Connection timed out
+I1020 17:37:13.801857  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:13.801850  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:13.802274  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935262 addr=127.0.1.1:8304} (0x0x631000090400): Connection refused
+I1020 17:37:14.002284  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:14.002298  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:14.002291  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935265 addr=127.0.1.1:8300} (0x0x631000090a00): Connection timed out
+W1020 17:37:14.002322  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:14.002644  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870029 addr=127.0.1.1:8304:56960} (0x0x6310000aa200): Connection refused
+W1020 17:37:14.202602  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=34359739528 addr=127.0.1.1:8300:57018} (0x0x6310000dd800): Connection timed out
+W1020 17:37:14.202651  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E110]Fail to connect Socket{id=8589935766 addr=127.0.1.1:8303:56984} (0x0x6310000df400): Connection timed out
+W1020 17:37:14.202675  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:14.202676  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:14.203000  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935257 addr=127.0.1.1:8304} (0x0x63100008fa00): Connection refused
+W1020 17:37:14.402930  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:14.403043  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:14.403064  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:14.403097  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:14.403596  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935628 addr=127.0.1.1:8304} (0x0x6310000ca000): Connection refused
+W1020 17:37:14.603433  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=17179869980 addr=127.0.1.1:8300:59694} (0x0x6310000a4000): Connection timed out
+W1020 17:37:14.603456  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=8589935400 addr=127.0.1.1:8301} (0x0x6310000a5800): Connection timed out
+W1020 17:37:14.603508  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:14.603657  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:14.604054  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935501 addr=127.0.1.1:8304} (0x0x6310000b6200): Connection refused
+W1020 17:37:14.803917  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935624 addr=127.0.1.1:8300} (0x0x6310000c9800): Connection timed out
+W1020 17:37:14.803971  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E110]Fail to connect Socket{id=8589935389 addr=127.0.1.1:8303} (0x0x6310000a4200): Connection timed out
+W1020 17:37:14.803985  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=8589935393 addr=127.0.1.1:8301} (0x0x6310000a4a00): Connection timed out
+I1020 17:37:14.804101  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:14.804594  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935546 addr=127.0.1.1:8304} (0x0x6310000bbc00): Connection refused
+W1020 17:37:15.004431  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:15.004486  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:15.004512  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:15.004656  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:15.004969  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935539 addr=127.0.1.1:8304} (0x0x6310000bae00): Connection refused
+W1020 17:37:15.204864  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:15.204924  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:15.204936  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:15.204949  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:15.205259  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179869838 addr=127.0.1.1:8304:59602} (0x0x63100008e400): Connection refused
+W1020 17:37:15.405165  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=34359739540 addr=127.0.1.1:8300:60674} (0x0x6310000df000): Connection timed out
+W1020 17:37:15.405175  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=8589935497 addr=127.0.1.1:8301} (0x0x6310000b5a00): Connection timed out
+W1020 17:37:15.405214  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:15.405300  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:15.405581  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804443 addr=127.0.1.1:8304:57026} (0x0x63100008fe00): Connection refused
+W1020 17:37:15.605501  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:15.605541  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:15.605555  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:15.605579  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:15.605828  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804482 addr=127.0.1.1:8304:60014} (0x0x631000094c00): Connection refused
+W1020 17:37:15.805838  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=17179870089 addr=127.0.1.1:8300} (0x0x6310000b5a00): Connection timed out
+W1020 17:37:15.805874  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:15.805883  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:15.805885  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=42949673671 addr=127.0.1.1:8301:56392} (0x0x631000095600): Connection timed out
+W1020 17:37:15.806150  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870254 addr=127.0.1.1:8304:60006} (0x0x6310000ce400): Connection refused
+W1020 17:37:16.006105  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:16.006149  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:16.006217  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:16.006229  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:16.006565  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=60129542272 addr=127.0.1.1:8304:8302} (0x0x63100003c800): Connection refused
+W1020 17:37:16.206486  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=51539608263 addr=127.0.1.1:8300:56392} (0x0x631000095600): Connection timed out
+W1020 17:37:16.206522  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:16.206561  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:16.206554  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=8589935623 addr=127.0.1.1:8301} (0x0x6310000c9600): Connection timed out
+W1020 17:37:16.206881  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=721 addr=127.0.1.1:8304} (0x0x631000096a00): Connection refused
+W1020 17:37:16.406835  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=717 addr=127.0.1.1:8301} (0x0x631000096200): Connection timed out
+W1020 17:37:16.406853  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=715 addr=127.0.1.1:8300} (0x0x631000095e00): Connection timed out
+W1020 17:37:16.406868  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:16.406923  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:16.407235  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=42949674073 addr=127.0.1.1:8304:35874} (0x0x6310000d3a00): Connection refused
+W1020 17:37:16.607145  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:16.607173  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:16.607181  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:16.607190  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:16.607499  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=727 addr=127.0.1.1:8304} (0x0x631000097600): Connection refused
+W1020 17:37:16.807422  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:16.807456  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:16.807463  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E110]Fail to connect Socket{id=725 addr=127.0.1.1:8303} (0x0x631000097200): Connection timed out
+I1020 17:37:16.807523  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:16.807815  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179869985 addr=127.0.1.1:8304} (0x0x6310000a4a00): Connection refused
+W1020 17:37:17.007761  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:17.007752  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:17.007856  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:17.007828  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:17.008162  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1193 addr=127.0.1.1:8304} (0x0x6310000e1a00): Connection refused
+W1020 17:37:17.208159  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:17.208159  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:17.208214  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:17.208235  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:17.208518  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=731 addr=127.0.1.1:8304} (0x0x631000097e00): Connection refused
+W1020 17:37:17.408523  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=51539608712 addr=127.0.1.1:8300:57018} (0x0x6310000dd800): Connection timed out
+I1020 17:37:17.408567  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:17.408528  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:17.408523  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=8589935315 addr=127.0.1.1:8301} (0x0x631000096e00): Connection timed out
+W1020 17:37:17.408865  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935595 addr=127.0.1.1:8304} (0x0x6310000c1e00): Connection refused
+W1020 17:37:17.608813  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:17.608845  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:17.608867  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:17.608899  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:17.609219  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935588 addr=127.0.1.1:8304} (0x0x6310000c1000): Connection refused
+W1020 17:37:17.809210  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935721 addr=127.0.1.1:8300} (0x0x6310000d5a00): Connection timed out
+W1020 17:37:17.809232  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=42949674044 addr=127.0.1.1:8301:56726} (0x0x6310000d0000): Connection timed out
+W1020 17:37:17.809255  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:17.809300  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:17.809668  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179869888 addr=127.0.1.1:8304} (0x0x631000094800): Connection refused
+W1020 17:37:18.009531  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:18.009593  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:18.009607  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:18.009724  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:18.010050  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870241 addr=127.0.1.1:8304:59936} (0x0x6310000cca00): Connection refused
+W1020 17:37:18.209987  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:18.209997  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:18.210025  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:18.210122  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:18.210429  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=34359739061 addr=127.0.1.1:8304:59886} (0x0x631000093200): Connection refused
+W1020 17:37:18.410328  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+I1020 17:37:18.410431  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:18.410426  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:18.410432  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:18.412920  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=42949673787 addr=127.0.1.1:8304:35630} (0x0x6310000a7e00): Connection refused
+W1020 17:37:18.612803  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:18.612838  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:18.612847  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:18.612864  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:18.613205  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=735 addr=127.0.1.1:8304} (0x0x631000098600): Connection refused
+W1020 17:37:18.813115  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:18.813161  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:18.813183  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:18.813181  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E110]Fail to connect Socket{id=733 addr=127.0.1.1:8303} (0x0x631000098200): Connection timed out
+W1020 17:37:18.813508  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1199 addr=127.0.1.1:8304} (0x0x6310000e2600): Connection refused
+W1020 17:37:19.013437  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:19.013440  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:19.013479  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:19.013482  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:19.013762  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1207 addr=127.0.1.1:8304} (0x0x6310000e3600): Connection refused
+W1020 17:37:19.213699  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:19.213745  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:19.213745  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:19.213803  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:19.214145  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935788 addr=127.0.1.1:8304} (0x0x6310000e2000): Connection refused
+W1020 17:37:19.414026  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:19.414086  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:19.414087  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:19.414195  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:19.414556  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=742 addr=127.0.1.1:8304} (0x0x631000099400): Connection refused
+W1020 17:37:19.614417  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=25769804851 addr=127.0.1.1:8300} (0x0x6310000cee00): Connection timed out
+W1020 17:37:19.614465  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=738 addr=127.0.1.1:8301} (0x0x631000098c00): Connection timed out
+W1020 17:37:19.614519  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:19.614549  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:19.614849  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804604 addr=127.0.1.1:8304} (0x0x6310000a8000): Connection refused
+W1020 17:37:19.814807  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:19.814843  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:19.814859  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:19.814860  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:19.815156  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870251 addr=127.0.1.1:8304} (0x0x6310000cde00): Connection refused
+W1020 17:37:20.015062  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:20.015107  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:20.015116  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:20.015187  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:20.015446  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=42949673650 addr=127.0.1.1:8304:57002} (0x0x631000092c00): Connection refused
+W1020 17:37:20.215433  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:20.215509  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:20.215559  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:20.215592  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:20.215994  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870189 addr=127.0.1.1:8304} (0x0x6310000c2200): Connection refused
+W1020 17:37:20.415856  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:20.415991  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:20.416030  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:20.416096  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:20.416372  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804472 addr=127.0.1.1:8304:56256} (0x0x631000093800): Connection refused
+W1020 17:37:20.616337  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:20.616385  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:20.616396  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:20.616412  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:20.616720  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935529 addr=127.0.1.1:8304} (0x0x6310000b9a00): Connection refused
+W1020 17:37:20.816679  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=25769804822 addr=127.0.1.1:8300:56196} (0x0x6310000cb400): Connection timed out
+W1020 17:37:20.816722  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:20.816734  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=17179869897 addr=127.0.1.1:8301} (0x0x631000095a00): Connection timed out
+I1020 17:37:20.816759  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:20.817160  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935321 addr=127.0.1.1:8304} (0x0x631000097a00): Connection refused
+W1020 17:37:21.017035  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:21.017052  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:21.017065  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:21.017213  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:21.017502  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=42949674028 addr=127.0.1.1:8304:60040} (0x0x6310000ce000): Connection refused
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:21.217422  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:21.217487  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:21.217500  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:21.217542  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:21.217943  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=68719477667 addr=127.0.1.1:8304:35456} (0x0x6310000b8e00): Connection refused
+W1020 17:37:21.417807  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:21.417875  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:21.417884  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:21.417996  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:21.418276  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=748 addr=127.0.1.1:8304} (0x0x63100009a000): Connection refused
+W1020 17:37:21.618200  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:21.618246  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:21.618262  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:21.618270  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:21.618545  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=42949673652 addr=127.0.1.1:8304:56692} (0x0x631000093000): Connection refused
+W1020 17:37:21.818535  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=25769804907 addr=127.0.1.1:8300} (0x0x6310000d5e00): Connection timed out
+W1020 17:37:21.818556  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:21.818561  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=42949674023 addr=127.0.1.1:8301} (0x0x6310000cd600): Connection timed out
+I1020 17:37:21.818600  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:21.818905  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=756 addr=127.0.1.1:8304} (0x0x63100009b000): Connection refused
+W1020 17:37:22.018803  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:22.018843  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:22.018869  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:22.018889  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:22.019232  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=764 addr=127.0.1.1:8304} (0x0x63100009c000): Connection refused
+W1020 17:37:22.219143  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:22.219180  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:22.219198  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:22.219315  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:22.219638  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1284 addr=127.0.1.1:8304} (0x0x6310000f1000): Connection refused
+W1020 17:37:22.419541  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:22.419577  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:22.419578  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:22.419623  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:22.419913  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935717 addr=127.0.1.1:8304} (0x0x6310000d5200): Connection refused
+W1020 17:37:22.619864  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:22.619898  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:22.619920  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:22.619920  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:22.620273  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=34359739290 addr=127.0.1.1:8304:35370} (0x0x6310000b7c00): Connection refused
+W1020 17:37:22.820222  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935354 addr=127.0.1.1:8300} (0x0x63100009bc00): Connection timed out
+W1020 17:37:22.820222  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=17179869908 addr=127.0.1.1:8301} (0x0x631000097000): Connection timed out
+W1020 17:37:22.820228  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:22.820252  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:22.820642  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=1291 addr=127.0.1.1:8304} (0x0x6310000f1e00): Connection refused
+W1020 17:37:23.020547  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:23.020603  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:23.020631  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:23.020633  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:23.020897  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804732 addr=127.0.1.1:8304:60088} (0x0x6310000bc000): Connection refused
+W1020 17:37:23.220856  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:23.220884  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:23.220912  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:23.220955  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:23.221290  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179869894 addr=127.0.1.1:8304:56290} (0x0x631000095400): Connection refused
+W1020 17:37:23.421218  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:23.421237  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:23.421254  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:23.421277  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:23.421538  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=8589935310 addr=127.0.1.1:8304} (0x0x631000096400): Connection refused
+W1020 17:37:23.621548  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:23.621611  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:23.621638  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:23.621672  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:23.622014  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804471 addr=127.0.1.1:8304} (0x0x631000093600): Connection refused
+W1020 17:37:23.821977  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=25769804566 addr=127.0.1.1:8300:59628} (0x0x6310000a3400): Connection timed out
+W1020 17:37:23.821981  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=17179870213 addr=127.0.1.1:8301} (0x0x6310000c9200): Connection timed out
+I1020 17:37:23.822034  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:23.822008  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:23.822541  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804607 addr=127.0.1.1:8304} (0x0x6310000a8600): Connection refused
+W1020 17:37:24.022296  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:24.022345  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:24.022476  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:24.022547  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:24.022866  7140 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=51539608393 addr=127.0.1.1:8304:35614} (0x0x6310000a9a00): Connection refused
+PRELOAD: fuzzing is stopped, will use kernel_func directly.
+W1020 17:37:24.222818  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=8589935586 addr=127.0.1.1:8300} (0x0x6310000c0c00): Connection timed out
+W1020 17:37:24.222829  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:24.222884  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:24.222886  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:24.223202  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804588 addr=127.0.1.1:8304:60664} (0x0x6310000a6000): Connection refused
+W1020 17:37:24.423115  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:24.423170  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:24.423244  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:24.423246  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:24.423524  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179870283 addr=127.0.1.1:8304:60222} (0x0x6310000d1e00): Connection refused
+W1020 17:37:24.623467  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:24.623514  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:24.623526  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:24.623542  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:24.623845  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=871 addr=127.0.1.1:8304} (0x0x6310000ad600): Connection refused
+W1020 17:37:24.823759  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E110]Fail to connect Socket{id=51539608409 addr=127.0.1.1:8300:35756} (0x0x6310000aba00): Connection timed out
+W1020 17:37:24.823828  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E110]Fail to connect Socket{id=34359739158 addr=127.0.1.1:8301:59628} (0x0x6310000a3400): Connection timed out
+W1020 17:37:24.823828  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:24.823862  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:24.824154  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179869845 addr=127.0.1.1:8304} (0x0x63100008f200): Connection refused
+W1020 17:37:25.024088  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:25.024132  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:25.024150  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:25.024180  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:25.024451  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804852 addr=127.0.1.1:8304:56432} (0x0x6310000cf000): Connection refused
+W1020 17:37:25.224443  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:25.224496  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:25.224539  7153 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:25.224492  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:25.224875  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=17179869990 addr=127.0.1.1:8304} (0x0x6310000a5400): Connection refused
+W1020 17:37:25.424774  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:25.424855  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:25.424877  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:25.424891  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:25.425266  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804890 addr=127.0.1.1:8304} (0x0x6310000d3c00): Connection refused
+W1020 17:37:25.625172  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:25.625224  7148 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:25.625220  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:25.625298  7151 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:25.625662  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=34359739298 addr=127.0.1.1:8304} (0x0x6310000b8c00): Connection refused
+W1020 17:37:25.825514  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:25.825559  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:25.825571  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:25.825686  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:25.825987  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=874 addr=127.0.1.1:8304} (0x0x6310000adc00): Connection refused
+W1020 17:37:26.025892  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:26.025964  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:26.025985  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:26.026017  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:26.026415  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=51539608243 addr=127.0.1.1:8304:35538} (0x0x631000092e00): Connection refused
+W1020 17:37:26.226273  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:26.226349  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:26.226370  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:26.226450  7166 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:26.226790  7122 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=25769804629 addr=127.0.1.1:8304:60112} (0x0x6310000ab200): Connection refused
+W1020 17:37:26.426698  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:26.426739  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+W1020 17:37:26.426765  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+I1020 17:37:26.426779  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:26.427105  7133 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=882 addr=127.0.1.1:8304} (0x0x6310000aec00): Connection refused
+W1020 17:37:26.627084  7153 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8301:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8301
+I1020 17:37:26.627101  7148 /home/zyh/braft/src/braft/node.cpp:1495] node Atomic:127.0.1.1:8302:0 term 4 start pre_vote
+W1020 17:37:26.627085  7166 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8300:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8300
+W1020 17:37:26.627092  7151 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8303:0 error: [E1008]Reached timeout=200ms @127.0.1.1:8303
+W1020 17:37:26.627449  7169 /home/zyh/braft/src/braft/node.cpp:1475] node Atomic:127.0.1.1:8302:0 request PreVote from 127.0.1.1:8304:0 error: [E111]Fail to connect Socket{id=890 addr=127.0.1.1:8304} (0x0x6310000afc00): Connection refused
+W1020 17:37:26.706381  7122 /home/zyh/Desktop/incubator-brpc/src/brpc/input_messenger.cpp:214] Fail to read from Socket{id=25769804420 fd=13 addr=127.0.1.1:8300:35020} (0x63100008d000): Connection reset by peer
+W1020 17:37:26.706451  7133 /home/zyh/Desktop/incubator-brpc/src/brpc/input_messenger.cpp:214] Fail to read from Socket{id=68719477378 fd=14 addr=127.0.1.1:8300:35196} (0x63100008cc00): Connection reset by peer
