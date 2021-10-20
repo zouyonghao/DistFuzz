@@ -7,8 +7,8 @@
 class RandomStart : public CriticalOperator
 {
 public:
-    RandomStart() {}
-    bool _do();
+    RandomStart() = default;
+    bool _do() override;
 };
 
 #endif

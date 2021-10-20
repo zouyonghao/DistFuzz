@@ -1,0 +1,11 @@
+//
+// Created by zyh on 2021.10.20.
+//
+
+#ifndef DISTRIBUTED_SYSTEM_TEST_COLOR_H
+#define DISTRIBUTED_SYSTEM_TEST_COLOR_H
+
+#define COLOR_RED_START "\033[1;31m"
+#define COLOR_RESET_END "\033[0m"
+
+#endif // DISTRIBUTED_SYSTEM_TEST_COLOR_H

@@ -1,6 +1,5 @@
-#include <stdio.h>
+#include <cstdio>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <unistd.h>
 
 #include <dlfcn.h>
@@ -11,6 +10,7 @@
 
 #include <arpa/inet.h>
 #include <netinet/in.h>
+#include <utils/share_mem_util.h>
 
 ssize_t (*k_send)(int sockfd, const void *buf, size_t len, int flags);
 ssize_t (*k_sendto)(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
@@ -62,19 +62,25 @@ enum SUPPORTED_ACTION
     ACTION_COUNT
 };
 
-ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::function<ssize_t()> kernel_func)
+ssize_t handle_random_event(const char *func_name, int fd, size_t length, const std::function<ssize_t()> &kernel_func)
 {
-
     // fprintf(stderr, "%s called.\n", func_name);
     unsigned int val = 0;
     unsigned int val_len = sizeof(val);
-    if (0 != getsockopt(fd, SOL_SOCKET, SO_TYPE, &val, &val_len))
+    /** If fuzzing is disabled, we call the original function. */
+    if (!get_is_fuzzing())
     {
-        // this is not a socket file descriptor
+        fprintf(stderr, "PRELOAD: fuzzing is stopped, will use kernel_func directly.\n");
         return kernel_func();
     }
 
-    sockaddr_in addr;
+    /** If the file descriptor is not a valid network socket, we call the original function.*/
+    if (0 != getsockopt(fd, SOL_SOCKET, SO_TYPE, &val, &val_len))
+    {
+        return kernel_func();
+    }
+
+    sockaddr_in addr{};
     socklen_t len = sizeof(addr);
     // getsockname(fd, (struct sockaddr *)&addr, &len);
 
@@ -86,7 +92,7 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
     // fprintf(stderr, "socket peer port is %d\n", addr.sin_port);
 
     // server must use ip 127.0.1.1
-    in_addr addr_cmp;
+    in_addr addr_cmp{};
     inet_aton("127.0.1.1", &addr_cmp);
 
     // If the IP is not from 127.0.1.1, then treat it as a client.
@@ -117,7 +123,7 @@ ssize_t handle_random_event(const char *func_name, int fd, ssize_t length, std::
     case DELAY:
     {
         uint32_t random = __dst_get_random_uint32();
-        usleep(random);
+        // usleep(random);
         // __dst_event_trigger(
         //     ("sleep for " + std::to_string(random) + "n").c_str());
         break;

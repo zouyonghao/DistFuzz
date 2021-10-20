@@ -1,10 +1,10 @@
 {
-    "instrumentors": [
-        "DefaultInstrumentor"
-    ],
-    "additional_link_args": [
-        "/tmp/test_lib.o"
-    ],
-    "additional_compile_args": [],
-    "ignored_args": []
+  "instrumentors": [
+    "DefaultInstrumentor"
+  ],
+  "additional_link_args": [
+    "/tmp/test_lib.o"
+  ],
+  "additional_compile_args": [],
+  "ignored_args": []
 }

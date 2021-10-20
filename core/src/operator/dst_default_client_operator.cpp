@@ -59,7 +59,11 @@ bool DefaultClientOperator::_do()
         /* timeout, killed or force killed */
         if (result == 124 || result == 143 || result == 137)
         {
-            return result;
+            if (result == 124)
+            {
+                std::cerr << "client operator got timeout\n";
+            }
+            return false;
         }
 
         std::string result_record_string = "{:process " + std::to_string(random_thread_id) + ", :type " +

@@ -1,5 +1,3 @@
 #include <stdio.h>
 
-void test() {
-    printf("Test called!\n");
-}
+void test() { printf("Test called!\n"); }

@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <bitset>
+#include <cstdint>
 #include <cstdlib>
 #include <cstring>
 #include <fstream>
@@ -9,16 +10,14 @@
 #include <memory>
 #include <set>
 #include <sstream>
-#include <stdint.h>
 #include <string>
 #include <vector>
 
-#include <signal.h>
+#include <csignal>
+#include <cstdio>
 #include <dirent.h>
 #include <fcntl.h>
 #include <getopt.h>
-#include <signal.h>
-#include <stdio.h>
 #include <sys/file.h>
 #include <sys/mman.h>
 #include <sys/shm.h>
@@ -124,8 +123,7 @@ typedef struct matrix_element
     unsigned long long hash_2;
 } matrix_element;
 
-#ifndef __MAIN__
-#define __MAIN__
+#ifndef __FUZZ_MAIN__
 extern seed_container queue;
 extern seed_container::iterator queueCur;
 extern seed_container::iterator queueTop[MAP_SIZE];
@@ -226,7 +224,7 @@ extern set<u64> unreachable_control_matrix;
 extern int concurrency_test_time;
 extern int skip_since_travel;
 extern int skip_since_unreachable;
-#endif // end __MAIN__
+#endif // end __FUZZ_MAIN__
 
 // in Main.cpp
 
@@ -237,14 +235,13 @@ u32 ShowCoverage(u8 *virgin_map);
 
 // in TestcasesProcess.cpp
 void ReadTestcases(string dirOfCases);
-void AddToQueue(const char *fname, u64 fsize, const char *elist_fname = NULL,
-                const char *cm_file = NULL);
+void AddToQueue(const char *fname, u64 fsize, const char *elist_fname = NULL, const char *cm_file = NULL);
 
 // in ShmMapping.cpp
-void ShmSetup(void);
-void ShmRemove(void);
+void ShmSetup();
+void ShmRemove();
 u8 *multi_proc_shm_get(string shm_file);
-u8 *multi_proc_shm_create(string shm_file, int mem_size);
+u8 *multi_proc_shm_create(const string &shm_file, int mem_size);
 
 // in QueueCulling.cpp
 void MinimizeBit(bitset<MAP_SIZE> *trace, u8 *globalTraceBit);
@@ -258,14 +255,13 @@ void DryRunning(char **argv);
 void ShowQueue(seed_container::iterator q);
 u64 GetCurTimeUs(void);
 u8 CalibrateCase(char **argv, seed_container::iterator q, u8 *mem);
-u8 ExecuteCase(string target_path, char **argv, u32 timeout);
-void WriteToTestcase(void *mem, u32 len, string testfile);
+u8 ExecuteCase(const string &current_target_path, char **argv, u32 timeout);
+void WriteToTestcase(void *mem, u32 len, const string &current_testfile);
 void SetupSignalHandlers(void);
-u8 FuzzUnit(char **argv, u8 *filemap, u64 len, u8 *error_list = NULL,
-            matrix_element *delay_list = NULL);
+u8 FuzzUnit(char **argv, u8 *filemap, u64 len, u8 *error_list = NULL, matrix_element *delay_list = NULL);
 u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status);
-void ReadFile2Mem(string filename, u8 *mem, u32 len);
-void WriteMem2File(string filename, const u8 *const mem, u32 len);
+void ReadFile2Mem(const string &filename, u8 *mem, u32 len);
+void WriteMem2File(const string &filename, const u8 *const mem, u32 len);
 void init_count_class(void);
 
 // in Trim.cpp
@@ -282,12 +278,9 @@ void save_crashed_fu(const u8 *const error_list);
 bool is_unique_fault(const u8 *const error_list);
 
 // in DelayInsertionEngin
-u8 control_matrix_mutate(char **argv, u64 len, u8 *filemap,
-                         matrix_element *tmp_control_matrix);
-u8 has_new_travel_matrix_element(matrix_element *tmp_travel_matrix,
-                                 set<u64> &tmp_total_travel);
-bool is_control_matrix_triggered(matrix_element *tmp_control_matrix,
-                                 matrix_element *tmp_travel_matrix);
+u8 control_matrix_mutate(char **argv, u64 len, u8 *filemap, matrix_element *tmp_control_matrix);
+u8 has_new_travel_matrix_element(matrix_element *tmp_travel_matrix, set<u64> &tmp_total_travel);
+bool is_control_matrix_triggered(matrix_element *tmp_control_matrix, matrix_element *tmp_travel_matrix);
 
 // in Setup
 void GetCoreCount(void);

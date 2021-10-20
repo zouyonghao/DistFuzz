@@ -7,7 +7,7 @@
 class RandomKill : public CriticalOperator
 {
 public:
-    RandomKill() {}
+    RandomKill() = default;
     bool _do() override;
 };
 

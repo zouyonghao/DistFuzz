@@ -5,7 +5,7 @@
 #include <dst_event.h>
 #include <dst_random.h>
 #include <operator/dst_default_operator.hpp>
-#include <util/common_uils.hpp>
+#include <utils/common_util.hpp>
 
 #include <limits>
 #include <map>
@@ -46,7 +46,7 @@ public:
     {
     }
 
-    virtual bool _do();
+    bool _do() override;
 };
 
 #endif // DST_DEFAULT_CLIENT_OPERATOR_HEADER

@@ -34,7 +34,7 @@ public:
     uint32_t node_count;
     ServerConfigurationGenerator *configuration_generator;
 
-    NodeManager(ServerConfigurationGenerator *_configuration_generator)
+    explicit NodeManager(ServerConfigurationGenerator *_configuration_generator)
         : configuration_generator(_configuration_generator), node_count(DEFAULT_NODE_COUNT)
     {
     }
@@ -170,8 +170,8 @@ public:
         env["__DST_ENV_RANDOM_FILE__"] = "random_node" + node_id_str;
         env["NODE_NAME"] = "node" + node_id_str;
         env["NODE_ID"] = node_id_str;
-        std::string log_file = "log" + node_id_str + "_" + std::to_string(ni.log_index);
-        std::string err_log_file = "log_err" + node_id_str + "_" + std::to_string(ni.log_index);
+        std::string log_file = "log_app_" + node_id_str + "_" + std::to_string(ni.log_index);
+        std::string err_log_file = "log_app_err" + node_id_str + "_" + std::to_string(ni.log_index);
         if (ni.process != nullptr)
         {
             delete ni.process;

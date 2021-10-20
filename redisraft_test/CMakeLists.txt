@@ -20,12 +20,12 @@ add_executable(redisraft_test_main ${REDISRAFT_TEST_MAIN_SRC})
 target_compile_definitions(redisraft_test_main PUBLIC -DNO_CONCURRENCY)
 target_link_libraries(redisraft_test_main
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
+        -Wl,--no-whole-archive dst_core pthread rt ${Boost_LIBRARIES})
 
 add_executable(redisraft_operator_test ${REDISRAFT_TEST_OPERATORS_SRC})
 target_link_libraries(redisraft_operator_test
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_random dst_default_kv dst_event ${Boost_LIBRARIES})
+        -Wl,--no-whole-archive dst_core pthread rt ${Boost_LIBRARIES})
 
 add_library(redisraft_operator_lib src/operators/redisraft_client.cpp)
 enable_testing()

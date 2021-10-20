@@ -17,10 +17,22 @@ target_link_libraries(dst_default_kv pthread ${Boost_LIBRARIES} rt)
 target_compile_options(dst_default_kv PUBLIC -fPIC)
 
 add_library(dst_default_operator
-            src/operator/dst_default_operator.cpp
-            src/operator/dst_random_kill.cpp
-            src/operator/dst_random_start.cpp
-            src/operator/dst_default_client_operator.cpp)
+        src/operator/dst_default_operator.cpp
+        src/operator/dst_random_kill.cpp
+        src/operator/dst_random_start.cpp
+        src/operator/dst_default_client_operator.cpp)
+
+add_library(dst_utils SHARED
+        src/utils/share_mem_util.cpp)
+target_link_libraries(dst_utils pthread ${Boost_LIBRARIES} rt)
+target_compile_options(dst_utils PUBLIC -fPIC)
+
+# dst core consists of dst_event, dst_random, dst_default_kv, dst_utils
+add_library(dst_core
+        src/dst_default_event.cpp
+        src/dst_default_random.c
+        src/dst_default_in_memory_kv_store.cpp
+        src/utils/share_mem_util.cpp)
 
 # unit test
 add_executable(dst_test_default_kv test/dst_test_kv.cpp)

@@ -15,7 +15,7 @@
 class BraftConfigurationGenerator : public ServerConfigurationGenerator
 {
 public:
-    std::string get_configure_string(uint32_t node_id, uint32_t node_count)
+    std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
         std::string config = BIN_PATH " -reuse_addr -ip=" IP " -reuse_port -election_timeout_ms=200 ";
         config += "-port=" + std::to_string(BASE_PORT + node_id) + " ";
@@ -39,9 +39,10 @@ public:
 class BraftClientConfigurationGenerator : public ClientConfigurationGenerator
 {
 public:
-    std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
+    std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...) override
     {
-        std::string configure_string = "timeout 2 /home/zyh/braft/example/atomic/atomic_test -conf=";
+        /* TODO: the timeout value should be estimated automatically by running several tests before fuzzing. */
+        std::string configure_string = "timeout 3 /home/zyh/braft/example/atomic/atomic_test -conf=";
         for (uint32_t i = 0; i < node_count; i++)
         {
             configure_string += IP ":" + std::to_string(BASE_PORT + i) + ":0,";

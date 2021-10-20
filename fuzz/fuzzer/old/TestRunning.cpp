@@ -13,8 +13,7 @@ static u8 killSignal;
 static u8 count_class_lookup8[256];
 static u16 count_class_lookup16[65536];
 
-bool are_errors_triggered(const u8 *const error_list,
-                          const u8 *const error_trace, u32 len)
+bool are_errors_triggered(const u8 *const error_list, const u8 *const error_trace, u32 len)
 {
     u32 i;
     for (i = 0; i < len; i++)
@@ -25,7 +24,7 @@ bool are_errors_triggered(const u8 *const error_list,
     return false;
 }
 
-void ReadFile2Mem(string filename, u8 *mem, u32 len)
+void ReadFile2Mem(const string &filename, u8 *mem, u32 len)
 {
     auto fd = open(filename.c_str(), O_RDONLY);
     if (fd < 0)
@@ -44,20 +43,18 @@ void ReadFile2Mem(string filename, u8 *mem, u32 len)
     close(fd);
 }
 
-void WriteMem2File(string filename, const u8 *const mem, u32 len)
+void WriteMem2File(const string &filename, const u8 *const mem, u32 len)
 {
     auto fd = open(filename.c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600);
     if (fd < 0)
     {
-        cout << "open() fail in WriteMem2File, cannot open " << filename
-             << endl;
+        cout << "open() fail in WriteMem2File, cannot open " << filename << endl;
         exit(-1);
     }
     auto write_len = write(fd, mem, len);
     if (write_len != len)
     {
-        cout << "write_len(" << write_len << ") is not equal to len(" << len
-             << ")" << endl;
+        cout << "write_len(" << write_len << ") is not equal to len(" << len << ")" << endl;
         cout << "write " << filename << " fail in WriteMem2File" << endl;
         cout << strerror(errno) << endl;
         exit(-1);
@@ -114,13 +111,13 @@ void SetupSignalHandlers(void)
     sigaction(SIGALRM, &sa, NULL);
 }
 
-void WriteToTestcase(void *mem, u32 len, string testfile)
+void WriteToTestcase(void *mem, u32 len, const string &current_testfile)
 {
-    unlink(testfile.c_str());
-    s32 fd = open(testfile.c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600);
+    unlink(current_testfile.c_str());
+    s32 fd = open(current_testfile.c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600);
     if (fd < 0)
     {
-        cout << "open() fail in WriteToTestcase, file is " << testfile << endl;
+        cout << "open() fail in WriteToTestcase, file is " << current_testfile << endl;
         exit(-1);
     }
     s32 res = write(fd, mem, len);
@@ -155,8 +152,7 @@ void init_count_class(void)
     u32 b1, b2;
     for (b1 = 0; b1 < 256; b1++)
         for (b2 = 0; b2 < 256; b2++)
-            count_class_lookup16[(b1 << 8) + b2] =
-                (count_class_lookup8[b1] << 8) | count_class_lookup8[b2];
+            count_class_lookup16[(b1 << 8) + b2] = (count_class_lookup8[b1] << 8) | count_class_lookup8[b2];
 }
 
 #ifdef __x86_64__
@@ -201,7 +197,7 @@ static inline void classify_counts(u32 *mem)
 
 #endif /* ^__x86_64__ */
 
-u8 ExecuteCase(string target_path, char **argv, u32 timeout)
+u8 ExecuteCase(const string &current_target_path, char **argv, u32 timeout)
 {
     static itimerval itimer;
     static u32 prev_timed_out = 0;
@@ -251,7 +247,7 @@ u8 ExecuteCase(string target_path, char **argv, u32 timeout)
                    0);
 
             // usleep(995000);
-            execv(target_path.c_str(), argv);
+            execv(current_target_path.c_str(), argv);
             exit(0);
         }
     }
@@ -391,8 +387,7 @@ void CheckMapSize(void)
     u32 bytecounted = CountBytes(globalTraceBit);
     if (bytecounted > MAP_SIZE / 10)
     {
-        cout << "bytecounted = " << bytecounted << ", map maybe too small"
-             << endl;
+        cout << "bytecounted = " << bytecounted << ", map maybe too small" << endl;
     }
 }
 
@@ -470,9 +465,8 @@ static u8 has_new_bits(u8 *globalTraceBit, u8 *virgin_map)
 
 #ifdef __x86_64__
 
-                if ((cur[0] && vir[0] == 0xff) || (cur[1] && vir[1] == 0xff) ||
-                    (cur[2] && vir[2] == 0xff) || (cur[3] && vir[3] == 0xff) ||
-                    (cur[4] && vir[4] == 0xff) || (cur[5] && vir[5] == 0xff) ||
+                if ((cur[0] && vir[0] == 0xff) || (cur[1] && vir[1] == 0xff) || (cur[2] && vir[2] == 0xff) ||
+                    (cur[3] && vir[3] == 0xff) || (cur[4] && vir[4] == 0xff) || (cur[5] && vir[5] == 0xff) ||
                     (cur[6] && vir[6] == 0xff) || (cur[7] && vir[7] == 0xff))
                     ret = 2;
                 else
@@ -480,8 +474,8 @@ static u8 has_new_bits(u8 *globalTraceBit, u8 *virgin_map)
 
 #else
 
-                if ((cur[0] && vir[0] == 0xff) || (cur[1] && vir[1] == 0xff) ||
-                    (cur[2] && vir[2] == 0xff) || (cur[3] && vir[3] == 0xff))
+                if ((cur[0] && vir[0] == 0xff) || (cur[1] && vir[1] == 0xff) || (cur[2] && vir[2] == 0xff) ||
+                    (cur[3] && vir[3] == 0xff))
                     ret = 2;
                 else
                     ret = 1;
@@ -514,9 +508,7 @@ u8 crash_handler(u8 keeping, u8 *mem, u32 len)
     string filename;
 
     total_crash_count++;
-    filename = outputDir + "total_crash/" +
-               num2str_Keep6bit(total_crash_count) + "-" +
-               to_string(GetCurTimeUs());
+    filename = outputDir + "total_crash/" + num2str_Keep6bit(total_crash_count) + "-" + to_string(GetCurTimeUs());
     WriteMem2File(filename, mem, len);
 
     bool new_bit = false;
@@ -548,9 +540,8 @@ u8 crash_handler(u8 keeping, u8 *mem, u32 len)
 
     unique_crash_count++;
 
-    filename = outputDir + "crash/" + num2str_Keep6bit(unique_crash_count) +
-               "-" + num2str_Keep6bit(total_crash_count) + "-" +
-               to_string(GetCurTimeUs());
+    filename = outputDir + "crash/" + num2str_Keep6bit(unique_crash_count) + "-" + num2str_Keep6bit(total_crash_count) +
+               "-" + to_string(GetCurTimeUs());
     WriteMem2File(filename, mem, len);
 
     if (!keeping)
@@ -608,8 +599,7 @@ u8 ex_crash_handler(u8 keeping, u8 *mem, u32 len)
     // write fault unique crash folder
     unique_ex_crash_count++;
 
-    crash_name = num2str_Keep6bit(unique_ex_crash_count) + "-" +
-                 to_string(GetCurTimeUs());
+    crash_name = num2str_Keep6bit(unique_ex_crash_count) + "-" + to_string(GetCurTimeUs());
 
     filename = outputDir + "ex_crash/files/" + crash_name;
     WriteMem2File(filename, mem, len);
@@ -689,8 +679,7 @@ u8 hang_handler(u8 keeping, char **argv, u8 *mem, u32 len)
 
     unique_hang_count++;
 
-    filename = outputDir + "hang/" + num2str_Keep6bit(unique_hang_count) + "-" +
-               to_string(GetCurTimeUs());
+    filename = outputDir + "hang/" + num2str_Keep6bit(unique_hang_count) + "-" + to_string(GetCurTimeUs());
     WriteMem2File(filename, mem, len);
 
     if (!keeping)
@@ -756,8 +745,7 @@ u8 ex_hang_handler(u8 keeping, char **argv, u8 *mem, u32 len)
 
     unique_ex_hang_count++;
 
-    hang_name = num2str_Keep6bit(unique_ex_hang_count) + "-" +
-                to_string(GetCurTimeUs());
+    hang_name = num2str_Keep6bit(unique_ex_hang_count) + "-" + to_string(GetCurTimeUs());
 
     filename = outputDir + "ex_hang/files/" + hang_name;
     WriteMem2File(filename, mem, len);
@@ -807,8 +795,7 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
     }
     // printf("newBitFlag %d\n", newBitFlag);
 #ifndef NO_CONCURRENCY_FUZZ
-    new_travel_element =
-        has_new_travel_matrix_element(travel_matrix, total_travel);
+    new_travel_element = has_new_travel_matrix_element(travel_matrix, total_travel);
 #endif
 
     bool eflag = false;
@@ -822,8 +809,7 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
 
     if (newBitFlag || new_travel_element)
     { // is interesting
-        filename = outputDir + "queue/" + num2str_Keep6bit(queue.size()) +
-                   (newBitFlag == 2 ? "+cov" : "+tup");
+        filename = outputDir + "queue/" + num2str_Keep6bit(queue.size()) + (newBitFlag == 2 ? "+cov" : "+tup");
 
         char *real_error_list_filename = NULL;
         char *real_control_matrix_filename = NULL;
@@ -831,11 +817,9 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
 #ifndef NO_FUZZING_ERROR
         if (eflag)
         {
-            error_list_filename = outputDir + "errorList/" +
-                                  num2str_Keep6bit(queue.size()) +
-                                  (newBitFlag == 2 ? "+cov" : "+tup");
-            real_error_list_filename =
-                (char *)malloc(error_list_filename.size() + 5);
+            error_list_filename =
+                outputDir + "errorList/" + num2str_Keep6bit(queue.size()) + (newBitFlag == 2 ? "+cov" : "+tup");
+            real_error_list_filename = (char *)malloc(error_list_filename.size() + 5);
             strcpy(real_error_list_filename, error_list_filename.c_str());
 
             WriteMem2File(error_list_filename, errorList, MAX_LIST_SIZE);
@@ -845,24 +829,19 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
 #ifndef NO_CONCURRENCY_FUZZ
         if (cflag)
         {
-            control_matrix_filename = outputDir + "delayList/" +
-                                      num2str_Keep6bit(queue.size()) +
-                                      (newBitFlag == 2 ? "+cov" : "+tup");
-            real_control_matrix_filename =
-                (char *)malloc(control_matrix_filename.size() + 5);
-            strcpy(real_control_matrix_filename,
-                   control_matrix_filename.c_str());
+            control_matrix_filename =
+                outputDir + "delayList/" + num2str_Keep6bit(queue.size()) + (newBitFlag == 2 ? "+cov" : "+tup");
+            real_control_matrix_filename = (char *)malloc(control_matrix_filename.size() + 5);
+            strcpy(real_control_matrix_filename, control_matrix_filename.c_str());
 
             WriteMem2File(control_matrix_filename, (u8 *)control_matrix,
-                          CONTROL_MATRIX_SIZE * sizeof(matrix_element) /
-                              sizeof(u8));
+                          CONTROL_MATRIX_SIZE * sizeof(matrix_element) / sizeof(u8));
         }
 #endif
         if (!eflag && !cflag)
             usefule_input++;
 
-        AddToQueue(filename.c_str(), len, real_error_list_filename,
-                   real_control_matrix_filename);
+        AddToQueue(filename.c_str(), len, real_error_list_filename, real_control_matrix_filename);
         WriteMem2File(filename, mem, len);
 
         if (real_error_list_filename)
@@ -909,8 +888,7 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
     return keeping;
 }
 
-u8 FuzzUnit(char **argv, u8 *filemap, u64 len, u8 *error_list,
-            matrix_element *tmp_cm)
+u8 FuzzUnit(char **argv, u8 *filemap, u64 len, u8 *error_list, matrix_element *tmp_cm)
 {
     u8 run_status;
     static int fuzz_time = 0, sync_cycle;
@@ -935,8 +913,7 @@ u8 FuzzUnit(char **argv, u8 *filemap, u64 len, u8 *error_list,
             flock(fp->_fileno, LOCK_EX);
 
             sync_coverage(virginMap, sync_cov_ptr, MAP_SIZE);
-            sync_coverage(virginMapForBranchTraceBit, sync_branch_cov_ptr,
-                          MAP_SIZE);
+            sync_coverage(virginMapForBranchTraceBit, sync_branch_cov_ptr, MAP_SIZE);
 
             flock(fp->_fileno, LOCK_UN);
             fclose(fp);
@@ -956,8 +933,7 @@ u8 FuzzUnit(char **argv, u8 *filemap, u64 len, u8 *error_list,
 #ifndef NO_CONCURRENCY_FUZZ
     // if delay list is null, the delayList is the delay list used lastly
     if (tmp_cm != NULL)
-        memcpy(control_matrix, tmp_cm,
-               CONTROL_MATRIX_SIZE * sizeof(matrix_element));
+        memcpy(control_matrix, tmp_cm, CONTROL_MATRIX_SIZE * sizeof(matrix_element));
 #endif
 
     WriteToTestcase(filemap, len, testfile);

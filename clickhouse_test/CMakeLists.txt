@@ -13,7 +13,8 @@ file(GLOB CLICKHOUSE_TEST_MAIN_SRC
 
 add_executable(clickhouse_test_main ${CLICKHOUSE_TEST_MAIN_SRC})
 target_link_libraries(clickhouse_test_main
-        dst_default_operator dst_random dst_default_kv dst_event
+        -Wl,--whole-archive dst_default_operator
+        -Wl,--no-whole-archive dst_core pthread rt
         ${Boost_LIBRARIES})
 
 file(GLOB CLICKHOUSE_TEST_OPERATORS_SRC
@@ -24,7 +25,7 @@ file(GLOB CLICKHOUSE_TEST_OPERATORS_SRC
 add_executable(clickhouse_operator_test ${CLICKHOUSE_TEST_OPERATORS_SRC})
 target_link_libraries(clickhouse_operator_test
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_random dst_default_kv dst_event
+        -Wl,--no-whole-archive dst_core pthread rt
         ${Boost_LIBRARIES})
 
 add_library(clickhouse_operator_lib src/keeper_operators/delete_data_folder.cpp src/keeper_operators/keeper_client_test.cpp)

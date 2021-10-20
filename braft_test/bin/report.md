@@ -40,25 +40,31 @@
     SUMMARY: AddressSanitizer: 146 byte(s) leaked in 3 allocation(s).
     ```
 
-    https://github.com/baidu/braft/issues/268
+   https://github.com/baidu/braft/issues/268
 
 2. fail to rename
-    issues
-        https://github.com/baidu/braft/issues/272
-    related logs
-        error_cases/100
+
+   issues
+    * https://github.com/baidu/braft/issues/272
+
+   related logs
+    * error_cases/100
 
 3. Met raft error
-    issues
-        https://github.com/baidu/braft/issues/273
-    related logs
-        error_cases/1486
+
+   issues
+    * https://github.com/baidu/braft/issues/273
+
+   related logs
+    * error_cases/1486
 
 4. grpc Too many open files
 
-    related logs
-        error_cases/1486
-    https://github.com/grpc/grpc/issues/20418
+   issues
+    * https://github.com/grpc/grpc/issues/20418
+
+   related logs
+    * error_cases/1486
 
 5. Check failed: meta.term == header.term
 
@@ -103,11 +109,11 @@
     I0418 23:23:51.457718 83193 /home/zyh/braft/src/braft/node.cpp:2009] node Atomic:127.0.1.1:8301:0 received PreVote from 127.0.1.1:8302:0 in term 7 current_term 7 granted 0
 
     ```
-    issues
-        https://github.com/baidu/braft/issues/279
-    
-    related logs
-        error_cases/8181
+   issues
+    * https://github.com/baidu/braft/issues/279
+
+   related logs
+    * error_cases/8181
 
 6. Check failed: false. Did you forget to call truncate_suffix
 
@@ -130,8 +136,16 @@
     F0420 08:05:14.776913 83218 /home/zyh/braft/src/braft/log.cpp:720] There's gap between appending entries and _last_log_index path: ./data0/log
 
     ```
-    issues
-        https://github.com/baidu/braft/issues/280
-    
-    related logs
-        error_cases/8181
+   issues
+    * https://github.com/baidu/braft/issues/280
+
+   related logs
+    * error_cases/8181
+
+7. 节点 step down 之后无法恢复
+
+   issues
+    * https://github.com/baidu/braft/issues/272
+
+   related logs
+    * error_cases/error_7

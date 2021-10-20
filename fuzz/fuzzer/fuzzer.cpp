@@ -5,5 +5,5 @@
  *      init variables
  *      init shared memory
  *      ...
- *  2. 
+ *  2.
  */

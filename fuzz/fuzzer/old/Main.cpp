@@ -1,4 +1,4 @@
-#define __MAIN__
+#define __FUZZ_MAIN__
 #include "Fuzzer.h"
 
 #define SYNC_CYCLE 1
@@ -103,7 +103,9 @@ u32 hang_tmout = EXEC_TIMEOUT;
 
 void MakeDirectory(void)
 {
-    struct stat buffer;
+    struct stat buffer
+    {
+    };
     if (!sync_id.empty() && stat(sync_dir.c_str(), &buffer) != 0)
     { // use multiple fuzzer, and sync_dir does not exist
         cout << "sync_dir does not exist, mkdir " << sync_dir << endl;
@@ -389,10 +391,8 @@ int main(int argc, char **argv)
     {
         if (sync_state == "MASTER")
         {
-            sync_cov_ptr =
-                multi_proc_shm_create(sync_file_name, sync_cov_length);
-            sync_branch_cov_ptr = multi_proc_shm_create(
-                sync_branch_cov_file_name, sync_cov_length);
+            sync_cov_ptr = multi_proc_shm_create(sync_file_name, sync_cov_length);
+            sync_branch_cov_ptr = multi_proc_shm_create(sync_branch_cov_file_name, sync_cov_length);
         }
         else
         {

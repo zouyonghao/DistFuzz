@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
     printf("result = %d\n", result);
 
     std::vector<const char *> test_vector{"echo", "abc"};
-    execvp(test_vector[0], (char *const*) &test_vector[0]);
+    execvp(test_vector[0], (char *const *)&test_vector[0]);
 
     test();
 

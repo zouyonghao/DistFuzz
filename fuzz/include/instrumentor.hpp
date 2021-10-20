@@ -31,7 +31,6 @@ public:
     virtual void do_instrument(llvm::Module *) = 0;
 };
 
-#define REGISTER_INSTRUMENTOR(name, item)                                      \
-    bool name##_entry = Registry<Instrumentor>::add(#name, item)
+#define REGISTER_INSTRUMENTOR(name, item) bool name##_entry = Registry<Instrumentor>::add(#name, item)
 
 #endif // __INSTRUMENTOR_HEADER__

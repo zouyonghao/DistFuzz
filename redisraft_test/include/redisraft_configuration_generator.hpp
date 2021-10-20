@@ -16,7 +16,7 @@
 class RedisraftConfigurationGenerator : public ServerConfigurationGenerator
 {
 public:
-    std::string get_configure_string(uint32_t node_id, uint32_t node_count)
+    std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
         std::string config = BIN_PATH " --bind " IP " ";
         config += "--port " + std::to_string(BASE_PORT + node_id) + " ";

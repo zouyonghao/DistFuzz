@@ -17,23 +17,27 @@ mv operation_log ./test_cases/$1
 
 # checking the operation log!
 {
-    # ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
-    if grep -q '):' ./test_cases/$1/log*; then
-        echo "Find errors!"
-    # elif [ $CHECK_RAFT_LOG_ERROR == 1 ]; then
-    #     echo "Check raft log failed!"
-    elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/log[0-2]; then
-        echo "Find ASan errors!"
-	if grep -q "0x81c9b" ./test_cases/$1/log[0-2]; then
-		echo "Find a duplicated case"
-		rm -rf ./test_cases/$1
-	fi
-    # elif grep -q true ./test_cases/$1/check_log; then
-    #     echo "No errors, deleting logs..."
-    #     rm -rf ./test_cases/$1
-    else
-        echo "No errors, deleting logs..."
-        rm -rf ./test_cases/$1
+  # ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
+  if grep -q '):' ./test_cases/$1/log*; then
+    echo "Find errors!"
+  # elif [ $CHECK_RAFT_LOG_ERROR == 1 ]; then
+  #     echo "Check raft log failed!"
+  elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/log[0-2]; then
+    echo "Find ASan errors!"
+    if grep -q "0x81c9b" ./test_cases/$1/log[0-2]; then
+      echo "Find a duplicated case"
+      rm -rf ./test_cases/$1
     fi
-    rm -rf ./test_cases/$1/c-raft_data*
+  # elif grep -q true ./test_cases/$1/check_log; then
+  #     echo "No errors, deleting logs..."
+  #     rm -rf ./test_cases/$1
+  elif grep -q "check failed!" ./test_cases/$1/log_test; then
+    echo "Find check failed!"
+  elif grep -q "all normal operators after fuzzing failed" ./test_cases/$1/log_test; then
+    echo "Find all normal operators after fuzzing failed"
+  else
+    echo "No errors, deleting logs..."
+    rm -rf ./test_cases/$1
+  fi
+  rm -rf ./test_cases/$1/c-raft_data*
 } &

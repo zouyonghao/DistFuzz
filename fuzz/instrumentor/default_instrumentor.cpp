@@ -9,14 +9,12 @@ public:
     DefaultInstrumentor() : Instrumentor() {}
     ~DefaultInstrumentor();
 
-    virtual std::vector<llvm::Instruction *>
-    get_locations(llvm::Module *m) override
+    virtual std::vector<llvm::Instruction *> get_locations(llvm::Module *m) override
     {
         std::vector<llvm::Instruction *> locations;
         for (auto &func_i : *m)
         {
-            for (auto bbI = func_i.begin(), bbE = func_i.end(); bbI != bbE;
-                 ++bbI)
+            for (auto bbI = func_i.begin(), bbE = func_i.end(); bbI != bbE; ++bbI)
             {
                 auto *basicBlocks = llvm::dyn_cast<llvm::BasicBlock>(bbI);
                 llvm::Instruction *in_first = basicBlocks->getFirstNonPHI();
@@ -33,20 +31,17 @@ public:
     virtual llvm::Function *get_function(llvm::Module *m) override
     {
         // Initialize paramater's type
-        llvm::IntegerType *Integer =
-            llvm::IntegerType::get(m->getContext(), 32);
+        llvm::IntegerType *Integer = llvm::IntegerType::get(m->getContext(), 32);
         std::vector<llvm::Type *> FuncTy_args;
         FuncTy_args.push_back(Integer);
         // FuncTy_args.push_back(Integer);
-        llvm::FunctionType *FuncTy = llvm::FunctionType::get(
-            llvm::Type::getVoidTy(m->getContext()), FuncTy_args, false);
+        llvm::FunctionType *FuncTy =
+            llvm::FunctionType::get(llvm::Type::getVoidTy(m->getContext()), FuncTy_args, false);
 
         llvm::Function *func = m->getFunction("CoverageRecord");
         if (!func)
         {
-            func = llvm::Function::Create(FuncTy,
-                                          llvm::GlobalValue::ExternalLinkage,
-                                          "CoverageRecord", m);
+            func = llvm::Function::Create(FuncTy, llvm::GlobalValue::ExternalLinkage, "CoverageRecord", m);
             func->setCallingConv(llvm::CallingConv::C);
         }
         llvm::AttributeList func_Add_PAL;
@@ -62,14 +57,12 @@ public:
         {
             auto insert_function = this->get_function(m);
             unsigned int rand_num = rand();
-            llvm::ConstantInt *rand_int = llvm::ConstantInt::get(
-                m->getContext(), llvm::APInt(32, rand_num));
+            llvm::ConstantInt *rand_int = llvm::ConstantInt::get(m->getContext(), llvm::APInt(32, rand_num));
             // Prepare parameters for MyCovCal
             std::vector<llvm::Value *> parameters;
             parameters.push_back(rand_int);
 
-            llvm::CallInst *mycall =
-                llvm::CallInst::Create(insert_function, parameters, "", inst);
+            llvm::CallInst *mycall = llvm::CallInst::Create(insert_function, parameters, "", inst);
             mycall->setCallingConv(llvm::CallingConv::C);
             mycall->setTailCall(false);
         }

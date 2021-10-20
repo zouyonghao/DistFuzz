@@ -1,57 +1,58 @@
 #include "Fuzzer.h"
 
-#define FLIP_BIT(_ar, _b)                                                      \
-    do                                                                         \
-    {                                                                          \
-        u8 *_arf = (u8 *)(_ar);                                                \
-        u32 _bf = (_b);                                                        \
-        _arf[(_bf) >> 3] ^= (128 >> ((_bf)&7));                                \
+#define FLIP_BIT(_ar, _b)                                                                                              \
+    do                                                                                                                 \
+    {                                                                                                                  \
+        u8 *_arf = (u8 *)(_ar);                                                                                        \
+        u32 _bf = (_b);                                                                                                \
+        _arf[(_bf) >> 3] ^= (128 >> ((_bf)&7));                                                                        \
     } while (0)
 
-#define SWAP16(_x)                                                             \
-    ({                                                                         \
-        u16 _ret = (_x);                                                       \
-        (u16)((_ret << 8) | (_ret >> 8));                                      \
-    })
+#define SWAP16(_x)                                                                                                     \
+    (                                                                                                                  \
+        {                                                                                                              \
+            u16 _ret = (_x);                                                                                           \
+            (u16)((_ret << 8) | (_ret >> 8));                                                                          \
+        })
 
-#define SWAP32(_x)                                                             \
-    ({                                                                         \
-        u32 _ret = (_x);                                                       \
-        (u32)((_ret << 24) | (_ret >> 24) | ((_ret << 8) & 0x00FF0000) |       \
-              ((_ret >> 8) & 0x0000FF00));                                     \
-    })
+#define SWAP32(_x)                                                                                                     \
+    (                                                                                                                  \
+        {                                                                                                              \
+            u32 _ret = (_x);                                                                                           \
+            (u32)((_ret << 24) | (_ret >> 24) | ((_ret << 8) & 0x00FF0000) | ((_ret >> 8) & 0x0000FF00));              \
+        })
 
-#define INTERESTING_8                                                          \
-    -128,    /* Overflow signed 8-bit when decremented  */                     \
-        -1,  /*                                         */                     \
-        0,   /*                                         */                     \
-        1,   /*                                         */                     \
-        16,  /* One-off with common buffer size         */                     \
-        32,  /* One-off with common buffer size         */                     \
-        64,  /* One-off with common buffer size         */                     \
-        100, /* One-off with common buffer size         */                     \
+#define INTERESTING_8                                                                                                  \
+    -128,    /* Overflow signed 8-bit when decremented  */                                                             \
+        -1,  /*                                         */                                                             \
+        0,   /*                                         */                                                             \
+        1,   /*                                         */                                                             \
+        16,  /* One-off with common buffer size         */                                                             \
+        32,  /* One-off with common buffer size         */                                                             \
+        64,  /* One-off with common buffer size         */                                                             \
+        100, /* One-off with common buffer size         */                                                             \
         127  /* Overflow signed 8-bit when incremented  */
 
-#define INTERESTING_16                                                         \
-    -32768,   /* Overflow signed 16-bit when decremented */                    \
-        -129, /* Overflow signed 8-bit                   */                    \
-        128,  /* Overflow signed 8-bit                   */                    \
-        255,  /* Overflow unsig 8-bit when incremented   */                    \
-        256,  /* Overflow unsig 8-bit                    */                    \
-        512,  /* One-off with common buffer size         */                    \
-        1000, /* One-off with common buffer size         */                    \
-        1024, /* One-off with common buffer size         */                    \
-        4096, /* One-off with common buffer size         */                    \
+#define INTERESTING_16                                                                                                 \
+    -32768,   /* Overflow signed 16-bit when decremented */                                                            \
+        -129, /* Overflow signed 8-bit                   */                                                            \
+        128,  /* Overflow signed 8-bit                   */                                                            \
+        255,  /* Overflow unsig 8-bit when incremented   */                                                            \
+        256,  /* Overflow unsig 8-bit                    */                                                            \
+        512,  /* One-off with common buffer size         */                                                            \
+        1000, /* One-off with common buffer size         */                                                            \
+        1024, /* One-off with common buffer size         */                                                            \
+        4096, /* One-off with common buffer size         */                                                            \
         32767 /* Overflow signed 16-bit when incremented */
 
-#define INTERESTING_32                                                         \
-    -2147483648LL,  /* Overflow signed 32-bit when decremented */              \
-        -100663046, /* Large negative number (endian-agnostic) */              \
-        -32769,     /* Overflow signed 16-bit                  */              \
-        32768,      /* Overflow signed 16-bit                  */              \
-        65535,      /* Overflow unsig 16-bit when incremented  */              \
-        65536,      /* Overflow unsig 16 bit                   */              \
-        100663045,  /* Large positive number (endian-agnostic) */              \
+#define INTERESTING_32                                                                                                 \
+    -2147483648LL,  /* Overflow signed 32-bit when decremented */                                                      \
+        -100663046, /* Large negative number (endian-agnostic) */                                                      \
+        -32769,     /* Overflow signed 16-bit                  */                                                      \
+        32768,      /* Overflow signed 16-bit                  */                                                      \
+        65535,      /* Overflow unsig 16-bit when incremented  */                                                      \
+        65536,      /* Overflow unsig 16 bit                   */                                                      \
+        100663045,  /* Large positive number (endian-agnostic) */                                                      \
         2147483647  /* Overflow signed 32-bit when incremented */
 
 #define MIN_TOKEN_SIZE 1
@@ -162,15 +163,13 @@ static u8 could_be_arith(u32 old_val, u32 new_val, u8 blen)
 
     if (blen == 4)
     {
-        if ((u32)(old_val - new_val) <= ARITH_MAX ||
-            (u32)(new_val - old_val) <= ARITH_MAX)
+        if ((u32)(old_val - new_val) <= ARITH_MAX || (u32)(new_val - old_val) <= ARITH_MAX)
             return 1;
 
         new_val = SWAP32(new_val);
         old_val = SWAP32(old_val);
 
-        if ((u32)(old_val - new_val) <= ARITH_MAX ||
-            (u32)(new_val - old_val) <= ARITH_MAX)
+        if ((u32)(old_val - new_val) <= ARITH_MAX || (u32)(new_val - old_val) <= ARITH_MAX)
             return 1;
     }
 
@@ -188,8 +187,7 @@ static u8 could_be_interest(u32 old_val, u32 new_val, u8 blen, u8 check_le)
     {
         for (j = 0; j < sizeof(interesting_8) / sizeof(s8); j++)
         {
-            u32 tval = (old_val & ~(0xff << (i * 8))) |
-                       (((u8)interesting_8[j]) << (i * 8));
+            u32 tval = (old_val & ~(0xff << (i * 8))) | (((u8)interesting_8[j]) << (i * 8));
 
             if (new_val == tval)
                 return 1;
@@ -203,16 +201,14 @@ static u8 could_be_interest(u32 old_val, u32 new_val, u8 blen, u8 check_le)
     {
         for (j = 0; j < sizeof(interesting_16) / sizeof(s16); j++)
         {
-            u32 tval = (old_val & ~(0xffff << (i * 8))) |
-                       (((u16)interesting_16[j]) << (i * 8));
+            u32 tval = (old_val & ~(0xffff << (i * 8))) | (((u16)interesting_16[j]) << (i * 8));
 
             if (new_val == tval)
                 return 1;
 
             if (blen > 2)
             {
-                tval = (old_val & ~(0xffff << (i * 8))) |
-                       (SWAP16(interesting_16[j]) << (i * 8));
+                tval = (old_val & ~(0xffff << (i * 8))) | (SWAP16(interesting_16[j]) << (i * 8));
 
                 if (new_val == tval)
                     return 1;
@@ -263,15 +259,13 @@ void print_result(string stage)
     string filename = outputDir + "plot-curve";
     output.open(filename, ios::app);
     output << GetCurTimeUs() << "   ";
-    output << ShowCoverage(virginMap) << "("
-           << 1.0 * ShowCoverage(virginMap) * 100 / MAP_SIZE << "%)"
+    output << ShowCoverage(virginMap) << "(" << 1.0 * ShowCoverage(virginMap) * 100 / MAP_SIZE << "%)"
            << "   ";
     output << unique_crash_count << "/" << total_crash_count << "   ";
     output << unique_ex_crash_count << "   ";
 
     output << "bc:" << ShowCoverage(virginMapForBranchTraceBit) << "("
-           << 1.0 * ShowCoverage(virginMapForBranchTraceBit) * 100 / MAP_SIZE
-           << "%)"
+           << 1.0 * ShowCoverage(virginMapForBranchTraceBit) * 100 / MAP_SIZE << "%)"
            << "   ";
     // output << useful_error_seq << "/" << total_error_seq << "   ";
     // output << usefule_input << "/" << total_input << "   ";
@@ -327,8 +321,7 @@ static void AddToken(string token)
     }
 }
 
-static u8 BitFlip(char **argv, u64 len, u8 *filemap, u8 flipnum, u8 flipstep,
-                  seed_container::iterator qCur)
+static u8 BitFlip(char **argv, u64 len, u8 *filemap, u8 flipnum, u8 flipstep, seed_container::iterator qCur)
 {
     u64 i;
     u64 stageCur;
@@ -376,8 +369,7 @@ static u8 BitFlip(char **argv, u64 len, u8 *filemap, u8 flipnum, u8 flipstep,
                 u32 cksum = hash32(globalTraceBit, MAP_SIZE, HASH_CONST);
                 if (cksum != prevcksum)
                 {
-                    if (token.size() >= MIN_TOKEN_SIZE &&
-                        token.size() <= MAX_TOKEN_SIZE)
+                    if (token.size() >= MIN_TOKEN_SIZE && token.size() <= MAX_TOKEN_SIZE)
                     {
                         AddToken(token);
                     }
@@ -515,8 +507,8 @@ static u8 Arithmetic32(char **argv, u64 len, u8 *filemap)
         return 0;
     for (i = 0; i < len - 3; i++)
     {
-        if (useful_byte[i] == false && useful_byte[i + 1] == false &&
-            useful_byte[i + 2] == false && useful_byte[i + 3] == false)
+        if (useful_byte[i] == false && useful_byte[i + 1] == false && useful_byte[i + 2] == false &&
+            useful_byte[i + 3] == false)
         {
             continue;
         }
@@ -576,8 +568,7 @@ static u8 InterestingReplace8(char **argv, u64 len, u8 *filemap)
         u8 orig = filemap[i];
         for (j = 0; j < sizeof(interesting_8) / sizeof(s8); j++)
         {
-            if (!could_be_bitflip(orig ^ (u8)interesting_8[j]) &&
-                !could_be_arith(orig, (u8)interesting_8[j], 1))
+            if (!could_be_bitflip(orig ^ (u8)interesting_8[j]) && !could_be_arith(orig, (u8)interesting_8[j], 1))
             {
 
                 filemap[i] = interesting_8[j];
@@ -606,8 +597,7 @@ static u8 InterestingReplace16(char **argv, u64 len, u8 *filemap)
         u16 orig = *(u16 *)(filemap + i);
         for (j = 0; j < sizeof(interesting_16) / sizeof(s16); j++)
         {
-            if (!could_be_bitflip(orig ^ (u16)interesting_16[j]) &&
-                !could_be_arith(orig, (u16)interesting_16[j], 2) &&
+            if (!could_be_bitflip(orig ^ (u16)interesting_16[j]) && !could_be_arith(orig, (u16)interesting_16[j], 2) &&
                 !could_be_interest(orig, (u16)interesting_16[j], 2, 0))
             {
 
@@ -629,8 +619,8 @@ static u8 InterestingReplace32(char **argv, u64 len, u8 *filemap)
         return 0;
     for (i = 0; i < len - 3; i++)
     {
-        if (useful_byte[i] == false && useful_byte[i + 1] == false &&
-            useful_byte[i + 2] == false && useful_byte[i + 3] == false)
+        if (useful_byte[i] == false && useful_byte[i + 1] == false && useful_byte[i + 2] == false &&
+            useful_byte[i + 3] == false)
         {
             continue;
         }
@@ -638,8 +628,7 @@ static u8 InterestingReplace32(char **argv, u64 len, u8 *filemap)
         u32 orig = *(u32 *)(filemap + i);
         for (j = 0; j < sizeof(interesting_32) / sizeof(s32); j++)
         {
-            if (!could_be_bitflip(orig ^ (u32)interesting_32[j]) &&
-                !could_be_arith(orig, (u32)interesting_32[j], 4) &&
+            if (!could_be_bitflip(orig ^ (u32)interesting_32[j]) && !could_be_arith(orig, (u32)interesting_32[j], 4) &&
                 !could_be_interest(orig, (u32)interesting_32[j], 4, 0))
             {
 
@@ -654,8 +643,7 @@ static u8 InterestingReplace32(char **argv, u64 len, u8 *filemap)
     return 0;
 }
 
-static u8 DictionaryReplace(char **argv, u64 len, u8 *filemap,
-                            vector<pair<string, u32>> &MVector)
+static u8 DictionaryReplace(char **argv, u64 len, u8 *filemap, vector<pair<string, u32>> &MVector)
 {
     u64 i, j;
     u8 *token_data;
@@ -699,8 +687,7 @@ static u8 DictionaryReplace(char **argv, u64 len, u8 *filemap,
     return 0;
 }
 
-static u8 DictionaryInsert(char **argv, u64 len, u8 *filemap,
-                           const vector<pair<string, u32>> &MVector)
+static u8 DictionaryInsert(char **argv, u64 len, u8 *filemap, const vector<pair<string, u32>> &MVector)
 {
     u64 i, j;
     u8 *token_data;
@@ -733,17 +720,14 @@ static u8 DictionaryInsert(char **argv, u64 len, u8 *filemap,
     return 0;
 }
 
-bool CompareMVectorValue(const pair<string, u32> &obj1,
-                         const pair<string, u32> &obj2)
+bool CompareMVectorValue(const pair<string, u32> &obj1, const pair<string, u32> &obj2)
 {
     return obj1.second > obj2.second; // sort from big value to small value
 }
 
-bool CompareMVectorStringLen(const pair<string, u32> &obj1,
-                             const pair<string, u32> &obj2)
+bool CompareMVectorStringLen(const pair<string, u32> &obj1, const pair<string, u32> &obj2)
 {
-    return obj1.first.size() <
-           obj2.first.size(); // sort from small size to big size
+    return obj1.first.size() < obj2.first.size(); // sort from small size to big size
 }
 
 static u8 Dictionary(char **argv, u64 len, u8 *filemap)
@@ -806,8 +790,7 @@ static u32 choose_block_len(u32 limit)
     return min_value + randNum(min(max_value, limit) - min_value + 1);
 }
 
-static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
-                u32 cycles = HAVOC_CYCLES_INIT)
+static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr, u32 cycles = HAVOC_CYCLES_INIT)
 {
     u8 *filemap = uniq_ptr.get();
     u64 temp_len = len;
@@ -825,8 +808,7 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
         u32 mutate_time = 1 << (1 + randNum(HAVOC_STACK_POW2));
         for (j = 0; j < mutate_time; j++)
         {
-            switch (randNum(15 +
-                            ((pointedToken.size() + autoToken.size()) ? 2 : 0)))
+            switch (randNum(15 + ((pointedToken.size() + autoToken.size()) ? 2 : 0)))
             {
             case 0:
                 // random bit flip
@@ -835,8 +817,7 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
 
             case 1:
                 // random byte replace
-                filemap[randNum(temp_len)] =
-                    interesting_8[randNum(sizeof(interesting_8))];
+                filemap[randNum(temp_len)] = interesting_8[randNum(sizeof(interesting_8))];
                 break;
 
             case 2:
@@ -845,13 +826,12 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                     break;
                 if (randNum(2))
                 {
-                    *(u16 *)(filemap + randNum(temp_len - 1)) =
-                        interesting_16[randNum(sizeof(interesting_16) >> 1)];
+                    *(u16 *)(filemap + randNum(temp_len - 1)) = interesting_16[randNum(sizeof(interesting_16) >> 1)];
                 }
                 else
                 {
-                    *(u16 *)(filemap + randNum(temp_len - 1)) = SWAP16(
-                        interesting_16[randNum(sizeof(interesting_16) >> 1)]);
+                    *(u16 *)(filemap + randNum(temp_len - 1)) =
+                        SWAP16(interesting_16[randNum(sizeof(interesting_16) >> 1)]);
                 }
                 break;
 
@@ -861,13 +841,12 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                     break;
                 if (randNum(2))
                 {
-                    *(u32 *)(filemap + randNum(temp_len - 3)) =
-                        interesting_32[randNum(sizeof(interesting_32) >> 2)];
+                    *(u32 *)(filemap + randNum(temp_len - 3)) = interesting_32[randNum(sizeof(interesting_32) >> 2)];
                 }
                 else
                 {
-                    *(u32 *)(filemap + randNum(temp_len - 3)) = SWAP32(
-                        interesting_32[randNum(sizeof(interesting_32) >> 2)]);
+                    *(u32 *)(filemap + randNum(temp_len - 3)) =
+                        SWAP32(interesting_32[randNum(sizeof(interesting_32) >> 2)]);
                 }
                 break;
 
@@ -895,8 +874,7 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                     u32 pos = randNum(temp_len - 1);
                     u16 num = 1 + randNum(ARITH_MAX);
 
-                    *(u16 *)(filemap + pos) =
-                        SWAP16(SWAP16(*(u16 *)(filemap + pos)) - num);
+                    *(u16 *)(filemap + pos) = SWAP16(SWAP16(*(u16 *)(filemap + pos)) - num);
                 }
                 break;
 
@@ -914,8 +892,7 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                     u32 pos = randNum(temp_len - 1);
                     u16 num = 1 + randNum(ARITH_MAX);
 
-                    *(u16 *)(filemap + pos) =
-                        SWAP16(SWAP16(*(u16 *)(filemap + pos)) + num);
+                    *(u16 *)(filemap + pos) = SWAP16(SWAP16(*(u16 *)(filemap + pos)) + num);
                 }
                 break;
 
@@ -934,8 +911,7 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                     u32 pos = randNum(temp_len - 3);
                     u32 num = 1 + randNum(ARITH_MAX);
 
-                    *(u32 *)(filemap + pos) =
-                        SWAP32(SWAP32(*(u32 *)(filemap + pos)) - num);
+                    *(u32 *)(filemap + pos) = SWAP32(SWAP32(*(u32 *)(filemap + pos)) - num);
                 }
 
                 break;
@@ -955,8 +931,7 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                     u32 pos = randNum(temp_len - 3);
                     u32 num = 1 + randNum(ARITH_MAX);
 
-                    *(u32 *)(filemap + pos) =
-                        SWAP32(SWAP32(*(u32 *)(filemap + pos)) + num);
+                    *(u32 *)(filemap + pos) = SWAP32(SWAP32(*(u32 *)(filemap + pos)) + num);
                 }
 
                 break;
@@ -973,8 +948,7 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                     break;
                 del_len = choose_block_len(temp_len - 1);
                 del_from = randNum(temp_len - del_len + 1);
-                memmove(filemap + del_from, filemap + del_from + del_len,
-                        temp_len - del_from - del_len);
+                memmove(filemap + del_from, filemap + del_from + del_len, temp_len - del_from - del_len);
 
                 temp_len -= del_len;
                 break;
@@ -1006,17 +980,12 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
 
                     // Inserted part
                     if (actually_clone)
-                        memcpy(new_buf + clone_to, filemap + clone_from,
-                               clone_len);
+                        memcpy(new_buf + clone_to, filemap + clone_from, clone_len);
                     else
-                        memset(new_buf + clone_to,
-                               randNum(2) ? randNum(256)
-                                          : filemap[randNum(temp_len)],
-                               clone_len);
+                        memset(new_buf + clone_to, randNum(2) ? randNum(256) : filemap[randNum(temp_len)], clone_len);
 
                     // Tail
-                    memcpy(new_buf + clone_to + clone_len, filemap + clone_to,
-                           temp_len - clone_to);
+                    memcpy(new_buf + clone_to + clone_len, filemap + clone_to, temp_len - clone_to);
 
                     uniq_ptr.reset(new_buf);
                     filemap = uniq_ptr.get();
@@ -1037,14 +1006,10 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                 if (randNum(4))
                 {
                     if (copy_from != copy_to)
-                        memmove(filemap + copy_to, filemap + copy_from,
-                                copy_len);
+                        memmove(filemap + copy_to, filemap + copy_from, copy_len);
                 }
                 else
-                    memset(filemap + copy_to,
-                           randNum(2) ? randNum(256)
-                                      : filemap[randNum(temp_len)],
-                           copy_len);
+                    memset(filemap + copy_to, randNum(2) ? randNum(256) : filemap[randNum(temp_len)], copy_len);
                 break;
             }
 
@@ -1136,8 +1101,7 @@ static u8 Havoc(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
                 }
 
                 /* Tail */
-                memcpy(new_buf + insert_at + extra_len, filemap + insert_at,
-                       temp_len - insert_at);
+                memcpy(new_buf + insert_at + extra_len, filemap + insert_at, temp_len - insert_at);
 
                 uniq_ptr.reset(new_buf);
                 filemap = uniq_ptr.get();
@@ -1196,8 +1160,7 @@ static void locate_diffs(u8 *ptr1, u8 *ptr2, u32 len, s32 &first, s32 &last)
     return;
 }
 
-static u8 Splice(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
-                 seed_container::iterator qCur)
+static u8 Splice(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr, seed_container::iterator qCur)
 {
     u32 other, splice_cycles = 0;
     u32 splice_at;
@@ -1241,8 +1204,7 @@ static u8 Splice(char **argv, u64 len, unique_ptr<u8[]> &uniq_ptr,
 
         close(fd);
 
-        locate_diffs(uniq_ptr.get(), other_buf.get(),
-                     min(len, other_que->fileLen), f_diff, l_diff);
+        locate_diffs(uniq_ptr.get(), other_buf.get(), min(len, other_que->fileLen), f_diff, l_diff);
         if (f_diff < 0 || l_diff < 2 || f_diff == l_diff)
         {
             continue;
@@ -1292,8 +1254,7 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
     // cout << "Check if the seed should be fuzzed" << endl;
     if (pendFavor)
     {
-        if ((qCur->wasFuzzed || !qCur->favored) &&
-            randNum(100) < SKIP_TO_NEW_PROB)
+        if ((qCur->wasFuzzed || !qCur->favored) && randNum(100) < SKIP_TO_NEW_PROB)
         {
             return FUZZING_SKIP;
         }
@@ -1350,21 +1311,17 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
 #endif
 
 #ifndef NO_CONCURRENCY_FUZZ
-    unique_ptr<matrix_element[]> unique_control_matrix(
-        new matrix_element[CONTROL_MATRIX_SIZE]);
+    unique_ptr<matrix_element[]> unique_control_matrix(new matrix_element[CONTROL_MATRIX_SIZE]);
     auto tmp_control_matrix = unique_control_matrix.get();
     if (qCur->control_matrix_file.empty())
     {
-        memset(tmp_control_matrix, 0,
-               CONTROL_MATRIX_SIZE * sizeof(matrix_element));
+        memset(tmp_control_matrix, 0, CONTROL_MATRIX_SIZE * sizeof(matrix_element));
     }
     else
     {
-        ReadFile2Mem(qCur->control_matrix_file, (u8 *)tmp_control_matrix,
-                     CONTROL_MATRIX_SIZE * sizeof(matrix_element));
+        ReadFile2Mem(qCur->control_matrix_file, (u8 *)tmp_control_matrix, CONTROL_MATRIX_SIZE * sizeof(matrix_element));
     }
-    memcpy(control_matrix, tmp_control_matrix,
-           CONTROL_MATRIX_SIZE * sizeof(matrix_element));
+    memcpy(control_matrix, tmp_control_matrix, CONTROL_MATRIX_SIZE * sizeof(matrix_element));
 #endif
 
     // u8 *outBuf = new u8[len];
@@ -1411,12 +1368,9 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
     }
     time_end = GetCurTimeUs();
     cout << "Fault Injection find " << queue.size() - queue_found << endl;
-    cout << "average speed = "
-         << (exec_count - excv_before) * 1000000 / (time_end - time_start)
-         << endl;
+    cout << "average speed = " << (exec_count - excv_before) * 1000000 / (time_end - time_start) << endl;
     tmp_coverage = ShowCoverage(virginMap);
-    cout << "Concurreny coverage:  " << tmp_coverage << " ("
-         << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
+    cout << "Concurreny coverage:  " << tmp_coverage << " (" << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
     queue_found = queue.size();
     ShowTime();
     // resume the errorList
@@ -1435,12 +1389,9 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
     }
     time_end = GetCurTimeUs();
     cout << "Delay Insertion find: " << queue.size() - queue_found << endl;
-    cout << "Average speed: "
-         << (exec_count - excv_before) * 1000000 / (time_end - time_start)
-         << endl;
+    cout << "Average speed: " << (exec_count - excv_before) * 1000000 / (time_end - time_start) << endl;
     tmp_coverage = ShowCoverage(virginMap);
-    cout << "Traditional coverage: " << tmp_coverage << " ("
-         << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
+    cout << "Traditional coverage: " << tmp_coverage << " (" << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
     queue_found = queue.size();
     ShowTime();
     // resume the errorList
@@ -1455,12 +1406,9 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
         cout << "\nEnter Stage: Bit Flip" << endl;
         excv_before = exec_count;
         time_start = GetCurTimeUs();
-        if (BitFlip(argv, len, outBuf_ptr, 1, 1, qCur) ||
-            BitFlip(argv, len, outBuf_ptr, 2, 1, qCur) ||
-            BitFlip(argv, len, outBuf_ptr, 4, 1, qCur) ||
-            BitFlip(argv, len, outBuf_ptr, 8, 8, qCur) ||
-            BitFlip(argv, len, outBuf_ptr, 16, 8, qCur) ||
-            BitFlip(argv, len, outBuf_ptr, 32, 8, qCur))
+        if (BitFlip(argv, len, outBuf_ptr, 1, 1, qCur) || BitFlip(argv, len, outBuf_ptr, 2, 1, qCur) ||
+            BitFlip(argv, len, outBuf_ptr, 4, 1, qCur) || BitFlip(argv, len, outBuf_ptr, 8, 8, qCur) ||
+            BitFlip(argv, len, outBuf_ptr, 16, 8, qCur) || BitFlip(argv, len, outBuf_ptr, 32, 8, qCur))
         {
             cout << "Fail to bit flip" << endl;
             munmap(inBuf, len);
@@ -1468,12 +1416,9 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
         }
         time_end = GetCurTimeUs();
         cout << "Bit Flip find " << queue.size() - queue_found << endl;
-        cout << "average speed = "
-             << (exec_count - excv_before) * 1000000 / (time_end - time_start)
-             << endl;
+        cout << "average speed = " << (exec_count - excv_before) * 1000000 / (time_end - time_start) << endl;
         tmp_coverage = ShowCoverage(virginMap);
-        cout << "Traditional coverage: " << tmp_coverage << " ("
-             << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
+        cout << "Traditional coverage: " << tmp_coverage << " (" << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
         queue_found = queue.size();
         ShowTime();
 
@@ -1485,8 +1430,7 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
         cout << "\nEnter Stage: Arithmetic" << endl;
         excv_before = exec_count;
         time_start = GetCurTimeUs();
-        if (Arithmetic8(argv, len, outBuf_ptr) ||
-            Arithmetic16(argv, len, outBuf_ptr) ||
+        if (Arithmetic8(argv, len, outBuf_ptr) || Arithmetic16(argv, len, outBuf_ptr) ||
             Arithmetic32(argv, len, outBuf_ptr))
         {
             cout << "Fail to arithmetic" << endl;
@@ -1495,12 +1439,9 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
         }
         time_end = GetCurTimeUs();
         cout << "Arithmetic find " << queue.size() - queue_found << endl;
-        cout << "average speed = "
-             << (exec_count - excv_before) * 1000000 / (time_end - time_start)
-             << endl;
+        cout << "average speed = " << (exec_count - excv_before) * 1000000 / (time_end - time_start) << endl;
         tmp_coverage = ShowCoverage(virginMap);
-        cout << "Traditional coverage: " << tmp_coverage << " ("
-             << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
+        cout << "Traditional coverage: " << tmp_coverage << " (" << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
         queue_found = queue.size();
         ShowTime();
 
@@ -1508,8 +1449,7 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
         cout << "\nEnter Stage: InterestingReplace" << endl;
         excv_before = exec_count;
         time_start = GetCurTimeUs();
-        if (InterestingReplace8(argv, len, outBuf_ptr) ||
-            InterestingReplace16(argv, len, outBuf_ptr) ||
+        if (InterestingReplace8(argv, len, outBuf_ptr) || InterestingReplace16(argv, len, outBuf_ptr) ||
             InterestingReplace32(argv, len, outBuf_ptr))
         {
             cout << "Fail to interesting replace" << endl;
@@ -1518,12 +1458,9 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
         }
         time_end = GetCurTimeUs();
         cout << "Interesting value find " << queue.size() - queue_found << endl;
-        cout << "average speed = "
-             << (exec_count - excv_before) * 1000000 / (time_end - time_start)
-             << endl;
+        cout << "average speed = " << (exec_count - excv_before) * 1000000 / (time_end - time_start) << endl;
         tmp_coverage = ShowCoverage(virginMap);
-        cout << "Traditional coverage: " << tmp_coverage << " ("
-             << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
+        cout << "Traditional coverage: " << tmp_coverage << " (" << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
         queue_found = queue.size();
         ShowTime();
 
@@ -1538,12 +1475,9 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
         }
         time_end = GetCurTimeUs();
         cout << "Dictionary find " << queue.size() - queue_found << endl;
-        cout << "average speed = "
-             << (exec_count - excv_before) * 1000000 / (time_end - time_start)
-             << endl;
+        cout << "average speed = " << (exec_count - excv_before) * 1000000 / (time_end - time_start) << endl;
         tmp_coverage = ShowCoverage(virginMap);
-        cout << "Traditional coverage: " << tmp_coverage << " ("
-             << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
+        cout << "Traditional coverage: " << tmp_coverage << " (" << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
         queue_found = queue.size();
         ShowTime();
     }
@@ -1559,12 +1493,9 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
     }
     time_end = GetCurTimeUs();
     cout << "Havoc find " << queue.size() - queue_found << endl;
-    cout << "average speed = "
-         << (exec_count - excv_before) * 1000000 / (time_end - time_start)
-         << endl;
+    cout << "average speed = " << (exec_count - excv_before) * 1000000 / (time_end - time_start) << endl;
     tmp_coverage = ShowCoverage(virginMap);
-    cout << "Traditional coverage: " << tmp_coverage << " ("
-         << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
+    cout << "Traditional coverage: " << tmp_coverage << " (" << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
     queue_found = queue.size();
     ShowTime();
 
@@ -1585,8 +1516,7 @@ u8 FuzzMain(seed_container::iterator qCur, char **argv)
     // << (exec_count - excv_before) * 1000000 / (time_end - time_start) <<
     // endl;
     tmp_coverage = ShowCoverage(virginMap);
-    cout << "Traditional coverage: " << tmp_coverage << " ("
-         << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
+    cout << "Traditional coverage: " << tmp_coverage << " (" << 1.0 * tmp_coverage * 100 / MAP_SIZE << "%)" << endl;
     queue_found = queue.size();
     ShowTime();
 #endif

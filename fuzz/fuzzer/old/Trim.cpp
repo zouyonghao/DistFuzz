@@ -14,8 +14,7 @@ static inline u64 min_pow2(u64 len)
     return ret;
 }
 
-static void WriteGapTestcase(void *mem, u32 len, u32 skip_at, u32 skip_len,
-                             string testfile)
+static void WriteGapTestcase(void *mem, u32 len, u32 skip_at, u32 skip_len, string testfile)
 {
     unlink(testfile.c_str());
     s32 fd = open(testfile.c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600);
@@ -36,8 +35,7 @@ static void WriteGapTestcase(void *mem, u32 len, u32 skip_at, u32 skip_len,
     }
     if (skip_len)
     {
-        s32 res =
-            write(fd, (const void *)((u64)mem + skip_at + skip_len), tail);
+        s32 res = write(fd, (const void *)((u64)mem + skip_at + skip_len), tail);
         if (res != tail)
         {
             cout << "fail to write testcases in WriteGapTestcase" << endl;
@@ -64,19 +62,16 @@ u8 TrimCase(char **argv, seed_container::iterator qCur, u8 *inBuf)
         return 0;
 
     min_pow2_of_file_size = min_pow2(qCur->fileLen);
-    trim_size =
-        max(min_pow2_of_file_size / TRIM_START_STEP, (u64)TRIM_MIN_BYTES);
+    trim_size = max(min_pow2_of_file_size / TRIM_START_STEP, (u64)TRIM_MIN_BYTES);
 
-    while (trim_size >=
-           max(min_pow2_of_file_size / TRIM_END_STEP, (u64)TRIM_MIN_BYTES))
+    while (trim_size >= max(min_pow2_of_file_size / TRIM_END_STEP, (u64)TRIM_MIN_BYTES))
     {
         trim_pos = trim_size;
 
         while (trim_pos < qCur->fileLen)
         {
             trim_avail_size = min(trim_size, qCur->fileLen - trim_pos);
-            WriteGapTestcase(inBuf, qCur->fileLen, trim_pos, trim_avail_size,
-                             testfile);
+            WriteGapTestcase(inBuf, qCur->fileLen, trim_pos, trim_avail_size, testfile);
             fault = ExecuteCase(target_path, argv, exec_tmout);
             if (fault == FAULT_ERROR)
                 return fault;
@@ -88,8 +83,7 @@ u8 TrimCase(char **argv, seed_container::iterator qCur, u8 *inBuf)
                 qCur->fileLen -= trim_avail_size;
                 min_pow2_of_file_size = min_pow2(qCur->fileLen);
 
-                memmove(inBuf + trim_pos, inBuf + trim_pos + trim_avail_size,
-                        move_tail);
+                memmove(inBuf + trim_pos, inBuf + trim_pos + trim_avail_size, move_tail);
                 if (!should_be_write)
                 {
                     should_be_write = true;
@@ -114,8 +108,7 @@ u8 TrimCase(char **argv, seed_container::iterator qCur, u8 *inBuf)
         fd = open(qCur->fileName.c_str(), O_WRONLY | O_CREAT | O_EXCL, 0600);
         if (fd < 0)
         {
-            cout << "open() fail in TrimCase, file is " << qCur->fileName
-                 << endl;
+            cout << "open() fail in TrimCase, file is " << qCur->fileName << endl;
             exit(-1);
         }
 

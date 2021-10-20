@@ -15,7 +15,7 @@ add_executable(aerospike_test_main ${AEROSPIKE_TEST_MAIN_SRC})
 target_compile_options(aerospike_test_main PUBLIC -DNO_CONCURRENCY -DRUN_NORMAL_OPERATOR_COUNT=5 -DRUN_CRITICAL_OPERATOR_COUNT=3)
 target_link_libraries(aerospike_test_main
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_random dst_default_kv dst_event aerospike ssl crypto dl m z
+        -Wl,--no-whole-archive dst_core pthread rt aerospike ssl crypto dl m z
         ${Boost_LIBRARIES})
 
 file(GLOB AEROSPIKE_TEST_OPERATORS_SRC
@@ -24,7 +24,7 @@ file(GLOB AEROSPIKE_TEST_OPERATORS_SRC
 add_executable(aerospike_operator_test ${AEROSPIKE_TEST_OPERATORS_SRC} ${CMAKE_SOURCE_DIR}/core/test/dst_operator_test.cpp)
 target_link_libraries(aerospike_operator_test
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_random dst_default_kv dst_event aerospike ssl crypto dl m z
+        -Wl,--no-whole-archive dst_core pthread rt aerospike ssl crypto dl m z
         ${Boost_LIBRARIES})
 
 file(GLOB AEROSPIKE_CLIENT_TEST_SRC
@@ -34,6 +34,7 @@ file(GLOB AEROSPIKE_CLIENT_TEST_SRC
 add_executable(aerospike_client_test ${AEROSPIKE_CLIENT_TEST_SRC})
 target_link_libraries(aerospike_client_test
         -Wl,--whole-archive dst_default_operator
+        # we do not statically link dst_core because a random function is rewrite in test_client.cpp
         -Wl,--no-whole-archive dst_random dst_default_kv dst_event aerospike ssl crypto dl m z
         ${Boost_LIBRARIES})
 
