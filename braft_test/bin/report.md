@@ -141,3 +141,8 @@
 
    related logs
     * error_cases/8181
+
+7. too many `reject term_unmatched AppendEntries`
+
+   issues
+    * https://github.com/baidu/braft/issues/330
