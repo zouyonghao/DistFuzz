@@ -11,6 +11,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <utils/share_mem_util.h>
+#include <vector>
 
 ssize_t (*k_send)(int sockfd, const void *buf, size_t len, int flags);
 ssize_t (*k_sendto)(int sockfd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
@@ -57,20 +58,66 @@ enum SUPPORTED_ACTION
     // REORDER,
     LOST,
     DELAY,
-    ASYNC_DELAY, // TODO: think about this argument: async delay is reorder?
+    ASYNC_DELAY, /** TODO: think about this question: Is async delay same to reorder? */
     DUP,
     ACTION_COUNT
 };
+
+struct timer_killer
+{
+    /** returns false if interrupted. */
+    template <class R, class P> bool wait_for(std::chrono::duration<R, P> const &time)
+    {
+        auto wait_time = std::chrono::microseconds(0);
+        auto ms_100 = std::chrono::microseconds(100);
+        bool return_val = false;
+        // fprintf(stderr, "wait for %ld seconds\n", (duration_cast<std::chrono::seconds>(time)).count());
+        while (!terminate && wait_time < time)
+        {
+            if (!get_is_fuzzing())
+            {
+                terminate = true;
+            }
+            std::unique_lock<std::mutex> lock(m);
+            return_val = cv.wait_for(lock, ms_100, [&] { return terminate; });
+            wait_time += ms_100;
+        }
+        return !return_val;
+    }
+    void kill()
+    {
+        std::unique_lock<std::mutex> lock(m);
+        terminate = true;
+        cv.notify_all();
+    }
+
+private:
+    std::condition_variable cv;
+    std::mutex m;
+    bool terminate = false;
+};
+
+/** global variables */
+timer_killer timer_killer;
+std::vector<std::future<void>> futures;
+bool printed_fuzzing_stopped = false;
 
 ssize_t handle_random_event(const char *func_name, int fd, size_t length, const std::function<ssize_t()> &kernel_func)
 {
     // fprintf(stderr, "%s called.\n", func_name);
     unsigned int val = 0;
     unsigned int val_len = sizeof(val);
+
     /** If fuzzing is disabled, we call the original function. */
     if (!get_is_fuzzing())
     {
-        fprintf(stderr, "PRELOAD: fuzzing is stopped, will use kernel_func directly.\n");
+        timer_killer.kill();
+        futures.clear();
+        if (!printed_fuzzing_stopped)
+        {
+            fprintf(stderr, "PRELOAD: fuzzing is stopped, will use kernel_func directly.\n");
+            printed_fuzzing_stopped = true;
+        }
         return kernel_func();
     }
 
@@ -95,8 +142,10 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
     in_addr addr_cmp{};
     inet_aton("127.0.1.1", &addr_cmp);
 
-    // If the IP is not from 127.0.1.1, then treat it as a client.
-    // FIXME: This still can not distinguish the client perfectly
+    /**
+     * If the IP is not from 127.0.1.1, then treat it as a client.
+     * FIXME: This still can not distinguish the client perfectly
+     */
     if (addr_cmp.s_addr != addr.sin_addr.s_addr)
     {
         // be careful when process this...
@@ -104,14 +153,14 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
         return kernel_func();
     }
 
-    // decease the probability of action
+    /** decease the probability of action */
     if (__dst_get_random_uint8_t() < 200)
     {
         return kernel_func();
     }
 
     static std::mutex lock_for_write;
-    // this is a socket file descriptor
+    static std::mutex lock_for_vector;
     uint8_t select_random = __dst_get_random_uint8_t() % ACTION_COUNT;
     // fprintf(stderr, "action is %d\n", select_random);
     switch (select_random)
@@ -122,8 +171,12 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
     }
     case DELAY:
     {
-        uint32_t random = __dst_get_random_uint32();
-        // usleep(random);
+        /** sleep from 0s ~ 1.3s */
+        uint16_t random = __dst_get_random_uint16_t() * 20;
+        if (!timer_killer.wait_for(std::chrono::microseconds(random)))
+        {
+            fprintf(stderr, "timer got killed!\n");
+        }
         // __dst_event_trigger(
         //     ("sleep for " + std::to_string(random) + "n").c_str());
         break;
@@ -134,21 +187,27 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
     }
     case ASYNC_DELAY:
     {
-        std::async(std::launch::async,
-                   [length, kernel_func]
-                   {
-                       uint32_t random = __dst_get_random_uint32();
-                       usleep(random);
-                       std::lock_guard<std::mutex> lk(lock_for_write);
-                       // __dst_event_trigger(
-                       //     ("sleep for " + std::to_string(random) + "n").c_str());
+        std::lock_guard<std::mutex> lk(lock_for_vector);
+        /** The result of std::async should be stored, otherwise it is not async. */
+        futures.push_back(std::async(std::launch::async,
+                                     [length, kernel_func]
+                                     {
+                                         /** sleep from 0s ~ 1.3s */
+                                         uint16_t random = __dst_get_random_uint16_t() * 20;
+                                         if (!timer_killer.wait_for(std::chrono::microseconds(random)))
+                                         {
+                                             fprintf(stderr, "timer got killed!\n");
+                                         }
+                                         std::lock_guard<std::mutex> lk(lock_for_write);
+                                         // __dst_event_trigger(
+                                         //     ("sleep for " + std::to_string(random) + "n").c_str());
 
-                       ssize_t real_write = kernel_func();
-                       if (real_write < length)
-                       {
-                           fprintf(stderr, "MAY WRITE MULTI TIMES, DANGEROUS!\n");
-                       }
-                   });
+                                         ssize_t real_write = kernel_func();
+                                         if (real_write < length)
+                                         {
+                                             fprintf(stderr, "MAY WRITE MULTI TIMES, DANGEROUS!\n");
+                                         }
+                                     }));
 
         return length;
     }
@@ -177,13 +236,13 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
 /* for send */
 extern "C" ssize_t send(int fd, const void *buf, size_t len, int flags)
 {
-    return handle_random_event("send", fd, len, std::bind(k_send, fd, buf, len, flags));
+    return handle_random_event("send", fd, len, [&]() { return k_send(fd, buf, len, flags); });
 }
 
 extern "C" ssize_t sendto(int fd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
                           socklen_t addrlen)
 {
-    return handle_random_event("sendto", fd, len, std::bind(k_sendto, fd, buf, len, flags, dest_addr, addrlen));
+    return handle_random_event("sendto", fd, len, [&]() { return k_sendto(fd, buf, len, flags, dest_addr, addrlen); });
 }
 
 extern "C" ssize_t sendmsg(int fd, const struct msghdr *msg, int flags)
@@ -193,12 +252,12 @@ extern "C" ssize_t sendmsg(int fd, const struct msghdr *msg, int flags)
     {
         length += msg->msg_iov[i].iov_len;
     }
-    return handle_random_event("sendmsg", fd, length, std::bind(k_sendmsg, fd, msg, flags));
+    return handle_random_event("sendmsg", fd, length, [&]() { return k_sendmsg(fd, msg, flags); });
 }
 
 extern "C" ssize_t write(int fd, const void *buf, size_t len)
 {
-    return handle_random_event("write", fd, len, std::bind(k_write, fd, buf, len));
+    return handle_random_event("write", fd, len, [&]() { return k_write(fd, buf, len); });
 }
 
 extern "C" ssize_t writev(int fd, const struct iovec *iov, int iovcnt)
@@ -208,5 +267,6 @@ extern "C" ssize_t writev(int fd, const struct iovec *iov, int iovcnt)
     {
         length += iov[i].iov_len;
     }
-    return handle_random_event("writev", fd, length, std::bind(k_writev, fd, iov, iovcnt));
+    // return handle_random_event("writev", fd, length, std::bind(k_writev, fd, iov, iovcnt));
+    return handle_random_event("writev", fd, length, [&]() { return k_writev(fd, iov, iovcnt); });
 }
