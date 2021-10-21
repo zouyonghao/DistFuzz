@@ -141,11 +141,3 @@
 
    related logs
     * error_cases/8181
-
-7. 节点 step down 之后无法恢复
-
-   issues
-    * https://github.com/baidu/braft/issues/272
-
-   related logs
-    * error_cases/error_7
