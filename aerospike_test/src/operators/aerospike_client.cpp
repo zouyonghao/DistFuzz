@@ -76,7 +76,7 @@ public:
         }
         case OP_WRITE:
         {
-            uint32_t random = __dst_get_random_uint32();
+            uint32_t random = __dst_get_random_uint32_t();
             // __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
 
             as_record rec;

@@ -2,7 +2,7 @@
 
 #include "../src/operators/aerospike_client.cpp"
 
-uint32_t __dst_get_random_uint32()
+uint32_t __dst_get_random_uint32_t()
 {
     static int index = 0;
     static int random_arrays[] = {0, 1, 2, 3, 4};

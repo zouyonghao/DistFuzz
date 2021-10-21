@@ -8,8 +8,8 @@
 #include <dst_random.h>
 #include <log.hpp>
 #include <operator/dst_operator.hpp>
-#include <utils/share_mem_util.h>
 #include <utils/color.h>
+#include <utils/share_mem_util.h>
 
 #ifndef RUN_NORMAL_OPERATOR_COUNT
 #define RUN_NORMAL_OPERATOR_COUNT 2
@@ -201,8 +201,21 @@ int main(int argc, char const *argv[])
 
     /** recovery checker to check whether servers can recover after fuzzing */
     {
+        int alive_node_count = 0;
+        for (auto &ni : nm->get_node_processes())
+        {
+            if (ni.should_alive)
+            {
+                alive_node_count++;
+            }
+            else
+            {
+                std::cerr << "node " << ni.node_id << " is stopped.\n";
+            }
+        }
+        std::cerr << "The remaining alive node count is " << alive_node_count << "\n";
         set_is_fuzzing(false);
-        std::cerr << "Fuzzing is stopped, now we wait for 5 seconds and then"
+        std::cerr << "Fuzzing is stopped, now we wait for 3 seconds and then"
                      " run some normal operators to see whether it works as usual.\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
 
@@ -222,9 +235,7 @@ int main(int argc, char const *argv[])
         }
         if (all_operators_after_fuzzing_failed)
         {
-            std::cerr << COLOR_RED_START
-                      << "all normal operators after fuzzing failed! :("
-                      << COLOR_RESET_END << "\n";
+            std::cerr << COLOR_RED_START << "all normal operators after fuzzing failed! :(" << COLOR_RESET_END << "\n";
         }
     }
 
@@ -234,7 +245,7 @@ STOP:
 
     remove_is_fuzzing();
 
-    run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
+    // run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
 
     /* we still need using kill to stop all process clearly */
     system("bash stop.sh");

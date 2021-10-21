@@ -12,7 +12,7 @@
  * like following methods.
  * @see __dst_get_random_char
  * @see __dst_get_random_uint16_t
- * @see __dst_get_random_uint32
+ * @see __dst_get_random_uint32_t
  *
  * The file is specified by environment variable __DST_ENV_RANDOM_FILE__
  * in the default implementation dst_default_random.c
@@ -33,7 +33,7 @@ extern "C"
 
     extern uint16_t __dst_get_random_uint16_t();
 
-    extern uint32_t __dst_get_random_uint32();
+    extern uint32_t __dst_get_random_uint32_t();
 
     extern void __dst_reinit_random(const char *file_name);
 

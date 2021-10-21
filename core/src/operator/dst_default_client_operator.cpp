@@ -29,13 +29,13 @@ bool DefaultClientOperator::_do()
         invoke_record_string += "nil";
         break;
     case OP_WRITE:
-        random_num1 = __dst_get_random_uint32();
+        random_num1 = __dst_get_random_uint32_t();
         command = configuration_generator->get_configure_string(OP_WRITE, node_count, random_num1);
         invoke_record_string += std::to_string(random_num1);
         break;
     case OP_CAS:
-        random_num1 = __dst_get_random_uint32();
-        random_num2 = __dst_get_random_uint32();
+        random_num1 = __dst_get_random_uint32_t();
+        random_num2 = __dst_get_random_uint32_t();
         command = configuration_generator->get_configure_string(OP_CAS, node_count, random_num1, random_num2);
         invoke_record_string += "[" + std::to_string(random_num1) + " " + std::to_string(random_num2) + "]";
         break;

@@ -82,7 +82,7 @@ uint16_t __dst_get_random_uint16_t()
     return result;
 }
 
-uint32_t __dst_get_random_uint32()
+uint32_t __dst_get_random_uint32_t()
 {
     pthread_mutex_lock(&lock);
     uint32_t result = read_byte();
