@@ -9,6 +9,17 @@
 
 #define SERVICE_BASE_PORT 2000
 
+static bool example_log_callback(as_log_level level, const char *func, const char *file, uint32_t line, const char *fmt,
+                                 ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    vfprintf(stderr, fmt, ap);
+    fprintf(stderr, "\n");
+    va_end(ap);
+    return true;
+}
+
 class AerospikeClient : public NormalOperator
 {
 private:
@@ -25,6 +36,8 @@ public:
 
     void init()
     {
+        as_log_set_level(AS_LOG_LEVEL_DEBUG);
+        as_log_set_callback(example_log_callback);
         as_config_init(&config);
         for (int i = 0; i < node_count; i++)
         {
@@ -120,5 +133,4 @@ public:
 
 REGISTER_NORMAL_OPERATOR(AerospikeRead, new AerospikeClient(OP_READ));
 REGISTER_NORMAL_OPERATOR(AerospikeWrite, new AerospikeClient(OP_WRITE));
-// REGISTER_NORMAL_OPERATOR(AerospikeCas, new
-// AerospikeClient(ACTION_TYPE::CAS));
+// REGISTER_NORMAL_OPERATOR(AerospikeCas, new AerospikeClient(ACTION_TYPE::CAS));

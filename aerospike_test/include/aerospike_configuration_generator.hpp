@@ -12,7 +12,7 @@
 /* Add pidfile, work-directory */
 #define PID_FILE_PREFIX "\tpidfile /home/zyh/distributed-system-test/aerospike_test/bin/run/asd_pid"
 #define WORK_DIRECTORY_PREFIX "\twork-directory run/work"
-#define CONFIG_FILE_PIECE_SERVICE_2 "\n\tproto-fd-max 15000\n\trun-as-daemon false\n}\n"
+#define CONFIG_FILE_PIECE_SERVICE_2 "\n\tproto-fd-max 1500\n\trun-as-daemon false\n}\n"
 
 #define CONFIG_FILE_PIECE_MOD_1 "\nmod-lua {\n"
 /* Add user-path */
@@ -23,9 +23,9 @@
 #define CONFIG_FILE_PIECE_LOGGING_1 "\nlogging {\n"
 /* Add file */
 #define FILE_PREFIX "\tfile /home/zyh/distributed-system-test/aerospike_test/bin/run/log"
-#define CONFIG_FILE_PIECE_LOGGING_2 "\n\t\tcontext any info\n\t}\n}\n"
+#define CONFIG_FILE_PIECE_LOGGING_2 " {\n\t\tcontext any info\n\t}\n}\n"
 
-#define CONFIG_FILE_PIECE_NETWORK_1 "\nnetwork {\n\tservice {\n\t\taddress 127.0.1.1\n"
+#define CONFIG_FILE_PIECE_NETWORK_1 "\nnetwork {\n\tservice {\n\t\taddress 127.0.1.1\n\taccess-address 127.0.1.1\n"
 /* Add service port */
 #define SERVICE_PORT_PREFIX "\t\tport "
 #define SERVICE_BASE_PORT 2000
@@ -36,7 +36,7 @@
 #define HEARTBEAT_PORT_PREFIX "\t\tport "
 #define HEARTBEAT_BASE_PORT 5000
 #define MESH_PORT_PREFIX "\t\tmesh-seed-address-port 127.0.1.1 "
-#define CONFIG_FILE_PIECE_NETWORK_4 "\n\t\tinterval 100\n\t\ttimeout 3\n\t\tconnect-timeout-ms 100\n}\n"
+#define CONFIG_FILE_PIECE_NETWORK_4 "\n\t\tinterval 100\n\t\ttimeout 3\n\t\tconnect-timeout-ms 100\n\t}\n"
 
 #define CONFIG_FILE_PIECE_NETWORK_5 "\n\tfabric {\n"
 /* Add fabric port */
@@ -51,7 +51,7 @@
 #define CONFIG_FILE_PIECE_NETWORK_8 "\n\t}\n}\n"
 
 #define CONFIG_FILE_PIECE_NAMESPACE_1                                                                                  \
-    "\nnamespace test {\n\treplication-factor 2\n\tmemory-size 4G\n\n\tstorage-engine device {\n"
+    "\nnamespace test {\n\treplication-factor 2\n\tmemory-size 1G\n\n\tstorage-engine device {\n"
 /* Add data file */
 #define STORAGE_FILE_PREFIX "\t\tfile run/data"
 #define CONFIG_FILE_PIECE_NAMESPACE_2 "\t\tfilesize 10M\n\t\tdata-in-memory true\n\t}\n}\n"
