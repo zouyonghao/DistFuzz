@@ -114,5 +114,6 @@
         "**/braft_test/bin/**": true,
         "**/data*": true
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "shellformat.flag": "-i=2"
 }

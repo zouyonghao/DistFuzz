@@ -57,7 +57,8 @@ bool DefaultClientOperator::_do()
         c.wait();
         int result = c.exit_code();
         /* timeout, killed or force killed */
-        if (result == 124 || result == 143 || result == 137)
+        // if (result == 124 || result == 143 || result == 137)
+        if (result != 0)
         {
             if (result == 124)
             {

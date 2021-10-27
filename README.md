@@ -4,16 +4,16 @@
 
 一般对应项目中包含 `build.sh`，直接使用即可
 
-| 项目          | 目录名           | 对应git                                                                          |
-| ------------- | ---------------- | -------------------------------------------------------------------------------- |
-| braft         | braft            | http://166.111.139.139:7800/zyh/braft, http://166.111.139.139:7800/zyh/brpc      |
-| c-raft        | **raft**         | http://166.111.139.139:7800/zyh/craft                                            |
-| nuraft        | **NuRaft**       | http://166.111.139.139:7800/zyh/nuraft                                           |
-| redisraft     | redisraft        | http://166.111.139.139:7800/zyh/redisraft, http://166.111.139.139:7800/zyh/redis |
-| floyd(raftis) | floyd            | https://github.com/Qihoo360/floyd                                                |
-| rethinkdb     | rethinkdb        | http://166.111.139.139:7800/zyh/rethinkdb                                        |
-| ClickHouse    | ClickHouse       | https://github.com/ClickHouse/ClickHouse.git                                     |
-| aerospike     | aerospike-server | http://166.111.139.139:7800/zyh/aerospike-server.git                             |
+| 项目          | 目录名           | 对应git                                                      |
+| ------------- | ---------------- | ------------------------------------------------------------ |
+| braft         | braft            | http://oslab:7800/zyh/braft, http://oslab:7800/zyh/brpc      |
+| c-raft        | **raft**         | http://oslab:7800/zyh/craft                                  |
+| nuraft        | **NuRaft**       | http://oslab:7800/zyh/nuraft                                 |
+| redisraft     | redisraft        | http://oslab:7800/zyh/redisraft, http://oslab:7800/zyh/redis |
+| floyd(raftis) | floyd            | https://github.com/Qihoo360/floyd                            |
+| rethinkdb     | rethinkdb        | http://oslab:7800/zyh/rethinkdb                              |
+| ClickHouse    | ClickHouse       | \\oslab\workspace\workspace\zyh\ClickHouse_21.9.2.17         |
+| aerospike     | aerospike-server | http://oslab:7800/zyh/aerospike-server.git                   |
 
 **注意**
 
@@ -28,7 +28,7 @@
 * `ClickHouse` 代码位于`ftp`上，使用下列方法获取
 
    ```
-   smbclient '\\166.111.139.139\workspace' -N -c 'prompt OFF; cd zyh; mget ClickHouse_21.9.2.17.tar.gz'
+   smbclient '\\oslab\workspace' -N -c 'prompt OFF; cd zyh; mget ClickHouse_21.9.2.17.tar.gz'
    ```
 
 * `ClickHouse` 需要新版本`cmake`，使用如下方式安装
