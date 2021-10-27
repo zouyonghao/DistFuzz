@@ -86,9 +86,13 @@ public:
             break;
         }
         case OP_CAS:
-            /* currently not supported */
-            configure_string = "";
+        {
+            uint32_t value = va_arg(random_nums, uint32_t);
+            /** The version should not be too large */
+            uint32_t version = va_arg(random_nums, uint32_t) % 3;
+            configure_string += "set /a " + std::to_string(value) + " " + std::to_string(version);
             break;
+        }
         default:
             break;
         }
