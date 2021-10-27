@@ -62,7 +62,7 @@ class KeeperClientConfigurationGenerator : public ClientConfigurationGenerator
 public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
     {
-        std::string configure_string = "timeout 2 /usr/share/zookeeper/bin/zkCli.sh -server ";
+        std::string configure_string = "timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server ";
         for (uint32_t i = 0; i < node_count; i++)
         {
             configure_string += IP ":" + std::to_string(BASE_ZK_PORT + i);

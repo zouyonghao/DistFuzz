@@ -53,6 +53,25 @@ public:
     }
 };
 
+class KeeperClientOperator : public DefaultClientOperator
+{
+public:
+    KeeperClientOperator(OP_NAME op_name, ClientConfigurationGenerator *ccg) : DefaultClientOperator(op_name, ccg) {}
+
+    int64_t parse_read_result(boost::process::ipstream &pipe_stream) override
+    {
+        /* the last output should be the result of read */
+        std::string last_output;
+        std::string tmp;
+        while (pipe_stream && std::getline(pipe_stream, tmp))
+        {
+            std::cerr << tmp << "\n";
+            last_output = tmp;
+        }
+        return std::stoll(last_output);
+    }
+};
+
 REGISTER_NORMAL_OPERATOR(KeeperGet, new DefaultClientOperator(OP_READ, keeper_client_configuration_generator));
 REGISTER_NORMAL_OPERATOR(KeeperSet, new DefaultClientOperator(OP_WRITE, keeper_client_configuration_generator));
 REGISTER_NORMAL_OPERATOR(Init, new KeeperInitOperator);

@@ -47,6 +47,8 @@ public:
     }
 
     bool _do() override;
+
+    virtual int64_t parse_read_result(boost::process::ipstream&);
 };
 
 #endif // DST_DEFAULT_CLIENT_OPERATOR_HEADER

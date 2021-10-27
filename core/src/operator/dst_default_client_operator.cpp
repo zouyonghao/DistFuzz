@@ -13,6 +13,11 @@ std::string get_last_output(boost::process::ipstream &pipe_stream)
     return last_output;
 }
 
+int64_t DefaultClientOperator::parse_read_result(boost::process::ipstream &pipe_stream)
+{
+    return std::stoll(get_last_output(pipe_stream));
+}
+
 bool DefaultClientOperator::_do()
 {
     int random_thread_id = random() % INT_MAX;
@@ -73,7 +78,7 @@ bool DefaultClientOperator::_do()
         switch (op_name)
         {
         case OP_READ:
-            result_record_string += std::to_string(std::stoll(get_last_output(pipe_stream)));
+            result_record_string += std::to_string(parse_read_result(pipe_stream));
             break;
         case OP_WRITE:
             /* just print the std out to debug */
