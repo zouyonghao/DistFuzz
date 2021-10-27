@@ -72,6 +72,6 @@ public:
     }
 };
 
-REGISTER_NORMAL_OPERATOR(KeeperGet, new DefaultClientOperator(OP_READ, keeper_client_configuration_generator));
-REGISTER_NORMAL_OPERATOR(KeeperSet, new DefaultClientOperator(OP_WRITE, keeper_client_configuration_generator));
+REGISTER_NORMAL_OPERATOR(KeeperGet, new KeeperClientOperator(OP_READ, keeper_client_configuration_generator));
+REGISTER_NORMAL_OPERATOR(KeeperSet, new KeeperClientOperator(OP_WRITE, keeper_client_configuration_generator));
 REGISTER_NORMAL_OPERATOR(Init, new KeeperInitOperator);
