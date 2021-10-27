@@ -34,7 +34,7 @@ mv init_random.txt ./test_cases/$1
     echo "No errors, deleting logs..."
     rm -rf ./test_cases/$1
   else
-    echo "check_log seems fail..."
+    echo "Find operation check fail."
     # rm -rf ./test_cases/$1
   fi
 } &
