@@ -909,3 +909,5 @@
     issues
     * https://github.com/RedisLabs/redisraft/pull/165
 
+    **Fixed**
+

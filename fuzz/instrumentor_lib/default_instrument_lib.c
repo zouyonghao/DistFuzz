@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <constants.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <pthread.h>
 #include <signal.h>
@@ -14,6 +15,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+
+#include "librdkafka/rdkafka.h"
 
 #define SHM_ENV_VAR "AFLCplusplus_SHM_ID"
 #define BRANCH_TRACE_SHM_ENV_VAR "AFLCplusplus_BRANCH_TRACE_SHM_ID"
@@ -65,6 +68,12 @@ __thread u32 stack_top = 0;
 __thread u32 stack_size = 0;
 
 __thread u8 is_new_thread = 1;
+
+/** Kafka variables */
+rd_kafka_conf_t *conf = NULL;
+rd_kafka_t *rk = NULL;
+rd_kafka_topic_t *topic_code_coverage = NULL;
+rd_kafka_topic_t *topic_order_coverage = NULL;
 
 u32 thread_exists(pthread_t thread_id)
 {
@@ -181,9 +190,7 @@ void FuncSequenceRecord(u32 curLoc)
     curLoc += node_id;
     if (init_done == 0)
         return;
-    // printf("111\n");
-    if (shmEnable == 0)
-        return;
+
     // TODO: remove the lock by async the operations
     pthread_mutex_lock(multiProcessMutex);
     // // NOTE: This is not the sequence coverage, this is the coverage of
@@ -203,6 +210,17 @@ void FuncSequenceRecord(u32 curLoc)
     }
     (*concurrentFunctionCountVar) = ((*concurrentFunctionCountVar) ^ curLoc) >> 1;
     pthread_mutex_unlock(multiProcessMutex);
+
+    /** If no shared mem is set, then use kafka to record */
+    if (shmEnable == 0)
+    {
+        if (rd_kafka_produce(topic_order_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY, &index, sizeof(u64),
+                             /** The key is not used currently */ &shmEnable, sizeof(u8), NULL) == -1)
+        {
+            fprintf(stderr, "%% Failed to produce to topic %s: %s\n", topic_order_coverage_str,
+                    rd_kafka_err2str(rd_kafka_last_error()));
+        }
+    }
 }
 
 void FuncEnterRecord(u32 curLoc)
@@ -291,9 +309,6 @@ void CoverageRecord(u32 curLoc)
 {
     if (init_done == 0)
         return;
-    // printf("111\n");
-    if (shmEnable == 0)
-        return;
     u32 index = (prevLoc ^ curLoc) % MAP_SIZE;
     // if prevloc and curloc are same in different thread, it will cause data
     // race but if lock for it, the overhead is too big
@@ -303,6 +318,18 @@ void CoverageRecord(u32 curLoc)
     }
 
     prevLoc = curLoc >> 1;
+
+    /** The code coverage is too many to record by kafka */
+    /** If no shared mem is set, then use kafka to record */
+    // if (shmEnable == 0)
+    // {
+    //     if (rd_kafka_produce(topic_code_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY, &index, sizeof(u64),
+    //                          /** The key is not used currently */ &shmEnable, sizeof(u8), NULL) == -1)
+    //     {
+    //         fprintf(stderr, "%% Failed to produce to topic %s: %s\n", topic_code_coverage_str,
+    //                 rd_kafka_err2str(rd_kafka_last_error()));
+    //     }
+    // }
 }
 
 void ShmDeclare(void)
@@ -326,8 +353,47 @@ void ShmDeclare(void)
         trace = (u8 *)malloc(MAP_SIZE * sizeof(u8));
         branchTraceBit = (u8 *)malloc(MAP_SIZE * sizeof(u8));
         concurrentFunctionCountVar = (u64 *)malloc(sizeof(u64));
+        *concurrentFunctionCountVar = 0;
         multiProcessMutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
         pthread_mutex_init(multiProcessMutex, NULL);
+        conf = rd_kafka_conf_new();
+        char hostname[128];
+        char errstr[512];
+        if (gethostname(hostname, sizeof(hostname)))
+        {
+            fprintf(stderr, "%% Failed to lookup hostname\n");
+            exit(1);
+        }
+
+        if (rd_kafka_conf_set(conf, "client.id", hostname, errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK)
+        {
+            fprintf(stderr, "%% %s\n", errstr);
+            exit(1);
+        }
+        if (rd_kafka_conf_set(conf, "bootstrap.servers", BOOTSTRAP_SERVER, errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK)
+        {
+            fprintf(stderr, "%% %s\n", errstr);
+            exit(1);
+        }
+        if (!(rk = rd_kafka_new(RD_KAFKA_PRODUCER, conf, errstr, sizeof(errstr))))
+        {
+            fprintf(stderr, "%% Failed to create new producer: %s\n", errstr);
+            exit(1);
+        }
+        rd_kafka_topic_conf_t *topic_conf_1 = rd_kafka_topic_conf_new();
+        if (rd_kafka_topic_conf_set(topic_conf_1, "acks", "0", errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK)
+        {
+            fprintf(stderr, "%% %s\n", errstr);
+            exit(1);
+        }
+        topic_code_coverage = rd_kafka_topic_new(rk, topic_code_coverage_str, topic_conf_1);
+        rd_kafka_topic_conf_t *topic_conf_2 = rd_kafka_topic_conf_new();
+        if (rd_kafka_topic_conf_set(topic_conf_2, "acks", "0", errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK)
+        {
+            fprintf(stderr, "%% %s\n", errstr);
+            exit(1);
+        }
+        topic_order_coverage = rd_kafka_topic_new(rk, topic_order_coverage_str, topic_conf_2);
     }
     else
     {

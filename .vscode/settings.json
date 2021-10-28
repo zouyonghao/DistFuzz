@@ -101,7 +101,11 @@
         "pthread.h": "c",
         "types.h": "c",
         "constants.h": "c",
-        "*.def": "cpp"
+        "*.def": "cpp",
+        "rdkafkacpp.h": "c",
+        "cerrno": "c",
+        "errno.h": "c",
+        "rdkafka.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
