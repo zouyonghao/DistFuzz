@@ -1,5 +1,5 @@
 add_executable(test_keeper_configuration_generator test_configuration_generator.cpp)
-target_link_libraries(test_keeper_configuration_generator ${Boost_LIBRARIES} pthread)
+target_link_libraries(test_keeper_configuration_generator dst_core ${Boost_LIBRARIES} pthread)
 add_test(test_keeper_configuration_generator test_keeper_configuration_generator)
 
 add_executable(test_clickhouse_operators test_operators.cpp)

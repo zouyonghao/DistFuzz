@@ -8,7 +8,7 @@ int main()
 {
     /* RandomKill, RandomStart and NoopOperator */
     assert(Registry<CriticalOperator>::getItemMap().size() == 3);
-    /* Init, DeleteDataFolder, KeeperSet, KeeperGet, KeeperCas */
+    /* Init, DeleteDataFolder, KeeperSet, KeeperGet, KeeperSetWithVersion */
     assert(Registry<NormalOperator>::getItemMap().size() == 5);
     return 0;
 }

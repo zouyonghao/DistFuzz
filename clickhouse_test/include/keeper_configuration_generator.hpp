@@ -87,9 +87,40 @@ public:
         }
         case OP_CAS:
         {
+            break;
+        }
+        default:
+            break;
+        }
+        va_end(random_nums);
+        return configure_string;
+    }
+};
+
+class KeeperClientWriteWithVersionConfigurationGenerator : public ClientConfigurationGenerator
+{
+public:
+    std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
+    {
+        std::string configure_string = "timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server ";
+        for (uint32_t i = 0; i < node_count; i++)
+        {
+            configure_string += IP ":" + std::to_string(BASE_ZK_PORT + i);
+            if (i < node_count - 1)
+            {
+                configure_string += ",";
+            }
+        }
+        configure_string += " ";
+        va_list random_nums;
+        va_start(random_nums, node_count);
+        switch (op_name)
+        {
+        case OP_WRITE:
+        {
             uint32_t value = va_arg(random_nums, uint32_t);
             /** The version should not be too large */
-            uint32_t version = va_arg(random_nums, uint32_t) % 3;
+            uint32_t version = __dst_get_random_uint8_t() % 3;
             configure_string += "set /a " + std::to_string(value) + " " + std::to_string(version);
             break;
         }

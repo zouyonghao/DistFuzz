@@ -15,9 +15,11 @@ void test_client_configuration_generator()
     assert(
         kccg.get_configure_string(OP_WRITE, 3, 100) ==
         "timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:9181,127.0.1.1:9182,127.0.1.1:9183 set /a 100");
-    assert(
-        kccg.get_configure_string(OP_CAS, 3, 0, 1) ==
-        "timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:9181,127.0.1.1:9182,127.0.1.1:9183 set /a 0 1");
+
+    KeeperClientWriteWithVersionConfigurationGenerator kcwvcg;
+    assert(kcwvcg.get_configure_string(OP_WRITE, 3, 100) ==
+           "timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:9181,127.0.1.1:9182,127.0.1.1:9183 set /a "
+           "100 0");
 }
 
 int main()
