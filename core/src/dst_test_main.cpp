@@ -147,6 +147,8 @@ int main(int argc, char const *argv[])
     std::cerr << "critical_operator run count = " << RUN_CRITICAL_OPERATOR_COUNT << "\n";
 
     init_is_fuzzing();
+    /** we must set is_fuzzing to false especially for java projects to avoid jvm errors while loading jar files */
+    set_is_fuzzing(false);
 
     bool all_operators_after_fuzzing_failed = true;
 
@@ -176,6 +178,7 @@ int main(int argc, char const *argv[])
     std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
 
     run_init_operator();
+    set_is_fuzzing(true);
     /** the normal operator may change after running init operator */
     normal_operator_size = Registry<NormalOperator>::getItemVector().size();
     run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);

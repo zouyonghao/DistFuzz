@@ -173,3 +173,16 @@ log*
 aerospike_test/bin/aerospike_conf*
 cmake-build-debug
 .idea
+zookeeper_test/bin/zoo*
+zookeeper_test/bin/data*
+zookeeper_test/bin/output/
+zookeeper_test/bin/file_lock
+.gitignore
+zookeeper_test/bin/random.txt
+zookeeper_test/bin/sync_branch_cov_file
+zookeeper_test/bin/sync_file
+zookeeper_test/bin/init_random.txt
+zookeeper_test/bin/operation_log
+zookeeper_test/bin/*.log
+zookeeper_test/bin/test_case_count
+zookeeper_test/bin/test_cases

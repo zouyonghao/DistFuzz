@@ -4,7 +4,7 @@
 
 一般对应项目中包含 `build.sh`，直接使用即可
 
-| 项目          | 目录名           | 对应git                                                      |
+| 项目          | 目录名           | 对应源码或下载地址                                           |
 | ------------- | ---------------- | ------------------------------------------------------------ |
 | braft         | braft            | http://oslab:7800/zyh/braft, http://oslab:7800/zyh/brpc      |
 | c-raft        | **raft**         | http://oslab:7800/zyh/craft                                  |
@@ -12,8 +12,9 @@
 | redisraft     | redisraft        | http://oslab:7800/zyh/redisraft, http://oslab:7800/zyh/redis |
 | floyd(raftis) | floyd            | https://github.com/Qihoo360/floyd                            |
 | rethinkdb     | rethinkdb        | http://oslab:7800/zyh/rethinkdb                              |
-| ClickHouse    | ClickHouse       | \\oslab\workspace\workspace\zyh\ClickHouse_21.9.2.17         |
+| ClickHouse    | ClickHouse       | \\oslab\workspace\zyh\ClickHouse_21.9.2.17                   |
 | aerospike     | aerospike-server | http://oslab:7800/zyh/aerospike-server.git                   |
+| Zookeeper     | zookeeper        | \\oslab\workspace\zyh\apache-zookeeper-3.7.0-bin.tar.gz      |
 
 **注意**
 
