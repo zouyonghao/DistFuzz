@@ -1,0 +1,6 @@
+OpenJDK 64-Bit Server VM warning: Option AggressiveOpts was deprecated in version 11.0 and will likely be removed in a future release.
+{:algorithm #object[knossos.competition$analysis 0x6d31f14 "knossos.competition$analysis@6d31f14"], :model #object[knossos.model$cas_register 0x404009df "knossos.model$cas_register@404009df"]}
+["/home/zyh/distributed-system-test/zookeeper_test/bin/test_cases/2/operation_log"]
+()
+/home/zyh/distributed-system-test/zookeeper_test/bin/test_cases/2/operation_log"check"
+	true
