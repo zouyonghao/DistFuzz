@@ -1,0 +1,3 @@
+symbol_init success!
+[33mYou are running in a fuzzing environment[0m
+PRELOAD: fuzzing is stopped, will use kernel_func directly.

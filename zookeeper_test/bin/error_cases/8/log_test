@@ -1,0 +1,146 @@
+Reading random file (null)
+spliting files...
+Reading random file random.txt
+normal_operator_size = 4
+normal operator run count = 2
+critical_operator_size = 3
+critical_operator run count = 2
+[33mYou are running in a fuzzing environment[0m
+[1;31mrunning test case 8[0m
+start nodes....
+mkdir: cannot create directory ‘data1’: File exists
+mkdir: cannot create directory ‘data2’: File exists
+mkdir: cannot create directory ‘data3’: File exists
+mkdir: cannot create directory ‘data4’: File exists
+mkdir: cannot create directory ‘data5’: File exists
+node 0 start command is : java -cp /home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain zoo1
+node 1 start command is : java -cp /home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain zoo2
+node 2 start command is : java -cp /home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain zoo3
+node 3 start command is : java -cp /home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain zoo4
+node 4 start command is : java -cp /home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain zoo5
+Run init operator
+Connecting to 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+Node already exists: /a
+running operator ZooKeeperGet
+timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185 get /a
+Exception in thread "main" org.apache.zookeeper.KeeperException$ConnectionLossException: KeeperErrorCode = ConnectionLoss for /a
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:99)
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:51)
+	at org.apache.zookeeper.ZooKeeper.getData(ZooKeeper.java:1212)
+	at org.apache.zookeeper.ZooKeeper.getData(ZooKeeper.java:1241)
+	at org.apache.zookeeper.ZooKeeperMain.processZKCmd(ZooKeeperMain.java:725)
+	at org.apache.zookeeper.ZooKeeperMain.processCmd(ZooKeeperMain.java:599)
+	at org.apache.zookeeper.ZooKeeperMain.run(ZooKeeperMain.java:362)
+	at org.apache.zookeeper.ZooKeeperMain.main(ZooKeeperMain.java:290)
+running operator ZooKeeperSetWithVersion
+timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185 set /a 2351664357 2
+Exception in thread "main" org.apache.zookeeper.KeeperException$ConnectionLossException: KeeperErrorCode = ConnectionLoss for /a
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:99)
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:51)
+	at org.apache.zookeeper.ZooKeeper.setData(ZooKeeper.java:1327)
+	at org.apache.zookeeper.ZooKeeperMain.processZKCmd(ZooKeeperMain.java:717)
+	at org.apache.zookeeper.ZooKeeperMain.processCmd(ZooKeeperMain.java:599)
+	at org.apache.zookeeper.ZooKeeperMain.run(ZooKeeperMain.java:362)
+	at org.apache.zookeeper.ZooKeeperMain.main(ZooKeeperMain.java:290)
+running operator RandomStart
+all nodes are alive.
+running operator ZooKeeperSet
+timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185 set /a 78640001
+cZxid = 0x100000002
+ctime = Sun Oct 31 16:28:23 CST 2021
+mZxid = 0x1100000002
+mtime = Mon Nov 01 10:38:26 CST 2021
+pZxid = 0x100000002
+cversion = 0
+dataVersion = 9
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 8
+numChildren = 0
+Connecting to 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185
+running operator ZooKeeperSet
+timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185 set /a 3860652058
+client operator got timeout
+running operator RandomStart
+all nodes are alive.
+running operator ZooKeeperGet
+timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185 get /a
+Exception in thread "main" org.apache.zookeeper.KeeperException$ConnectionLossException: KeeperErrorCode = ConnectionLoss for /a
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:99)
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:51)
+	at org.apache.zookeeper.ZooKeeper.getData(ZooKeeper.java:1212)
+	at org.apache.zookeeper.ZooKeeper.getData(ZooKeeper.java:1241)
+	at org.apache.zookeeper.ZooKeeperMain.processZKCmd(ZooKeeperMain.java:725)
+	at org.apache.zookeeper.ZooKeeperMain.processCmd(ZooKeeperMain.java:599)
+	at org.apache.zookeeper.ZooKeeperMain.run(ZooKeeperMain.java:362)
+	at org.apache.zookeeper.ZooKeeperMain.main(ZooKeeperMain.java:290)
+running operator ZooKeeperSet
+timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185 set /a 1412657682
+Exception in thread "main" org.apache.zookeeper.KeeperException$ConnectionLossException: KeeperErrorCode = ConnectionLoss for /a
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:99)
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:51)
+	at org.apache.zookeeper.ZooKeeper.setData(ZooKeeper.java:1327)
+	at org.apache.zookeeper.ZooKeeperMain.processZKCmd(ZooKeeperMain.java:717)
+	at org.apache.zookeeper.ZooKeeperMain.processCmd(ZooKeeperMain.java:599)
+	at org.apache.zookeeper.ZooKeeperMain.run(ZooKeeperMain.java:362)
+	at org.apache.zookeeper.ZooKeeperMain.main(ZooKeeperMain.java:290)
+node 3 is unintentially terminiated.
+check failed!
+The remaining alive node count is 5
+Fuzzing is stopped, now we wait for 3 seconds and then run some normal operators to see whether it works as usual.
+running operator ZooKeeperSetWithVersion
+timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185 set /a 126292416 1
+Exception in thread "main" org.apache.zookeeper.KeeperException$ConnectionLossException: KeeperErrorCode = ConnectionLoss for /a
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:99)
+	at org.apache.zookeeper.KeeperException.create(KeeperException.java:51)
+	at org.apache.zookeeper.ZooKeeper.setData(ZooKeeper.java:1327)
+	at org.apache.zookeeper.ZooKeeperMain.processZKCmd(ZooKeeperMain.java:717)
+	at org.apache.zookeeper.ZooKeeperMain.processCmd(ZooKeeperMain.java:599)
+	at org.apache.zookeeper.ZooKeeperMain.run(ZooKeeperMain.java:362)
+	at org.apache.zookeeper.ZooKeeperMain.main(ZooKeeperMain.java:290)
+running operator ZooKeeperSetWithVersion failed after fuzzing
+running operator ZooKeeperGet
+timeout 3 /usr/share/zookeeper/bin/zkCli.sh -server 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185 get /a
+cZxid = 0x100000002
+ctime = Sun Oct 31 16:28:23 CST 2021
+mZxid = 0x1100000002
+mtime = Mon Nov 01 10:38:26 CST 2021
+pZxid = 0x100000002
+cversion = 0
+dataVersion = 9
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 8
+numChildren = 0
+Connecting to 127.0.1.1:2181,127.0.1.1:2182,127.0.1.1:2183,127.0.1.1:2184,127.0.1.1:2185
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+78640001
+stopping...
+
+Usage:
+ kill [options] <pid> [...]
+
+Options:
+ <pid> [...]            send signal to every <pid> listed
+ -<signal>, -s, --signal <signal>
+                        specify the <signal> to be sent
+ -l, --list=[<signal>]  list all signal names, or convert one to a name
+ -L, --table            list all signal names in a nice table
+
+ -h, --help     display this help and exit
+ -V, --version  output version information and exit
+
+For more details see kill(1).
+backup test cases
+/home/zyh/distributed-system-test/zookeeper_test/bin
+mv: cannot stat 'run/*': No such file or directory
+9
+grep: ./test_cases/8/run/log*: No such file or directory
+Find check failed!
