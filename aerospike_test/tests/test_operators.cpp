@@ -8,7 +8,7 @@ int main()
 {
     /* RandomKill, RandomStart and NoopOperator */
     assert(Registry<CriticalOperator>::getItemMap().size() == 3);
-    /* AerospikeWrite and AerospikeRead */
-    assert(Registry<NormalOperator>::getItemMap().size() == 2);
+    /* Init, AerospikeWrite, AerospikeRead */
+    assert(Registry<NormalOperator>::getItemMap().size() == 3);
     return 0;
 }

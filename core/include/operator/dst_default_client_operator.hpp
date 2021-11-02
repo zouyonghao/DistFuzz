@@ -15,6 +15,7 @@
 
 enum OP_NAME
 {
+    OP_INIT,
     OP_READ,
     OP_WRITE,
     OP_CAS

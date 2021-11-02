@@ -123,6 +123,33 @@ public:
         case OP_CAS:
             // TODO
             break;
+        case OP_INIT:
+        {
+            as_record rec;
+            as_record_inita(&rec, 1);
+            as_record_set_int64(&rec, "test-bin", 0);
+            as_policy_write wpol;
+            as_policy_write_init(&wpol);
+            wpol.exists = AS_POLICY_EXISTS_CREATE_OR_REPLACE;
+            if (aerospike_key_put(&as, &err, &wpol, &key, &rec) != AEROSPIKE_OK)
+            {
+                fprintf(stderr, "err(%d) %s at [%s:%d]\n", err.code, err.message, err.file, err.line);
+
+                if (err.code != AEROSPIKE_ERR_TIMEOUT)
+                {
+                    printf("init failed!\n");
+                    // __dst_event_record(get_result_record(op_name, op_vector, -1, "FAIL", random_thread_id).c_str());
+                }
+                else
+                {
+                    printf("init timeout!\n");
+                }
+                return false;
+            }
+            // __dst_event_record(get_result_record(op_name, op_vector, 0, "", random_thread_id).c_str());
+            as_record_destroy(&rec);
+            break;
+        }
         }
 
         return true;
@@ -133,4 +160,5 @@ public:
 
 REGISTER_NORMAL_OPERATOR(AerospikeRead, new AerospikeClient(OP_READ));
 REGISTER_NORMAL_OPERATOR(AerospikeWrite, new AerospikeClient(OP_WRITE));
+REGISTER_NORMAL_OPERATOR(Init, new AerospikeClient(OP_INIT));
 // REGISTER_NORMAL_OPERATOR(AerospikeCas, new AerospikeClient(ACTION_TYPE::CAS));
