@@ -3,8 +3,9 @@
 void test_configuration_generator()
 {
     ZooKeeperConfigurationGenerator zkcg;
-    assert(zkcg.get_configure_string(0, 3) == "java -cp /home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf "
-                                              "org.apache.zookeeper.server.quorum.QuorumPeerMain zoo1");
+    assert(zkcg.get_configure_string(0, 3) ==
+           "java -cp /home/zyh/zookeeper/lib/zookeeper-3.7.0.jar:/home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf "
+           "org.apache.zookeeper.server.quorum.QuorumPeerMain zoo1");
 }
 
 void test_client_configuration_generator()

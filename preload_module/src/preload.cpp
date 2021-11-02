@@ -136,6 +136,7 @@ enum SUPPORTED_ACTION
 {
     NOOP,
     // REORDER,
+    FAIL,
     LOST,
     DELAY,
     ASYNC_DELAY, /** TODO: think about this question: Is async delay same to reorder? */
@@ -213,6 +214,10 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
         perror("fstat:");
         return kernel_func();
     }
+
+    /** The file operation should not be DELAY, LOST or ASYNC_DELAY. */
+    bool is_file = false;
+
     switch (sb.st_mode & S_IFMT)
     {
     /** regular file */
@@ -229,7 +234,7 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
         {
             return kernel_func();
         }
-
+        is_file = true;
         break;
     }
     /** socket */
@@ -271,6 +276,10 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
     {
         break;
     }
+    case FAIL:
+    {
+        return -1;
+    }
     case DELAY:
     {
         /** sleep from 0s ~ 1.3s */
@@ -285,10 +294,18 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
     }
     case LOST:
     {
+        if (is_file)
+        {
+            break;
+        }
         return __dst_get_random_uint8_t() % 2 == 0 ? length : 0;
     }
     case ASYNC_DELAY:
     {
+        if (is_file)
+        {
+            break;
+        }
         std::lock_guard<std::mutex> lk(lock_for_vector);
         /** The result of std::async should be stored, otherwise it is not async. */
         futures.push_back(std::async(std::launch::async,
@@ -311,6 +328,10 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
     }
     case DUP:
     {
+        if (is_file)
+        {
+            break;
+        }
         real_write = kernel_func();
         break;
     }

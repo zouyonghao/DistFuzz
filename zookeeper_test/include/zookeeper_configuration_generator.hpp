@@ -7,7 +7,7 @@
 #include <dst_node_manager.hpp>
 #include <operator/dst_default_client_operator.hpp>
 
-#define BIN_PATH "java -cp /home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain "
+#define BIN_PATH "java -cp /home/zyh/zookeeper/lib/zookeeper-3.7.0.jar:/home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain "
 #define BASE_ZK_PORT 2181
 #define BASE_QUORUM_PORT 2888
 #define BASE_ELECTION_PORT 3888
@@ -29,6 +29,7 @@ public:
         zk_conf_file << "tickTime=200\n";
         zk_conf_file << "initLimit=5\n";
         zk_conf_file << "syncLimit=2\n";
+        zk_conf_file << "admin.enableServer=false\n";
         zk_conf_file << "dataDir=" DATA_DIR_PREFIX << zk_id_str << "\n";
         zk_conf_file << "clientPort=" << std::to_string(BASE_ZK_PORT + node_id) << "\n";
         for (int i = 0; i < node_count; i++)

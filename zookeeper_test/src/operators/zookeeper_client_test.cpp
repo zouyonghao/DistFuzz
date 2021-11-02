@@ -1,6 +1,7 @@
 #include <zookeeper_configuration_generator.hpp>
 
-static ClientConfigurationGenerator *zookeeper_client_configuration_generator = new ZooKeeperClientConfigurationGenerator();
+static ClientConfigurationGenerator *zookeeper_client_configuration_generator =
+    new ZooKeeperClientConfigurationGenerator();
 
 /** The KeeperInitOperator will try to set until the read is success */
 class ZooKeeperInitOperator : public NormalOperator
@@ -41,6 +42,14 @@ public:
             std::cerr << "Keeper init failed!\n";
             return false;
         }
+
+        int random_thread_id = random() % INT_MAX;
+        std::string invoke_record_string =
+            "{:process " + std::to_string(random_thread_id) + ", :type :invoke, :f :write, :value 0}";
+        __dst_event_record(invoke_record_string.c_str());
+        std::string result_record_string =
+            "{:process " + std::to_string(random_thread_id) + ", :type :ok, :f :write, :value 0}";
+        __dst_event_record(result_record_string.c_str());
         return true;
     }
 };
@@ -66,5 +75,7 @@ public:
 
 REGISTER_NORMAL_OPERATOR(ZooKeeperGet, new ZooKeeperClientOperator(OP_READ, zookeeper_client_configuration_generator));
 REGISTER_NORMAL_OPERATOR(ZooKeeperSet, new ZooKeeperClientOperator(OP_WRITE, zookeeper_client_configuration_generator));
-REGISTER_NORMAL_OPERATOR(ZooKeeperSetWithVersion, new ZooKeeperClientOperator(OP_WRITE, new ZooKeeperClientWriteWithVersionConfigurationGenerator));
+REGISTER_NORMAL_OPERATOR(ZooKeeperSetWithVersion,
+                         new ZooKeeperClientOperator(OP_WRITE,
+                                                     new ZooKeeperClientWriteWithVersionConfigurationGenerator));
 REGISTER_NORMAL_OPERATOR(Init, new ZooKeeperInitOperator);
