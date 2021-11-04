@@ -35,6 +35,7 @@ public:
             {
                 break;
             }
+            count++;
         }
         if (count >= MAX_TRY_COUNT)
         {
