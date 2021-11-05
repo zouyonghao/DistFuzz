@@ -65,8 +65,11 @@ public:
             ni.should_alive = true;
             ni.start_command = configuration_generator->get_configure_string(i, node_count);
             std::cout << "node " << i << " start command is : " << ni.start_command << "\n";
-            start_process(ni);
             node_processes.push_back(ni);
+        }
+        for (auto &ni : node_processes)
+        {
+            start_process(ni);
         }
         return check();
     }
@@ -140,6 +143,7 @@ public:
                 else
                 {
                     std::cerr << "node " << ni.node_id << " is terminiated normally.\n";
+                    /** TODO: true or false? */
                     return false;
                 }
             }
@@ -166,10 +170,12 @@ public:
     {
         std::string node_id_str = std::to_string(ni.node_id);
         boost::process::environment env = boost::this_process::environment();
-        env["LD_PRELOAD"] = PRELOAD_LIB_PATH;
+        env["DATA_DIR"] = configuration_generator->get_data_folder(ni.node_id);
+        env["NO_FAULT_FILES"] = configuration_generator->get_no_fault_files(ni.node_id);
         env["__DST_ENV_RANDOM_FILE__"] = "random_node" + node_id_str;
         env["NODE_NAME"] = "node" + node_id_str;
         env["NODE_ID"] = node_id_str;
+        env["LD_PRELOAD"] = PRELOAD_LIB_PATH;
         std::string log_file = "log_app_" + node_id_str + "_" + std::to_string(ni.log_index);
         std::string err_log_file = "log_app_err" + node_id_str + "_" + std::to_string(ni.log_index);
         if (ni.process != nullptr)
@@ -179,6 +185,7 @@ public:
         }
         ni.process = new boost::process::child(ni.start_command, boost::process::std_out > log_file,
                                                boost::process::std_err > err_log_file, env);
+        ni.log_index++;
         return true;
     }
 

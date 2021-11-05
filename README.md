@@ -12,9 +12,9 @@
 | redisraft     | redisraft        | http://oslab:7800/zyh/redisraft, http://oslab:7800/zyh/redis |
 | floyd(raftis) | floyd            | https://github.com/Qihoo360/floyd                            |
 | rethinkdb     | rethinkdb        | http://oslab:7800/zyh/rethinkdb                              |
-| ClickHouse    | ClickHouse       | \\oslab\workspace\zyh\ClickHouse_21.9.2.17                   |
+| ClickHouse    | ClickHouse       | \\\\oslab\workspace\zyh\ClickHouse_21.9.2.17                 |
 | aerospike     | aerospike-server | http://oslab:7800/zyh/aerospike-server.git                   |
-| Zookeeper     | zookeeper        | \\oslab\workspace\zyh\apache-zookeeper-3.7.0-bin.tar.gz      |
+| Zookeeper     | zookeeper        | \\\\oslab\workspace\zyh\apache-zookeeper-3.7.0-bin.tar.gz    |
 
 **注意**
 
@@ -41,28 +41,20 @@
    修改 .bashrc，加入cmake执行路径
    ```
 
-
+* `Zookeeper` 需要将`jar`包重命名为`zookeeper.jar`
 
 **新增项目**
 
 添加新测试项目时需要增加、修改的文件：
 
-1. run_fuzz_server_normal.sh
+1. 实现`node_manager`
    
-   一般是用于测试应用是否能正常启动
+   主要是实现 `ServerConfigurationGenerator`
 
-2. run_fuzz_server.sh
+2. operators
    
-   启动开始测试需要的所有服务 （TODO:改为在main里控制）
+   一般需要实现多个，主要是 `ClientConfigurationGenerator` 和自定义 operators
 
-3. start_server[0-2].sh
-   
-   启动单个server
-
-4. operators
-   
-   一般需要实现多个，包括启动/停止等
-
-5. backup_test_case.sh
+3. backup_test_case.sh
    
    用于备份和检查相关日志、数据

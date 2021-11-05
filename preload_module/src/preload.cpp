@@ -17,7 +17,12 @@
 #include <vector>
 
 /**
- * TODO: fprintf, fgets, fread, and fwrite?
+ * max delay millseconds 1000ms
+ * TODO: make it configurable
+ */
+#define MAX_DELAY_MILLSECONDS 1000
+
+/**
  * read(), write()
  * readv(), writev()
  * pread(), pwrite()
@@ -118,7 +123,7 @@ int get_file_path(int fd, struct stat *sb, char **buf)
 
     /* Print only 'nbytes' of 'buf', as it doesn't contain a terminating
        null byte ('\0'). */
-    fprintf(stderr, "'%s' points to '%.*s'\n", path.c_str(), (int)nbytes, *buf);
+    // fprintf(stderr, "'%s' points to '%.*s'\n", path.c_str(), (int)nbytes, *buf);
 
     /* If the return value was equal to the buffer size, then the
        the link target was larger than expected (perhaps because the
@@ -134,12 +139,10 @@ int get_file_path(int fd, struct stat *sb, char **buf)
 
 enum SUPPORTED_ACTION
 {
-    NOOP,
-    // REORDER,
     FAIL,
     LOST,
     DELAY,
-    ASYNC_DELAY, /** TODO: think about this question: Is async delay same to reorder? */
+    ASYNC_DELAY,
     DUP,
     ACTION_COUNT
 };
@@ -179,16 +182,20 @@ private:
 };
 
 /** global variables */
-timer_killer _timer_killer;
-std::vector<std::future<void>> futures;
-bool printed_fuzzing_stopped = false;
+static timer_killer _timer_killer;
+static std::vector<std::future<void>> futures;
+static std::mutex lock_for_vector;
+static bool printed_fuzzing_stopped = false;
 
-ssize_t handle_random_event(const char *func_name, int fd, size_t length, const std::function<ssize_t()> &kernel_func)
+ssize_t handle_random_event(const char *func_name, int fd, size_t length, bool is_send,
+                            const std::function<ssize_t()> &kernel_func)
 {
+    /** Ignore stdin, stdout, stderr */
     if (fd < 4)
     {
         return kernel_func();
     }
+
     /** If fuzzing is disabled, we call the original function. */
     if (!get_is_fuzzing())
     {
@@ -215,7 +222,7 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
         return kernel_func();
     }
 
-    /** The file operation should not be DELAY, LOST or ASYNC_DELAY. */
+    /** The file operation should not be ASYNC_DELAY. */
     bool is_file = false;
 
     switch (sb.st_mode & S_IFMT)
@@ -230,9 +237,40 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
             return kernel_func();
         }
 
+        /** Skip jars for java applications */
         if (std::string(file_path).find(".jar") != std::string::npos)
         {
             return kernel_func();
+        }
+
+        /** Skip files in get_no_fault_files */
+        if (getenv("NO_FAULT_FILES") != NULL)
+        {
+            std::string no_fault_files(getenv("NO_FAULT_FILES"));
+            fprintf(stderr, "no_fault_files is %s\n", no_fault_files.c_str());
+            if (!no_fault_files.empty())
+            {
+                std::string delim = ",";
+                auto start = 0U;
+                auto end = no_fault_files.find(delim);
+                bool is_no_fault_file = false;
+                while (end != std::string::npos)
+                {
+                    auto no_fault_file = no_fault_files.substr(start, end - start);
+                    if (std::string(file_path).find(no_fault_file) != std::string::npos)
+                    {
+                        fprintf(stderr, "%s is skipped\n", no_fault_file.c_str());
+                        is_no_fault_file = true;
+                        break;
+                    }
+                    start = end + delim.length();
+                    end = no_fault_files.find(delim, start);
+                }
+                if (is_no_fault_file)
+                {
+                    return kernel_func();
+                }
+            }
         }
         is_file = true;
         break;
@@ -250,15 +288,14 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
         inet_aton("127.0.1.1", &addr_cmp);
 
         /**
-         * If the IP is not from 127.0.1.1, then treat it as a client.
-         * FIXME: This still can not distinguish the client perfectly
+         * TODO: skip client packets
          */
-        if (addr_cmp.s_addr != addr.sin_addr.s_addr)
-        {
-            // be careful when process this...
-            // fprintf(stderr, "peer IP address not equals to 127.0.1.1, skip...\n");
-            return kernel_func();
-        }
+        // if (addr_cmp.s_addr != addr.sin_addr.s_addr)
+        // {
+        //     // be careful when process this...
+        //     // fprintf(stderr, "peer IP address not equals to 127.0.1.1, skip...\n");
+        //     return kernel_func();
+        // }
         break;
     }
     default:
@@ -267,24 +304,20 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
 
     ssize_t real_write;
     static std::mutex lock_for_write;
-    static std::mutex lock_for_vector;
+
     uint8_t select_random = __dst_get_random_uint8_t() % ACTION_COUNT;
     // fprintf(stderr, "action is %d\n", select_random);
     switch (select_random)
     {
-    case NOOP:
-    {
-        break;
-    }
     case FAIL:
     {
         return -1;
     }
     case DELAY:
     {
-        /** sleep from 0s ~ 1.3s */
-        uint16_t random = __dst_get_random_uint16_t() * 20;
-        if (!_timer_killer.wait_for(std::chrono::microseconds(random)))
+        /** sleep for 0s ~ 1s */
+        uint16_t random = __dst_get_random_uint16_t() % MAX_DELAY_MILLSECONDS;
+        if (!_timer_killer.wait_for(std::chrono::milliseconds(random)))
         {
             fprintf(stderr, "timer got killed!\n");
         }
@@ -296,7 +329,7 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
     {
         if (is_file)
         {
-            break;
+            return 0;
         }
         return __dst_get_random_uint8_t() % 2 == 0 ? length : 0;
     }
@@ -309,11 +342,11 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
         std::lock_guard<std::mutex> lk(lock_for_vector);
         /** The result of std::async should be stored, otherwise it is not async. */
         futures.push_back(std::async(std::launch::async,
-                                     [length, &kernel_func, &real_write]
+                                     [length, kernel_func]
                                      {
-                                         /** sleep from 0s ~ 1.3s */
-                                         uint16_t random = __dst_get_random_uint16_t() * 20;
-                                         if (!_timer_killer.wait_for(std::chrono::microseconds(random)))
+                                         /** sleep from 0s ~ 1s */
+                                         uint16_t random = __dst_get_random_uint16_t() % MAX_DELAY_MILLSECONDS;
+                                         if (!_timer_killer.wait_for(std::chrono::milliseconds(random)))
                                          {
                                              fprintf(stderr, "timer got killed!\n");
                                          }
@@ -321,7 +354,7 @@ ssize_t handle_random_event(const char *func_name, int fd, size_t length, const 
                                          // __dst_event_trigger(
                                          //     ("sleep for " + std::to_string(random) + "n").c_str());
 
-                                         real_write = kernel_func();
+                                         kernel_func();
                                      }));
 
         return length;
@@ -366,90 +399,94 @@ ssize_t get_length_from_msghdr(const struct msghdr *msg)
 
 extern "C" ssize_t read(int fd, void *bf, size_t count)
 {
-    return handle_random_event("read", fd, count, [&]() { return k_read(fd, bf, count); });
+    return handle_random_event("read", fd, count, false, [&]() { return k_read(fd, bf, count); });
 }
 
 extern "C" ssize_t write(int fd, const void *buf, size_t len)
 {
-    return handle_random_event("write", fd, len, [&]() { return k_write(fd, buf, len); });
+    return handle_random_event("write", fd, len, true, [&]() { return k_write(fd, buf, len); });
 }
 
 extern "C" ssize_t readv(int fd, const struct iovec *iov, int iovcnt)
 {
-    return handle_random_event("readv", fd, get_length_from_iovec(iov, iovcnt),
+    return handle_random_event("readv", fd, get_length_from_iovec(iov, iovcnt), false,
                                [&]() { return k_readv(fd, iov, iovcnt); });
 }
 
 extern "C" ssize_t writev(int fd, const struct iovec *iov, int iovcnt)
 {
-    return handle_random_event("writev", fd, get_length_from_iovec(iov, iovcnt),
+    return handle_random_event("writev", fd, get_length_from_iovec(iov, iovcnt), true,
                                [&]() { return k_writev(fd, iov, iovcnt); });
 }
 
 extern "C" ssize_t pread(int fd, void *buf, size_t count, off_t offset)
 {
-    return handle_random_event("pread", fd, count, [&]() { return k_pread(fd, buf, count, offset); });
+    return handle_random_event("pread", fd, count, false, [&]() { return k_pread(fd, buf, count, offset); });
 }
 
 extern "C" ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset)
 {
-    return handle_random_event("pwrite", fd, count, [&]() { return k_pwrite(fd, buf, count, offset); });
+    return handle_random_event("pwrite", fd, count, true, [&]() { return k_pwrite(fd, buf, count, offset); });
 }
 
 extern "C" ssize_t preadv(int fd, const struct iovec *iov, int iovcnt, off_t offset)
 {
-    return handle_random_event("preadv", fd, get_length_from_iovec(iov, iovcnt),
+    return handle_random_event("preadv", fd, get_length_from_iovec(iov, iovcnt), false,
                                [&]() { return k_preadv(fd, iov, iovcnt, offset); });
 }
 
 extern "C" ssize_t pwritev(int fd, const struct iovec *iov, int iovcnt, off_t offset)
 {
-    return handle_random_event("pwritev", fd, get_length_from_iovec(iov, iovcnt),
+    return handle_random_event("pwritev", fd, get_length_from_iovec(iov, iovcnt), true,
                                [&] { return k_pwritev(fd, iov, iovcnt, offset); });
 }
 
 extern "C" ssize_t preadv2(int fd, const struct iovec *iov, int iovcnt, off_t offset, int flags)
 {
-    return handle_random_event("preadv2", fd, get_length_from_iovec(iov, iovcnt),
+    return handle_random_event("preadv2", fd, get_length_from_iovec(iov, iovcnt), false,
                                [&]() { return k_preadv2(fd, iov, iovcnt, offset, flags); });
 }
 
 extern "C" ssize_t pwritev2(int fd, const struct iovec *iov, int iovcnt, off_t offset, int flags)
 {
-    return handle_random_event("pwritev2", fd, get_length_from_iovec(iov, iovcnt),
+    return handle_random_event("pwritev2", fd, get_length_from_iovec(iov, iovcnt), true,
                                [&]() { return k_pwritev2(fd, iov, iovcnt, offset, flags); });
 }
 
 /* for send */
 extern "C" ssize_t send(int fd, const void *buf, size_t len, int flags)
 {
-    return handle_random_event("send", fd, len, [&]() { return k_send(fd, buf, len, flags); });
+    return handle_random_event("send", fd, len, true, [&]() { return k_send(fd, buf, len, flags); });
 }
 
 extern "C" ssize_t sendto(int fd, const void *buf, size_t len, int flags, const struct sockaddr *dest_addr,
                           socklen_t addrlen)
 {
-    return handle_random_event("sendto", fd, len, [&]() { return k_sendto(fd, buf, len, flags, dest_addr, addrlen); });
+    return handle_random_event("sendto", fd, len, true,
+                               [&]() { return k_sendto(fd, buf, len, flags, dest_addr, addrlen); });
 }
 
 extern "C" ssize_t sendmsg(int fd, const struct msghdr *msg, int flags)
 {
-    return handle_random_event("sendmsg", fd, get_length_from_msghdr(msg), [&]() { return k_sendmsg(fd, msg, flags); });
+    return handle_random_event("sendmsg", fd, get_length_from_msghdr(msg), true,
+                               [&]() { return k_sendmsg(fd, msg, flags); });
 }
 
 extern "C" ssize_t recv(int sockfd, void *buf, size_t len, int flags)
 {
-    return handle_random_event("recv", sockfd, len, [&]() { return k_recv(sockfd, buf, len, flags); });
+    return handle_random_event("recv", sockfd, len, false, [&]() { return k_recv(sockfd, buf, len, flags); });
 }
 
 extern "C" ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags, struct sockaddr *src_addr, socklen_t *addrlen)
 {
-    return handle_random_event("recvfrom", sockfd, len,
+    return handle_random_event("recvfrom", sockfd, len, false,
                                [&]() { return k_recvfrom(sockfd, buf, len, flags, src_addr, addrlen); });
 }
 
 extern "C" ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags)
 {
-    return handle_random_event("recvmsg", sockfd, get_length_from_msghdr(msg),
+    return handle_random_event("recvmsg", sockfd, get_length_from_msghdr(msg), false,
                                [&]() { return k_recvmsg(sockfd, msg, flags); });
 }
+
+/** TODO: sched_setattr(2); */

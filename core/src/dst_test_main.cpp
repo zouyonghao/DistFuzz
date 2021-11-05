@@ -147,8 +147,8 @@ int main(int argc, char const *argv[])
     std::cerr << "critical_operator run count = " << RUN_CRITICAL_OPERATOR_COUNT << "\n";
 
     init_is_fuzzing();
-    /** we must set is_fuzzing to false especially for java projects to avoid jvm errors while loading jar files */
-    set_is_fuzzing(false);
+    /** Do not set is_fuzzing to false for some cases during boot */
+    // set_is_fuzzing(false);
 
     bool all_operators_after_fuzzing_failed = true;
 
@@ -175,7 +175,7 @@ int main(int argc, char const *argv[])
         i.second->node_count = node_count;
     }
 
-    std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
+    std::this_thread::sleep_for(std::chrono::milliseconds(__dst_get_random_uint16_t() % 1000));
 
     run_init_operator();
     set_is_fuzzing(true);
@@ -192,14 +192,11 @@ int main(int argc, char const *argv[])
         run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
     }
 
-    /** let it run a while */
-    // std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
-
     /** check server availability */
     if (!nm->check())
     {
         std::cerr << "check failed!\n";
-        // goto STOP;
+        goto STOP;
     }
 
     /** recovery checker to check whether servers can recover after fuzzing */
@@ -241,6 +238,10 @@ int main(int argc, char const *argv[])
             std::cerr << COLOR_RED_START << "all normal operators after fuzzing failed! :(" << COLOR_RESET_END << "\n";
         }
     }
+
+    set_is_fuzzing(false);
+    /** run some checkers before stop */
+    system("bash check_before_stop.sh");
 
 STOP:
     std::cerr << "stopping...\n";

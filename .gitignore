@@ -186,3 +186,4 @@ zookeeper_test/bin/operation_log
 zookeeper_test/bin/*.log
 zookeeper_test/bin/test_case_count
 zookeeper_test/bin/test_cases
+zookeeper_test/bin/test

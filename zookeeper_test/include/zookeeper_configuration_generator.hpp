@@ -7,7 +7,15 @@
 #include <dst_node_manager.hpp>
 #include <operator/dst_default_client_operator.hpp>
 
-#define BIN_PATH "java -cp /home/zyh/zookeeper/lib/zookeeper-3.7.0.jar:/home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain "
+#define BIN_PATH                                                                                                       \
+    "java -cp /home/zyh/zookeeper/lib/zookeeper.jar:/home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf "               \
+    "org.apache.zookeeper.server.quorum.QuorumPeerMain "
+
+/** For zookeeper-2212 */
+// #define BIN_PATH                                                                                                       \
+//     "java -cp "                                                                                                        \
+//     "/home/zyh/zookeeper-src/build/zookeeper-3.5.1-alpha.jar:/home/zyh/zookeeper-src/build/lib/*:/home/zyh/"           \
+//     "zookeeper-src/conf org.apache.zookeeper.server.quorum.QuorumPeerMain "
 #define BASE_ZK_PORT 2181
 #define BASE_QUORUM_PORT 2888
 #define BASE_ELECTION_PORT 3888
@@ -32,11 +40,31 @@ public:
         zk_conf_file << "admin.enableServer=false\n";
         zk_conf_file << "dataDir=" DATA_DIR_PREFIX << zk_id_str << "\n";
         zk_conf_file << "clientPort=" << std::to_string(BASE_ZK_PORT + node_id) << "\n";
-        for (int i = 0; i < node_count; i++)
+
+        if (__dst_get_random_uint8_t() < 200)
         {
-            zk_conf_file << "server." << std::to_string(i + 1) << "=" IP ":" << std::to_string(BASE_QUORUM_PORT + i)
-                         << ":" << std::to_string(BASE_ELECTION_PORT + i) << "\n";
+            zk_conf_file << "4lw.commands.whitelist=*\n";
+            for (int i = 0; i < node_count; i++)
+            {
+                zk_conf_file << "server." << std::to_string(i + 1) << "=" IP ":" << std::to_string(BASE_QUORUM_PORT + i)
+                             << ":" << std::to_string(BASE_ELECTION_PORT + i) << "\n";
+            }
         }
+        else
+        {
+            /** For zk 2212 */
+            zk_conf_file << "standaloneEnabled=false\n";
+            zk_conf_file << "server.1=" IP ":" << std::to_string(BASE_QUORUM_PORT) << ":"
+                         << std::to_string(BASE_ELECTION_PORT) << ":participant;" << std::to_string(BASE_ZK_PORT)
+                         << "\n";
+            if (node_id > 0)
+            {
+                zk_conf_file << "server." << zk_id_str << "=" IP ":" << std::to_string(BASE_QUORUM_PORT + node_id)
+                             << ":" << std::to_string(BASE_ELECTION_PORT + node_id) << ":observer;"
+                             << std::to_string(BASE_ZK_PORT + node_id) << "\n";
+            }
+        }
+
         zk_conf_file.close();
     }
 
@@ -47,12 +75,18 @@ public:
         std::system(("mkdir " DATA_DIR_PREFIX + zk_id_str).c_str());
         std::system(("bash -c \"echo " + zk_id_str + " > " DATA_DIR_PREFIX + zk_id_str + "/myid\"").c_str());
     }
-    std::string get_configure_string(uint32_t node_id, uint32_t node_count)
+    std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
         init_conf_file(node_id, node_count);
         init_data_folder(node_id);
         std::string config = BIN_PATH BASE_CONF_PATH_PREFIX + std::to_string(node_id + 1);
         return config;
+    }
+    std::string get_data_folder(uint32_t node_id) override { return DATA_DIR_PREFIX + std::to_string(node_id + 1); }
+
+    std::string get_no_fault_files(uint32_t node_id) override
+    {
+        return BASE_CONF_PATH_PREFIX + std::to_string(node_id + 1);
     }
 };
 
