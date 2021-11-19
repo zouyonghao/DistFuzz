@@ -14,6 +14,8 @@
 
 #define DEFAULT_NODE_COUNT 3
 
+#define WAIT_PROCESS_START_MAX_COUNT 100000
+
 struct NodeInfo
 {
     /* The node ID */
@@ -175,7 +177,8 @@ public:
         env["__DST_ENV_RANDOM_FILE__"] = "random_node" + node_id_str;
         env["NODE_NAME"] = "node" + node_id_str;
         env["NODE_ID"] = node_id_str;
-        env["LD_PRELOAD"] = PRELOAD_LIB_PATH;
+        env["DST_FUZZ"] = "1";
+        // env["LD_PRELOAD"] = PRELOAD_LIB_PATH;
         std::string log_file = "log_app_" + node_id_str + "_" + std::to_string(ni.log_index);
         std::string err_log_file = "log_app_err" + node_id_str + "_" + std::to_string(ni.log_index);
         if (ni.process != nullptr)
@@ -183,8 +186,12 @@ public:
             delete ni.process;
             ni.process = nullptr;
         }
-        ni.process = new boost::process::child(ni.start_command, boost::process::std_out > log_file,
-                                               boost::process::std_err > err_log_file, env);
+        ni.process = new boost::process::child(
+            "/home/zyh/strace/src/strace -f -o strace_log_" + node_id_str + " " + ni.start_command,
+            boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
+        int wait_count = 0;
+        while (!ni.process->running() && (++wait_count) < WAIT_PROCESS_START_MAX_COUNT)
+            ;
         ni.log_index++;
         return true;
     }

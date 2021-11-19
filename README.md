@@ -15,6 +15,7 @@
 | ClickHouse    | ClickHouse       | \\\\oslab\workspace\zyh\ClickHouse_21.9.2.17                 |
 | aerospike     | aerospike-server | http://oslab:7800/zyh/aerospike-server.git                   |
 | Zookeeper     | zookeeper        | \\\\oslab\workspace\zyh\apache-zookeeper-3.7.0-bin.tar.gz    |
+| etcd          | etcd             | https://github.com/etcd-io/etcd/archive/v3.5.0.zip           |
 
 **注意**
 

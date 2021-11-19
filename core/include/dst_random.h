@@ -22,7 +22,6 @@
  * @date 2021/03/17
  *
  */
-static const char *ENV_DST_RANDOM_FILE = "__DST_ENV_RANDOM_FILE__";
 
 #ifdef __cplusplus
 extern "C"

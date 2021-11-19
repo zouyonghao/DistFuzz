@@ -14,8 +14,8 @@
 /** For zookeeper-2212 */
 // #define BIN_PATH                                                                                                       \
 //     "java -cp "                                                                                                        \
-//     "/home/zyh/zookeeper-src/build/zookeeper-3.5.1-alpha.jar:/home/zyh/zookeeper-src/build/lib/*:/home/zyh/"           \
-//     "zookeeper-src/conf org.apache.zookeeper.server.quorum.QuorumPeerMain "
+//     "/home/zyh/zookeeper-src/build/zookeeper-3.5.1-alpha.jar:/home/zyh/zookeeper-src/build/lib/"
+//      "*:/home/zyh/zookeeper-src/conf org.apache.zookeeper.server.quorum.QuorumPeerMain "
 #define BASE_ZK_PORT 2181
 #define BASE_QUORUM_PORT 2888
 #define BASE_ELECTION_PORT 3888
@@ -24,7 +24,8 @@
 #define DATA_DIR_PREFIX "data"
 
 /* The ServerConfigurationGenerator for zk, the example is as follows:
- * java -cp zookeeper/lib/*:zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain zoo1
+ * java -cp zookeeper/lib/
+ * *:zookeeper/conf org.apache.zookeeper.server.quorum.QuorumPeerMain zoo1
  */
 class ZooKeeperConfigurationGenerator : public ServerConfigurationGenerator
 {

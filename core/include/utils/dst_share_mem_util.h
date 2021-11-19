@@ -5,8 +5,8 @@
 #ifndef DISTRIBUTED_SYSTEM_TEST_SHARE_MEM_UTIL_H
 #define DISTRIBUTED_SYSTEM_TEST_SHARE_MEM_UTIL_H
 
-#include <cstdbool>
-#include <cstdint>
+#include <stdbool.h>
+#include <stdint.h>
 
 /** For dst controlling whether it is still fuzzing the apps. */
 #define IS_FUZZING_SHM_ENV_VAR "IS_FUZZING_NUM_SHMD_ID"

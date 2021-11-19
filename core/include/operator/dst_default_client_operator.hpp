@@ -5,7 +5,7 @@
 #include <dst_event.h>
 #include <dst_random.h>
 #include <operator/dst_default_operator.hpp>
-#include <utils/common_util.hpp>
+#include <utils/dst_common_util.hpp>
 
 #include <limits>
 #include <map>
@@ -21,7 +21,7 @@ enum OP_NAME
     OP_CAS
 };
 
-static const std::string OP_NAME_STR[] = {"read", "write", "cas"};
+static const std::string OP_NAME_STR[] = {"init", "read", "write", "cas"};
 
 /* The ClientConfigurationGenerator for each system
  * return an empty string if some operations are not supported

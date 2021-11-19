@@ -6,10 +6,10 @@
 #include <dst_kv_store.h>
 #include <dst_node_manager.hpp>
 #include <dst_random.h>
-#include <log.hpp>
+#include <dst_log.hpp>
 #include <operator/dst_operator.hpp>
-#include <utils/color.h>
-#include <utils/share_mem_util.h>
+#include <utils/dst_color.h>
+#include <utils/dst_share_mem_util.h>
 
 #ifndef RUN_NORMAL_OPERATOR_COUNT
 #define RUN_NORMAL_OPERATOR_COUNT 2

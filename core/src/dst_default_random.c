@@ -1,6 +1,8 @@
 #include <dst_random.h>
 #include <pthread.h>
 
+static const char *ENV_DST_RANDOM_FILE = "__DST_ENV_RANDOM_FILE__";
+
 // TODO: this variable should be put into the shared memory to keep its value
 // when the program is shutdown/restart
 static volatile uint32_t fuzz_file_index = 0;

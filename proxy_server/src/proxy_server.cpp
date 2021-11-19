@@ -11,7 +11,7 @@
 
 #include <dst_event.h>
 #include <dst_random.h>
-#include <log.hpp>
+#include <dst_log.hpp>
 
 ProxyServer::ProxyServer(std::string _src_ip, int _src_port,
                          std::string _dest_ip, int _dest_port, int _delay_time,

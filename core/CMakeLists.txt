@@ -33,6 +33,7 @@ add_library(dst_core
         src/dst_default_random.c
         src/dst_default_in_memory_kv_store.cpp
         src/utils/share_mem_util.cpp)
+target_compile_options(dst_core PUBLIC -fPIC)
 
 # unit test
 add_executable(dst_test_default_kv test/dst_test_kv.cpp)

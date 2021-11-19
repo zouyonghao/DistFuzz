@@ -2,7 +2,7 @@
 #include <aerospike/aerospike_key.h>
 
 #include <operator/dst_default_client_operator.hpp>
-#include <utils/common_util.hpp>
+#include <utils/dst_common_util.hpp>
 
 #include <dst_event.h>
 #include <dst_random.h>

@@ -22,7 +22,7 @@
 #include <instrumentor.hpp>
 #include <llvm/IRReader/IRReader.h>
 #include <llvm/Support/SourceMgr.h>
-#include <log.hpp>
+#include <dst_log.hpp>
 
 using namespace std;
 

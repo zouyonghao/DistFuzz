@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #include <dst_random.h>
-#include <utils/share_mem_util.h>
+#include <utils/dst_share_mem_util.h>
 
 #include <cstdio>
 #include <cstdlib>
