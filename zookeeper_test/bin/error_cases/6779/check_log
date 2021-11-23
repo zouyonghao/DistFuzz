@@ -1,0 +1,5 @@
+{:algorithm #object[knossos.competition$analysis 0x7e3d2ebd "knossos.competition$analysis@7e3d2ebd"], :model #object[knossos.model$cas_register 0x2b43f314 "knossos.model$cas_register@2b43f314"]}
+["/home/zyh/distributed-system-test/zookeeper_test/bin/test_cases/6779/operation_log"]
+()
+/home/zyh/distributed-system-test/zookeeper_test/bin/test_cases/6779/operation_log"check"
+	true

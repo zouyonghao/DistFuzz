@@ -19,7 +19,7 @@
         ... 4 more
     ```
 
-    issues:
+    issues
     * https://issues.apache.org/jira/browse/ZOOKEEPER-2307
 
 2. Severe unrecoverable error *
@@ -40,7 +40,7 @@
 
     该错误会导致server崩溃，但是它是正常退出的，所以可能不是bug?
 
-    issues:
+    issues
     * https://issues.apache.org/jira/browse/ZOOKEEPER-2247
     * https://issues.apache.org/jira/browse/ZOOKEEPER-4408
 
@@ -73,3 +73,21 @@
 
     error logs
     * error_cases/8000
+
+5. ZooKeeperServer not running
+    ```
+    2021-11-23 13:16:36,113 [myid:3] - WARN  [NIOWorkerThread-4:NIOServerCnxn@380] - Close of session 0x0
+    java.io.IOException: ZooKeeperServer not running
+        at org.apache.zookeeper.server.NIOServerCnxn.readLength(NIOServerCnxn.java:554)
+        at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:339)
+        at org.apache.zookeeper.server.NIOServerCnxnFactory$IOWorkRequest.doWork(NIOServerCnxnFactory.java:508)
+        at org.apache.zookeeper.server.WorkerService$ScheduledWorkRequest.run(WorkerService.java:154)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+        at java.lang.Thread.run(Thread.java:748)
+    ```
+
+    在结束错误注入之后，zookeeper短时间内未能恢复到可以接收请求的状态。
+
+    issues
+    * https://issues.apache.org/jira/browse/ZOOKEEPER-1330

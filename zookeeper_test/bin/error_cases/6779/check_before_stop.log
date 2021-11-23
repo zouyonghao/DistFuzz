@@ -1,0 +1,21 @@
+call stat
+Parsing This ZooKeeper instance is not currently serving requests
+: 
+Could not parse: 'NoneType' object has no attribute 'group'
+call stat
+Parsing This ZooKeeper instance is not currently serving requests
+: 
+Could not parse: 'NoneType' object has no attribute 'group'
+call stat
+Parsing stat is not executed because it is not in the whitelist.
+: 
+Could not parse: 'NoneType' object has no attribute 'group'
+call stat
+Parsing stat is not executed because it is not in the whitelist.
+: 
+Could not parse: 'NoneType' object has no attribute 'group'
+call stat
+Parsing stat is not executed because it is not in the whitelist.
+: 
+Could not parse: 'NoneType' object has no attribute 'group'
+OK (0 leaders, 0 observers): [{'zxid': 'NOTPARSED', 'mode': 'NOTPARSED'}, {'zxid': 'NOTPARSED', 'mode': 'NOTPARSED'}, {'zxid': 'NOTPARSED', 'mode': 'NOTPARSED'}, {'zxid': 'NOTPARSED', 'mode': 'NOTPARSED'}, {'zxid': 'NOTPARSED', 'mode': 'NOTPARSED'}]
