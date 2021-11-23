@@ -1,0 +1,77 @@
+call stat
+Parsing Zookeeper version: 3.7.0-e3704b390a6697bfdf4b0bef79e3da7a4f6bac4b, built on 2021-03-17 09:46 UTC
+Clients:
+ /127.0.0.1:54996[0](queued=0,recved=1,sent=0)
+
+Latency min/avg/max: 3/5.0/7
+Received: 3
+Sent: 2
+Connections: 1
+Outstanding: 0
+Zxid: 0x100000011
+Mode: follower
+Node count: 6
+: 
+Parsed {'zxid': '0x100000011', 'mode': 'follower'}: 
+call stat
+Parsing Zookeeper version: 3.7.0-e3704b390a6697bfdf4b0bef79e3da7a4f6bac4b, built on 2021-03-17 09:46 UTC
+Clients:
+ /127.0.0.1:50110[0](queued=0,recved=1,sent=0)
+
+Latency min/avg/max: 2/3.5/5
+Received: 3
+Sent: 2
+Connections: 1
+Outstanding: 0
+Zxid: 0x100000011
+Mode: follower
+Node count: 6
+: 
+Parsed {'zxid': '0x100000011', 'mode': 'follower'}: 
+call stat
+Parsing Zookeeper version: 3.7.0-e3704b390a6697bfdf4b0bef79e3da7a4f6bac4b, built on 2021-03-17 09:46 UTC
+Clients:
+ /127.0.0.1:42504[0](queued=0,recved=1,sent=0)
+
+Latency min/avg/max: 1/11.0/22
+Received: 7
+Sent: 6
+Connections: 1
+Outstanding: 0
+Zxid: 0x100000011
+Mode: follower
+Node count: 6
+: 
+Parsed {'zxid': '0x100000011', 'mode': 'follower'}: 
+call stat
+Parsing Zookeeper version: 3.7.0-e3704b390a6697bfdf4b0bef79e3da7a4f6bac4b, built on 2021-03-17 09:46 UTC
+Clients:
+ /127.0.0.1:46962[0](queued=0,recved=1,sent=0)
+
+Latency min/avg/max: 3/5.0/7
+Received: 3
+Sent: 2
+Connections: 1
+Outstanding: 0
+Zxid: 0x100000011
+Mode: follower
+Node count: 6
+: 
+Parsed {'zxid': '0x100000011', 'mode': 'follower'}: 
+call stat
+Parsing Zookeeper version: 3.7.0-e3704b390a6697bfdf4b0bef79e3da7a4f6bac4b, built on 2021-03-17 09:46 UTC
+Clients:
+ /127.0.0.1:57336[0](queued=0,recved=1,sent=0)
+
+Latency min/avg/max: 0/4.0/8
+Received: 7
+Sent: 6
+Connections: 1
+Outstanding: 0
+Zxid: 0x100000011
+Mode: leader
+Node count: 6
+Proposal sizes last/min/max: 48/48/87
+: 
+Parsed {'zxid': '0x100000011', 'mode': 'leader'}: 
+OK (1 leaders, 0 observers): [{'zxid': '0x100000011', 'mode': 'follower'}, {'zxid': '0x100000011', 'mode': 'follower'}, {'zxid': '0x100000011', 'mode': 'follower'}, {'zxid': '0x100000011', 'mode': 'follower'}, {'zxid': '0x100000011', 'mode': 'leader'}]
