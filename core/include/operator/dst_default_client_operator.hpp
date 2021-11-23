@@ -15,13 +15,12 @@
 
 enum OP_NAME
 {
-    OP_INIT,
     OP_READ,
     OP_WRITE,
     OP_CAS
 };
 
-static const std::string OP_NAME_STR[] = {"init", "read", "write", "cas"};
+static const std::string OP_NAME_STR[] = {"read", "write", "cas"};
 
 /* The ClientConfigurationGenerator for each system
  * return an empty string if some operations are not supported
@@ -49,7 +48,7 @@ public:
 
     bool _do() override;
 
-    virtual int64_t parse_read_result(boost::process::ipstream&);
+    virtual int64_t parse_read_result(boost::process::ipstream &);
 };
 
 #endif // DST_DEFAULT_CLIENT_OPERATOR_HEADER

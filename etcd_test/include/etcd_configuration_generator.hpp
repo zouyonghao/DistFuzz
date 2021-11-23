@@ -4,6 +4,7 @@
 #include <cstdarg>
 #include <dst_node_manager.hpp>
 #include <operator/dst_default_client_operator.hpp>
+#include <operator/dst_default_init_operator.hpp>
 
 #define BIN_PATH "/home/zyh/etcd/bin/etcd"
 #define BASE_ETCD_PORT 2380

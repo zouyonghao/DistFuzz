@@ -22,7 +22,7 @@ static bool example_log_callback(as_log_level level, const char *func, const cha
 
 class AerospikeClient : public NormalOperator
 {
-private:
+public:
     OP_NAME op_name;
 
     as_config config;
@@ -31,7 +31,6 @@ private:
 
     bool is_initialized = false;
 
-public:
     AerospikeClient(OP_NAME _op_name) : op_name(_op_name) {}
 
     void init()
@@ -123,8 +122,38 @@ public:
         case OP_CAS:
             // TODO
             break;
-        case OP_INIT:
+        }
+
+        return true;
+    }
+
+    ~AerospikeClient() { aerospike_destroy(&as); }
+};
+
+/** The InitOperator will try to set until the read is success */
+class AerospikeInitOperator : public AerospikeClient
+{
+public:
+    int MAX_TRY_COUNT = 5;
+    AerospikeInitOperator() : AerospikeClient(OP_WRITE) {}
+    bool _do() override
+    {
+        if (!is_initialized)
         {
+            init();
+        }
+
+        int count = 0;
+        while (count < MAX_TRY_COUNT)
+        {
+            sleep(500 * 1e3); // 500ms
+
+            as_error err;
+            if (aerospike_connect(&as, &err) != AEROSPIKE_OK)
+            {
+                fprintf(stderr, "err(%d) %s at [%s:%d]\n", err.code, err.message, err.file, err.line);
+                continue;
+            }
             as_record rec;
             as_record_inita(&rec, 1);
             as_record_set_int64(&rec, "test-bin", 0);
@@ -138,27 +167,24 @@ public:
                 if (err.code != AEROSPIKE_ERR_TIMEOUT)
                 {
                     printf("init failed!\n");
-                    // __dst_event_record(get_result_record(op_name, op_vector, -1, "FAIL", random_thread_id).c_str());
                 }
                 else
                 {
                     printf("init timeout!\n");
                 }
-                return false;
             }
-            // __dst_event_record(get_result_record(op_name, op_vector, 0, "", random_thread_id).c_str());
             as_record_destroy(&rec);
-            break;
         }
+        if (count >= MAX_TRY_COUNT)
+        {
+            std::cerr << "Run init failed!\n";
+            return false;
         }
-
         return true;
     }
-
-    ~AerospikeClient() { aerospike_destroy(&as); }
 };
 
 REGISTER_NORMAL_OPERATOR(AerospikeRead, new AerospikeClient(OP_READ));
 REGISTER_NORMAL_OPERATOR(AerospikeWrite, new AerospikeClient(OP_WRITE));
-REGISTER_NORMAL_OPERATOR(Init, new AerospikeClient(OP_INIT));
+REGISTER_NORMAL_OPERATOR(Init, new AerospikeInitOperator);
 // REGISTER_NORMAL_OPERATOR(AerospikeCas, new AerospikeClient(ACTION_TYPE::CAS));

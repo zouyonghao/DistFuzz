@@ -3,6 +3,7 @@
 
 #include <cstdarg>
 #include <operator/dst_default_client_operator.hpp>
+#include <operator/dst_default_init_operator.hpp>
 
 #define BIN_PATH "/home/zyh/braft/example/atomic/atomic_server"
 #define BASE_PORT 8300

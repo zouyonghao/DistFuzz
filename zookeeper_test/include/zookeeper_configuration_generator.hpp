@@ -6,6 +6,7 @@
 #include <cstdarg>
 #include <dst_node_manager.hpp>
 #include <operator/dst_default_client_operator.hpp>
+#include <operator/dst_default_init_operator.hpp>
 
 #define BIN_PATH                                                                                                       \
     "java -cp /home/zyh/zookeeper/lib/zookeeper.jar:/home/zyh/zookeeper/lib/*:/home/zyh/zookeeper/conf "               \
