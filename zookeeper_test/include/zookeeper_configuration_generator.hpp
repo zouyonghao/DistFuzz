@@ -85,9 +85,15 @@ public:
     }
     std::string get_data_folder(uint32_t node_id) override { return DATA_DIR_PREFIX + std::to_string(node_id + 1); }
 
+    /* exclude config file, myid, and snapshot files(too many errors). */
     std::string get_no_fault_files(uint32_t node_id) override
     {
-        return BASE_CONF_PATH_PREFIX + std::to_string(node_id + 1);
+        std::string no_fault_files = BASE_CONF_PATH_PREFIX + std::to_string(node_id + 1);
+        no_fault_files += ",";
+        no_fault_files += "myid";
+        no_fault_files += ",";
+        no_fault_files += "version-2/snapshot";
+        return no_fault_files;
     }
 };
 
