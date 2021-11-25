@@ -144,5 +144,10 @@
 
 7. too many `reject term_unmatched AppendEntries`
 
-   issues
+    issues
     * https://github.com/baidu/braft/issues/330
+
+8. 一个Node stepped down 之后，集群无法响应客户端请求
+
+    issues
+    * https://github.com/baidu/braft/issues/338
