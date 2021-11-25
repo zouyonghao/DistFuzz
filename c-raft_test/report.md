@@ -127,3 +127,41 @@
     Shadow gap:              cc
     ==11599==ABORTING
     ```
+
+    可能是误报（partial write fail)
+
+5. Memory leak in uvSnapshotLoadMeta
+    ```
+        buf.base = HeapMalloc(buf.len);
+        if (buf.base == NULL) {
+            rv = RAFT_NOMEM;
+            goto err_after_open;
+        }
+
+        rv = UvFsReadInto(fd, &buf, errmsg);
+        if (rv != 0) {
+            tracef("read %s: %s", info->filename, errmsg);
+            rv = RAFT_IOERR;
+            goto err_after_buf_malloc;
+        }
+
+        crc2 = byteCrc32(header + 2, sizeof header - sizeof(uint64_t) * 2, 0);
+        crc2 = byteCrc32(buf.base, buf.len, crc2);
+
+        if (crc1 != crc2) {
+            ErrMsgPrintf(errmsg, "read %s: checksum mismatch", info->filename);
+            rv = RAFT_CORRUPT;
+            goto err_after_open;
+        }
+
+        ...
+
+    err_after_buf_malloc:
+        HeapFree(buf.base);
+
+    err_after_open:
+        close(fd);
+    ```
+
+    issues
+    * https://github.com/canonical/raft/pull/249

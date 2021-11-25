@@ -47,6 +47,8 @@ c-raft_test/bin/file_lock
 c-raft_test/bin/c-raft_data0/
 c-raft_test/bin/c-raft_data1/
 c-raft_test/bin/c-raft_data2/
+c-raft_test/bin/c-raft_data3/
+c-raft_test/bin/c-raft_data4/
 c-raft_test/bin/log*
 c-raft_test/bin/random*.txt
 c-raft_test/bin/init_random.txt

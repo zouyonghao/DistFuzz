@@ -13,7 +13,7 @@ class CraftConfigurationGenerator : public ServerConfigurationGenerator
 {
 public:
     void init_data_dir(uint32_t node_id) { system(("mkdir -p ./c-raft_data" + std::to_string(node_id)).c_str()); }
-    std::string get_configure_string(uint32_t node_id, uint32_t node_count)
+    std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
         std::string config = BIN_PATH " ";
         config += "./c-raft_data" + std::to_string(node_id) + " ";
@@ -27,6 +27,8 @@ public:
         init_data_dir(node_id);
         return config;
     }
+
+    std::string get_no_fault_files(uint32_t node_id) override { return ".probe"; }
 };
 
 #endif // CRAFT_CONFIGURATION_GENERATOR_HEADER
