@@ -938,19 +938,19 @@ u8 FuzzUnit(char **argv, u8 *filemap, u64 len, u8 *error_list, matrix_element *t
 
     WriteToTestcase(filemap, len, testfile);
     run_status = ExecuteCase(target_path, argv, exec_tmout);
-    if (run_status == FAULT_CRASH)
-    {
-        cout << "Crash, run again" << endl;
+    // if (run_status == FAULT_CRASH)
+    // {
+        // cout << "Crash, run again" << endl;
         // cout << "catch a crash!!" << endl;
         // exit(-1);
-        usleep(200000);
-        run_status = ExecuteCase(target_path, argv, exec_tmout);
+        // usleep(200000);
+        // run_status = ExecuteCase(target_path, argv, exec_tmout);
         // cout << "Crash again, run again" << endl;
         // if (run_status == FAULT_CRASH) {
         // 	usleep(4000000);
         // 	run_status = ExecuteCase(target_path, argv, exec_tmout);
         // }
-    }
+    // }
 
     // cout << "run_status = " << (int)run_status << endl;
     AddInterestingSeed(argv, filemap, len, run_status);
