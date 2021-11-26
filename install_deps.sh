@@ -19,7 +19,9 @@ sudo apt-get install \
     lsb-release wget software-properties-common \
     librdkafka-dev \
     redis \
-    zookeeper -y > /dev/null && echo "apt-get dependencies success!"
+    zookeeper \
+    gcc-multilib \
+    gawk gcc-8 g++-8 libc++-8-dev libstdc++-8-dev -y > /dev/null && echo "apt-get dependencies success!"
 
 cd
 # install aerospike client
