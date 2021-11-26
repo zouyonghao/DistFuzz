@@ -5,7 +5,7 @@ int main()
 {
     /* RandomKill, RandomStart and NoopOperator */
     assert(Registry<CriticalOperator>::getItemMap().size() == 3);
-    /* Init, KeeperSet, KeeperGet */
+    /* Init, EtcdSet, EtcdGet */
     assert(Registry<NormalOperator>::getItemMap().size() == 3);
     return 0;
 }
