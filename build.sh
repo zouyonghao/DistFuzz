@@ -1,6 +1,6 @@
 mkdir build
 cd build
 cmake ..
-make
+make -j12
 
 cd ..

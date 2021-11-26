@@ -8,7 +8,7 @@ include(CTest)
 find_package(Threads REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 
-add_subdirectory(proxy_server)
+# add_subdirectory(proxy_server)
 add_subdirectory(event_control)
 add_subdirectory(core)
 add_subdirectory(fuzz)
@@ -24,7 +24,7 @@ add_subdirectory(aerospike_test)
 add_subdirectory(clickhouse_test)
 add_subdirectory(test)
 
-add_subdirectory(preload_module)
+# add_subdirectory(preload_module)
 
 add_subdirectory(zookeeper_test)
 
