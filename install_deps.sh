@@ -40,8 +40,8 @@ if lein version > /dev/null; then
     echo "leiningen is installed, skip."
 else
     echo "installing leiningen and jdk..."
-    wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-    sudo mv lein /usr/bin/
+    # wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    sudo mv distributed-system-test/lein /usr/bin/
     sudo chmod +x /usr/bin/lein
     sudo apt install default-jdk -y > /dev/null
     echo "install lein success!"
