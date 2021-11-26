@@ -23,7 +23,7 @@ public:
         ni.process = new boost::process::child(
             ni.start_command, boost::process::std_out > log_file, boost::process::std_err > err_log_file, env,
             boost::process::std_in < "calc" + std::to_string(ni.node_id + 1) + ".pipe");
-        boost::process::system("strace -f -p " + std::to_string(ni.process->id()), env);
+        boost::process::system("/home/zyh/strace/src/strace -f -p " + std::to_string(ni.process->id()), env);
         return true;
     }
 };
