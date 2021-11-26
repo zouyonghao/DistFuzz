@@ -3,6 +3,7 @@
 class NuRaftNodeManager : public NodeManager
 {
 public:
+    boost::process::child *strace_process;
     NuRaftNodeManager(ServerConfigurationGenerator *scg) : NodeManager(scg) {}
     bool start_process(NodeInfo &ni) override
     {
@@ -23,7 +24,10 @@ public:
         ni.process = new boost::process::child(
             ni.start_command, boost::process::std_out > log_file, boost::process::std_err > err_log_file, env,
             boost::process::std_in < "calc" + std::to_string(ni.node_id + 1) + ".pipe");
-        boost::process::system("/home/zyh/strace/src/strace -f -p " + std::to_string(ni.process->id()), env);
+        std::cout << "pid is " << ni.process->id() << std::endl;
+        strace_process = new boost::process::child("/home/zyh/strace/src/strace -f -o strace_log_" + node_id_str +
+                                                       " -p " + std::to_string(ni.process->id()),
+                                                   env);
         return true;
     }
 };
