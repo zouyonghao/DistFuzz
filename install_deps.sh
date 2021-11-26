@@ -52,7 +52,7 @@ if ls criu > /dev/null; then
     echo "it seems you have installed criu, skip."
 else
     echo "installing criu..."
-    git clone http://166.111.139.139:7800/zyh/criu.git
+    git clone http://166.111.139.110:7800/zyh/criu.git
     cd criu
     make && echo "install criu success!"
 fi
