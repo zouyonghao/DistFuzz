@@ -18,7 +18,8 @@ sudo apt-get install \
     libprotobuf-dev libprotobuf-c-dev protobuf-c-compiler protobuf-compiler python3-protobuf python3-future libnl-3-dev libcap-dev \
     lsb-release wget software-properties-common \
     librdkafka-dev \
-    redis -y > /dev/null && echo "apt-get dependencies success!"
+    redis \
+    zookeeper -y > /dev/null && echo "apt-get dependencies success!"
 
 cd
 # install aerospike client
