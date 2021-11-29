@@ -13,4 +13,25 @@ static std::string get_thread_id()
     return std::to_string(std::stoull(ss.str()) % INT_MAX);
 }
 
+static bool retry_command(std::string command, int max_try_count)
+{
+    int count = 0;
+    for (; count < max_try_count; count++)
+    {
+        boost::process::child c(command);
+        c.wait();
+        if (c.exit_code() == 0)
+        {
+            break;
+        }
+        usleep(500 * 1e3);
+    }
+    if (count >= max_try_count)
+    {
+        std::cerr << "Run init failed!\n";
+        return false;
+    }
+    return true;
+}
+
 #endif
