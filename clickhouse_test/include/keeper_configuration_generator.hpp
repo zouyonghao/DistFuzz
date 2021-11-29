@@ -45,12 +45,14 @@ public:
         tree.put_child("yandex.keeper_server.raft_configuration", servers);
         pt::write_xml("enable_keeper" + std::to_string(node_id) + ".xml", tree);
     }
-    std::string get_configure_string(uint32_t node_id, uint32_t node_count)
+    std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
         std::string config = BIN_PATH " --config enable_keeper" + std::to_string(node_id) + ".xml";
         init_xml_file(node_id, node_count);
         return config;
     }
+
+    std::string get_no_fault_files(uint32_t node_id) override { return ".xml,run/log,run/err_log"; }
 };
 
 /* The ClientConfigurationGenerator for clickhouse-keeper, the example is as follows:
