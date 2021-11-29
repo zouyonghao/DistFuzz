@@ -15,7 +15,7 @@ public:
         system(("redis-cli -h " IP " -p " + std::to_string(BASE_PORT) + " raft.cluster init").c_str());
         for (int i = 1; i < node_count; i++)
         {
-            std::string command = "redis-cli -h " IP " -p " + std::to_string(BASE_PORT + i) +
+            std::string command = "timeout 2 redis-cli -h " IP " -p " + std::to_string(BASE_PORT + i) +
                                   " RAFT.CLUSTER JOIN " IP ":" + std::to_string(BASE_PORT);
             std::cerr << "init command is " << command << "\n";
             system(command.c_str());
