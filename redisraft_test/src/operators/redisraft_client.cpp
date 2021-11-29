@@ -12,7 +12,6 @@ public:
     int MAX_TRY_COUNT = 5;
     bool _do() override
     {
-        sleep(1);
         system(("redis-cli -h " IP " -p " + std::to_string(BASE_PORT) + " raft.cluster init").c_str());
         for (int i = 1; i < node_count; i++)
         {
@@ -26,6 +25,7 @@ public:
         std::string command = "timeout 3 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh set 0";
         for (; count < MAX_TRY_COUNT; count++)
         {
+            sleep(1);
             boost::process::child c(command);
             c.wait();
             if (c.exit_code() == 0)
