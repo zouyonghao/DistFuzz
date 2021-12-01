@@ -1,0 +1,1 @@
+../../build/fuzz/fuzzer -i input -o output -M fuzzer1 -f init_random.txt /bin/bash /home/zyh/distributed-system-test/etcd_test-3517/bin/run_test.sh
