@@ -160,6 +160,7 @@ public:
             as_policy_write wpol;
             as_policy_write_init(&wpol);
             wpol.exists = AS_POLICY_EXISTS_CREATE_OR_REPLACE;
+            bool success = true;
             if (aerospike_key_put(&as, &err, &wpol, &key, &rec) != AEROSPIKE_OK)
             {
                 fprintf(stderr, "err(%d) %s at [%s:%d]\n", err.code, err.message, err.file, err.line);
@@ -172,8 +173,14 @@ public:
                 {
                     printf("init timeout!\n");
                 }
+                success = false;
             }
             as_record_destroy(&rec);
+            if (success)
+            {
+                break;
+            }
+            count++;
         }
         if (count >= MAX_TRY_COUNT)
         {

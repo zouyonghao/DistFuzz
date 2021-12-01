@@ -201,3 +201,16 @@ etcd_test/bin/default.etcd/
 strace_log_*
 etcd_test/bin/random.txt
 etcd_test/bin/init_random.txt
+etcd_test-3517/bin/output
+etcd_test-3517/bin/test_cases
+etcd_test-3517/bin/file_lock
+operation_log
+sync_file
+sync_branch_cov_file
+test_case_count
+etcd_test-3517/bin/default.etcd
+data0
+data1
+data2
+data3
+data4

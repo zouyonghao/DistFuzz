@@ -29,3 +29,4 @@ add_subdirectory(test)
 add_subdirectory(zookeeper_test)
 
 add_subdirectory(etcd_test)
+add_subdirectory(etcd_test-3517)

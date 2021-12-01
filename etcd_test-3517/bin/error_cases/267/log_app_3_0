@@ -1,0 +1,58 @@
+usage: etcd [flags]
+       start an etcd server
+
+       etcd --version
+       show the version of etcd
+
+       etcd -h | --help
+       show the help information about etcd
+	
+d is 6, index is 10
+match term
+ci is 11
+l.committed is 6
+ci is 11, index is 10
+committed is 6, index is 11
+match term
+ci is 12
+l.committed is 6
+ci is 12, index is 11
+committed is 11, index is 12
+match term
+ci is 0
+l.committed is 6
+committed is 12, index is 12
+match term
+ci is 0
+l.committed is 11
+committed is 12, index is 12
+match term
+ci is 13
+l.committed is 12
+ci is 13, index is 12
+committed is 13, index is 13
+match term
+ci is 0
+l.committed is 12
+tted is 7
+committed is 9, index is 12
+match term
+ci is 0
+l.committed is 8
+committed is 10, index is 12
+match term
+ci is 0
+l.committed is 9
+committed is 12, index is 12
+match term
+ci is 0
+l.committed is 10
+committed is 12, index is 12
+match term
+ci is 13
+l.committed is 12
+ci is 13, index is 12
+committed is 13, index is 13
+match term
+ci is 0
+l.committed is 12
