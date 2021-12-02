@@ -133,6 +133,11 @@ public:
         config += "--config-file aerospike_conf" + std::to_string(node_id);
         return config;
     }
+
+    std::string get_no_fault_files(uint32_t node_id) override
+    {
+        return "aerospike_conf,log";
+    }
 };
 
 #endif // AEROSPIKE_CONFIGURATION_GENERATOR_HEADER

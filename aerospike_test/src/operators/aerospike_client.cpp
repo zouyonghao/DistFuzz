@@ -146,12 +146,12 @@ public:
         int count = 0;
         while (count < MAX_TRY_COUNT)
         {
-            sleep(500 * 1e3); // 500ms
-
             as_error err;
             if (aerospike_connect(&as, &err) != AEROSPIKE_OK)
             {
                 fprintf(stderr, "err(%d) %s at [%s:%d]\n", err.code, err.message, err.file, err.line);
+                count++;
+                usleep(500 * 1e3); // 500ms
                 continue;
             }
             as_record rec;
@@ -160,6 +160,7 @@ public:
             as_policy_write wpol;
             as_policy_write_init(&wpol);
             wpol.exists = AS_POLICY_EXISTS_CREATE_OR_REPLACE;
+            wpol.base.total_timeout = 200; // 200ms
             bool success = true;
             if (aerospike_key_put(&as, &err, &wpol, &key, &rec) != AEROSPIKE_OK)
             {
@@ -181,6 +182,7 @@ public:
                 break;
             }
             count++;
+            usleep(500 * 1e3); // 500ms
         }
         if (count >= MAX_TRY_COUNT)
         {
