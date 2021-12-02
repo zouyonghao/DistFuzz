@@ -151,3 +151,36 @@
 
     issues
     * https://github.com/baidu/braft/issues/338
+
+9. brpc ASan error
+    ```
+    E1201 22:37:01.713448 34144 /home/zyh/brpc/src/bthread/task_control.cpp:167] Fail to create _workers[2], Resource temporarily unavailable
+    E1201 22:37:01.713607 34144 /home/zyh/brpc/src/bthread/bthread.cpp:92] Fail to init g_task_control
+    ASAN:DEADLYSIGNAL
+    =================================================================
+    ==34144==ERROR: AddressSanitizer: SEGV on unknown address 0x7fc5d05ac9d0 (pc 0x7fc5e7ec4386 bp 0x7ffd1e92b4c0 sp 0x7ffd1e92b460 T0)
+    ==34144==The signal is caused by a READ memory access.
+    E1201 22:37:01.729068 34147 /home/zyh/brpc/src/bthread/task_control.cpp:68] Fail to create TaskGroup in pthread=140487748658944
+    E1201 22:37:01.729776 34148 /home/zyh/brpc/src/bthread/task_control.cpp:68] Fail to create TaskGroup in pthread=140487664776960
+        #0 0x7fc5e7ec4385  (/lib/x86_64-linux-gnu/libpthread.so.0+0xf385)
+        #1 0x55c92471ddd4  (/home/zyh/braft/example/atomic/atomic_test+0x1a4dd4) brpc/src/bthread/task_control.cpp:240
+        #2 0x55c92472088a  (/home/zyh/braft/example/atomic/atomic_test+0x1a788a) brpc/src/bthread/task_control.cpp:257
+        #3 0x55c92471cb75  (/home/zyh/braft/example/atomic/atomic_test+0x1a3b75) brpc/src/bthread/bthread.cpp:93
+        #4 0x55c924764451  (/home/zyh/braft/example/atomic/atomic_test+0x1eb451) brpc/src/brpc/global.cpp:607
+        #5 0x7fc5e7ec4906  (/lib/x86_64-linux-gnu/libpthread.so.0+0xf906)
+        #6 0x55c92476130c  (/home/zyh/braft/example/atomic/atomic_test+0x1e830c)
+        #7 0x55c92473d280  (/home/zyh/braft/example/atomic/atomic_test+0x1c4280)
+        #8 0x55c92473db2e  (/home/zyh/braft/example/atomic/atomic_test+0x1c4b2e)
+        #9 0x55c9246d6e45  (/home/zyh/braft/example/atomic/atomic_test+0x15de45)
+        #10 0x55c9246c5895  (/home/zyh/braft/example/atomic/atomic_test+0x14c895)
+        #11 0x55c9246b5347  (/home/zyh/braft/example/atomic/atomic_test+0x13c347)
+        #12 0x7fc5e6f49bf6  (/lib/x86_64-linux-gnu/libc.so.6+0x21bf6)
+        #13 0x55c9246c3569  (/home/zyh/braft/example/atomic/atomic_test+0x14a569)
+
+    AddressSanitizer can not provide additional info.
+    SUMMARY: AddressSanitizer: SEGV (/lib/x86_64-linux-gnu/libpthread.so.0+0xf385)
+    ==34144==ABORTING
+    ```
+
+    issues
+    * https://github.com/apache/incubator-brpc/issues/1624
