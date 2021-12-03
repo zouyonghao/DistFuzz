@@ -184,3 +184,21 @@
 
     issues
     * https://github.com/apache/incubator-brpc/issues/1624
+
+10. Fatal error
+    ```
+    F1201 22:36:50.517096 33233 /home/zyh/brpc/src/brpc/event_dispatcher.cpp:360] Check failed: 0 == g_edisp[i].Start(&attr) (0 vs -1).
+    #0 0x55dbcc135d30 logging::LogMessage::~LogMessage()
+    #1 0x55dbcc1a1c0c brpc::InitializeGlobalDispatchers()
+    #2 0x7f043201c907 __pthread_once_slow
+    #3 0x55dbcc1a22be brpc::GetGlobalEventDispatcher()
+    #4 0x55dbcc26b7bb brpc::Socket::ResetFileDescriptor()
+    #5 0x55dbcc26f8d7 brpc::Socket::Create()
+    #6 0x55dbcc336c70 brpc::Acceptor::StartAccept()
+    #7 0x55dbcc25e500 brpc::Server::StartInternal()
+    #8 0x55dbcc25edff brpc::Server::Start()
+    #9 0x55dbcc25efa3 brpc::Server::Start()
+    #10 0x55dbcbe8a413 main
+    #11 0x7f04310a1bf7 __libc_start_main
+    #12 0x55dbcbea5aaa _start
+    ```
