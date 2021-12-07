@@ -90,3 +90,7 @@
     Shadow gap:              cc
     ==20195==ABORTING
     ```
+
+4. lose data
+    issues
+    * https://github.com/aerospike/aerospike-server/issues/35

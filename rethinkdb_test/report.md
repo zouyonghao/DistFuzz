@@ -393,6 +393,65 @@
     error: Exiting.
     ```
 
+10. stack overflow
+    ```
+    ==3712480==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7fdd8cdc2c80; bottom 0x7fdd86eac000; size: 0x000005f16c80 (99708032)                                                                                                                               False positive error reports may follow                                                                                                                                                                                                                                                 For details see https://github.com/google/sanitizers/issues/189                                                                                                                                                                                                                         warn: Problem when checking for new versions of RethinkDB: HTTP request to update.rethinkdb.com failed.                                                                                                                                                                                 =================================================================                                                                                                                                                                                                                       ==3712480==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fdd86ed10e8 at pc 0x00000082f680 bp 0x7fdd86ed0230 sp 0x7fdd86ecf9f8
+    WRITE of size 24 at 0x7fdd86ed10e8 thread T9
+        #0 0x82f67f  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x82f67f)
+        #1 0x1a7b81a  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x1a7b81a)
+        #2 0x13cd675  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x13cd675)
+        #3 0x1a756f9  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x1a756f9)
+        #4 0x1a7da81  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x1a7da81)
+        #5 0x939e1e  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x939e1e)
+
+    0x7fdd86ed10e8 is located 123112 bytes inside of 131072-byte region [0x7fdd86eb3000,0x7fdd86ed3000)
+    allocated by thread T9 here:
+        #0 0x830c27  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x830c27)
+
+    Thread T9 created by T0 here:
+        #0 0x81a91a  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x81a91a)
+        #1 0x94453f  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x94453f)
+        #2 0x9465c6  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x9465c6)
+        #3 0x179ded4  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x179ded4)
+        #4 0x113445e  (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x113445e)
+        #5 0x7fdd90fc20b2  (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+    SUMMARY: AddressSanitizer: stack-buffer-overflow (/home/zyh/rethinkdb/build/release_clang_system/rethinkdb+0x82f67f)
+    Shadow bytes around the buggy address:
+    0x0ffc30dd21c0: 00 00 00 00 f1 f1 f1 f1 00 f3 f3 f3 00 00 00 00
+    0x0ffc30dd21d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0x0ffc30dd21e0: 00 00 00 00 00 00 00 00 00 00 00 00 f1 f1 f1 f1
+    0x0ffc30dd21f0: 00 00 00 f2 f2 f2 f2 f2 00 00 00 00 f2 f2 f2 f2
+    0x0ffc30dd2200: 04 f2 00 00 00 00 00 00 00 00 00 00 00 f2 f2 f2
+    =>0x0ffc30dd2210: f2 f2 00 00 01 f2 f2 f2 f2 f2 00 00 00[f2]f2 f2
+    0x0ffc30dd2220: 04 f2 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 00 00 00 00
+    0x0ffc30dd2230: 00 00 00 00 00 00 00 00 00 00 00 00 f2 f2 f8 f8
+    0x0ffc30dd2240: f8 f8 f8 f8 f8 f8 f2 f2 f2 f2 f8 f8 f8 f8 f8 f8
+    0x0ffc30dd2250: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    0x0ffc30dd2260: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+    Shadow byte legend (one shadow byte represents 8 application bytes):
+    Addressable:           00
+    Partially addressable: 01 02 03 04 05 06 07
+    Heap left redzone:       fa
+    Freed heap region:       fd
+    Stack left redzone:      f1
+    Stack mid redzone:       f2
+    Stack right redzone:     f3
+    Stack after return:      f5
+    Stack use after scope:   f8
+    Global redzone:          f9
+    Global init order:       f6
+    Poisoned by user:        f7
+    Container overflow:      fc
+    Array cookie:            ac
+    Intra object redzone:    bb
+    ASan internal:           fe
+    Left alloca redzone:     ca
+    Right alloca redzone:    cb
+    Shadow gap:              cc
+    ==3712480==ABORTING
+    ```
+
 more bugs:
 
     cat test_cases/*/log[0-2] | grep 'error: Error' | awk '{print $7 $10}' | sort | uniq

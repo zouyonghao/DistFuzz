@@ -911,3 +911,36 @@
 
     **Fixed**
 
+
+4. assertion failed
+    ```
+    redis-server: log.c:63: void EntryCacheAppend(EntryCache *, raft_entry_t *, raft_index_t): Assertion `cache->start_idx + cache->len == idx' failed.
+    === REDIS BUG REPORT START: Cut & paste starting from here ===
+    34178:M 30 Nov 2021 23:57:26.323 # Redis 255.255.255 crashed by signal: 6, si_code: -6
+    34178:M 30 Nov 2021 23:57:26.323 # Killed by PID: 34178, UID: 1000
+    34178:M 30 Nov 2021 23:57:26.323 # Crashed running the instruction at: 0x7f9c6cf40fb7
+
+    ------ STACK TRACE ------
+    EIP:
+    /lib/x86_64-linux-gnu/libc.so.6(gsignal+0xc7)[0x7f9c6cf40fb7]
+
+    Backtrace:
+    /home/zyh/redis/src/redis-server 127.0.1.1:5001(sigsegvHandler+0x18c)[0x62a80c] redis/src/debug.c:1826
+    /lib/x86_64-linux-gnu/libpthread.so.0(+0x12980)[0x7f9c6d51d980]
+    /lib/x86_64-linux-gnu/libc.so.6(gsignal+0xc7)[0x7f9c6cf40fb7]
+    /lib/x86_64-linux-gnu/libc.so.6(abort+0x141)[0x7f9c6cf42921]
+    /lib/x86_64-linux-gnu/libc.so.6(+0x3048a)[0x7f9c6cf3248a]
+    /lib/x86_64-linux-gnu/libc.so.6(+0x30502)[0x7f9c6cf32502]
+    /home/zyh/redisraft/redisraft.so(EntryCacheAppend+0x12f)[0x7f9c6a0d0a4f]
+    /home/zyh/redisraft/redisraft.so(+0x84966)[0x7f9c6a0da966]                        log.c:1056
+    /home/zyh/redisraft/redisraft.so(raft_recv_entry+0x179)[0x7f9c6a0f43b9]
+    /home/zyh/redisraft/redisraft.so(+0x6912a)[0x7f9c6a0bf12a]                        raft.c:1439
+    /home/zyh/redisraft/redisraft.so(RaftReqHandleQueue+0xce)[0x7f9c6a0b53fe]
+    /home/zyh/redisraft/redisraft.so(+0xd3b98)[0x7f9c6a129b98]                        libuv/src/unix/async.c:?
+    /home/zyh/redisraft/redisraft.so(uv__io_poll+0x9c6)[0x7f9c6a155dc6]
+    /home/zyh/redisraft/redisraft.so(uv_run+0x568)[0x7f9c6a12aad8]
+    /home/zyh/redisraft/redisraft.so(+0x5f6f4)[0x7f9c6a0b56f4]
+    /lib/x86_64-linux-gnu/libpthread.so.0(+0x76db)[0x7f9c6d5126db]
+    /lib/x86_64-linux-gnu/libc.so.6(clone+0x3f)[0x7f9c6d02371f]
+
+    ```
