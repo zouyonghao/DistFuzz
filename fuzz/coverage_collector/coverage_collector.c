@@ -108,7 +108,7 @@ int main(int argc, char const *argv[])
         }
         struct timespec ts;
         clock_gettime(CLOCK_REALTIME, &ts); // Works on Linux
-        fprintf(stderr, "time is %d, coverage count : %d\n", ts.tv_sec, cov_count);
+        fprintf(stderr, "time is %ld, coverage count : %d\n", ts.tv_sec, cov_count);
     }
 
     /* Close the consumer: commit final offsets and leave the group. */
