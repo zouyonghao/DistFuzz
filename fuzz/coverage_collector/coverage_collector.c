@@ -1,7 +1,7 @@
-#include <stdlib.h>
-#include <unistd.h>
-
 #include <signal.h>
+#include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "constants.h"
 #include "librdkafka/rdkafka.h"
@@ -49,7 +49,7 @@ int main(int argc, char const *argv[])
 
     rd_kafka_poll_set_consumer(rk);
     subscription = rd_kafka_topic_partition_list_new(1);
-    rd_kafka_topic_partition_list_add(subscription, "order_coverage", RD_KAFKA_PARTITION_UA);
+    rd_kafka_topic_partition_list_add(subscription, KAFKA_COVERAGE_TOPIC, RD_KAFKA_PARTITION_UA);
     /* Subscribe to the list of topics */
     err = rd_kafka_subscribe(rk, subscription);
     if (err)
@@ -76,19 +76,27 @@ int main(int argc, char const *argv[])
             continue;
         }
 
+        if (!rkm->payload)
+        {
+            rd_kafka_message_destroy(rkm);
+            continue;
+        }
+
         /* Proper message. */
-        printf("Message on %s [%" PRId32 "] at offset %" PRId64 ":\n", rd_kafka_topic_name(rkm->rkt), rkm->partition,
-               rkm->offset);
+        // printf("Message on %s [%" PRId32 "] at offset %" PRId64 ":\n", rd_kafka_topic_name(rkm->rkt), rkm->partition,
+        //        rkm->offset);
 
-        printf("Value: %ld\n", *((uint64_t *)rkm->payload));
+        // printf("Value: %ld\n", *((uint64_t *)rkm->payload));
 
-        rd_kafka_message_destroy(rkm);
+        // rd_kafka_message_destroy(rkm);
 
         uint64_t index = (*((uint64_t *)rkm->payload)) % MAP_SIZE;
         if (coverage_map[index] < 255)
         {
             coverage_map[index]++;
         }
+
+        rd_kafka_message_destroy(rkm);
 
         uint32_t cov_count = 0;
         for (uint32_t i = 0; i < MAP_SIZE; i++)
@@ -98,7 +106,9 @@ int main(int argc, char const *argv[])
                 cov_count++;
             }
         }
-        fprintf(stderr, "coverage count : %d\n", cov_count);
+        struct timespec ts;
+        clock_gettime(CLOCK_REALTIME, &ts); // Works on Linux
+        fprintf(stderr, "time is %d, coverage count : %d\n", ts.tv_sec, cov_count);
     }
 
     /* Close the consumer: commit final offsets and leave the group. */
