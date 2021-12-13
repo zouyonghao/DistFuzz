@@ -62,6 +62,7 @@ int main(int argc, char const *argv[])
 
     rd_kafka_topic_partition_list_destroy(subscription);
     signal(SIGINT, stop);
+    uint32_t old_cov_count = 0;
     while (run)
     {
         rd_kafka_message_t *rkm;
@@ -106,9 +107,13 @@ int main(int argc, char const *argv[])
                 cov_count++;
             }
         }
-        struct timespec ts;
-        clock_gettime(CLOCK_REALTIME, &ts); // Works on Linux
-        fprintf(stderr, "time is %ld, coverage count : %d\n", ts.tv_sec, cov_count);
+        if (cov_count > old_cov_count)
+        {
+            struct timespec ts;
+            clock_gettime(CLOCK_REALTIME, &ts); // Works on Linux
+            fprintf(stderr, "time is %ld, coverage count : %d\n", ts.tv_sec, cov_count);
+            old_cov_count = cov_count;
+        }
     }
 
     /* Close the consumer: commit final offsets and leave the group. */
