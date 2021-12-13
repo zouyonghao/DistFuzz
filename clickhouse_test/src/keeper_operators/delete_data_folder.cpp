@@ -11,4 +11,4 @@ public:
     }
 };
 
-REGISTER_NORMAL_OPERATOR(RandomDeleteFolderOperator, new RandomDeleteFolderOperator);
+// REGISTER_NORMAL_OPERATOR(RandomDeleteFolderOperator, new RandomDeleteFolderOperator);
