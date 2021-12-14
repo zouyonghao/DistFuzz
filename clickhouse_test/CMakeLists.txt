@@ -16,7 +16,7 @@ target_link_libraries(clickhouse_test_main
         -Wl,--whole-archive dst_default_operator
         -Wl,--no-whole-archive dst_core pthread rt
         ${Boost_LIBRARIES})
-target_compile_options(clickhouse_test_main PUBLIC -DNO_CONCURRENCY)
+target_compile_options(clickhouse_test_main PUBLIC -DNO_CONCURRENCY -DRUN_NORMAL_OPERATOR_COUNT=5 -DRUN_CRITICAL_OPERATOR_COUNT=3)
 
 file(GLOB CLICKHOUSE_TEST_OPERATORS_SRC
         "src/keeper_operators/*.cpp"
