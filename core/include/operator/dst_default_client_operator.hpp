@@ -15,12 +15,12 @@
 
 enum OP_NAME
 {
-    OP_READ,
     OP_WRITE,
+    OP_READ,
     OP_CAS
 };
 
-static const std::string OP_NAME_STR[] = {"read", "write", "cas"};
+static const std::string OP_NAME_STR[] = {"write", "read", "cas"};
 
 /* The ClientConfigurationGenerator for each system
  * return an empty string if some operations are not supported

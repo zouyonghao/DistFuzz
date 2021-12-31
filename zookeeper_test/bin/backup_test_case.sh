@@ -10,7 +10,7 @@ mv random.txt ./test_cases/$1
 mv init_random.txt ./test_cases/$1
 mv data* ./test_cases/$1
 mv zoo* ./test_cases/$1
-mv strace* ./test_cases/$1
+# mv strace* ./test_cases/$1
 
 # checking the operation log!
 {

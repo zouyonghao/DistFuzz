@@ -20,7 +20,7 @@ public:
     }
 };
 
-REGISTER_NORMAL_OPERATOR(RethinkdbGet, new DefaultClientOperator(OP_READ, rccg));
 REGISTER_NORMAL_OPERATOR(RethinkdbSet, new DefaultClientOperator(OP_WRITE, rccg));
+REGISTER_NORMAL_OPERATOR(RethinkdbGet, new DefaultClientOperator(OP_READ, rccg));
 REGISTER_NORMAL_OPERATOR(RethinkdbCas, new DefaultClientOperator(OP_CAS, rccg));
 REGISTER_NORMAL_OPERATOR(Init, new RethinkdbInitOperator);
