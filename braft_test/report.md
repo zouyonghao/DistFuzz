@@ -42,7 +42,7 @@
 
    https://github.com/baidu/braft/issues/268
 
-2. fail to rename
+2. fail to rename *
 
    issues
     * https://github.com/baidu/braft/issues/272
@@ -50,7 +50,7 @@
    related logs
     * error_cases/100
 
-3. Met raft error
+3. Met raft error *
 
    issues
     * https://github.com/baidu/braft/issues/273

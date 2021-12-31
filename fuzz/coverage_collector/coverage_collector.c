@@ -92,12 +92,19 @@ int main(int argc, char const *argv[])
         // rd_kafka_message_destroy(rkm);
 
         uint64_t index = (*((uint64_t *)rkm->payload)) % MAP_SIZE;
+        int changed = 0;
         if (coverage_map[index] < 255)
         {
             coverage_map[index]++;
+            changed = 1;
         }
 
         rd_kafka_message_destroy(rkm);
+
+        if (!changed)
+        {
+            continue;
+        }
 
         uint32_t cov_count = 0;
         for (uint32_t i = 0; i < MAP_SIZE; i++)
