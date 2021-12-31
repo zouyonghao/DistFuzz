@@ -57,16 +57,15 @@ public:
         va_start(random_nums, node_count);
         switch (op_name)
         {
-               case OP_WRITE:
+        case OP_WRITE:
         {
             uint32_t value = va_arg(random_nums, uint32_t);
             configure_string += "set " + std::to_string(value);
             break;
         }
-case OP_READ:
+        case OP_READ:
             configure_string += "get";
             break;
- 
         case OP_CAS:
         {
             uint32_t old_value = va_arg(random_nums, uint32_t);
@@ -78,7 +77,7 @@ case OP_READ:
             break;
         }
         va_end(random_nums);
-	sleep(2);
+        sleep(2);
         return configure_string;
     }
 };
