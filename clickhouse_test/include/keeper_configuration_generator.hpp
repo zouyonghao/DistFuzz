@@ -122,8 +122,11 @@ public:
         case OP_WRITE:
         {
             uint32_t value = va_arg(random_nums, uint32_t);
-            /** The version should not be too large */
-            uint32_t version = __dst_get_random_uint8_t() % 3;
+            /**
+             * The version should not be too large
+             * and can't be 0?
+             */
+            uint32_t version = __dst_get_random_uint8_t() % 3 + 1;
             configure_string += "set /a " + std::to_string(value) + " " + std::to_string(version);
             break;
         }
