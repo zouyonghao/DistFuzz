@@ -1,16 +1,15 @@
-rm -rf run/*
-rm log*
-rm *log
-rm -rf zookeeper/data
+rm -rf data/*
 
-sudo umount run
-sudo umount run_backup_tmpfs
-sudo umount checkpoint_folder0_tmpfs
-sudo umount checkpoint_folder1_tmpfs
-sudo umount checkpoint_folder2_tmpfs
+# run for running folder
+# run_backup_tmpfs for backup folder
+# checkpoint folder for checkpoint backup folder
 
-rm -rf run
-rm -rf run_backup_tmpfs
-rm -rf checkpoint_folder0_tmpfs
-rm -rf checkpoint_folder1_tmpfs
-rm -rf checkpoint_folder2_tmpfs
+sudo umount data
+sudo umount data_backup_tmpfs
+# sudo umount checkpoint_folder
+sudo umount checkpoint_folder_tmpfs
+
+rm -rf data
+rm -rf data_backup_tmpfs
+# rm -rf checkpoint_folder
+rm -rf checkpoint_folder_tmpfs
