@@ -14,7 +14,7 @@ for i in 0 1 2 3 4; do
     echo PID is $PID
     sudo /home/zyh/criu/scripts/criu-ns \
         dump --tree $(ps -ef | grep rethinkdb | grep -v grep | grep $(python -c "print 'cluster-port', 5000+$i") | grep " 1 " | awk '{print $2}') \
-        -D checkpoint_folder/$i -v4 --shell-job --tcp-established --file-lock -vvv -o dump.log && echo OK
+        -D checkpoint_folder/$i -v4 --shell-job --tcp-established --file-locks -vvv -o dump.log && echo OK
 done
 
 cp -r data data_backup
