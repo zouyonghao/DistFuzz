@@ -1,8 +1,5 @@
 # before run this script, you must run env_init_checkpoint.sh first!
 
-./stop.sh
-./env_clear_tmpfs.sh
-
 mkdir data
 sudo mount -t tmpfs none data
 

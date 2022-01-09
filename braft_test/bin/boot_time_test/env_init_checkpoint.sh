@@ -1,6 +1,3 @@
-./stop.sh
-./env_clear_tmpfs.sh
-
 rm checkpoint_folder -rf
 mkdir checkpoint_folder
 
