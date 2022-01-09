@@ -219,3 +219,4 @@ checkpoint_folder
 data
 data_backup
 test_boot_time_result
+zookeeper_audit.log
