@@ -44,6 +44,8 @@
 
 * `Zookeeper` 需要将`jar`包重命名为`zookeeper.jar`
 
+* TODO: 如果使用checkpoint，strace应改为attach模式，类似启动NuRaft的方式。(see nuraft_test/src/node_manager.cpp)
+
 **新增项目**
 
 添加新测试项目时需要增加、修改的文件：
