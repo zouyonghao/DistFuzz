@@ -46,6 +46,9 @@
 
 * TODO: 如果使用checkpoint，strace应改为attach模式，类似启动NuRaft的方式。(see nuraft_test/src/node_manager.cpp)
 
+* TODO: 使用 rr-debugger 可以实现多进程 record/replay，需要实现syscall的错误注入，即可替换目前的strace模式。
+* TODO: 使用 rr-debugger 后，checkpoint的实现需要用rr-debugger启动criu restore ... (目前似乎不支持!)
+
 **新增项目**
 
 添加新测试项目时需要增加、修改的文件：
