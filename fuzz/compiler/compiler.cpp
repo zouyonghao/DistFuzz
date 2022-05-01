@@ -19,10 +19,10 @@
 #include <rapidjson/ostreamwrapper.h>
 #include <rapidjson/prettywriter.h>
 
+#include <dst_log.hpp>
 #include <instrumentor.hpp>
 #include <llvm/IRReader/IRReader.h>
 #include <llvm/Support/SourceMgr.h>
-#include <dst_log.hpp>
 
 using namespace std;
 
@@ -143,6 +143,8 @@ int main(int argc, char **argv)
     bool is_only_compile = false;
     bool is_specified_output_name = false;
     bool has_black_list_file = false;
+    bool has_source_files = false;
+    bool has_target_files = false;
     for (int i = 1; i < argc; i++)
     {
         std::string tmp(argv[i]);
@@ -158,6 +160,7 @@ int main(int argc, char **argv)
             target_name = std::string(argv[i + 1]);
             only_link_vector.push_back(argv[i + 1]);
             i++;
+            has_target_files = true;
             continue;
         }
         else if (tmp == "-c")
@@ -176,6 +179,7 @@ int main(int argc, char **argv)
             }
             source_files.push_back(arg_string);
             is_only_link = false;
+            has_source_files = true;
         }
 
         if (is_should_ignored(tmp, document["ignored_args"]))
@@ -185,6 +189,14 @@ int main(int argc, char **argv)
 
         only_link_vector.push_back(argv[i]);
         compile_to_ll_vector.push_back(argv[i]);
+    }
+
+    if (!has_target_files && !has_source_files)
+    {
+        only_link_vector.push_back(nullptr);
+        execvp(only_link_vector[0], (char *const *)&only_link_vector[0]);
+        perror((std::string("failed to exec ") + clang_exe).c_str());
+        exit(-1);
     }
 
     if (is_only_link || has_black_list_file)

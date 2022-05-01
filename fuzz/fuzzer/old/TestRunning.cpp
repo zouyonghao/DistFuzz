@@ -787,11 +787,11 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
     // cout << CountBytes(globalTraceBit) << endl;
     if (isBranchCoverage)
     {
-        if (!newBitFlag)
-        {
-            newBitFlag |= branchBitFlag;
-        }
-        // newBitFlag = branchBitFlag;
+        // if (!newBitFlag)
+        // {
+        //     newBitFlag |= branchBitFlag;
+        // }
+        newBitFlag = branchBitFlag;
     }
     // printf("newBitFlag %d\n", newBitFlag);
 #ifndef NO_CONCURRENCY_FUZZ
