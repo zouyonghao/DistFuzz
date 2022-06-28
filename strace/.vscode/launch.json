@@ -1,0 +1,89 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "strace",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/strace",
+            "args": [
+                "-e",
+                "write>2",
+                "-e",
+                // "inject=write:delay_enter=100ms",
+                "inject=write:retval=-1",
+                "./a.out"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                // {"name": "DST_FUZZ", "value": "1"}
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "strace_dst",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/strace",
+            "args": [
+                "-e",
+                "write,writev",
+                // "-e",
+                // "inject=write:retval=-1",
+                "./a.out"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+				{"name": "__DST_ENV_RANDOM_FILE__", "value": "dst_fuzz_file.txt"},
+                {"name": "DST_FUZZ", "value": "1"}
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
+            "name": "str_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/str_test",
+            "args": [
+                "-e",
+                "write,writev",
+                // "-e",
+                // "inject=write:retval=-1",
+                "./a.out"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+				{"name": "__DST_ENV_RANDOM_FILE__", "value": "dst_fuzz_file.txt"},
+                {"name": "DST_FUZZ", "value": "1"}
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
+    ]
+}
