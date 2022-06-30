@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 include(CTest)
 
 find_package(Threads REQUIRED)
-find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system filesystem)
 
 # add_subdirectory(proxy_server)
 add_subdirectory(event_control)
@@ -30,3 +30,4 @@ add_subdirectory(zookeeper_test)
 
 add_subdirectory(etcd_test)
 add_subdirectory(etcd_test-3517)
+add_subdirectory(general_test)

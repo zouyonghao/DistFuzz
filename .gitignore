@@ -220,3 +220,5 @@ data
 data_backup
 test_boot_time_result
 zookeeper_audit.log
+
+general_test/bin/output/

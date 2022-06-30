@@ -10,8 +10,6 @@
 #include <dst_configuration_generator.hpp>
 #include <dst_registry.hpp>
 
-#define PRELOAD_LIB_PATH "/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so"
-
 #define DEFAULT_NODE_COUNT 3
 
 #define WAIT_PROCESS_START_MAX_COUNT 100000
@@ -173,7 +171,7 @@ public:
         std::string node_id_str = std::to_string(ni.node_id);
         boost::process::environment env = boost::this_process::environment();
         env["DATA_DIR"] = configuration_generator->get_data_folder(ni.node_id);
-        env["NO_FAULT_FILES"] = configuration_generator->get_no_fault_files(ni.node_id);
+        // env["NO_FAULT_FILES"] = configuration_generator->get_no_fault_files(ni.node_id);
         env["__DST_ENV_RANDOM_FILE__"] = "random_node" + node_id_str;
         env["NODE_NAME"] = "node" + node_id_str;
         env["NODE_ID"] = node_id_str;
@@ -186,9 +184,12 @@ public:
             delete ni.process;
             ni.process = nullptr;
         }
-        ni.process = new boost::process::child(
-            "/home/zyh/strace/src/strace -f -o strace_log_" + node_id_str + " " + ni.start_command,
-            boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
+
+        std::vector<std::string> args{"-f", "-o", "strace_log_" + node_id_str, ni.start_command};
+
+        ni.process =
+            new boost::process::child(boost::process::search_path("strace"), args, boost::process::std_out > log_file,
+                                      boost::process::std_err > err_log_file, env);
         int wait_count = 0;
         while (!ni.process->running() && (++wait_count) < WAIT_PROCESS_START_MAX_COUNT)
             ;
