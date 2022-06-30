@@ -514,7 +514,7 @@ init_dst_fuzz(void)
 {
 	if (getenv("DST_FUZZ") != NULL) {
 		char *res_shm_fuzz_coverage_map = getenv(FUZZ_COVERAGE_MAP_ENV_ID);
-		if (!res_shm_fuzz_coverage_map) {
+		if (!res_shm_fuzz_coverage_map && getenv("USE_KAFKA") != NULL) {
 			fprintf(stderr, "%s",
 				"\033[33m[FUZZ PRINT] Can not Get Environment Variable\033[0m\n");
 			init_kafka_producer();
