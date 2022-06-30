@@ -107,7 +107,8 @@
         "errno.h": "c",
         "rdkafka.h": "c",
         "syscall.h": "c",
-        "numbers": "cpp"
+        "numbers": "cpp",
+        "semaphore": "cpp"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {

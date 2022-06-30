@@ -184,12 +184,9 @@ public:
             delete ni.process;
             ni.process = nullptr;
         }
-
-        std::vector<std::string> args{"-f", "-o", "strace_log_" + node_id_str, ni.start_command};
-
         ni.process =
-            new boost::process::child(boost::process::search_path("strace"), args, boost::process::std_out > log_file,
-                                      boost::process::std_err > err_log_file, env);
+            new boost::process::child("strace -f -o strace_log_" + node_id_str + " " + ni.start_command,
+                                      boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
         int wait_count = 0;
         while (!ni.process->running() && (++wait_count) < WAIT_PROCESS_START_MAX_COUNT)
             ;

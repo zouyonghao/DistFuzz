@@ -1,12 +1,13 @@
 #include <fstream>
 #include <iostream>
+#include <regex>
 #include <thread>
 #include <vector>
 
 #include <dst_kv_store.h>
+#include <dst_log.hpp>
 #include <dst_node_manager.hpp>
 #include <dst_random.h>
-#include <dst_log.hpp>
 #include <operator/dst_operator.hpp>
 #include <utils/dst_color.h>
 #include <utils/dst_share_mem_util.h>
@@ -38,12 +39,12 @@ void run_init_operator()
     }
 }
 
-void run_some_normal_operators(int number)
+void run_some_normal_operators(int number, int normal_sleep_ms)
 {
     size_t operator_size = Registry<NormalOperator>::getItemVector().size();
     for (int i = 0; i < number && operator_size > 0; i++)
     {
-        // std::this_thread::sleep_for(1s);
+        std::this_thread::sleep_for(std::chrono::microseconds(normal_sleep_ms));
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
         std::cerr << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
         std::thread t1([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); });
@@ -118,33 +119,97 @@ void backup_testcase(uint32_t &test_case_count)
     system(("sh ./backup_test_case.sh " + std::to_string(test_case_count++)).c_str());
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
-    if (argc < 2)
+    std::map<std::string, std::string> options;
+    std::regex optregex(
+        "--(help|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|check_after_fuzz|random_file)"
+        "(?:=((?:.|\n)*))?");
+
+    for (char **opt = argv + 1; opt < argv + argc; opt++)
     {
-        std::cerr << "Usage: xxx_test_main random_file [node_count]\n";
-        exit(-1);
+        std::smatch match;
+        std::string s(*opt);
+        if (std::regex_match(s, match, optregex))
+        {
+            options[std::string(match[1])] = match[2];
+        }
+        else
+        {
+            std::cerr << "Cannot parse option: " << *opt << std::endl;
+            options["help"] = "";
+        }
     }
 
-    uint32_t node_count = 3;
-    if (argc > 2)
+    if (options.count("help"))
     {
-        node_count = std::atoi(argv[2]);
+        std::cerr << "    --help                print this usage" << std::endl
+                  << "    --node_count          the nodes needs to run" << std::endl
+                  << "    --normal_sleep_ms     the sleep time between normal operators" << std::endl
+                  << "    --normal_count        the normal operators count" << std::endl
+                  << "    --critic_sleep_ms     the sleep time between critic operators" << std::endl
+                  << "    --critic_count        the critic operators count" << std::endl
+                  << "    --check_after_fuzz    whether to run some normal operators after fuzz" << std::endl
+                  << "    --random_file         the random file name" << std::endl
+                  << std::endl;
+        return 0;
+    }
+
+    int node_count = DEFAULT_NODE_COUNT;
+    if (options.count("node_count"))
+    {
+        node_count = std::atoi(options["node_count"].c_str());
+    }
+
+    bool check_after_fuzz = false;
+    if (options.count("check_after_fuzz"))
+    {
+        check_after_fuzz = true;
+    }
+
+    std::string random_file = "init_random.txt";
+    if (options.count("random_file"))
+    {
+        random_file = options["random_file"];
+    }
+
+    int run_normal_operator_count = RUN_NORMAL_OPERATOR_COUNT;
+    if (options.count("normal_count"))
+    {
+        run_normal_operator_count = std::atoi(options["normal_count"].c_str());
+    }
+
+    int run_critic_operator_count = RUN_CRITICAL_OPERATOR_COUNT;
+    if (options.count("critic_count"))
+    {
+        run_critic_operator_count = std::atoi(options["critic_count"].c_str());
+    }
+
+    int normal_sleep_ms = 0;
+    if (options.count("normal_sleep_ms"))
+    {
+        normal_sleep_ms = std::atoi(options["normal_sleep_ms"].c_str());
+    }
+
+    int critic_sleep_ms = 0;
+    if (options.count("critic_sleep_ms"))
+    {
+        critic_sleep_ms = std::atoi(options["critic_sleep_ms"].c_str());
     }
 
     uint32_t test_case_count = 0;
     std::ifstream itest_case_count_file("test_case_count");
     itest_case_count_file >> test_case_count;
     itest_case_count_file.close();
-    std::string random_file(argv[1]);
+
     split_files(random_file, node_count);
 
     size_t critical_operator_size = Registry<CriticalOperator>::getItemVector().size();
     size_t normal_operator_size = Registry<NormalOperator>::getItemVector().size();
     std::cerr << "normal_operator_size = " << normal_operator_size << "\n";
-    std::cerr << "normal operator run count = " << RUN_NORMAL_OPERATOR_COUNT << "\n";
+    std::cerr << "normal operator run count = " << run_normal_operator_count << "\n";
     std::cerr << "critical_operator_size = " << critical_operator_size << "\n";
-    std::cerr << "critical_operator run count = " << RUN_CRITICAL_OPERATOR_COUNT << "\n";
+    std::cerr << "critical_operator run count = " << run_critic_operator_count << "\n";
 
     init_is_fuzzing();
     /** Do not set is_fuzzing to false for some cases during boot */
@@ -181,15 +246,15 @@ int main(int argc, char const *argv[])
     set_is_fuzzing(true);
     /** the normal operator may change after running init operator */
     normal_operator_size = Registry<NormalOperator>::getItemVector().size();
-    run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
+    run_some_normal_operators(run_normal_operator_count, normal_sleep_ms);
 
-    for (int i = 0; i < RUN_CRITICAL_OPERATOR_COUNT && critical_operator_size > 0; i++)
+    for (int i = 0; i < run_critic_operator_count && critical_operator_size > 0; i++)
     {
-        std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t()));
+        std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t() + critic_sleep_ms));
         uint32_t index = __dst_get_random_uint8_t() % critical_operator_size;
         std::cerr << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
         Registry<CriticalOperator>::getItemVector()[index].second->_do();
-        run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
+        run_some_normal_operators(run_normal_operator_count, normal_sleep_ms);
     }
 
     /** check server availability */
@@ -200,6 +265,7 @@ int main(int argc, char const *argv[])
     }
 
     /** recovery checker to check whether servers can recover after fuzzing */
+    if (check_after_fuzz)
     {
         int alive_node_count = 0;
         for (auto &ni : nm->get_node_processes())
@@ -219,7 +285,7 @@ int main(int argc, char const *argv[])
                      " run some normal operators to see whether it works as usual.\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
 
-        for (int i = 0; i < RUN_NORMAL_OPERATOR_COUNT && normal_operator_size > 0; i++)
+        for (int i = 0; i < run_normal_operator_count && normal_operator_size > 0; i++)
         {
             uint32_t index = __dst_get_random_uint8_t() % normal_operator_size;
             std::cerr << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";

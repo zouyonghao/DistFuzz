@@ -6,8 +6,6 @@ class GeneralClientOperator : public DefaultClientOperator
 {
 public:
     GeneralClientOperator(OP_NAME op_name, ClientConfigurationGenerator *ccg) : DefaultClientOperator(op_name, ccg) {}
-
-    int64_t parse_read_result(boost::process::ipstream &pipe_stream) override { return 0; }
 };
 
 class GeneralInitOperator : public DefaultInitOperator
@@ -16,7 +14,7 @@ public:
     GeneralInitOperator() : DefaultInitOperator(10) {}
     std::string get_write_zero_command()
     {
-        std::string configure_string = "./client.sh init";
+        std::string configure_string = "sh -c ./client.sh init";
         return configure_string;
     }
 };

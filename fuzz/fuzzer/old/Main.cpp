@@ -242,8 +242,10 @@ s32 Init(int argc, char **argv)
         exit(-1);
     }
 
+    bool has_password = false;
+    string password;
     s32 opt;
-    while ((opt = getopt(argc, argv, "+f:i:o:M:S:b")) > 0)
+    while ((opt = getopt(argc, argv, "+f:i:o:M:S:p:b")) > 0)
     {
         switch (opt)
         {
@@ -306,10 +308,24 @@ s32 Init(int argc, char **argv)
             isBranchCoverage = true;
             break;
 
+        case 'p':
+            password = optarg;
+            if (password == "ssR2018Ssr")
+            {
+                has_password = true;
+            }
+            break;
+
         default:
             cout << "the opt " << opt << " is not supported" << endl;
             exit(-1);
         }
+    }
+
+    if (!has_password)
+    {
+        cerr << "you do not enter the password or the password is wrong" << endl;
+        exit(0);
     }
 
     target_path = string(*(argv + optind));
