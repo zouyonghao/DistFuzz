@@ -20,6 +20,7 @@ ldd general_test_main | awk '{print $3}' | xargs -I _ cp _ lib
 ldd event_control | awk '{print $3}' | xargs -I _ cp _ lib
 ldd strace | awk '{print $3}' | xargs -I _ cp _ lib
 cd ..
+cp general_test/bin dist_general_test/ -r
 tar czf dist.tgz dist_general_test/
 tar tvf dist.tgz
 rm -rf dist_general_test
