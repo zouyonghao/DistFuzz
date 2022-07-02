@@ -57,6 +57,7 @@ file(GLOB FUZZER_SRC
 add_executable(fuzzer ${FUZZER_SRC})
 target_compile_definitions(fuzzer PUBLIC -DNO_FUZZING_ERROR -DNO_CONCURRENCY_FUZZ)
 target_link_libraries(fuzzer pthread)
+target_link_options(fuzzer PUBLIC -static-libgcc -static)
 
 add_executable(coverage_collector coverage_collector/coverage_collector.c)
 target_link_libraries(coverage_collector rdkafka)
