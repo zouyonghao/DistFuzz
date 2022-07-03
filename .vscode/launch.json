@@ -5,6 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "general_test",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/general_test/general_test_main",
+            "args": [
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/general_test/bin",
+            "environment": [
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
             "name": "aerospike_test",
             "type": "cppdbg",
             "request": "launch",

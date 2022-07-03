@@ -307,7 +307,7 @@ int main(int argc, char *argv[])
 
     set_is_fuzzing(false);
     /** run some checkers before stop */
-    system("bash check_before_stop.sh");
+    system("sh check_before_stop.sh");
 
 STOP:
     std::cerr << "stopping...\n";
@@ -318,7 +318,7 @@ STOP:
     // run_some_normal_operators(RUN_NORMAL_OPERATOR_COUNT);
 
     /* we still need using kill to stop all process clearly */
-    system("bash stop.sh");
+    system("sh stop.sh");
 
     dst_clear_kv_all();
 

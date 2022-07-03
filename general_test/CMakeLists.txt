@@ -13,6 +13,7 @@ file(GLOB GENERAL_TEST_MAIN_SRC
 
 add_executable(general_test_main ${GENERAL_TEST_MAIN_SRC})
 target_compile_options(general_test_main PUBLIC -DNO_CONCURRENCY)
+target_link_options(general_test_main PUBLIC -static-libgcc -static)
 target_link_libraries(general_test_main
         -Wl,--whole-archive dst_default_operator
         -Wl,--no-whole-archive dst_core pthread rt ${Boost_LIBRARIES})

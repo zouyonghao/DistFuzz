@@ -7,7 +7,9 @@
 #include "utils/dst_share_mem_util.h"
 #include "dst_random.h"
 
+#ifdef ENABLE_KAFKA
 #include "librdkafka/rdkafka.h"
+#endif
 
 #include <sys/uio.h>
 #include <sys/param.h>
@@ -49,15 +51,15 @@ static bool printed_fuzzing_stopped = false;
 
 static bool last_injected = false;
 
-/** Kafka related */
+bool use_kafka = false;
+#ifdef ENABLE_KAFKA
 #ifndef KAFKA_BOOTSTRAP_SERVER
 #define KAFKA_BOOTSTRAP_SERVER "control:9092" // jepsen control node
 #endif
 #define KAFKA_COVERAGE_TOPIC "coverage"
 rd_kafka_topic_t *topic_coverage = NULL;
-bool use_kafka = false;
 void init_kafka_producer(void);
-/** Kafka end */
+#endif
 
 void init_dst_fuzz(void);
 
@@ -201,11 +203,13 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 
 	uint64_t hash_index = get_hash_value(is_send);
 	if (use_kafka) {
+#ifdef ENABLE_KAFKA
 		if (rd_kafka_produce(topic_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY,
 				     &hash_index, sizeof(uint64_t), NULL, 0, NULL) == -1) {
 			fprintf(stderr, "%% Failed to produce to topic %s: %s\n",
 				KAFKA_COVERAGE_TOPIC, rd_kafka_err2str(rd_kafka_last_error()));
 		}
+#endif
 	} else {
 		fuzz_coverage_map[hash_index]++;
 	}
@@ -517,8 +521,11 @@ init_dst_fuzz(void)
 		if (!res_shm_fuzz_coverage_map && getenv("USE_KAFKA") != NULL) {
 			fprintf(stderr, "%s",
 				"\033[33m[FUZZ PRINT] Can not Get Environment Variable\033[0m\n");
+				
+#ifdef ENABLE_KAFKA
 			init_kafka_producer();
 			use_kafka = true;
+#endif
 		} else {
 			fprintf(stderr, "\033[33m[FUZZ PRINT]Get Environment Variable %s\033[0m\n",
 				res_shm_fuzz_coverage_map);
@@ -532,6 +539,7 @@ init_dst_fuzz(void)
 	}
 }
 
+#ifdef ENABLE_KAFKA
 void
 init_kafka_producer(void)
 {
@@ -566,3 +574,4 @@ init_kafka_producer(void)
 	}
 	topic_coverage = rd_kafka_topic_new(rk, KAFKA_COVERAGE_TOPIC, topic_conf);
 }
+#endif

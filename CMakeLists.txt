@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 include(CTest)
 
 find_package(Threads REQUIRED)
+set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost REQUIRED COMPONENTS system filesystem)
 
 # add_subdirectory(proxy_server)
