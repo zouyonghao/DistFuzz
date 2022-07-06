@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 {
     std::map<std::string, std::string> options;
     std::regex optregex(
-        "--(help|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|check_after_fuzz|random_file)"
+        "--(help|fuzz_before_init|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|check_after_fuzz|random_file)"
         "(?:=((?:.|\n)*))?");
 
     for (char **opt = argv + 1; opt < argv + argc; opt++)
@@ -151,6 +151,7 @@ int main(int argc, char *argv[])
                   << "    --critic_count        the critic operators count" << std::endl
                   << "    --check_after_fuzz    whether to run some normal operators after fuzz" << std::endl
                   << "    --random_file         the random file name" << std::endl
+                  << "    --fuzz_before_init    should we start fuzzing before the init operator (true or false)" << std::endl
                   << std::endl;
         return 0;
     }
@@ -197,6 +198,12 @@ int main(int argc, char *argv[])
         critic_sleep_ms = std::atoi(options["critic_sleep_ms"].c_str());
     }
 
+    bool fuzz_before_init = true;
+    if (options.count("fuzz_before_init") && options["fuzz_before_init"] == "false")
+    {
+        fuzz_before_init = false;
+    }
+
     uint32_t test_case_count = 0;
     std::ifstream itest_case_count_file("test_case_count");
     itest_case_count_file >> test_case_count;
@@ -212,8 +219,11 @@ int main(int argc, char *argv[])
     std::cerr << "critical_operator run count = " << run_critic_operator_count << "\n";
 
     init_is_fuzzing();
-    /** Do not set is_fuzzing to false for some cases during boot */
-    // set_is_fuzzing(false);
+    if (!fuzz_before_init)
+    {
+        /** Do not set is_fuzzing to false for some cases during boot */
+        set_is_fuzzing(false);
+    }
 
     bool all_operators_after_fuzzing_failed = true;
 
