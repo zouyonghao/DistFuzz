@@ -31,7 +31,7 @@ class GeneralClientConfigurationGenerator : public ClientConfigurationGenerator
 public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
     {
-        std::string configure_string = "sh -c ./client.sh ";
+        std::string configure_string = "sh -c \"./client.sh ";
         va_list random_nums;
         va_start(random_nums, node_count);
         switch (op_name)
@@ -54,6 +54,7 @@ public:
             break;
         }
         va_end(random_nums);
+        configure_string += "\"";
         return configure_string;
     }
 };
