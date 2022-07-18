@@ -72,7 +72,7 @@ typedef int64_t s64;
 #define FAULT_NOBITS 5
 
 // the configure for vim using asan
-#define EXEC_TIMEOUT 200000 // measured by ms
+#define EXEC_TIMEOUT 20000000 // measured by ms
 // #define HANG_TIMEOUT	1000 	//measured by ms
 
 struct seed
