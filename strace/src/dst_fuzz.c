@@ -51,8 +51,8 @@ static bool printed_fuzzing_stopped = false;
 
 static bool last_injected = false;
 
-bool use_kafka = false;
 #ifdef ENABLE_KAFKA
+bool use_kafka = false;
 #ifndef KAFKA_BOOTSTRAP_SERVER
 #define KAFKA_BOOTSTRAP_SERVER "control:9092" // jepsen control node
 #endif
@@ -202,17 +202,19 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 	}
 
 	uint64_t hash_index = get_hash_value(is_send);
-	if (use_kafka) {
 #ifdef ENABLE_KAFKA
+	if (use_kafka) {
 		if (rd_kafka_produce(topic_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY,
 				     &hash_index, sizeof(uint64_t), NULL, 0, NULL) == -1) {
 			fprintf(stderr, "%% Failed to produce to topic %s: %s\n",
 				KAFKA_COVERAGE_TOPIC, rd_kafka_err2str(rd_kafka_last_error()));
 		}
-#endif
 	} else {
+#endif
 		fuzz_coverage_map[hash_index]++;
+#ifdef ENABLE_KAFKA
 	}
+#endif
 
 	if (getenv("NO_FAULT") != NULL) {
 		return;
@@ -518,13 +520,15 @@ init_dst_fuzz(void)
 {
 	if (getenv("DST_FUZZ") != NULL) {
 		char *res_shm_fuzz_coverage_map = getenv(FUZZ_COVERAGE_MAP_ENV_ID);
-		if (!res_shm_fuzz_coverage_map && getenv("USE_KAFKA") != NULL) {
+		if (!res_shm_fuzz_coverage_map) {
 			fprintf(stderr, "%s",
 				"\033[33m[FUZZ PRINT] Can not Get Environment Variable\033[0m\n");
-				
+
 #ifdef ENABLE_KAFKA
-			init_kafka_producer();
-			use_kafka = true;
+			if (getenv("USE_KAFKA") != NULL) {
+				init_kafka_producer();
+				use_kafka = true;
+			}
 #endif
 		} else {
 			fprintf(stderr, "\033[33m[FUZZ PRINT]Get Environment Variable %s\033[0m\n",
@@ -533,10 +537,9 @@ init_dst_fuzz(void)
 				(uint8_t *)shmat((int)atoi(res_shm_fuzz_coverage_map), NULL, 0);
 		}
 		is_dst_fuzz = true;
-	} else {
-		fuzz_coverage_map = (uint8_t *)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
 		return;
 	}
+	fuzz_coverage_map = (uint8_t *)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
 }
 
 #ifdef ENABLE_KAFKA

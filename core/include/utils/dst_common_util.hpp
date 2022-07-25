@@ -6,12 +6,12 @@
 
 #include <boost/process.hpp>
 
-static std::string get_thread_id()
-{
-    std::stringstream ss;
-    ss << std::this_thread::get_id();
-    return std::to_string(std::stoull(ss.str()) % INT_MAX);
-}
+// static std::string get_thread_id()
+// {
+//     std::stringstream ss;
+//     ss << std::this_thread::get_id();
+//     return std::to_string(std::stoull(ss.str()) % INT_MAX);
+// }
 
 static bool retry_command(std::string command, int max_try_count)
 {
