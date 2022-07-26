@@ -2,11 +2,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <cstring>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cstring>
+
+void a() { std::cout << std::stoll("3876838356") << "\n"; }
 
 int main(int argc, char const *argv[])
 {
@@ -71,13 +73,13 @@ int main(int argc, char const *argv[])
 
     std::cout << strlen("test") << "\n";
 
-
     std::string t1("NEED_RECORD: {:process 140183075182336, :type :invoke, :f :write, :value 202168352}");
     auto n = t1.find("NEED_RECORD: ");
     std::cout << n << " " << t1.substr(n + strlen("NEED_RECORD: ")) << "\n";
 
     std::cout << std::stoi("450086335") << "\n";
     std::cout << std::stoll("3876838356") << "\n";
-
+    std::cout << std::stoll("3876838356") << "\n";
+    a();
     return 0;
 }

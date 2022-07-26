@@ -4,9 +4,10 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include/llvm-11"
+                "/usr/include/llvm-11",
+                "/usr/include/x86_64-linux-gnu"
             ],
-            "defines": [],
+            "defines": ["__USE_GNU", "ENABLE_STACKTRACE"],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++14",

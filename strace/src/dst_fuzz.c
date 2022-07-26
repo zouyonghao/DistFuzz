@@ -6,6 +6,7 @@
 #include "retval.h"
 #include "utils/dst_share_mem_util.h"
 #include "dst_random.h"
+#include "unwind.h"
 
 #ifdef ENABLE_KAFKA
 #include "librdkafka/rdkafka.h"
@@ -26,6 +27,19 @@
 #define FUZZ_COVERAGE_MAP_ENV_ID "AFLCplusplus_BRANCH_TRACE_SHM_ID"
 
 #define FUZZ_COVERAGE_MAP_SIZE (1u << 23)
+
+struct exec_params {
+	int fd_to_close;
+	uid_t run_euid;
+	gid_t run_egid;
+	char **argv;
+	char **env;
+	char *pathname;
+	struct sigaction child_sa;
+};
+extern struct exec_params params_for_tracee;
+
+static char *pathname;
 
 /**
  * According to https://man7.org/linux/man-pages/man2/_syscall.2.html,
@@ -74,7 +88,7 @@ uint64_t get_length_from_iovec(struct tcb *tcp, int iov_pos, int iovcnt_pos);
 uint64_t get_length_from_msg(struct tcb *tcp, int msg_pos);
 uint64_t get_length_from_mmsg(struct tcb *tcp, int msgvec_pos, int vlen_pos);
 
-uint64_t get_hash_value(bool is_send);
+uint64_t get_hash_value(bool is_send, uint64_t position, size_t length);
 
 // static int arch_set_error(struct tcb *);
 // #include "arch_regs.c"
@@ -82,13 +96,44 @@ uint64_t get_hash_value(bool is_send);
 
 static uint8_t *fuzz_coverage_map;
 
+static int ignore_range = 1;
+
+// temp variables, should be restored after each syscall finished
+static unsigned long tmp_offset = 0;
+
 static uint64_t event_index = 0;
 uint64_t
-get_hash_value(bool is_send)
+get_hash_value(bool is_send, uint64_t position, size_t length)
 {
-	return (++event_index + is_send +
-		(getenv("NODE_ID") != NULL ? atoi(getenv("NODE_ID")) : 0)) %
-	       FUZZ_COVERAGE_MAP_SIZE;
+	int node_id = getenv("NODE_ID") != NULL ? atoi(getenv("NODE_ID")) : 0;
+	uint64_t hash_value = (event_index + is_send * 10 + length + node_id * 100 + position) %
+			      FUZZ_COVERAGE_MAP_SIZE;
+	for (int i = 1; i <= ignore_range; i++) {
+		if (fuzz_coverage_map[hash_value - i] > 0) {
+			return hash_value - i;
+		}
+		if (fuzz_coverage_map[hash_value + 1] > 0) {
+			return hash_value + i;
+		}
+	}
+	event_index++;
+	return hash_value;
+}
+
+static void
+print_call_cb(void *dummy, const char *binary_filename, const char *symbol_name,
+	      unwind_function_offset_t function_offset, unsigned long true_offset)
+{
+	if (tmp_offset == 0 && strstr(binary_filename, pathname)) {
+		// fprintf(stderr, "pathname is %s\n", pathname);
+		// fprintf(stderr, "true_offset is %ld\n", true_offset);
+		tmp_offset = true_offset;
+	}
+}
+
+static void
+print_error_cb(void *dummy, const char *error, unsigned long true_offset)
+{
 }
 
 void
@@ -181,8 +226,8 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		/* Skip files in get_no_fault_files */
 		const char *no_fault_files_env = getenv("NO_FAULT_FILES");
 		if (no_fault_files_env != NULL && strlen(no_fault_files_env) > 0) {
-			int length = strlen(no_fault_files_env);
-			char *no_fault_files = malloc(length + 1);
+			int files_length = strlen(no_fault_files_env);
+			char *no_fault_files = malloc(files_length + 1);
 			strcpy(no_fault_files, no_fault_files_env);
 			fprintf(stderr, "no_fault_files is %s\n", no_fault_files);
 			const char *delim = ",";
@@ -194,6 +239,7 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 				}
 				no_fault_file = strtok(NULL, delim);
 			}
+			free(no_fault_files);
 		}
 
 		is_file = true;
@@ -201,7 +247,13 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		break;
 	}
 
-	uint64_t hash_index = get_hash_value(is_send);
+	// NOTE: The use of IP register is not suitable
+	//       because every syscall has same offset in libc
+	// struct user_regs_struct _regs;
+	// ptrace(PTRACE_GETREGS, tcp->pid, NULL, &_regs);
+	// fprintf(stderr, "rip - fs_base is %llX\n", _regs.rip - _regs.fs_base);
+	unwinder.tcb_walk(tcp, print_call_cb, print_error_cb, NULL);
+	uint64_t hash_index = get_hash_value(is_send, tmp_offset, length);
 #ifdef ENABLE_KAFKA
 	if (use_kafka) {
 		if (rd_kafka_produce(topic_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY,
@@ -385,6 +437,8 @@ dst_fuzz_syscall_exiting_finish(struct tcb *tcp)
 	if (!is_dst_fuzz) {
 		return;
 	}
+
+	tmp_offset = 0;
 	if (stored_regs != NULL) {
 		struct user_regs_struct regs;
 		ptrace(PTRACE_GETREGS, tcp->pid, NULL, &regs);
@@ -536,10 +590,22 @@ init_dst_fuzz(void)
 			fuzz_coverage_map =
 				(uint8_t *)shmat((int)atoi(res_shm_fuzz_coverage_map), NULL, 0);
 		}
-		is_dst_fuzz = true;
-		return;
+	} else {
+		fuzz_coverage_map = (uint8_t *)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
 	}
-	fuzz_coverage_map = (uint8_t *)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
+
+	pathname = strace_malloc(strlen(params_for_tracee.argv[0]) + 10);
+	if (params_for_tracee.argv[0][0] == '.') {
+		if (params_for_tracee.argv[0][1] == '.') {
+			strcpy(pathname, params_for_tracee.argv[0] + 3);
+		} else {
+			strcpy(pathname, params_for_tracee.argv[0] + 2);
+		}
+	} else {
+		strcpy(pathname, params_for_tracee.argv[0]);
+	}
+
+	is_dst_fuzz = true;
 }
 
 #ifdef ENABLE_KAFKA

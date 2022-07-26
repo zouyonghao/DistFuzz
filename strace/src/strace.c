@@ -1371,7 +1371,7 @@ struct exec_params {
 	char *pathname;
 	struct sigaction child_sa;
 };
-static struct exec_params params_for_tracee;
+struct exec_params params_for_tracee;
 
 static void ATTRIBUTE_NOINLINE ATTRIBUTE_NORETURN
 exec_or_die(void)

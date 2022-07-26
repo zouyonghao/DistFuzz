@@ -108,7 +108,9 @@
         "rdkafka.h": "c",
         "syscall.h": "c",
         "numbers": "cpp",
-        "semaphore": "cpp"
+        "semaphore": "cpp",
+        "socket.h": "c",
+        "shm.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
