@@ -21,7 +21,7 @@ sudo apt-get install \
     redis \
     zookeeper \
     gcc-multilib \
-    gawk gcc-8 g++-8 libc++-8-dev libstdc++-8-dev -y > /dev/null && echo "apt-get dependencies success!"
+    gawk gcc-8 g++-8 libc++-8-dev libstdc++-8-dev libunwind-dev liblzma-dev lzma-dev -y > /dev/null && echo "apt-get dependencies success!"
 
 cd
 # install aerospike client
