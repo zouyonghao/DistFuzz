@@ -46,7 +46,7 @@ strace_CFLAGS = $(AM_CFLAGS)
 strace_LDFLAGS = -static -Wl,-allow-multiple-definition
 strace_LDADD = libstrace.a $(clock_LIBS) $(timer_LIBS) \
 	/home/zyh/distributed-system-test/build/core/libdst_core.a \
-	-llzma -lstdc++
+	-llzma -lpthread -lstdc++
 	
 # -lrdkafka
 strace_SOURCES = strace.c
@@ -422,7 +422,7 @@ if USE_LIBUNWIND
 libstrace_a_SOURCES += unwind-libunwind.c
 strace_CPPFLAGS += $(libunwind_CPPFLAGS)
 strace_LDFLAGS += $(libunwind_LDFLAGS)
-strace_LDADD += $(libunwind_LIBS)
+strace_LDADD += $(libunwind_LIBS) -llzma
 endif
 if USE_DEMANGLE
 strace_CPPFLAGS += $(libiberty_CPPFLAGS)
