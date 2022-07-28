@@ -1008,8 +1008,10 @@ syscall_exiting_trace(struct tcb *tcp, struct timespec *ts, int res)
 	line_ended();
 
 #ifdef ENABLE_STACKTRACE
-	if (stack_trace_enabled)
-		unwind_tcb_print(tcp);
+	if (stack_trace_enabled) {
+		// TODO: add an argument for this
+		// unwind_tcb_print(tcp);
+	}
 #endif
 	return 0;
 }

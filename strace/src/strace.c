@@ -3023,8 +3023,10 @@ print_stopped(struct tcb *tcp, const siginfo_t *si, const unsigned int sig)
 		line_ended();
 
 #ifdef ENABLE_STACKTRACE
-		if (stack_trace_enabled)
-			unwind_tcb_print(tcp);
+		if (stack_trace_enabled) {
+			// TODO: add an argument for this
+			// unwind_tcb_print(tcp);
+		}
 #endif
 	}
 }
