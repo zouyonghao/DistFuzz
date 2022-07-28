@@ -16,7 +16,7 @@ target_compile_options(general_test_main PUBLIC -DNO_CONCURRENCY)
 target_link_options(general_test_main PUBLIC -static-libgcc -static)
 target_link_libraries(general_test_main
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_core pthread rt ${Boost_LIBRARIES})
+        -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
 
 
 file(GLOB GENERAL_TEST_OPERATORS_SRC
@@ -26,7 +26,7 @@ file(GLOB GENERAL_TEST_OPERATORS_SRC
 add_executable(general_operator_test ${GENERAL_TEST_OPERATORS_SRC})
 target_link_libraries(general_operator_test
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_core pthread rt ${Boost_LIBRARIES})
+        -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
 
 add_library(general_operator_lib src/operators/general_client_test.cpp)
 enable_testing()

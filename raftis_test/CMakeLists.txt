@@ -19,11 +19,11 @@ file(GLOB RAFTIS_TEST_MAIN_SRC
 add_executable(raftis_test_main ${RAFTIS_TEST_MAIN_SRC})
 target_link_libraries(raftis_test_main
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_core pthread rt
+        -Wl,--no-whole-archive dst_core rt pthread
         ${Boost_LIBRARIES})
 
 add_executable(raftis_operator_test ${RAFTIS_TEST_OPERATORS_SRC})
 target_link_libraries(raftis_operator_test
         -Wl,--whole-archive dst_default_operator
-        -Wl,--no-whole-archive dst_core pthread rt
+        -Wl,--no-whole-archive dst_core rt pthread
         ${Boost_LIBRARIES})

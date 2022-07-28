@@ -5,5 +5,5 @@ add_test(test_nuraft_configuration_generator test_nuraft_configuration_generator
 add_executable(test_nuraft_operators test_operators.cpp)
 target_link_libraries(test_nuraft_operators PUBLIC
         -Wl,--whole-archive nuraft_operator_lib dst_default_operator
-        -Wl,--no-whole-archive dst_core pthread rt ${Boost_LIBRARIES})
+        -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
 add_test(test_nuraft_operators test_nuraft_operators)

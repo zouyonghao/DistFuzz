@@ -5,5 +5,5 @@ add_test(test_etcd_configuration_generator-3517 test_etcd_configuration_generato
 add_executable(test_etcd_operators-3517 test_operators.cpp)
 target_link_libraries(test_etcd_operators-3517 PUBLIC
         -Wl,--whole-archive etcd_operator_lib dst_default_operator
-        -Wl,--no-whole-archive dst_core pthread rt ${Boost_LIBRARIES})
+        -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
 add_test(test_etcd_operators-3517 test_etcd_operators-3517)

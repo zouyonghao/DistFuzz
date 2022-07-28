@@ -5,5 +5,5 @@ add_test(test_zookeeper_configuration_generator test_zookeeper_configuration_gen
 add_executable(test_zooclickhouse_operators test_operators.cpp)
 target_link_libraries(test_zooclickhouse_operators PUBLIC
         -Wl,--whole-archive clickhouse_operator_lib dst_default_operator
-        -Wl,--no-whole-archive dst_core pthread rt ${Boost_LIBRARIES})
+        -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
 add_test(test_zooclickhouse_operators test_zooclickhouse_operators)
