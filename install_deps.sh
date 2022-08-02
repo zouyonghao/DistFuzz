@@ -3,7 +3,7 @@ sudo apt update
 sudo apt-get install \
     libboost-all-dev \
     rapidjson-dev \
-    clang-9 \
+    clang \
     libssl-dev \
     libleveldb-dev \
     libgflags-dev \
@@ -21,7 +21,10 @@ sudo apt-get install \
     redis \
     zookeeper \
     gcc-multilib \
-    gawk gcc-8 g++-8 libc++-8-dev libstdc++-8-dev libunwind-dev liblzma-dev lzma-dev -y > /dev/null && echo "apt-get dependencies success!"
+    gawk gcc g++ libc++-dev liblzma-dev lzma-dev leiningen -y > /dev/null && echo "apt-get dependencies success!"
+
+# NOTE:
+# libunwind-dev
 
 cd
 # install aerospike client
@@ -38,34 +41,35 @@ else
 fi
 
 # install java, lein
-if lein version > /dev/null; then
-    echo "leiningen is installed, skip."
-else
-    echo "installing leiningen and jdk..."
-    # wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-    sudo mv distributed-system-test/lein /usr/bin/
-    sudo chmod +x /usr/bin/lein
-    sudo apt install default-jdk -y > /dev/null
-    echo "install lein success!"
-fi
+# if lein version > /dev/null; then
+#     echo "leiningen is installed, skip."
+# else
+#     echo "installing leiningen and jdk..."
+#     wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+#     sudo mv lein /usr/bin/lein
+#     # sudo mv distributed-system-test/lein /usr/bin/
+#     sudo chmod +x /usr/bin/lein
+#     sudo apt install default-jdk -y > /dev/null
+#     echo "install lein success!"
+# fi
 
-cd
-if ls criu > /dev/null; then
-    echo "it seems you have installed criu, skip."
-else
-    echo "installing criu..."
-    git clone http://166.111.139.110:7800/zyh/criu.git
-    cd criu
-    make && echo "install criu success!"
-fi
+# cd
+# if ls criu > /dev/null; then
+#     echo "it seems you have installed criu, skip."
+# else
+#     echo "installing criu..."
+#     git clone http://166.111.139.110:7800/zyh/criu.git
+#     cd criu
+#     make && echo "install criu success!"
+# fi
 
-cd
-if clang-11 --version > /dev/null; then
-    echo "clang-11 is installed, skip."
-else
-    echo "installing clang-11..."
-    wget https://apt.llvm.org/llvm.sh
-    chmod +x llvm.sh
-    sudo ./llvm.sh 11
-    echo "install clang and llvm 11 success!"
-fi
+# cd
+# if clang-11 --version > /dev/null; then
+#     echo "clang-11 is installed, skip."
+# else
+#     echo "installing clang-11..."
+#     wget https://apt.llvm.org/llvm.sh
+#     chmod +x llvm.sh
+#     sudo ./llvm.sh 11
+#     echo "install clang and llvm 11 success!"
+# fi
