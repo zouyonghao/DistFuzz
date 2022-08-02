@@ -21,7 +21,7 @@ sudo apt-get install \
     redis \
     zookeeper \
     gcc-multilib \
-    gawk gcc g++ libc++-dev liblzma-dev lzma-dev leiningen -y > /dev/null && echo "apt-get dependencies success!"
+    gawk gcc g++ libc++-dev liblzma-dev lzma-dev leiningen valgrind -y > /dev/null && echo "apt-get dependencies success!"
 
 # NOTE:
 # libunwind-dev
@@ -33,6 +33,7 @@ if ls /usr/include/aerospike > /dev/null; then
 else
     echo "installing aerospike client..."
     wget https://download.aerospike.com/artifacts/aerospike-client-c/5.2.0/aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz
+    # for 22.04 https://download.aerospike.com/artifacts/aerospike-client-c/6.1.1/aerospike-client-c-6.1.1.ubuntu22.04.x86_64.tgz
     tar xvf aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz
     cd aerospike-client-c-5.2.0.ubuntu18.04.x86_64
     sudo dpkg -i aerospike-client-c-devel-5.2.0.ubuntu18.04.x86_64.deb
