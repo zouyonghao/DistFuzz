@@ -380,6 +380,18 @@ s32 Exit(void)
 #ifndef TEST
 int main(int argc, char **argv)
 {
+#ifdef USE_LICENSE
+    if (!CheckLicenseFile(checker_str))
+    {
+        printf("License check is failed!\n");
+        exit(-1);
+    }
+    if (!CheckWriteRunLogFile())
+    {
+        printf("License check is failed!!\n");
+        exit(-1);
+    }
+#endif
     timeBegin = GetCurTimeUs();
 
     u64 i;

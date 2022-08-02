@@ -225,3 +225,4 @@ general_test/bin/output/
 general_test/bin/file_lock
 dist.tgz
 test/strace.log
+.cache
