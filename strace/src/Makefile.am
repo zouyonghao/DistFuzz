@@ -27,7 +27,7 @@ bundled_CPPFLAGS += -I$(top_srcdir)/bundled/$(OS)/arch/$(KARCH)/include/uapi \
 endif
 
 AM_CFLAGS = $(WARN_CFLAGS) \
-		  -I/home/zyh/distributed-system-test/core/include
+		  -I../../core/include
 AM_CPPFLAGS = -I$(builddir)/$(OS)/$(ARCH) \
 	      -I$(srcdir)/$(OS)/$(ARCH) \
 	      -I$(builddir)/$(OS)/generic \
@@ -45,7 +45,7 @@ strace_CPPFLAGS = $(AM_CPPFLAGS) -DIN_STRACE=1
 strace_CFLAGS = $(AM_CFLAGS)
 strace_LDFLAGS = -static -Wl,-allow-multiple-definition
 strace_LDADD = libstrace.a $(clock_LIBS) $(timer_LIBS) \
-	/home/zyh/distributed-system-test/build/core/libdst_core.a \
+	../../build/core/libdst_core.a \
 	-llzma -lpthread -lstdc++
 	
 # -lrdkafka

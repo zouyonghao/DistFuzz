@@ -50,13 +50,22 @@ target_link_libraries(default_compiler++ ${LLVM_LIBS})
 add_library(default_instrument_lib OBJECT instrumentor_lib/default_instrument_lib.c)
 target_compile_options(default_instrument_lib PUBLIC -fPIC)
 
+set(LCC_PROJECT_NAME "MocoTest")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
+
+set(LICENSECC_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/../third-party/licensecc")
+find_package(licensecc 2.0.0 REQUIRED)
+message(STATUS "LicenseCC found " ${licensecc_DIR})
+
 file(GLOB FUZZER_SRC
         "fuzzer/old/*.cpp"
         )
 
 add_executable(fuzzer ${FUZZER_SRC})
 target_compile_definitions(fuzzer PUBLIC -DNO_FUZZING_ERROR -DNO_CONCURRENCY_FUZZ)
-target_link_libraries(fuzzer pthread)
+target_link_libraries(fuzzer pthread licensecc::licensecc_static)
 target_link_options(fuzzer PUBLIC -static-libgcc -static)
 
 add_executable(coverage_collector coverage_collector/coverage_collector.c)
