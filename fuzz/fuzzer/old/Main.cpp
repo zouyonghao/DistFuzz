@@ -101,6 +101,13 @@ u8 timeout_given = 1;
 u32 exec_tmout = EXEC_TIMEOUT;
 u32 hang_tmout = EXEC_TIMEOUT;
 
+#ifdef USE_LICENSE
+#include "../license/license.h"
+#include <licensecc/licensecc.h>
+char g_tool_dir[300];
+string license_dir;
+#endif
+
 void MakeDirectory(void)
 {
     struct stat buffer
@@ -242,10 +249,13 @@ s32 Init(int argc, char **argv)
         exit(-1);
     }
 
+#ifdef USE_PASSWORD
     bool has_password = false;
     string password;
+#endif
+
     s32 opt;
-    while ((opt = getopt(argc, argv, "+f:i:o:M:S:p:b")) > 0)
+    while ((opt = getopt(argc, argv, "+f:i:o:M:S:p:b:l:")) > 0)
     {
         switch (opt)
         {
@@ -309,11 +319,19 @@ s32 Init(int argc, char **argv)
             break;
 
         case 'p':
+#ifdef USE_PASSWORD
             password = optarg;
             if (password == "ssR2018Ssr")
             {
                 has_password = true;
             }
+#endif
+            break;
+
+        case 'l':
+#ifdef USE_LICENSE
+            license_dir = optarg;
+#endif
             break;
 
         default:
@@ -322,11 +340,47 @@ s32 Init(int argc, char **argv)
         }
     }
 
+#ifdef USE_LICENSE
+    if (license_dir.empty())
+    {
+        printf("License is required, use -l to specify license folder.\n");
+        exit(-1);
+    }
+    strcpy(g_tool_dir, license_dir.c_str());
+    if (!CheckWriteRunLogFile())
+    {
+        printf("License check failed!\n");
+        exit(-1);
+    }
+    LicenseInfo licenseInfo;
+    LicenseLocation location = {LICENSE_PLAIN_DATA};
+    string license_path = license_dir + "/license.lic";
+    if (FILE *f = fopen(license_path.c_str(), "r"))
+    {
+        fclose(f);
+    }
+    else
+    {
+        printf("No license found!\n");
+        exit(-1);
+    }
+    string license_data = license::get_file_contents(license_path.c_str(), 65536);
+    std::copy(license_data.begin(), license_data.end(), location.licenseData);
+    LCC_EVENT_TYPE result = acquire_license(nullptr, &location, &licenseInfo);
+    if (result != LICENSE_OK)
+    {
+        printf("License check failed, err = %d!\n", result);
+        exit(-1);
+    }
+#endif
+
+#ifdef USE_PASSWORD
     if (!has_password)
     {
         cerr << "you do not enter the password or the password is wrong" << endl;
         exit(0);
     }
+#endif
 
     target_path = string(*(argv + optind));
 
@@ -380,18 +434,6 @@ s32 Exit(void)
 #ifndef TEST
 int main(int argc, char **argv)
 {
-#ifdef USE_LICENSE
-    if (!CheckLicenseFile(checker_str))
-    {
-        printf("License check is failed!\n");
-        exit(-1);
-    }
-    if (!CheckWriteRunLogFile())
-    {
-        printf("License check is failed!!\n");
-        exit(-1);
-    }
-#endif
     timeBegin = GetCurTimeUs();
 
     u64 i;

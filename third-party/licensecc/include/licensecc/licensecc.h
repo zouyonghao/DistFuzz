@@ -73,6 +73,10 @@ LCC_EVENT_TYPE release_license(char* featureName, LicenseLocation licenseLocatio
 
 #ifdef __cplusplus
 }
+#include <string>
+namespace license {
+	std::string get_file_contents(const char *filename, size_t max_size);
+}
 #endif
 
 #endif

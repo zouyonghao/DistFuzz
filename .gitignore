@@ -226,3 +226,5 @@ general_test/bin/file_lock
 dist.tgz
 test/strace.log
 .cache
+general_test/bin/licenses/
+general_test/bin/init_random.txt

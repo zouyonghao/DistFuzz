@@ -65,8 +65,18 @@ file(GLOB FUZZER_SRC
 
 add_executable(fuzzer ${FUZZER_SRC})
 target_compile_definitions(fuzzer PUBLIC -DNO_FUZZING_ERROR -DNO_CONCURRENCY_FUZZ)
-target_link_libraries(fuzzer pthread licensecc::licensecc_static)
+target_link_libraries(fuzzer pthread)
 target_link_options(fuzzer PUBLIC -static-libgcc -static)
+
+add_executable(fuzzer-licensed ${FUZZER_SRC} fuzzer/license/license.cpp)
+target_compile_definitions(fuzzer-licensed PUBLIC -DNO_FUZZING_ERROR -DNO_CONCURRENCY_FUZZ -DUSE_LICENSE)
+target_link_libraries(fuzzer-licensed pthread licensecc::licensecc_static)
+target_link_options(fuzzer-licensed PUBLIC -static-libgcc -static)
+
+add_executable(issue-date fuzzer/license/issue_license_and_date.cpp fuzzer/license/license.cpp)
+target_compile_definitions(issue-date PUBLIC)
+target_link_libraries(issue-date pthread licensecc::licensecc_static)
+target_link_options(issue-date PUBLIC -static-libgcc -static)
 
 add_executable(coverage_collector coverage_collector/coverage_collector.c)
 target_link_libraries(coverage_collector rdkafka)
