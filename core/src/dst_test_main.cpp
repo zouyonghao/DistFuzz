@@ -122,9 +122,9 @@ void backup_testcase(uint32_t &test_case_count)
 int main(int argc, char *argv[])
 {
     std::map<std::string, std::string> options;
-    std::regex optregex(
-        "--(help|fuzz_before_init|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|check_after_fuzz|random_file)"
-        "(?:=((?:.|\n)*))?");
+    std::regex optregex("--(help|fuzz_before_init|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|"
+                        "check_after_fuzz|random_file)"
+                        "(?:=((?:.|\n)*))?");
 
     for (char **opt = argv + 1; opt < argv + argc; opt++)
     {
@@ -151,7 +151,8 @@ int main(int argc, char *argv[])
                   << "    --critic_count        the critic operators count" << std::endl
                   << "    --check_after_fuzz    whether to run some normal operators after fuzz" << std::endl
                   << "    --random_file         the random file name" << std::endl
-                  << "    --fuzz_before_init    should we start fuzzing before the init operator (true or false)" << std::endl
+                  << "    --fuzz_before_init    should we start fuzzing before the init operator (true or false)"
+                  << std::endl
                   << std::endl;
         return 0;
     }
@@ -225,6 +226,7 @@ int main(int argc, char *argv[])
         set_is_fuzzing(false);
     }
 
+    bool check_failed = false;
     bool all_operators_after_fuzzing_failed = true;
 
     std::cerr << "\033[1;31m"
@@ -240,6 +242,7 @@ int main(int argc, char *argv[])
     nm->set_node_count(node_count);
     if (!nm->start_all())
     {
+        check_failed = true;
         std::cerr << "check failed!\n";
         goto STOP;
     }
@@ -270,6 +273,7 @@ int main(int argc, char *argv[])
     /** check server availability */
     if (!nm->check())
     {
+        check_failed = true;
         std::cerr << "check failed!\n";
         goto STOP;
     }
@@ -311,6 +315,7 @@ int main(int argc, char *argv[])
         }
         if (all_operators_after_fuzzing_failed)
         {
+            check_failed = true;
             std::cerr << COLOR_RED_START << "all normal operators after fuzzing failed! :(" << COLOR_RESET_END << "\n";
         }
     }
@@ -342,6 +347,11 @@ STOP:
     for (auto &t : threads)
     {
         t.join();
+    }
+    
+    if (check_failed)
+    {
+        abort();
     }
 
     return 0;
