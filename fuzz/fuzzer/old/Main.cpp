@@ -255,7 +255,7 @@ s32 Init(int argc, char **argv)
 #endif
 
     s32 opt;
-    while ((opt = getopt(argc, argv, "+f:i:o:M:S:p:b:l:")) > 0)
+    while ((opt = getopt(argc, argv, "+f:i:o:M:S:p:bl:")) > 0)
     {
         switch (opt)
         {
