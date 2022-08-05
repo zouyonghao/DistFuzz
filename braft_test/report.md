@@ -41,6 +41,7 @@
     ```
 
    https://github.com/baidu/braft/issues/268
+   Fixed
 
 2. fail to rename *
 
@@ -201,4 +202,70 @@
     #10 0x55dbcbe8a413 main
     #11 0x7f04310a1bf7 __libc_start_main
     #12 0x55dbcbea5aaa _start
+    ```
+
+11. heap-use-after-free
+    ```
+    ==31226==ERROR: AddressSanitizer: heap-use-after-free on address 0x606000013258 at pc 0x0000008c4dbd bp 0x7fd8bfed6060 sp 0x7fd8bfed6058
+    READ of size 1 at 0x606000013258 thread T4
+        #0 0x8c4dbc  (/home/zyh/braft/example/atomic/atomic_server+0x8c4dbc) /home/zyh/braft/build/braft/raft.pb.h:3474
+        #1 0x9d539f  (/home/zyh/braft/example/atomic/atomic_server+0x9d539f) /home/zyh/braft/src/braft/node.cpp:1116
+        #2 0xa6ea60  (/home/zyh/braft/example/atomic/atomic_server+0xa6ea60) /home/zyh/braft/src/braft/raft_service.cpp:166
+        #3 0x8b892d  (/home/zyh/braft/example/atomic/atomic_server+0x8b892d) /home/zyh/braft/build/braft/raft.pb.cc:7297
+        #4 0xc29922  (/home/zyh/braft/example/atomic/atomic_server+0xc29922) /home/zyh/brpc/src/brpc/policy/baidu_rpc_protocol.cpp:499
+        #5 0xc1d676  (/home/zyh/braft/example/atomic/atomic_server+0xc1d676) /home/zyh/brpc/src/brpc/input_messenger.cpp:135
+        #6 0xc1e531  (/home/zyh/braft/example/atomic/atomic_server+0xc1e531) /home/zyh/brpc/src/brpc/input_messenger.cpp:141
+        #7 0xce1eec  (/home/zyh/braft/example/atomic/atomic_server+0xce1eec) /home/zyh/brpc/src/brpc/socket.cpp:1017
+        #8 0xbe384e  (/home/zyh/braft/example/atomic/atomic_server+0xbe384e) /home/zyh/brpc/src/bthread/task_group.cpp:295
+        #9 0xd79140  (/home/zyh/braft/example/atomic/atomic_server+0xd79140)
+
+    0x606000013258 is located 56 bytes inside of 64-byte region [0x606000013220,0x606000013260)
+    freed by thread T32 here:
+        #0 0x6d910d  (/home/zyh/braft/example/atomic/atomic_server+0x6d910d)
+
+    previously allocated by thread T4 here:
+        #0 0x6d88ad  (/home/zyh/braft/example/atomic/atomic_server+0x6d88ad)
+
+    Thread T4 created by T0 here:
+        #0 0x6939da  (/home/zyh/braft/example/atomic/atomic_server+0x6939da)
+        #1 0xbdc99c  (/home/zyh/braft/example/atomic/atomic_server+0xbdc99c) /home/zyh/brpc/src/bthread/task_control.cpp:165
+        #2 0xbcabd5  (/home/zyh/braft/example/atomic/atomic_server+0xbcabd5)
+        #3 0xc17ba1  (/home/zyh/braft/example/atomic/atomic_server+0xc17ba1)
+        #4 0x7fd989235906  (/lib/x86_64-linux-gnu/libpthread.so.0+0xf906)
+
+    Thread T32 created by T0 here:
+        #0 0x6939da  (/home/zyh/braft/example/atomic/atomic_server+0x6939da)
+        #1 0xbdce2d  (/home/zyh/braft/example/atomic/atomic_server+0xbdce2d) /home/zyh/brpc/src/bthread/task_control.cpp:200
+        #2 0xbcb10b  (/home/zyh/braft/example/atomic/atomic_server+0xbcb10b)
+        #3 0xccfe63  (/home/zyh/braft/example/atomic/atomic_server+0xccfe63)
+        #4 0xcd103e  (/home/zyh/braft/example/atomic/atomic_server+0xcd103e)
+        #5 0xcd11e2  (/home/zyh/braft/example/atomic/atomic_server+0xcd11e2)
+        #6 0x6dc6aa  (/home/zyh/braft/example/atomic/atomic_server+0x6dc6aa)
+        #7 0x7fd988c3ec86  (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
+    ```
+
+12. SEGV
+    ```
+    AddressSanitizer:DEADLYSIGNAL
+    =================================================================
+    ==29192==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000008 (pc 0x000000bb09f9 bp 0x7f17f8296d90 sp 0x7f17f8296910 T5)
+    ==29192==The signal is caused by a READ memory access.
+    ==29192==Hint: address points to the zero page.
+        #0 0xbb09f9  (/home/zyh/braft/example/atomic/atomic_server+0xbb09f9) /home/zyh/brpc/src/butil/iobuf.cpp:1599
+        #1 0xcdfe7c  (/home/zyh/braft/example/atomic/atomic_server+0xcdfe7c) /home/zyh/brpc/src/butil/iobuf_inl.h:41
+        #2 0xc1e0b2  (/home/zyh/braft/example/atomic/atomic_server+0xc1e0b2) /home/zyh/brpc/src/brpc/input_messenger.cpp:201
+        #3 0xce1eec  (/home/zyh/braft/example/atomic/atomic_server+0xce1eec) /home/zyh/brpc/src/brpc/socket.cpp:1017
+        #4 0xbe384e  (/home/zyh/braft/example/atomic/atomic_server+0xbe384e) /home/zyh/brpc/src/bthread/task_group.cpp:295
+        #5 0xd79140  (/home/zyh/braft/example/atomic/atomic_server+0xd79140)
+
+    AddressSanitizer can not provide additional info.
+    SUMMARY: AddressSanitizer: SEGV (/home/zyh/braft/example/atomic/atomic_server+0xbb09f9)
+    Thread T5 created by T0 here:
+        #0 0x6939da  (/home/zyh/braft/example/atomic/atomic_server+0x6939da)
+        #1 0xbdc99c  (/home/zyh/braft/example/atomic/atomic_server+0xbdc99c)
+        #2 0xbcabd5  (/home/zyh/braft/example/atomic/atomic_server+0xbcabd5)
+        #3 0xc17ba1  (/home/zyh/braft/example/atomic/atomic_server+0xc17ba1)
+        #4 0x7f18c0f67906  (/lib/x86_64-linux-gnu/libpthread.so.0+0xf906)
+
+    ==29192==ABORTING
     ```
