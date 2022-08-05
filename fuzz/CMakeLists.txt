@@ -39,13 +39,13 @@ add_executable(default_compiler compiler/compiler.cpp instrumentor/default_instr
         instrumentor/process_tick_instrumentor.cpp
         instrumentor/process_function_sequence_instrumentor.cpp)
 target_compile_definitions(default_compiler PUBLIC -DCLANG="clang-11")
-target_link_libraries(default_compiler ${LLVM_LIBS})
+target_link_libraries(default_compiler ${LLVM_LIBS} ${Boost_LIBRARIES})
 
 add_executable(default_compiler++ compiler/compiler.cpp instrumentor/default_instrumentor.cpp instrumentor/process_concurrent_coverage_instrumentor.cpp
         instrumentor/process_tick_instrumentor.cpp
         instrumentor/process_function_sequence_instrumentor.cpp)
 target_compile_definitions(default_compiler++ PUBLIC -DCLANG="clang++-11")
-target_link_libraries(default_compiler++ ${LLVM_LIBS})
+target_link_libraries(default_compiler++ ${LLVM_LIBS} ${Boost_LIBRARIES})
 
 add_library(default_instrument_lib OBJECT instrumentor_lib/default_instrument_lib.c)
 target_compile_options(default_instrument_lib PUBLIC -fPIC)

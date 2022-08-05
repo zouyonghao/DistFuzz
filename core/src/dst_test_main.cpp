@@ -29,7 +29,7 @@ void run_init_operator()
     {
         if (o->first == INIT_OPERATOR_NAME)
         {
-            std::cerr << "Run init operator\n";
+            LOG_INFO << "Run init operator\n";
             o->second->_do();
             /** remove the init operator after it is executed */
             Registry<NormalOperator>::getItemVector().erase(o);
@@ -46,7 +46,8 @@ void run_some_normal_operators(int number, int normal_sleep_ms)
     {
         std::this_thread::sleep_for(std::chrono::microseconds(normal_sleep_ms));
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
-        std::cerr << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
+        LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first
+                                << "\n";
         std::thread t1([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); });
 
         // threads.push_back(std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do();
@@ -89,10 +90,10 @@ void split_files(std::string &initial_file, uint32_t node_count)
     }
     else
     {
-        ERROR_LOG("Open file " << initial_file << " failed.");
+        LOG_ERROR << "Open file " << initial_file << " failed.";
         exit(-1);
     }
-    std::cerr << "spliting files...\n";
+    LOG_ERROR << "spliting files...\n";
     /** random.txt is used for test_main */
     std::vector<std::string> write_files{"random.txt"};
     for (uint32_t i = 0; i < node_count; i++)
@@ -115,7 +116,7 @@ void split_files(std::string &initial_file, uint32_t node_count)
 
 void backup_testcase(uint32_t &test_case_count)
 {
-    std::cerr << "backup test cases\n";
+    LOG_ERROR << "backup test cases\n";
     system(("sh ./backup_test_case.sh " + std::to_string(test_case_count++)).c_str());
 }
 
@@ -205,6 +206,8 @@ int main(int argc, char *argv[])
         fuzz_before_init = false;
     }
 
+    log_init("log_test");
+
     uint32_t test_case_count = 0;
     std::ifstream itest_case_count_file("test_case_count");
     itest_case_count_file >> test_case_count;
@@ -214,10 +217,12 @@ int main(int argc, char *argv[])
 
     size_t critical_operator_size = Registry<CriticalOperator>::getItemVector().size();
     size_t normal_operator_size = Registry<NormalOperator>::getItemVector().size();
-    std::cerr << "normal_operator_size = " << normal_operator_size << "\n";
-    std::cerr << "normal operator run count = " << run_normal_operator_count << "\n";
-    std::cerr << "critical_operator_size = " << critical_operator_size << "\n";
-    std::cerr << "critical_operator run count = " << run_critic_operator_count << "\n";
+    LOG_INFO << "normal_operator_size = " << normal_operator_size << "\n";
+    LOG_INFO << "normal operator run count = " << run_normal_operator_count << "\n";
+    LOG_INFO << "critical_operator_size = " << critical_operator_size << "\n";
+    LOG_INFO << "critical_operator run count = " << run_critic_operator_count << "\n";
+
+    system("sh env_init.sh");
 
     init_is_fuzzing();
     if (!fuzz_before_init)
@@ -229,21 +234,21 @@ int main(int argc, char *argv[])
     bool check_failed = false;
     bool all_operators_after_fuzzing_failed = true;
 
-    std::cerr << "\033[1;31m"
-              << "running test case " << test_case_count << "\033[0m\n";
-    std::cerr << "start nodes....\n";
+    LOG_INFO << "\033[1;31m"
+                            << "running test case " << test_case_count << "\033[0m\n";
+    LOG_INFO << "start nodes....\n";
     /** We should only have 1 NodeManager. */
     NodeManager *nm = SingletonRegistry<NodeManager>::getItem();
     if (nm == nullptr)
     {
-        std::cerr << "failed to get NodeManager\n";
+        LOG_ERROR << "failed to get NodeManager\n";
         goto STOP;
     }
     nm->set_node_count(node_count);
     if (!nm->start_all())
     {
         check_failed = true;
-        std::cerr << "check failed!\n";
+        LOG_ERROR << "check failed!\n";
         goto STOP;
     }
 
@@ -265,7 +270,8 @@ int main(int argc, char *argv[])
     {
         std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t() + critic_sleep_ms));
         uint32_t index = __dst_get_random_uint8_t() % critical_operator_size;
-        std::cerr << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
+        LOG_INFO << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first
+                                << "\n";
         Registry<CriticalOperator>::getItemVector()[index].second->_do();
         run_some_normal_operators(run_normal_operator_count, normal_sleep_ms);
     }
@@ -274,7 +280,7 @@ int main(int argc, char *argv[])
     if (!nm->check())
     {
         check_failed = true;
-        std::cerr << "check failed!\n";
+        LOG_ERROR << "check failed!\n";
         goto STOP;
     }
 
@@ -290,19 +296,20 @@ int main(int argc, char *argv[])
             }
             else
             {
-                std::cerr << "node " << ni.node_id << " is stopped.\n";
+                LOG_ERROR << "node " << ni.node_id << " is stopped.\n";
             }
         }
-        std::cerr << "The remaining alive node count is " << alive_node_count << "\n";
+        LOG_ERROR << "The remaining alive node count is " << alive_node_count << "\n";
         set_is_fuzzing(false);
-        std::cerr << "Fuzzing is stopped, now we wait for 3 seconds and then"
-                     " run some normal operators to see whether it works as usual.\n";
+        LOG_INFO << "Fuzzing is stopped, now we wait for 3 seconds and then"
+                                   " run some normal operators to see whether it works as usual.\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
 
         for (int i = 0; i < run_normal_operator_count && normal_operator_size > 0; i++)
         {
             uint32_t index = __dst_get_random_uint8_t() % normal_operator_size;
-            std::cerr << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
+            LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first
+                                    << "\n";
             auto &running_operator = Registry<NormalOperator>::getItemVector()[index];
             if (running_operator.second->_do())
             {
@@ -310,13 +317,13 @@ int main(int argc, char *argv[])
             }
             else
             {
-                std::cerr << "running operator " << running_operator.first << " failed after fuzzing\n";
+                LOG_ERROR << "running operator " << running_operator.first << " failed after fuzzing\n";
             }
         }
         if (all_operators_after_fuzzing_failed)
         {
             check_failed = true;
-            std::cerr << COLOR_RED_START << "all normal operators after fuzzing failed! :(" << COLOR_RESET_END << "\n";
+            LOG_ERROR << COLOR_RED_START << "all normal operators after fuzzing failed! :(" << COLOR_RESET_END << "\n";
         }
     }
 
@@ -325,7 +332,7 @@ int main(int argc, char *argv[])
     system("sh check_before_stop.sh");
 
 STOP:
-    std::cerr << "stopping...\n";
+    LOG_ERROR << "stopping...\n";
     nm->stop_all();
 
     remove_is_fuzzing();
@@ -337,8 +344,13 @@ STOP:
 
     dst_clear_kv_all();
 
+    if (check_failed)
+    {
+        LOG_ERROR << "check failed!";
+    }
+
     backup_testcase(test_case_count);
-    std::cerr << test_case_count << "\n";
+    LOG_INFO << test_case_count << "\n";
 
     std::ofstream otest_case_count_file("test_case_count");
     otest_case_count_file << test_case_count;
@@ -348,7 +360,7 @@ STOP:
     {
         t.join();
     }
-    
+
     if (check_failed)
     {
         abort();

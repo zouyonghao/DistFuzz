@@ -7,7 +7,7 @@ include(CTest)
 
 find_package(Threads REQUIRED)
 set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost REQUIRED COMPONENTS system filesystem)
+find_package(Boost REQUIRED COMPONENTS system filesystem log)
 
 # add_subdirectory(proxy_server)
 add_subdirectory(event_control)

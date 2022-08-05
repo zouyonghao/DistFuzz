@@ -110,7 +110,10 @@
         "numbers": "cpp",
         "semaphore": "cpp",
         "socket.h": "c",
-        "shm.h": "c"
+        "shm.h": "c",
+        "strstream": "cpp",
+        "span": "cpp",
+        "cfenv": "cpp"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {

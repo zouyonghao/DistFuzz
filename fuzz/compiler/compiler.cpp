@@ -280,7 +280,7 @@ int main(int argc, char **argv)
     }
 
     // TODO
-    ERROR_LOG("Currently we do not support to run compling and linking together.\n");
+    LOG_ERROR << "Currently we do not support to run compling and linking together.\n";
 
     for (auto &i : document["additional_link_args"].GetArray())
     {
