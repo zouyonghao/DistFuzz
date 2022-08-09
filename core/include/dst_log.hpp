@@ -36,6 +36,7 @@ static void log_init(std::string log_file_name)
 {
     namespace logging = boost::log;
     namespace keywords = boost::log::keywords;
+    // see https://github.com/boostorg/log/issues/104#issuecomment-594253043
     logging::add_file_log(keywords::file_name = log_file_name, keywords::auto_flush = true);
 }
 
