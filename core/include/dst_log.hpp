@@ -36,8 +36,7 @@ static void log_init(std::string log_file_name)
 {
     namespace logging = boost::log;
     namespace keywords = boost::log::keywords;
-    logging::add_file_log(keywords::file_name = log_file_name, keywords::target_file_name = log_file_name,
-                          keywords::auto_flush = true);
+    logging::add_file_log(keywords::file_name = log_file_name, keywords::auto_flush = true);
 }
 
 #endif // __FUZZ_LOG_HEADER__
