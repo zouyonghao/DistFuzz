@@ -22,7 +22,14 @@ rm -rf licenses output file_lock init_random.txt sync_file sync_branch_cov_file 
 ./issue-1m.sh
 cd ../..
 cp general_test/bin dist_general_test/ -r
-rm dist_general_test/bin/issue-1m.sh dist_general_test/bin/run_random_test.sh
+rm -r dist_general_test/bin/issue-1m.sh \
+  dist_general_test/bin/run_random_test.sh \
+  dist_general_test/bin/output \
+  dist_general_test/bin/test_cases \
+  dist_general_test/bin/sync_file \
+  dist_general_test/bin/sync_branch_cov_file \
+  dist_general_test/bin/test_case_count
+cp doc/doc.pdf dist_general_test/
 tar czf dist.tgz dist_general_test/
 tar tvf dist.tgz
 rm -rf dist_general_test
