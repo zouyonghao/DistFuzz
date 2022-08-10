@@ -1,2 +1,1 @@
-echo bcd
-echo 0
+curl localhost:8080

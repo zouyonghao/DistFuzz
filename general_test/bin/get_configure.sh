@@ -1,1 +1,1 @@
-echo "sleep 10"
+echo "java -jar spring.jar"

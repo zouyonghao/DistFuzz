@@ -14,7 +14,7 @@ public:
     std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
         std::string config = "";
-        std::vector<std::string> args{"-c", "./get_configure.sh", std::to_string(node_id)};
+        std::vector<std::string> args{"./get_configure.sh", std::to_string(node_id)};
         boost::process::ipstream out;
         boost::process::child c(boost::process::search_path("sh"), args, boost::process::std_out > out);
         for (std::string line; c.running() && std::getline(out, line);)

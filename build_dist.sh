@@ -6,7 +6,7 @@ cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 make -j20
 cd ..
-cp build/fuzz/fuzzer dist_general_test/
+cp build/fuzz/fuzzer-licensed dist_general_test/fuzzer
 cp build/general_test/general_test_main dist_general_test/
 cp build/event_control/event_control dist_general_test/
 cd strace
