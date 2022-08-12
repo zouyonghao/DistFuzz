@@ -4,6 +4,6 @@ add_test(test_general_configuration_generator test_general_configuration_generat
 
 add_executable(test_general_operators test_operators.cpp)
 target_link_libraries(test_general_operators PUBLIC
-        -Wl,--whole-archive clickhouse_operator_lib dst_default_operator
+        -Wl,--whole-archive general_operator_lib dst_default_operator
         -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
 add_test(test_general_operators test_general_operators)

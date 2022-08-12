@@ -43,7 +43,10 @@ include xlat/Makemodule.am
 
 strace_CPPFLAGS = $(AM_CPPFLAGS) -DIN_STRACE=1
 strace_CFLAGS = $(AM_CFLAGS)
-strace_LDFLAGS = -static -Wl,-allow-multiple-definition
+strace_LDFLAGS =
+if BUILD_STATIC
+strace_LDFLAGS += -static -Wl,-allow-multiple-definition
+endif
 strace_LDADD = libstrace.a $(clock_LIBS) $(timer_LIBS) \
 	../../build/core/libdst_core.a \
 	-llzma -lpthread -lstdc++

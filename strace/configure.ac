@@ -773,6 +773,19 @@ st_MPERS([mx32], [x86_64])
 AX_VALGRIND_DFLT([sgcheck], [off])
 AX_VALGRIND_CHECK
 
+AC_ARG_ENABLE([static],
+	[AS_HELP_STRING([--enable-static=yes|no],
+		[whether to enable static build, default is yes])],
+	[case "$enableval" in
+		yes|no) enable_static="$enableval" ;;
+		*) AC_MSG_ERROR([bad value $enableval for enable-static option.
+Valid options are: yes, no.])
+		;;
+	 esac],
+	[enable_static=yes])
+
+AM_CONDITIONAL([BUILD_STATIC], [test "x$enable_static" != xno])
+
 AC_CONFIG_FILES([Makefile
 		 bundled/Makefile
 		 debian/changelog
