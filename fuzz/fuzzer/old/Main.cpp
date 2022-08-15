@@ -108,6 +108,11 @@ char g_tool_dir[300];
 string license_dir;
 #endif
 
+#ifdef USE_ST_LICENSE
+#include "license.h"
+string license_dir;
+#endif
+
 void MakeDirectory(void)
 {
     struct stat buffer
@@ -332,6 +337,10 @@ s32 Init(int argc, char **argv)
 #ifdef USE_LICENSE
             license_dir = optarg;
 #endif
+
+#ifdef USE_ST_LICENSE
+            license_dir = optarg;
+#endif
             break;
 
         default:
@@ -339,6 +348,20 @@ s32 Init(int argc, char **argv)
             exit(-1);
         }
     }
+#ifdef USE_ST_LICENSE
+    if (license_dir.empty())
+    {
+        printf("License is required, use -l to specify license folder.\n");
+        exit(-1);
+    }
+    string config_string = "";
+    int check_result = CheckWriteLicenseFile(license_dir + "/config_tool.lic", config_string);
+    if (check_result)
+    {
+        printf("License check failed, %d\n", check_result);
+        exit(-1);
+    }
+#endif
 
 #ifdef USE_LICENSE
     if (license_dir.empty())

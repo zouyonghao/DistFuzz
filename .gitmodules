@@ -1,0 +1,3 @@
+[submodule "third-party/licensecheck"]
+	path = third-party/licensecheck
+	url = http://166.111.139.120:7800/bjj/licensecheck.git
