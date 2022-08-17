@@ -2,6 +2,7 @@
 // Created by zyh on 2021.10.18.
 //
 
+#include "dst_fuzz_constant.h"
 #include "utils/dst_share_mem_util.h"
 #include <cstdlib>
 #include <iostream>
@@ -79,4 +80,24 @@ bool remove_is_fuzzing()
         return shmctl(share_mem_id, IPC_RMID, nullptr) == 0;
     }
     return true;
+}
+
+void increase_coverage(uint64_t hash_index)
+{
+    hash_index = hash_index % FUZZ_COVERAGE_MAP_SIZE;
+    static uint8_t *fuzz_coverage_map = nullptr;
+    if (fuzz_coverage_map == nullptr)
+    {
+        char *res_shm_fuzz_coverage_map = getenv(FUZZ_COVERAGE_MAP_ENV_ID);
+        if (!res_shm_fuzz_coverage_map)
+        {
+            fprintf(stderr, "%s", "\033[33m[FUZZ PRINT] Can not Get Environment Variable\033[0m\n");
+        }
+        else
+        {
+            fprintf(stderr, "\033[33m[FUZZ PRINT]Get Environment Variable %s\033[0m\n", res_shm_fuzz_coverage_map);
+            fuzz_coverage_map = (uint8_t *)shmat((int)atoi(res_shm_fuzz_coverage_map), NULL, 0);
+        }
+    }
+    fuzz_coverage_map[hash_index]++;
 }

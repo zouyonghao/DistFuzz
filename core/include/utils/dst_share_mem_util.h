@@ -28,6 +28,10 @@ extern "C"
 
     extern bool remove_is_fuzzing();
 
+    // extern bool set_is_interesting_seed(bool is_interesting);
+
+    extern void increase_coverage(uint64_t);
+
 #ifdef __cplusplus
 };
 #endif

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.4.3)
 project(distributed_system_test)
 
 set(CMAKE_CXX_STANDARD 14)
+include_directories(${CMAKE_SOURCE_DIR}/third-party/diff-match-patch)
 
 include(CTest)
 

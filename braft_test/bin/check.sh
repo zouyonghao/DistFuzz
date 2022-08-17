@@ -1,4 +1,4 @@
 
 cd ~/knossos
 
-lein run --model cas-register $1
+timeout 10 lein run --model cas-register $1

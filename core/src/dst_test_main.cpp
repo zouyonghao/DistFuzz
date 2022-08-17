@@ -12,6 +12,8 @@
 #include <utils/dst_color.h>
 #include <utils/dst_share_mem_util.h>
 
+#include <utils/dst_sequence_coverage.hpp>
+
 #ifndef RUN_NORMAL_OPERATOR_COUNT
 #define RUN_NORMAL_OPERATOR_COUNT 2
 #endif
@@ -46,8 +48,7 @@ void run_some_normal_operators(int number, int normal_sleep_ms)
     {
         std::this_thread::sleep_for(std::chrono::microseconds(normal_sleep_ms));
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
-        LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first
-                                << "\n";
+        LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
         std::thread t1([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); });
 
         // threads.push_back(std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do();
@@ -235,7 +236,7 @@ int main(int argc, char *argv[])
     bool all_operators_after_fuzzing_failed = true;
 
     LOG_INFO << "\033[1;31m"
-                            << "running test case " << test_case_count << "\033[0m\n";
+             << "running test case " << test_case_count << "\033[0m\n";
     LOG_INFO << "start nodes....\n";
     /** We should only have 1 NodeManager. */
     NodeManager *nm = SingletonRegistry<NodeManager>::getItem();
@@ -270,8 +271,7 @@ int main(int argc, char *argv[])
     {
         std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t() + critic_sleep_ms));
         uint32_t index = __dst_get_random_uint8_t() % critical_operator_size;
-        LOG_INFO << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first
-                                << "\n";
+        LOG_INFO << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
         Registry<CriticalOperator>::getItemVector()[index].second->_do();
         run_some_normal_operators(run_normal_operator_count, normal_sleep_ms);
     }
@@ -302,14 +302,13 @@ int main(int argc, char *argv[])
         LOG_ERROR << "The remaining alive node count is " << alive_node_count << "\n";
         set_is_fuzzing(false);
         LOG_INFO << "Fuzzing is stopped, now we wait for 3 seconds and then"
-                                   " run some normal operators to see whether it works as usual.\n";
+                    " run some normal operators to see whether it works as usual.\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
 
         for (int i = 0; i < run_normal_operator_count && normal_operator_size > 0; i++)
         {
             uint32_t index = __dst_get_random_uint8_t() % normal_operator_size;
-            LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first
-                                    << "\n";
+            LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
             auto &running_operator = Registry<NormalOperator>::getItemVector()[index];
             if (running_operator.second->_do())
             {
@@ -330,6 +329,8 @@ int main(int argc, char *argv[])
     set_is_fuzzing(false);
     /** run some checkers before stop */
     system("sh check_before_stop.sh");
+
+    dst_test_event_sequence_coverage();
 
 STOP:
     LOG_ERROR << "stopping...\n";

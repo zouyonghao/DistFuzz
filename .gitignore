@@ -228,3 +228,7 @@ test/strace.log
 .cache
 general_test/bin/licenses/
 general_test/bin/init_random.txt
+strace/compile_commands.json
+sequences/
+sequences0/
+total_sequence/

@@ -807,7 +807,7 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
     cflag = is_control_matrix_triggered(control_matrix, travel_matrix);
 #endif
 
-    if (newBitFlag || new_travel_element)
+    if (newBitFlag == 2 || new_travel_element)
     { // is interesting
         filename = outputDir + "queue/" + num2str_Keep6bit(queue.size()) + (newBitFlag == 2 ? "+cov" : "+tup");
 

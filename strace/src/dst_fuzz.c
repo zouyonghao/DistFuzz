@@ -5,8 +5,14 @@
 #include "delay.h"
 #include "retval.h"
 #include "utils/dst_share_mem_util.h"
+#include "utils/dst_sequence_coverage_constants.h"
 #include "dst_random.h"
 #include "unwind.h"
+
+#include <errno.h>
+#include <stdio.h>
+#include <dirent.h>
+#include <sys/types.h>
 
 #ifdef ENABLE_KAFKA
 #include "librdkafka/rdkafka.h"
@@ -39,7 +45,7 @@ struct exec_params {
 };
 extern struct exec_params params_for_tracee;
 
-static char *pathname;
+static char *pathname; // just for debugging purpose
 
 /**
  * According to https://man7.org/linux/man-pages/man2/_syscall.2.html,
@@ -96,27 +102,104 @@ uint64_t get_hash_value(bool is_send, uint64_t position, size_t length);
 
 static uint8_t *fuzz_coverage_map;
 
-static int ignore_range = 1;
+// static int ignore_range = 1;
 
 // temp variables, should be restored after each syscall finished
 static unsigned long tmp_offset = 0;
 
 static uint64_t event_index = 0;
+
+struct sequence {
+	int node_id;
+	bool is_send;
+	size_t length;
+	uint64_t position;
+	int event_index;
+	bool success;
+};
+
+static struct sequence *tmp_sequence = NULL;
+
+static struct sequence local_sequences[1000];
+static size_t sequence_length = 0;
+
+// void record_sequence(int node_id, bool is_send, size_t length, uint64_t position, int event_index);
+void record_sequence(void);
+
+// int node_id, bool is_send, size_t length, uint64_t position, int event_index
+void
+record_sequence(void)
+{
+	// if (is_send) {
+	// 	return;
+	// }
+	// char sequence_file_name[20];
+	// sprintf(sequence_file_name, SEQUENCE_DIR "/%d", node_id);
+	// FILE *fp = fopen(sequence_file_name, "a");
+	// int result = fprintf(fp, "node %d, send or write %d, length %zu, position %lu, index %d\n",
+	// 		     node_id, is_send, length, position, event_index);
+	// if (result < 0) {
+	// 	fprintf(stderr, "record sequence failed, err = %d\n", errno);
+	// }
+	// fclose(fp);
+	if (!tmp_sequence->is_send) {
+		// currently do not record read
+		return;
+	}
+	if (!tmp_sequence->success) {
+		return;
+	}
+	if (sequence_length > 0 &&
+	    local_sequences[sequence_length - 1].position == tmp_sequence->position) {
+		// merge sequence if it is in same position and with they are neighbor
+		local_sequences[sequence_length - 1].length += tmp_sequence->length;
+	} else {
+		memcpy(&local_sequences[sequence_length], tmp_sequence, sizeof(struct sequence));
+		sequence_length += 1;
+		const struct sequence *current_sequence = &local_sequences[sequence_length - 1];
+		char sequence_file_name[20];
+		sprintf(sequence_file_name, SEQUENCE_DIR "/%d", current_sequence->node_id);
+		FILE *fp = fopen(sequence_file_name, "a");
+		// int result = fprintf(fp, "node %d, send or write %d, length %zu, position %lu, index %d\n",
+		// 		     current_sequence->node_id, current_sequence->is_send,
+		// 		     current_sequence->length, current_sequence->position,
+		// 		     current_sequence->event_index);
+		int result = fprintf(fp, "%zu %lu\n", current_sequence->length,
+				     current_sequence->position);
+		if (result < 0) {
+			fprintf(stderr, "record sequence failed, err = %d\n", errno);
+		}
+		fclose(fp);
+	}
+
+	// uint64_t hash_value = (local_sequences[sequence_length - 1].position +
+	// 		       local_sequences[sequence_length - 1].success * 10240) %
+	// 		      FUZZ_COVERAGE_MAP_SIZE;
+	// fuzz_coverage_map[hash_value]++;
+}
+
 uint64_t
 get_hash_value(bool is_send, uint64_t position, size_t length)
 {
 	int node_id = getenv("NODE_ID") != NULL ? atoi(getenv("NODE_ID")) : 0;
 	uint64_t hash_value = (event_index + is_send * 10 + length + node_id * 100 + position) %
 			      FUZZ_COVERAGE_MAP_SIZE;
-	for (int i = 1; i <= ignore_range; i++) {
-		if (fuzz_coverage_map[hash_value - i] > 0) {
-			return hash_value - i;
-		}
-		if (fuzz_coverage_map[hash_value + 1] > 0) {
-			return hash_value + i;
-		}
-	}
-	event_index++;
+	// for (int i = 1; i <= ignore_range; i++) {
+	// 	if (fuzz_coverage_map[hash_value - i] > 0) {
+	// 		return hash_value - i;
+	// 	}
+	// 	if (fuzz_coverage_map[hash_value + i] > 0) {
+	// 		return hash_value + i;
+	// 	}
+	// }
+	// record_sequence(node_id, is_send, length, position, event_index);
+	tmp_sequence = malloc(sizeof(struct sequence));
+	tmp_sequence->node_id = node_id;
+	tmp_sequence->is_send = is_send;
+	tmp_sequence->length = length;
+	tmp_sequence->position = position;
+	tmp_sequence->event_index = event_index;
+	// event_index++;
 	return hash_value;
 }
 
@@ -252,8 +335,10 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 	// struct user_regs_struct _regs;
 	// ptrace(PTRACE_GETREGS, tcp->pid, NULL, &_regs);
 	// fprintf(stderr, "rip - fs_base is %llX\n", _regs.rip - _regs.fs_base);
+	// so we use @tmp_offset, see @print_call_cb
 	unwinder.tcb_walk(tcp, print_call_cb, print_error_cb, NULL);
-	uint64_t hash_index = get_hash_value(is_send, tmp_offset, length);
+	// uint64_t hash_index = get_hash_value(is_send, tmp_offset, length);
+	get_hash_value(is_send, tmp_offset, length);
 #ifdef ENABLE_KAFKA
 	if (use_kafka) {
 		if (rd_kafka_produce(topic_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY,
@@ -263,7 +348,7 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		}
 	} else {
 #endif
-		fuzz_coverage_map[hash_index]++;
+		// fuzz_coverage_map[hash_index]++;
 #ifdef ENABLE_KAFKA
 	}
 #endif
@@ -455,6 +540,24 @@ dst_fuzz_syscall_exiting_finish(struct tcb *tcp)
 			ptrace(PTRACE_SETREGS, tcp->pid, NULL, &regs);
 		}
 	}
+
+	if (tmp_sequence != NULL) {
+		// if (tcp->u_rval > 0 && tcp->u_rval < 65535) {
+		// 	tmp_sequence->success = true;
+		// 	tmp_sequence->length = tcp->u_rval;
+		// } else {
+		// 	tmp_sequence->success = false;
+		// 	tmp_sequence->length = 0;
+		// }
+		// record_sequence();
+		if (tcp->u_rval > 0 && tcp->u_rval < 65535) {
+			tmp_sequence->success = true;
+			record_sequence();
+		}
+
+		free(tmp_sequence);
+		tmp_sequence = NULL;
+	}
 }
 
 uint64_t
@@ -603,6 +706,13 @@ init_dst_fuzz(void)
 		}
 	} else {
 		strcpy(pathname, params_for_tracee.argv[0]);
+	}
+
+	DIR *dir = opendir(SEQUENCE_DIR);
+	if (dir) {
+		closedir(dir);
+	} else {
+		mkdir(SEQUENCE_DIR, ACCESSPERMS);
 	}
 
 	is_dst_fuzz = true;
