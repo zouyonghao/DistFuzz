@@ -1,10 +1,10 @@
 #include <arpa/inet.h> //inet_addr
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <time.h>
 #include <unistd.h> //write
-#include <fcntl.h>
 
 int main(int argc, char const *argv[])
 {
@@ -33,15 +33,15 @@ int main(int argc, char const *argv[])
     {
         uint8_t client_message[1000];
         clock_t begin = clock();
-        int read_length = 0;
-        while (read_length <= 0)
-            read_length = read(client_socket, client_message, 1000);
+        int read_length;
+        while ((read_length = read(client_socket, client_message, 1000)) > 0)
+            ;
         clock_t end = clock();
         double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
         printf("server read time usage is %f\n", time_spent);
-        break;
+        // break;
+        close(client_socket);
     }
-    close(client_socket);
     close(server_socket);
     return 0;
 }

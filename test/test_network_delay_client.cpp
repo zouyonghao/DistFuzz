@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
     // }
 
     clock_t begin = clock();
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 1000000; i++)
     {
         // printf("client writing\n");
         int length = strlen(s) + 1;
@@ -69,8 +69,8 @@ int main(int argc, char const *argv[])
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     printf("client write time usage is %f\n", time_spent);
-    // close(sock);
+    close(sock);
 
-    sleep(1000);
+    // sleep(1000);
     return 0;
 }

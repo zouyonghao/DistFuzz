@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-void a() { std::cout << std::stoll("3876838356") << "\n"; }
+void a() { std::cout << std::stoll("111") << "\n"; }
 
 int main(int argc, char const *argv[])
 {
@@ -30,20 +30,18 @@ int main(int argc, char const *argv[])
 
     printf("result = %d\n", result);
 
-    std::vector<const char *> test{"echo", "abc"};
-    if (fork() == 0)
-    {
-        execvp(test[0], (char *const *)&test[0]);
-    }
+    // std::vector<const char *> test{"echo", "abc"};
+    // if (fork() == 0)
+    // {
+    //     execvp(test[0], (char *const *)&test[0]);
+    // }
 
     std::string test_str("/usr/share/cmake-3.10/Modules/CMakeCCompilerABI.c");
-    test_str = test_str.substr(test_str.rfind("/") + 1,
-                               test_str.rfind(".") - test_str.rfind("/") - 1);
+    test_str = test_str.substr(test_str.rfind("/") + 1, test_str.rfind(".") - test_str.rfind("/") - 1);
     std::cout << test_str << "\n";
 
     test_str = "CMakeCCompilerABI.c";
-    test_str = test_str.substr(test_str.rfind("/") + 1,
-                               test_str.rfind(".") - test_str.rfind("/") - 1);
+    test_str = test_str.substr(test_str.rfind("/") + 1, test_str.rfind(".") - test_str.rfind("/") - 1);
     std::cout << test_str << "\n";
 
     printf("result = %d\n", result);
@@ -67,7 +65,8 @@ int main(int argc, char const *argv[])
     }
     catch (const std::exception &e)
     {
-        std::cout << "exception!!" << "\n";
+        std::cout << "exception!!"
+                  << "\n";
         std::cerr << e.what() << '\n';
     }
 
@@ -80,6 +79,10 @@ int main(int argc, char const *argv[])
     std::cout << std::stoi("450086335") << "\n";
     std::cout << std::stoll("3876838356") << "\n";
     std::cout << std::stoll("3876838356") << "\n";
+    for (int i = 0; i < 100000; i++)
+    {
+        std::cout << std::stoll("3876838356") << "\n";
+    }
     a();
     return 0;
 }
