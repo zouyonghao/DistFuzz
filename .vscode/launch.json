@@ -564,5 +564,28 @@
                 }
             ]
         },
+        {
+            "name": "test_network_delay_server_no_dpdk",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/test/test_network_delay_server",
+            "args": [
+                "127.0.0.1",
+                "8300"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/test",
+            // ASAN_OPTIONS=detect_leaks=0 LD_PRELOAD=/home/zyh/tldk/libtldk.so NODE_NAME=node1
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
     ]
 }

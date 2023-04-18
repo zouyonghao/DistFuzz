@@ -72,6 +72,7 @@ if (${DIST_FUZZ_STATIC_BUILD})
 target_link_options(fuzzer PUBLIC -static-libgcc -static)
 endif()
 
+if (${DIST_FUZZ_LICENSE})
 add_executable(fuzzer-licensed ${FUZZER_SRC} fuzzer/license/license.cpp)
 target_compile_definitions(fuzzer-licensed PUBLIC -DNO_FUZZING_ERROR -DNO_CONCURRENCY_FUZZ -DUSE_LICENSE)
 target_link_libraries(fuzzer-licensed -lz pthread licensecc::licensecc_static)
@@ -92,6 +93,7 @@ target_compile_definitions(fuzzer-st-licensed PUBLIC -DNO_FUZZING_ERROR -DNO_CON
 target_link_libraries(fuzzer-st-licensed -lz pthread)
 if (${DIST_FUZZ_STATIC_BUILD})
 target_link_options(fuzzer-st-licensed PUBLIC -static-libgcc -static)
+endif()
 endif()
 
 if (${DIST_FUZZ_BUILD_COVERAGE_COLLECTOR})

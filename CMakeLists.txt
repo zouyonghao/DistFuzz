@@ -4,7 +4,8 @@ set(CMAKE_CXX_STANDARD 14)
 
 include(CTest)
 
-set(DIST_FUZZ_STATIC_BUILD ON CACHE BOOL "Build static?")
+set(DIST_FUZZ_STATIC_BUILD OFF CACHE BOOL "Build static?")
+set(DIST_FUZZ_LICENSE OFF CACHE BOOL "Build licensed program?")
 set(DIST_FUZZ_DEFAULT_TEST ON CACHE BOOL "Build default test like braft?")
 set(DIST_FUZZ_BUILD_COMPILER ON CACHE BOOL "Build C/C++ compiler?")
 set(DIST_FUZZ_BUILD_COVERAGE_COLLECTOR OFF CACHE BOOL "Build coverage collector with rdkafka?")
