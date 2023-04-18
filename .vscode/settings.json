@@ -113,7 +113,12 @@
         "shm.h": "c",
         "strstream": "cpp",
         "span": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "bpf_helpers.h": "c",
+        "bpf.h": "c",
+        "buildins.h": "c",
+        "compiler.h": "c",
+        "bpf_core_read.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
@@ -127,5 +132,5 @@
         "**/data*": true
     },
     "cmake.configureOnOpen": false,
-    "shellformat.flag": "-i=2"
+    "shellformat.flag": "-i=2",
 }
