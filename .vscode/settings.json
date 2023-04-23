@@ -118,7 +118,8 @@
         "bpf.h": "c",
         "buildins.h": "c",
         "compiler.h": "c",
-        "bpf_core_read.h": "c"
+        "bpf_core_read.h": "c",
+        "bpf_tracing.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
@@ -133,4 +134,11 @@
     },
     "cmake.configureOnOpen": false,
     "shellformat.flag": "-i=2",
+    
+    // "cmake.configureEnvironment": {
+    //     "TOOLCHAIN_PATH": "/home/bass/osquery-toolchain",
+    //     "CMAKE_TOOLCHAIN_FILE": "cmake/toolchain.cmake",
+    //     "CMAKE_BUILD_TYPE": "RelWithDebInfo ",
+    //     "EBPFAULT_ENABLE_INSTALL": "true"
+    // },
 }
