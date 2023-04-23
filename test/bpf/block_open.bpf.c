@@ -5,6 +5,7 @@
 #include <bpf/bpf_tracing.h>
 // #include <linux/errno.h>
 // #include "buildins.h"
+#include <linux/errno.h>
 
 #define memcpy(dest, src, n) __builtin_memcpy((dest), (src), (n))
 #define memcmp(dest, src, n) __builtin_memcmp((dest), (src), (n))
@@ -15,6 +16,9 @@ static __always_inline int str_equal(const char *cs, const char *ct, int size)
 {
     int len = 0;
     unsigned char c1, c2;
+    /**
+     * NOTE: use & 0xffff to make verifier happy.
+     */
     for (len = 0; len < (size & 0xffff); len++)
     {
         c1 = *cs++;
@@ -29,18 +33,43 @@ static __always_inline int str_equal(const char *cs, const char *ct, int size)
 
 static int max(int a, int b) { return a > b ? a : b; }
 
-SEC("kprobe/do_sys_openat2")
-int BPF_KPROBE(do_sys_openat2, int dfd, const char *filename)
+/**
+ * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
+ *       It seems this is because this syscall cannot be fault injected.
+ *       To know which syscall can be injected, use 'cat /proc/kallsyms | grep _eil_addr'
+ */
+SEC("kprobe/__x64_sys_openat")
+int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
 {
+    /**
+     * NOTE: On x86-64 systems, syscalls are wrapped if
+     * ARCH_HAS_SYSCALL_WRAPPER=y is set in the kernel config.
+     * E.g.:
+     * asmlinkage long sys_xyzzy(const struct pt_regs *regs)
+     * {
+     *     return SyS_xyzzy(regs->di, regs->si, regs->dx);
+     * }
+     * In this case, we cannot get some parameters' value,
+     * just like the filename in __x64_sys_openat.
+     * To get the value, we must get the raw regs pointer
+     * first, then use PT_REGS_PARMn_SYSCALL or
+     * PT_REGS_PARMn_CORE_SYSCALL to get the value.
+     * @see https://github.com/iovisor/bcc/commit/2da34267fcae4485f4e05a17521214749f6f0edd
+     *      https://github.com/libbpf/libbpf/commit/50b4d99bbc48b21fef19cb4255d41290b80f786e
+     */
+    struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
     char fname[256];
-    bpf_probe_read_str(&fname, sizeof(fname), (void *)filename);
+    bpf_probe_read(&fname, sizeof(fname), (void *)PT_REGS_PARM2_CORE_SYSCALL(new_ctx));
     if (str_equal(fname, FILE_NAME, sizeof(fname)) == 0)
     {
         bpf_printk("Blocking open of %s\n", fname);
+        bpf_override_return(ctx, -ENOMEM);
         return -1;
     }
-    // bpf_printk("Blocking open of %s\n", filename);
     return 0;
 }
+
+SEC("kprobe/__x64_sys_write")
+int BPF_KPROBE(sys_write, unsigned int fd) { return 0; }
 
 char LICENSE[] SEC("license") = "Dual BSD/GPL";
