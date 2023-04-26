@@ -31,7 +31,7 @@ static __always_inline int str_equal(const char *cs, const char *ct, int size)
     return 0;
 }
 
-static int max(int a, int b) { return a > b ? a : b; }
+static __always_inline int max(int a, int b) { return a > b ? a : b; }
 
 /**
  * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
@@ -69,7 +69,64 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
     return 0;
 }
 
+/**
+ * write syscalls: write, writev, pwritev, pwritev2
+*/
 SEC("kprobe/__x64_sys_write")
 int BPF_KPROBE(sys_write, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_writev")
+int BPF_KPROBE(sys_writev, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_pwritev")
+int BPF_KPROBE(sys_pwritev, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_pwritev2")
+int BPF_KPROBE(sys_pwritev2, unsigned int fd) { return 0; }
+
+/**
+ * read syscalls: read, readv, preadv, preadv2
+*/
+SEC("kprobe/__x64_sys_read")
+int BPF_KPROBE(sys_read, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_readv")
+int BPF_KPROBE(sys_readv, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_preadv")
+int BPF_KPROBE(sys_preadv, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_preadv2")
+int BPF_KPROBE(sys_preadv2, unsigned int fd) { return 0; }
+
+/**
+ * recv syscalls: recv, recvfrom, recvmsg, recvmmsg
+*/
+SEC("kprobe/__x64_sys_recv")
+int BPF_KPROBE(sys_recv, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_recvfrom")
+int BPF_KPROBE(sys_recvfrom, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_recvmsg")
+int BPF_KPROBE(sys_recvmsg, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_recvmmsg")
+int BPF_KPROBE(sys_recvmmsg, unsigned int fd) { return 0; }
+
+/**
+ * send syscalls: send, sendto, sendmsg, sendmmsg
+*/
+SEC("kprobe/__x64_sys_send")
+int BPF_KPROBE(sys_send, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_sendto")
+int BPF_KPROBE(sys_sendto, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_sendmsg")
+int BPF_KPROBE(sys_sendmsg, unsigned int fd) { return 0; }
+
+SEC("kprobe/__x64_sys_sendmmsg")
+int BPF_KPROBE(sys_sendmmsg, unsigned int fd) { return 0; }
 
 char LICENSE[] SEC("license") = "Dual BSD/GPL";
