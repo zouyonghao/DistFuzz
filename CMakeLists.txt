@@ -49,3 +49,5 @@ add_subdirectory(etcd_test-3517)
 endif()
 
 add_subdirectory(general_test)
+
+add_subdirectory(bpf)
