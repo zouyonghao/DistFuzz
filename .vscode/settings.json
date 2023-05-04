@@ -119,7 +119,8 @@
         "buildins.h": "c",
         "compiler.h": "c",
         "bpf_core_read.h": "c",
-        "bpf_tracing.h": "c"
+        "bpf_tracing.h": "c",
+        "stddef.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {

@@ -5,9 +5,15 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include/llvm-11",
-                "/usr/include/x86_64-linux-gnu"
+                "/usr/include/x86_64-linux-gnu",
+                "${workspaceFolder}/build/bpf/bpftool/bootstrap/libbpf/include",
+                "${workspaceFolder}/build/bpf/bpftool/bootstrap/libbpf/include",
+                "${workspaceFolder}/build/bpf/libbpf"
             ],
-            "defines": ["__USE_GNU", "ENABLE_STACKTRACE"],
+            "defines": [
+                "__USE_GNU",
+                "ENABLE_STACKTRACE"
+            ],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c11",
             "cppStandard": "c++14",
