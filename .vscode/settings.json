@@ -120,7 +120,9 @@
         "compiler.h": "c",
         "bpf_core_read.h": "c",
         "bpf_tracing.h": "c",
-        "stddef.h": "c"
+        "stddef.h": "c",
+        "dst_fuzz_fault.skel.h": "c",
+        "stdio.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {

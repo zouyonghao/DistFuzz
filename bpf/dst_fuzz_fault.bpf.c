@@ -8,6 +8,8 @@
 #include <linux/errno.h>
 #include <linux/limits.h>
 
+int pid = 0;
+
 /**
  * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
  *       It seems this is because this syscall cannot be fault injected.
@@ -16,6 +18,20 @@
 SEC("kprobe/__x64_sys_openat")
 int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
 {
+    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
+    u32 current_tgid = bpf_get_current_pid_tgid();
+
+    if (current_pid == pid || current_tgid == pid)
+    {
+        bpf_printk("current pid = %d\n", pid);
+        return 0;
+    }
+
+    // if (current_pid != pid && current_tgid != pid)
+    // {
+    //     return 0;
+    // }
+    // bpf_printk("current pid = %d\n", pid);
     /**
      * NOTE: On x86-64 systems, syscalls are wrapped if
      * ARCH_HAS_SYSCALL_WRAPPER=y is set in the kernel config.
@@ -37,6 +53,8 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
     bpf_probe_read(&fname, sizeof(fname), (void *)PT_REGS_PARM2_CORE_SYSCALL(new_ctx));
     if (str_contains(fname, ".o", sizeof(fname), 2) == 0)
     {
+        bpf_printk("opening %s\n", fname);
+        bpf_printk("current_pid = %d, current_tgid = %d, pid = %d\n", current_pid, current_tgid, pid);
         return 0;
     }
     if (str_contains(fname, ".so", sizeof(fname), 2) == 0)
