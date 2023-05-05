@@ -52,15 +52,6 @@ add_library(default_instrument_lib OBJECT instrumentor_lib/default_instrument_li
 target_compile_options(default_instrument_lib PUBLIC -fPIC)
 endif()
 
-set(LCC_PROJECT_NAME "MocoTest")
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
-
-set(LICENSECC_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/../third-party/licensecc")
-find_package(licensecc 2.0.0 REQUIRED)
-message(STATUS "LicenseCC found " ${licensecc_DIR})
-
 file(GLOB FUZZER_SRC
         "fuzzer/old/*.cpp"
         )
@@ -73,6 +64,16 @@ target_link_options(fuzzer PUBLIC -static-libgcc -static)
 endif()
 
 if (${DIST_FUZZ_LICENSE})
+
+set(LCC_PROJECT_NAME "MocoTest")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
+
+set(LICENSECC_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/../third-party/licensecc")
+find_package(licensecc 2.0.0 REQUIRED)
+message(STATUS "LicenseCC found " ${licensecc_DIR})
+
 add_executable(fuzzer-licensed ${FUZZER_SRC} fuzzer/license/license.cpp)
 target_compile_definitions(fuzzer-licensed PUBLIC -DNO_FUZZING_ERROR -DNO_CONCURRENCY_FUZZ -DUSE_LICENSE)
 target_link_libraries(fuzzer-licensed -lz pthread licensecc::licensecc_static)
