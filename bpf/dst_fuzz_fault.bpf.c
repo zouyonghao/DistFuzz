@@ -10,8 +10,6 @@
 
 int pid = 0;
 
-char SKIPPED_FILES[][6] = {".o", ".so", ".cfg", "lib", "/sys", "/usr", "/proc", "/dev", "/etc", ".pro", ".jar", "/var"};
-
 /**
  * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
  *       It seems this is because this syscall cannot be fault injected.
@@ -48,13 +46,48 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
     struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
     char fname[256];
     bpf_probe_read(&fname, sizeof(fname), (void *)PT_REGS_PARM2_CORE_SYSCALL(new_ctx));
-    for (int i = 0; i < sizeof(SKIPPED_FILES); i++)
+
+    if (str_contains(fname, ".o", sizeof(fname), 2) == 0)
     {
-        if (str_contains(fname, SKIPPED_FILES[i], sizeof(fname), sizeof(SKIPPED_FILES[i])))
-        {
-            return 0;
-        }
+        return 0;
     }
+    if (str_contains(fname, ".so", sizeof(fname), 3) == 0)
+    {
+        return 0;
+    }
+    if (str_contains(fname, ".cfg", sizeof(fname), 4) == 0)
+    {
+        return 0;
+    }
+    if (str_contains(fname, "lib", sizeof(fname), 3) == 0)
+    {
+        return 0;
+    }
+    if (str_contains(fname, "/sys", sizeof(fname), 4) == 0)
+    {
+        return 0;
+    }
+    if (str_contains(fname, "/proc", sizeof(fname), 5) == 0)
+    {
+        return 0;
+    }
+    if (str_contains(fname, "/dev", sizeof(fname), 4) == 0)
+    {
+        return 0;
+    }
+    if (str_contains(fname, ".pro", sizeof(fname), 4) == 0)
+    {
+        return 0;
+    }
+    if (str_contains(fname, ".jar", sizeof(fname), 4) == 0)
+    {
+        return 0;
+    }
+    if (str_contains(fname, "/var", sizeof(fname), 4) == 0)
+    {
+        return 0;
+    }
+
     bpf_printk("opening %s\n", fname);
     return 0;
 }

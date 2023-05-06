@@ -49,16 +49,7 @@ static inline int str_contains(const char *str, const char *pattern, int str_siz
         {
             return 1;
         }
-        for (pattern_index = 0; pattern_index < (pattern_size & 0xffff); pattern_index++)
-        {
-            c1 = *(str + index + pattern_index);
-            c2 = *(pattern + pattern_index);
-            if (c1 != c2)
-            {
-                break;
-            }
-        }
-        if (pattern_index == (pattern_size & 0xffff))
+        if (str_equal(str + index, pattern, pattern_size) == 0)
         {
             return 0;
         }
