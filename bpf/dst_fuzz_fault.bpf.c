@@ -10,6 +10,8 @@
 
 int pid = 0;
 
+char SKIPPED_FILES[][6] = {".o", ".so", ".cfg", "lib", "/sys", "/usr", "/proc", "/dev", "/etc", ".pro", ".jar", "/var"};
+
 /**
  * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
  *       It seems this is because this syscall cannot be fault injected.
@@ -21,16 +23,11 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
     u32 current_pid = bpf_get_current_pid_tgid() >> 32;
     u32 current_tgid = bpf_get_current_pid_tgid();
 
-    if (current_pid == pid || current_tgid == pid)
+    if (current_pid != pid && current_tgid != pid)
     {
-        bpf_printk("current pid = %d\n", pid);
         return 0;
     }
 
-    // if (current_pid != pid && current_tgid != pid)
-    // {
-    //     return 0;
-    // }
     // bpf_printk("current pid = %d\n", pid);
     /**
      * NOTE: On x86-64 systems, syscalls are wrapped if
@@ -51,16 +48,14 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
     struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
     char fname[256];
     bpf_probe_read(&fname, sizeof(fname), (void *)PT_REGS_PARM2_CORE_SYSCALL(new_ctx));
-    if (str_contains(fname, ".o", sizeof(fname), 2) == 0)
+    for (int i = 0; i < sizeof(SKIPPED_FILES); i++)
     {
-        bpf_printk("opening %s\n", fname);
-        bpf_printk("current_pid = %d, current_tgid = %d, pid = %d\n", current_pid, current_tgid, pid);
-        return 0;
+        if (str_contains(fname, SKIPPED_FILES[i], sizeof(fname), sizeof(SKIPPED_FILES[i])))
+        {
+            return 0;
+        }
     }
-    if (str_contains(fname, ".so", sizeof(fname), 2) == 0)
-    {
-        return 0;
-    }
+    bpf_printk("opening %s\n", fname);
     return 0;
 }
 
@@ -68,15 +63,7 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
  * write syscalls: write, writev, pwritev, pwritev2
  */
 SEC("kprobe/__x64_sys_write")
-int BPF_KPROBE(sys_write, unsigned int fd)
-{
-    // char *file_path;
-    // if (get_file_path(fd, &file_path) != -1)
-    // {
-    //     bpf_printk("Blocking open of %s\n", file_path);
-    // }
-    return 0;
-}
+int BPF_KPROBE(sys_write, unsigned int fd) { return 0; }
 
 SEC("kprobe/__x64_sys_writev")
 int BPF_KPROBE(sys_writev, unsigned int fd) { return 0; }
