@@ -8,7 +8,15 @@
 #include <linux/errno.h>
 #include <linux/limits.h>
 
+#define SHOULD_RECORD_SIZE 97
+
+#define FD_SIZE 103
+
 int pid = 0;
+
+char should_record[SHOULD_RECORD_SIZE];
+
+long record_fds[FD_SIZE];
 
 /**
  * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
@@ -26,7 +34,6 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
         return 0;
     }
 
-    // bpf_printk("current pid = %d\n", pid);
     /**
      * NOTE: On x86-64 systems, syscalls are wrapped if
      * ARCH_HAS_SYSCALL_WRAPPER=y is set in the kernel config.
@@ -88,7 +95,48 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
         return 0;
     }
 
-    bpf_printk("opening %s\n", fname);
+    bpf_printk("record file %s", fname);
+
+    /** NOTE: let's make verifier happy with the volatile and a = index */
+    volatile int index = current_pid % SHOULD_RECORD_SIZE;
+    int a = index;
+    if (a >= 0 && a < SHOULD_RECORD_SIZE)
+    {
+        should_record[a] = 1;
+    }
+
+    return 0;
+}
+
+SEC("kretprobe/__x64_sys_openat")
+int BPF_KRETPROBE(__x64_sys_openat_exit, long ret)
+{
+    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
+    u32 current_tgid = bpf_get_current_pid_tgid();
+    if (current_pid != pid && current_tgid != pid)
+    {
+        return 0;
+    }
+
+    /** NOTE: let's make verifier happy with the volatile and a = index */
+    volatile int index = current_pid % SHOULD_RECORD_SIZE;
+    int a = index;
+
+    if (a >= 0 && a < SHOULD_RECORD_SIZE)
+    {
+        if (should_record[a])
+        {
+            should_record[a] = 0;
+            volatile int fd_index = (unsigned long) ret % FD_SIZE;
+            int b = fd_index;
+            if (b >= 0 && b < FD_SIZE)
+            {
+                record_fds[b] = 1;
+                bpf_printk("record fd %d\n", ret);
+            }
+        }
+    }
+
     return 0;
 }
 
