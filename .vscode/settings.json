@@ -123,7 +123,8 @@
         "stddef.h": "c",
         "dst_fuzz_fault.skel.h": "c",
         "stdio.h": "c",
-        "libbpf.h": "c"
+        "libbpf.h": "c",
+        "utils.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
@@ -145,4 +146,5 @@
     //     "CMAKE_BUILD_TYPE": "RelWithDebInfo ",
     //     "EBPFAULT_ENABLE_INSTALL": "true"
     // },
+    "editor.fontSize": 16
 }

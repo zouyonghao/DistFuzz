@@ -14,9 +14,11 @@
 
 int pid = 0;
 
-char should_record[SHOULD_RECORD_SIZE];
+unsigned char should_record[SHOULD_RECORD_SIZE];
 
-long record_fds[FD_SIZE];
+unsigned long record_fds[FD_SIZE];
+
+unsigned char fuzz_bytes[1024 * 1024];
 
 /**
  * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
@@ -26,10 +28,7 @@ long record_fds[FD_SIZE];
 SEC("kprobe/__x64_sys_openat")
 int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
 {
-    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
-    u32 current_tgid = bpf_get_current_pid_tgid();
-
-    if (current_pid != pid && current_tgid != pid)
+    if (!is_current_pid_or_tgid(pid))
     {
         return 0;
     }
@@ -95,13 +94,13 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
         return 0;
     }
 
-    bpf_printk("record file %s", fname);
-
     /** NOTE: let's make verifier happy with the volatile and a = index */
+    unsigned int current_pid = bpf_get_current_pid_tgid() >> 32;
     volatile int index = current_pid % SHOULD_RECORD_SIZE;
     int a = index;
-    if (a >= 0 && a < SHOULD_RECORD_SIZE)
+    if (a >= 0 && a < SHOULD_RECORD_SIZE && fname[0] != 0)
     {
+        bpf_printk("record file %s", fname);
         should_record[a] = 1;
     }
 
@@ -111,14 +110,13 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
 SEC("kretprobe/__x64_sys_openat")
 int BPF_KRETPROBE(__x64_sys_openat_exit, long ret)
 {
-    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
-    u32 current_tgid = bpf_get_current_pid_tgid();
-    if (current_pid != pid && current_tgid != pid)
+    if (!is_current_pid_or_tgid(pid))
     {
         return 0;
     }
 
     /** NOTE: let's make verifier happy with the volatile and a = index */
+    unsigned int current_pid = bpf_get_current_pid_tgid() >> 32;
     volatile int index = current_pid % SHOULD_RECORD_SIZE;
     int a = index;
 
@@ -127,7 +125,7 @@ int BPF_KRETPROBE(__x64_sys_openat_exit, long ret)
         if (should_record[a])
         {
             should_record[a] = 0;
-            volatile int fd_index = (unsigned long) ret % FD_SIZE;
+            volatile int fd_index = (unsigned long)ret % FD_SIZE;
             int b = fd_index;
             if (b >= 0 && b < FD_SIZE)
             {
@@ -137,6 +135,24 @@ int BPF_KRETPROBE(__x64_sys_openat_exit, long ret)
         }
     }
 
+    return 0;
+}
+
+SEC("kretprobe/__x64_sys_socket")
+int BPF_KRETPROBE(__x64_sys_socket_exit, long ret)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    bpf_printk("create socket %d\n", ret);
+    volatile int fd_index = (unsigned long)ret % FD_SIZE;
+    int b = fd_index;
+    if (b >= 0 && b < FD_SIZE)
+    {
+        record_fds[b] = 1;
+        bpf_printk("record fd %d\n", ret);
+    }
     return 0;
 }
 

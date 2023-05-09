@@ -5,6 +5,18 @@ static inline int max(int a, int b) { return a > b ? a : b; }
 
 static inline int min(int a, int b) { return a > b ? b : a; }
 
+static inline int is_current_pid_or_tgid(int pid)
+{
+    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
+    u32 current_tgid = bpf_get_current_pid_tgid();
+
+    if (current_pid != pid && current_tgid != pid)
+    {
+        return 0;
+    }
+    return 1;
+}
+
 /**
  * return 0 for equal
  */
