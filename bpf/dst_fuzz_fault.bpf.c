@@ -1,4 +1,3 @@
-
 #include "vmlinux.h"
 #include <bpf/bpf_core_read.h>
 #include <bpf/bpf_helpers.h>
@@ -115,6 +114,14 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
     return 0;
 }
 
+/**
+ * NOTE: fd_install is called by open, openat and socket
+ * which may be a good choice for recording. But for now,
+ * recording open, openat seperately seems fine for this
+ * project.
+ * @see https://github.com/ShiftLeftSecurity/traceleft/blob/master/documentation/file-tracking.md
+ */
+/*
 SEC("kprobe/fd_install")
 int BPF_KPROBE(fd_install, unsigned int fd, struct file *file)
 {
@@ -123,8 +130,22 @@ int BPF_KPROBE(fd_install, unsigned int fd, struct file *file)
         return 0;
     }
     bpf_printk("fd_install %d", fd);
+
+    struct path path;
+    struct dentry *dentry;
+    struct qstr pathname;
+    char filename[256];
+
+    bpf_probe_read(&path, sizeof(path), (const void *)&file->f_path);
+
+    dentry = path.dentry;
+    bpf_probe_read(&pathname, sizeof(pathname), (const void *)&dentry->d_name);
+    bpf_probe_read_str((void *)filename, sizeof(filename), (const void *)pathname.name);
+
+    bpf_printk("File: %s", filename);
     return 0;
 }
+*/
 
 SEC("kretprobe/__x64_sys_open")
 int BPF_KRETPROBE(__x64_sys_open_exit, long ret)
