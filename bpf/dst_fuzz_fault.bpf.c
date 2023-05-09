@@ -12,13 +12,17 @@
 
 #define FD_SIZE 103
 
+#define FUZZ_BYTES_SIZE 1024 * 1024
+
 int pid = 0;
 
 unsigned char should_record[SHOULD_RECORD_SIZE];
 
 unsigned long record_fds[FD_SIZE];
 
-unsigned char fuzz_bytes[1024 * 1024];
+unsigned char fuzz_bytes[FUZZ_BYTES_SIZE];
+
+unsigned volatile int fuzz_index = 0;
 
 /**
  * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
@@ -93,6 +97,10 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
     {
         return 0;
     }
+    if (str_contains(fname, "tmp", sizeof(fname), 3) == 0)
+    {
+        return 0;
+    }
 
     /** NOTE: let's make verifier happy with the volatile and a = index */
     unsigned int current_pid = bpf_get_current_pid_tgid() >> 32;
@@ -104,6 +112,24 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
         should_record[a] = 1;
     }
 
+    return 0;
+}
+
+SEC("kprobe/fd_install")
+int BPF_KPROBE(fd_install, unsigned int fd, struct file *file)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    bpf_printk("fd_install %d", fd);
+    return 0;
+}
+
+SEC("kretprobe/__x64_sys_open")
+int BPF_KRETPROBE(__x64_sys_open_exit, long ret)
+{
+    /** TODO: use logic in openat */
     return 0;
 }
 
@@ -130,7 +156,7 @@ int BPF_KRETPROBE(__x64_sys_openat_exit, long ret)
             if (b >= 0 && b < FD_SIZE)
             {
                 record_fds[b] = 1;
-                bpf_printk("record fd %d\n", ret);
+                bpf_printk("record fd %d", ret);
             }
         }
     }
@@ -145,13 +171,13 @@ int BPF_KRETPROBE(__x64_sys_socket_exit, long ret)
     {
         return 0;
     }
-    bpf_printk("create socket %d\n", ret);
+    bpf_printk("create socket %d", ret);
     volatile int fd_index = (unsigned long)ret % FD_SIZE;
     int b = fd_index;
     if (b >= 0 && b < FD_SIZE)
     {
         record_fds[b] = 1;
-        bpf_printk("record fd %d\n", ret);
+        bpf_printk("record fd %d", ret);
     }
     return 0;
 }
@@ -160,7 +186,16 @@ int BPF_KRETPROBE(__x64_sys_socket_exit, long ret)
  * write syscalls: write, writev, pwritev, pwritev2
  */
 SEC("kprobe/__x64_sys_write")
-int BPF_KPROBE(sys_write, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_write, unsigned int fd)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
+    bpf_printk("write fd is %d", PT_REGS_PARM1_CORE_SYSCALL(new_ctx));
+    return 0;
+}
 
 SEC("kprobe/__x64_sys_writev")
 int BPF_KPROBE(sys_writev, unsigned int fd) { return 0; }
@@ -175,7 +210,26 @@ int BPF_KPROBE(sys_pwritev2, unsigned int fd) { return 0; }
  * read syscalls: read, readv, preadv, preadv2
  */
 SEC("kprobe/__x64_sys_read")
-int BPF_KPROBE(sys_read, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_read)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
+    unsigned int fd = PT_REGS_PARM1_CORE_SYSCALL(new_ctx);
+    if (fd >= 0 && fd < FD_SIZE && record_fds[fd])
+    {
+        unsigned int b = fuzz_index;
+        if (b >= 0 && b < FUZZ_BYTES_SIZE && fuzz_bytes[b] < 50)
+        {
+            bpf_printk("inject fault to fd %d.", fd);
+            bpf_override_return(ctx, -1);
+        }
+        fuzz_index++;
+    }
+    return 0;
+}
 
 SEC("kprobe/__x64_sys_readv")
 int BPF_KPROBE(sys_readv, unsigned int fd) { return 0; }
