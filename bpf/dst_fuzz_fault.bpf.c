@@ -23,6 +23,18 @@ unsigned char fuzz_bytes[FUZZ_BYTES_SIZE];
 
 unsigned volatile int fuzz_index = 0;
 
+static inline int is_current_pid_or_tgid(int pid)
+{
+    u32 current_pid = bpf_get_current_pid_tgid() >> 32;
+    u32 current_tgid = bpf_get_current_pid_tgid();
+
+    if (current_pid != pid && current_tgid != pid)
+    {
+        return 0;
+    }
+    return 1;
+}
+
 /**
  * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
  *       It seems this is because this syscall cannot be fault injected.
