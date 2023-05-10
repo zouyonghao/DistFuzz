@@ -221,6 +221,12 @@ int BPF_KRETPROBE(__x64_sys_socket_exit, long ret)
     return 0;
 }
 
+long static inline loop_fn(u32 index, void *ctx)
+{
+    bpf_printk(".");
+    return 0;
+}
+
 int static inline handle_events(struct pt_regs *ctx)
 {
     if (!is_current_pid_or_tgid(pid))
@@ -245,10 +251,7 @@ int static inline handle_events(struct pt_regs *ctx)
                 /**
                  * in our env, 0xfff ~= 1ms
                  */
-                for (unsigned long tmp = 0; tmp < 0xfff; tmp++)
-                {
-                    bpf_printk(".");
-                }
+                bpf_loop(0xfff * 500, loop_fn, &ctx, 0);
             }
         }
     }
