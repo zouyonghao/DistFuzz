@@ -7,7 +7,7 @@
 #include <linux/errno.h>
 #include <linux/limits.h>
 
-#define SHOULD_RECORD_SIZE 97
+#define SHOULD_RECORD_SIZE 103
 
 #define FD_SIZE 103
 
@@ -15,13 +15,19 @@
 
 int pid = 0;
 
+/**
+ * this is used for determining whether the file
+ * descriptor should be recorded created by open
+ * and openat.
+ */
 unsigned char should_record[SHOULD_RECORD_SIZE];
 
+/* this records filtered files and sockets */
 unsigned long record_fds[FD_SIZE];
 
 unsigned char fuzz_bytes[FUZZ_BYTES_SIZE];
 
-unsigned volatile int fuzz_index = 0;
+unsigned volatile int fuzz_bit_index = 0;
 
 static inline int is_current_pid_or_tgid(int pid)
 {
@@ -215,35 +221,7 @@ int BPF_KRETPROBE(__x64_sys_socket_exit, long ret)
     return 0;
 }
 
-/**
- * write syscalls: write, writev, pwritev, pwritev2
- */
-SEC("kprobe/__x64_sys_write")
-int BPF_KPROBE(sys_write, unsigned int fd)
-{
-    if (!is_current_pid_or_tgid(pid))
-    {
-        return 0;
-    }
-    struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
-    bpf_printk("write fd is %d", PT_REGS_PARM1_CORE_SYSCALL(new_ctx));
-    return 0;
-}
-
-SEC("kprobe/__x64_sys_writev")
-int BPF_KPROBE(sys_writev, unsigned int fd) { return 0; }
-
-SEC("kprobe/__x64_sys_pwritev")
-int BPF_KPROBE(sys_pwritev, unsigned int fd) { return 0; }
-
-SEC("kprobe/__x64_sys_pwritev2")
-int BPF_KPROBE(sys_pwritev2, unsigned int fd) { return 0; }
-
-/**
- * read syscalls: read, readv, preadv, preadv2
- */
-SEC("kprobe/__x64_sys_read")
-int BPF_KPROBE(sys_read)
+int static inline handle_events(struct pt_regs *ctx)
 {
     if (!is_current_pid_or_tgid(pid))
     {
@@ -253,54 +231,88 @@ int BPF_KPROBE(sys_read)
     unsigned int fd = PT_REGS_PARM1_CORE_SYSCALL(new_ctx);
     if (fd >= 0 && fd < FD_SIZE && record_fds[fd])
     {
-        unsigned int b = fuzz_index;
-        if (b >= 0 && b < FUZZ_BYTES_SIZE && fuzz_bytes[b] < 50)
+        unsigned int b = fuzz_bit_index;
+        if (get_bit(fuzz_bytes, FUZZ_BYTES_SIZE, fuzz_bit_index++))
         {
-            bpf_printk("inject fault to fd %d.", fd);
-            bpf_override_return(ctx, -1);
+            if (get_bit(fuzz_bytes, FUZZ_BYTES_SIZE, fuzz_bit_index++))
+            {
+                bpf_printk("inject fault to fd %d.", fd);
+                bpf_override_return(ctx, -1);
+            }
+            else
+            {
+                bpf_printk("inject delay to fd %d.", fd);
+                /**
+                 * in our env, 0xfff ~= 1ms
+                 */
+                for (unsigned long tmp = 0; tmp < 0xfff; tmp++)
+                {
+                    bpf_printk(".");
+                }
+            }
         }
-        fuzz_index++;
     }
     return 0;
 }
 
+/**
+ * write syscalls: write, writev, pwritev, pwritev2
+ */
+SEC("kprobe/__x64_sys_write")
+int BPF_KPROBE(sys_write) { return handle_events(ctx); }
+
+SEC("kprobe/__x64_sys_writev")
+int BPF_KPROBE(sys_writev) { return handle_events(ctx); }
+
+SEC("kprobe/__x64_sys_pwritev")
+int BPF_KPROBE(sys_pwritev) { return handle_events(ctx); }
+
+SEC("kprobe/__x64_sys_pwritev2")
+int BPF_KPROBE(sys_pwritev2) { return handle_events(ctx); }
+
+/**
+ * read syscalls: read, readv, preadv, preadv2
+ */
+SEC("kprobe/__x64_sys_read")
+int BPF_KPROBE(sys_read) { return handle_events(ctx); }
+
 SEC("kprobe/__x64_sys_readv")
-int BPF_KPROBE(sys_readv, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_readv) { return handle_events(ctx); }
 
 SEC("kprobe/__x64_sys_preadv")
-int BPF_KPROBE(sys_preadv, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_preadv) { return handle_events(ctx); }
 
 SEC("kprobe/__x64_sys_preadv2")
-int BPF_KPROBE(sys_preadv2, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_preadv2) { return handle_events(ctx); }
 
 /**
  * recv syscalls: recv, recvfrom, recvmsg, recvmmsg
  */
 SEC("kprobe/__x64_sys_recv")
-int BPF_KPROBE(sys_recv, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_recv) { return handle_events(ctx); }
 
 SEC("kprobe/__x64_sys_recvfrom")
-int BPF_KPROBE(sys_recvfrom, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_recvfrom) { return handle_events(ctx); }
 
 SEC("kprobe/__x64_sys_recvmsg")
-int BPF_KPROBE(sys_recvmsg, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_recvmsg) { return handle_events(ctx); }
 
 SEC("kprobe/__x64_sys_recvmmsg")
-int BPF_KPROBE(sys_recvmmsg, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_recvmmsg) { return handle_events(ctx); }
 
 /**
  * send syscalls: send, sendto, sendmsg, sendmmsg
  */
 SEC("kprobe/__x64_sys_send")
-int BPF_KPROBE(sys_send, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_send) { return handle_events(ctx); }
 
 SEC("kprobe/__x64_sys_sendto")
-int BPF_KPROBE(sys_sendto, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_sendto) { return handle_events(ctx); }
 
 SEC("kprobe/__x64_sys_sendmsg")
-int BPF_KPROBE(sys_sendmsg, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_sendmsg) { return handle_events(ctx); }
 
 SEC("kprobe/__x64_sys_sendmmsg")
-int BPF_KPROBE(sys_sendmmsg, unsigned int fd) { return 0; }
+int BPF_KPROBE(sys_sendmmsg) { return handle_events(ctx); }
 
 char LICENSE[] SEC("license") = "Dual BSD/GPL";
