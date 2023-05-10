@@ -5,6 +5,19 @@ static inline int max(int a, int b) { return a > b ? a : b; }
 
 static inline int min(int a, int b) { return a > b ? b : a; }
 
+static inline int get_bit(unsigned char *array, int array_size, unsigned int bit_index)
+{
+    unsigned int elem_length = (sizeof(unsigned char) * 8);
+    unsigned int char_index = bit_index / elem_length;
+    if (char_index >= 0 && char_index < array_size)
+    {
+        unsigned char elem = array[char_index];
+        bit_index = bit_index % elem_length;
+        return (elem >> bit_index) & 0x1;
+    }
+    return 0;
+}
+
 /**
  * return 0 for equal
  */

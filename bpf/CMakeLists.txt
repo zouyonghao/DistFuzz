@@ -72,3 +72,6 @@ foreach(app ${apps})
       ${CMAKE_CURRENT_SOURCE_DIR}/libbpf-bootstrap/blazesym/target/release/libblazesym.a -lpthread -lrt -ldl)
   endif()
 endforeach()
+
+enable_testing()
+add_subdirectory(tests)

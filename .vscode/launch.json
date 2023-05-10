@@ -587,5 +587,24 @@
                 }
             ]
         },
+        {
+            "name": "test_bpf_utils",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/bpf/tests/test_bpf_utils",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        }
     ]
 }
