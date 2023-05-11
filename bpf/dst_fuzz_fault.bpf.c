@@ -7,12 +7,6 @@
 #include <linux/errno.h>
 #include <linux/limits.h>
 
-#define SHOULD_RECORD_SIZE 103
-
-#define FD_SIZE 103
-
-#define FUZZ_BYTES_SIZE 1024 * 1024
-
 int pid = 0;
 
 /**

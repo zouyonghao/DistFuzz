@@ -1,6 +1,12 @@
 #ifndef BPF_FAULT_UTILS_H
 #define BPF_FAULT_UTILS_H
 
+#define SHOULD_RECORD_SIZE 103
+
+#define FD_SIZE 103
+
+#define FUZZ_BYTES_SIZE 1024 * 1024
+
 static inline int max(int a, int b) { return a > b ? a : b; }
 
 static inline int min(int a, int b) { return a > b ? b : a; }

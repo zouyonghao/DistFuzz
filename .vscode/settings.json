@@ -125,7 +125,8 @@
         "stdio.h": "c",
         "libbpf.h": "c",
         "utils.h": "c",
-        "vmlinux.h": "c"
+        "vmlinux.h": "c",
+        "limits.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {

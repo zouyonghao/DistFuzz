@@ -7,6 +7,9 @@
 #include <sys/resource.h>
 #include <unistd.h>
 
+#include "dst_random.h"
+#include "utils.h"
+
 static int libbpf_print_fn(enum libbpf_print_level level, const char *format, va_list args)
 {
     return vfprintf(stderr, format, args);
@@ -53,6 +56,12 @@ int main(int argc, char **argv)
 
     printf("Successfully started! Please run `sudo cat /sys/kernel/debug/tracing/trace_pipe` "
            "to see output of the BPF programs.\n");
+
+    /* Init fuzz_bytes array */
+    for (int i = 0; i < FUZZ_BYTES_SIZE; i++)
+    {
+        skel->bss->fuzz_bytes[i] = __dst_get_random_uint8_t();
+    }
 
     /* Start the target program */
     pid_t child_pid = fork();

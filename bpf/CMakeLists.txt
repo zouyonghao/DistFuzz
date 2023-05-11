@@ -1,3 +1,5 @@
+include_directories(${CMAKE_SOURCE_DIR}/core/include)
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/libbpf-bootstrap/tools/cmake)
 
 # Build vendored libbpf
@@ -64,7 +66,7 @@ foreach(app ${apps})
   add_dependencies(${app_stem}_skel libbpf-build bpftool-build)
 
   add_executable(${app_stem} ${app_stem}.c)
-  target_link_libraries(${app_stem} ${app_stem}_skel)
+  target_link_libraries(${app_stem} ${app_stem}_skel dst_core)
   if(${app_stem} STREQUAL profile)
     target_include_directories(${app_stem} PRIVATE
       ${CMAKE_CURRENT_SOURCE_DIR}/libbpf-bootstrap/blazesym/target/release/)
