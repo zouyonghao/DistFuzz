@@ -23,16 +23,27 @@ unsigned char fuzz_bytes[FUZZ_BYTES_SIZE];
 
 unsigned volatile int fuzz_bit_index = 0;
 
+unsigned long long dev;
+unsigned long long ino;
 static inline int is_current_pid_or_tgid(int pid)
 {
+    struct bpf_pidns_info ns;
+    if (bpf_get_ns_current_pid_tgid(dev, ino, &ns, sizeof(ns)) == 0)
+    {
+        if (ns.pid == pid || ns.tgid == pid)
+        {
+            return 1;
+        }
+    }
+
     u32 current_pid = bpf_get_current_pid_tgid() >> 32;
     u32 current_tgid = bpf_get_current_pid_tgid();
 
-    if (current_pid != pid && current_tgid != pid)
+    if (current_pid == pid || current_tgid == pid)
     {
-        return 0;
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 /**

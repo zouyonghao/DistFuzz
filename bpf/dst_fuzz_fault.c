@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/resource.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include "dst_random.h"
@@ -61,6 +62,21 @@ int main(int argc, char **argv)
     for (int i = 0; i < FUZZ_BYTES_SIZE; i++)
     {
         skel->bss->fuzz_bytes[i] = __dst_get_random_uint8_t();
+    }
+
+    /**
+     * NOTE: ensure BPF program can run in containers and WSL2
+     * @see https://github.com/libbpf/libbpf-bootstrap/pull/175/files
+     */
+    struct stat sb;
+    if (stat("/proc/self/ns/pid", &sb) == 0)
+    {
+        skel->bss->dev = sb.st_dev;
+        skel->bss->ino = sb.st_ino;
+    }
+    else
+    {
+        fprintf(stderr, "Failed to acquire namespace information, just skipped\n");
     }
 
     /* Start the target program */
