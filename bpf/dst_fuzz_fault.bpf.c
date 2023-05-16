@@ -197,7 +197,7 @@ int BPF_KRETPROBE(__x64_sys_openat_exit, long ret)
             should_record[a] = 0;
             volatile int fd_index = (unsigned long)ret % FD_SIZE;
             int b = fd_index;
-            if (b >= 0 && b < FD_SIZE)
+            if (ret > 0 && b >= 0 && b < FD_SIZE)
             {
                 record_fds[b] = 1;
                 bpf_printk("record fd %d", ret);
