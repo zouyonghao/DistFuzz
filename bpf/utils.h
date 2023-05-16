@@ -24,9 +24,6 @@ static inline int get_bit(unsigned char *array, int array_size, unsigned int bit
     return 0;
 }
 
-/**
- * return 0 for equal
- */
 static inline int str_equal(const char *cs, const char *ct, int size)
 {
     int len = 0;
@@ -39,16 +36,13 @@ static inline int str_equal(const char *cs, const char *ct, int size)
         c1 = *cs++;
         c2 = *ct++;
         if (c1 != c2)
-            return c1 < c2 ? -1 : 1;
+            return false;
         if (!c1)
             break;
     }
-    return 0;
+    return true;
 }
 
-/**
- * return 0 for containing
- */
 static inline int str_contains(const char *str, const char *pattern, int str_size, int pattern_size)
 {
     int index = 0;
@@ -66,14 +60,14 @@ static inline int str_contains(const char *str, const char *pattern, int str_siz
          */
         if (c1 == 0)
         {
-            return 1;
+            return false;
         }
-        if (str_equal(str + index, pattern, pattern_size) == 0)
+        if (str_equal(str + index, pattern, pattern_size))
         {
-            return 0;
+            return true;
         }
     }
-    return 1;
+    return false;
 }
 
 #endif

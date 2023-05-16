@@ -32,7 +32,7 @@ static inline int is_current_pid_or_tgid(int pid)
     {
         if (ns.pid == pid || ns.tgid == pid)
         {
-            return 1;
+            return true;
         }
     }
 
@@ -41,9 +41,9 @@ static inline int is_current_pid_or_tgid(int pid)
 
     if (current_pid == pid || current_tgid == pid)
     {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 static inline int filter_by_filename(void *filename)
@@ -51,47 +51,47 @@ static inline int filter_by_filename(void *filename)
     char fname[256];
     bpf_probe_read(&fname, sizeof(fname), filename);
 
-    if (str_contains(fname, ".o", sizeof(fname), 2) == 0)
+    if (str_contains(fname, ".o", sizeof(fname), 2))
     {
         return 0;
     }
-    if (str_contains(fname, ".so", sizeof(fname), 3) == 0)
+    if (str_contains(fname, ".so", sizeof(fname), 3))
     {
         return 0;
     }
-    if (str_contains(fname, ".cfg", sizeof(fname), 4) == 0)
+    if (str_contains(fname, ".cfg", sizeof(fname), 4))
     {
         return 0;
     }
-    if (str_contains(fname, "lib", sizeof(fname), 3) == 0)
+    if (str_contains(fname, "lib", sizeof(fname), 3))
     {
         return 0;
     }
-    if (str_contains(fname, "/sys", sizeof(fname), 4) == 0)
+    if (str_contains(fname, "/sys", sizeof(fname), 4))
     {
         return 0;
     }
-    if (str_contains(fname, "/proc", sizeof(fname), 5) == 0)
+    if (str_contains(fname, "/proc", sizeof(fname), 5))
     {
         return 0;
     }
-    if (str_contains(fname, "/dev", sizeof(fname), 4) == 0)
+    if (str_contains(fname, "/dev", sizeof(fname), 4))
     {
         return 0;
     }
-    if (str_contains(fname, ".pro", sizeof(fname), 4) == 0)
+    if (str_contains(fname, ".pro", sizeof(fname), 4))
     {
         return 0;
     }
-    if (str_contains(fname, ".jar", sizeof(fname), 4) == 0)
+    if (str_contains(fname, ".jar", sizeof(fname), 4))
     {
         return 0;
     }
-    if (str_contains(fname, "/var", sizeof(fname), 4) == 0)
+    if (str_contains(fname, "/var", sizeof(fname), 4))
     {
         return 0;
     }
-    if (str_contains(fname, "tmp", sizeof(fname), 3) == 0)
+    if (str_contains(fname, "tmp", sizeof(fname), 3))
     {
         return 0;
     }

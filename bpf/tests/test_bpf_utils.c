@@ -1,12 +1,14 @@
+
+#include <stdbool.h>
 #include "../utils.h"
 #include <assert.h>
 #include <stdio.h>
 
 int main(int argc, char const *argv[])
 {
-    assert(str_contains("/usr/lib/locale/en.utf8/LC_NUMERIC", ".o", 24, 2) == 1);
-    assert(str_contains("/usr/lib/locale/en.otf8/LC_NUMERIC", ".o", 24, 2) == 0);
-    assert(str_contains(".o", ".o", 20, 2) == 0);
+    assert(str_contains("/usr/lib/locale/en.utf8/LC_NUMERIC", ".o", 24, 2) == false);
+    assert(str_contains("/usr/lib/locale/en.otf8/LC_NUMERIC", ".o", 24, 2) == true);
+    assert(str_contains(".o", ".o", 20, 2) == true);
 
     printf("sizeof(unsigned char) = %lu\n", sizeof(unsigned char));
     unsigned char test[] = {0b00000010, 0b01, 0b00110010};
