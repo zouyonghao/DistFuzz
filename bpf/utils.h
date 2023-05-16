@@ -1,6 +1,11 @@
 #ifndef BPF_FAULT_UTILS_H
 #define BPF_FAULT_UTILS_H
 
+#ifndef true
+#define true 1
+#define false 0
+#endif
+
 #define SHOULD_RECORD_SIZE 103
 
 #define FD_SIZE 103
