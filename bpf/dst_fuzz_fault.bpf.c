@@ -46,38 +46,10 @@ static inline int is_current_pid_or_tgid(int pid)
     return 0;
 }
 
-/**
- * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
- *       It seems this is because this syscall cannot be fault injected.
- *       To know which syscall can be injected, use 'cat /proc/kallsyms | grep _eil_addr'
- */
-SEC("kprobe/__x64_sys_openat")
-int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
+static inline int filter_by_filename(void *filename)
 {
-    if (!is_current_pid_or_tgid(pid))
-    {
-        return 0;
-    }
-
-    /**
-     * NOTE: On x86-64 systems, syscalls are wrapped if
-     * ARCH_HAS_SYSCALL_WRAPPER=y is set in the kernel config.
-     * E.g.:
-     * asmlinkage long sys_xyzzy(const struct pt_regs *regs)
-     * {
-     *     return SyS_xyzzy(regs->di, regs->si, regs->dx);
-     * }
-     * In this case, we cannot get some parameters' value,
-     * just like the filename in __x64_sys_openat.
-     * To get the value, we must get the raw regs pointer
-     * first, then use PT_REGS_PARMn_SYSCALL or
-     * PT_REGS_PARMn_CORE_SYSCALL to get the value.
-     * @see https://github.com/iovisor/bcc/commit/2da34267fcae4485f4e05a17521214749f6f0edd
-     *      https://github.com/libbpf/libbpf/commit/50b4d99bbc48b21fef19cb4255d41290b80f786e
-     */
-    struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
     char fname[256];
-    bpf_probe_read(&fname, sizeof(fname), (void *)PT_REGS_PARM2_CORE_SYSCALL(new_ctx));
+    bpf_probe_read(&fname, sizeof(fname), filename);
 
     if (str_contains(fname, ".o", sizeof(fname), 2) == 0)
     {
@@ -137,6 +109,92 @@ int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
     return 0;
 }
 
+static inline void record_fd(long ret)
+{
+    /** NOTE: let's make verifier happy with the volatile and a = index */
+    unsigned int current_pid = bpf_get_current_pid_tgid() >> 32;
+    volatile int index = current_pid % SHOULD_RECORD_SIZE;
+    int a = index;
+
+    if (a >= 0 && a < SHOULD_RECORD_SIZE)
+    {
+        if (should_record[a])
+        {
+            should_record[a] = 0;
+            volatile int fd_index = (unsigned long)ret % FD_SIZE;
+            int b = fd_index;
+            if (ret > 0 && b >= 0 && b < FD_SIZE)
+            {
+                record_fds[b] = 1;
+                bpf_printk("record fd %d", ret);
+            }
+        }
+    }
+}
+
+SEC("kprobe/__x64_sys_open")
+int BPF_KPROBE(__x64_sys_open, const char *filename)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+
+    struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
+    filter_by_filename((void *)PT_REGS_PARM1_CORE_SYSCALL(new_ctx));
+
+    return 0;
+}
+
+/**
+ * NOTE: If we use kprobe/do_sys_openat2, it will encounter the error: Invalid argument.
+ *       It seems this is because this syscall cannot be fault injected.
+ *       To know which syscall can be injected, use 'cat /proc/kallsyms | grep _eil_addr'
+ */
+SEC("kprobe/__x64_sys_openat")
+int BPF_KPROBE(__x64_sys_openat, int dfd, const char *filename)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+
+    /**
+     * NOTE: On x86-64 systems, syscalls are wrapped if
+     * ARCH_HAS_SYSCALL_WRAPPER=y is set in the kernel config.
+     * E.g.:
+     * asmlinkage long sys_xyzzy(const struct pt_regs *regs)
+     * {
+     *     return SyS_xyzzy(regs->di, regs->si, regs->dx);
+     * }
+     * In this case, we cannot get some parameters' value,
+     * just like the filename in __x64_sys_openat.
+     * To get the value, we must get the raw regs pointer
+     * first, then use PT_REGS_PARMn_SYSCALL or
+     * PT_REGS_PARMn_CORE_SYSCALL to get the value.
+     * @see https://github.com/iovisor/bcc/commit/2da34267fcae4485f4e05a17521214749f6f0edd
+     *      https://github.com/libbpf/libbpf/commit/50b4d99bbc48b21fef19cb4255d41290b80f786e
+     */
+    struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
+    filter_by_filename((void *)PT_REGS_PARM2_CORE_SYSCALL(new_ctx));
+
+    return 0;
+}
+
+SEC("kprobe/__x64_sys_openat2")
+int BPF_KPROBE(__x64_sys_openat2, int dfd, const char *filename)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+
+    struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
+    filter_by_filename((void *)PT_REGS_PARM2_CORE_SYSCALL(new_ctx));
+
+    return 0;
+}
+
 /**
  * NOTE: fd_install is called by open, openat and socket
  * which may be a good choice for recording. But for now,
@@ -173,7 +231,14 @@ int BPF_KPROBE(fd_install, unsigned int fd, struct file *file)
 SEC("kretprobe/__x64_sys_open")
 int BPF_KRETPROBE(__x64_sys_open_exit, long ret)
 {
-    /** TODO: use logic in openat */
+
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+
+    record_fd(ret);
+
     return 0;
 }
 
@@ -185,25 +250,20 @@ int BPF_KRETPROBE(__x64_sys_openat_exit, long ret)
         return 0;
     }
 
-    /** NOTE: let's make verifier happy with the volatile and a = index */
-    unsigned int current_pid = bpf_get_current_pid_tgid() >> 32;
-    volatile int index = current_pid % SHOULD_RECORD_SIZE;
-    int a = index;
+    record_fd(ret);
 
-    if (a >= 0 && a < SHOULD_RECORD_SIZE)
+    return 0;
+}
+
+SEC("kretprobe/__x64_sys_openat2")
+int BPF_KRETPROBE(__x64_sys_openat2_exit, long ret)
+{
+    if (!is_current_pid_or_tgid(pid))
     {
-        if (should_record[a])
-        {
-            should_record[a] = 0;
-            volatile int fd_index = (unsigned long)ret % FD_SIZE;
-            int b = fd_index;
-            if (ret > 0 && b >= 0 && b < FD_SIZE)
-            {
-                record_fds[b] = 1;
-                bpf_printk("record fd %d", ret);
-            }
-        }
+        return 0;
     }
+
+    record_fd(ret);
 
     return 0;
 }
