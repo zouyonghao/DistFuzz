@@ -126,7 +126,11 @@
         "libbpf.h": "c",
         "utils.h": "c",
         "vmlinux.h": "c",
-        "limits.h": "c"
+        "limits.h": "c",
+        "stat.h": "c",
+        "unistd.h": "c",
+        "resource.h": "c",
+        "dst_random.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
