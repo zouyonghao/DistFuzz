@@ -21,7 +21,7 @@ sudo apt-get install \
     redis \
     zookeeper \
     gcc-multilib \
-    gawk gcc g++ libc++-dev liblzma-dev lzma-dev leiningen valgrind libelf1 libelf-dev zlib1g-dev -y > /dev/null && echo "apt-get dependencies success!"
+    gawk gcc g++ libc++-dev liblzma-dev lzma-dev leiningen valgrind libelf1 libelf-dev zlib1g-dev bear -y > /dev/null && echo "apt-get dependencies success!"
 
 # NOTE:
 # libunwind-dev
