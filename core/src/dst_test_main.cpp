@@ -46,8 +46,7 @@ void run_some_normal_operators(int number, int normal_sleep_ms)
     {
         std::this_thread::sleep_for(std::chrono::microseconds(normal_sleep_ms));
         uint32_t index = __dst_get_random_uint8_t() % operator_size;
-        LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first
-                                << "\n";
+        LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
         std::thread t1([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); });
 
         // threads.push_back(std::thread([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do();
@@ -124,7 +123,7 @@ int main(int argc, char *argv[])
 {
     std::map<std::string, std::string> options;
     std::regex optregex("--(help|fuzz_before_init|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|"
-                        "check_after_fuzz|random_file)"
+                        "check_after_fuzz|random_file|start_with_strace)"
                         "(?:=((?:.|\n)*))?");
 
     for (char **opt = argv + 1; opt < argv + argc; opt++)
@@ -154,6 +153,7 @@ int main(int argc, char *argv[])
                   << "    --random_file         the random file name" << std::endl
                   << "    --fuzz_before_init    should we start fuzzing before the init operator (true or false)"
                   << std::endl
+                  << "    --start_with_strace   start the process with strace" << std::endl
                   << std::endl;
         return 0;
     }
@@ -206,6 +206,12 @@ int main(int argc, char *argv[])
         fuzz_before_init = false;
     }
 
+    bool start_with_strace = false;
+    if (options.count("start_with_strace"))
+    {
+        start_with_strace = true;
+    }
+
     log_init("log_test");
 
     uint32_t test_case_count = 0;
@@ -235,7 +241,7 @@ int main(int argc, char *argv[])
     bool all_operators_after_fuzzing_failed = true;
 
     LOG_INFO << "\033[1;31m"
-                            << "running test case " << test_case_count << "\033[0m\n";
+             << "running test case " << test_case_count << "\033[0m\n";
     LOG_INFO << "start nodes....\n";
     /** We should only have 1 NodeManager. */
     NodeManager *nm = SingletonRegistry<NodeManager>::getItem();
@@ -245,6 +251,12 @@ int main(int argc, char *argv[])
         goto STOP;
     }
     nm->set_node_count(node_count);
+
+    if (start_with_strace)
+    {
+        nm->start_with_strace = true;
+    }
+
     if (!nm->start_all())
     {
         check_failed = true;
@@ -270,8 +282,7 @@ int main(int argc, char *argv[])
     {
         std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t() + critic_sleep_ms));
         uint32_t index = __dst_get_random_uint8_t() % critical_operator_size;
-        LOG_INFO << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first
-                                << "\n";
+        LOG_INFO << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
         Registry<CriticalOperator>::getItemVector()[index].second->_do();
         run_some_normal_operators(run_normal_operator_count, normal_sleep_ms);
     }
@@ -302,14 +313,13 @@ int main(int argc, char *argv[])
         LOG_ERROR << "The remaining alive node count is " << alive_node_count << "\n";
         set_is_fuzzing(false);
         LOG_INFO << "Fuzzing is stopped, now we wait for 3 seconds and then"
-                                   " run some normal operators to see whether it works as usual.\n";
+                    " run some normal operators to see whether it works as usual.\n";
         std::this_thread::sleep_for(std::chrono::seconds(3));
 
         for (int i = 0; i < run_normal_operator_count && normal_operator_size > 0; i++)
         {
             uint32_t index = __dst_get_random_uint8_t() % normal_operator_size;
-            LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first
-                                    << "\n";
+            LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
             auto &running_operator = Registry<NormalOperator>::getItemVector()[index];
             if (running_operator.second->_do())
             {

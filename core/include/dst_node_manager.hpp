@@ -33,6 +33,7 @@ class NodeManager
 public:
     uint32_t node_count;
     ServerConfigurationGenerator *configuration_generator;
+    bool start_with_strace = false;
 
     explicit NodeManager(ServerConfigurationGenerator *_configuration_generator)
         : configuration_generator(_configuration_generator), node_count(DEFAULT_NODE_COUNT)
@@ -184,9 +185,19 @@ public:
             delete ni.process;
             ni.process = nullptr;
         }
-        ni.process =
-            new boost::process::child(boost::process::search_path("strace").string() + " -f -k -o strace_log_" + node_id_str + " " + ni.start_command,
-                                      boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
+        if (start_with_strace)
+        {
+            ni.process = new boost::process::child(boost::process::search_path("strace").string() +
+                                                       " -f -k -o strace_log_" + node_id_str + " " + ni.start_command,
+                                                   boost::process::std_out > log_file,
+                                                   boost::process::std_err > err_log_file, env);
+        }
+        else
+        {
+            ni.process = new boost::process::child(
+                boost::process::search_path("dst_fuzz_fault").string() + " " + ni.start_command,
+                boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
+        }
         int wait_count = 0;
         while (!ni.process->running() && (++wait_count) < WAIT_PROCESS_START_MAX_COUNT)
             ;

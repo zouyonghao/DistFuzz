@@ -130,7 +130,8 @@
         "stat.h": "c",
         "unistd.h": "c",
         "resource.h": "c",
-        "dst_random.h": "c"
+        "dst_random.h": "c",
+        "__bits": "cpp"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
