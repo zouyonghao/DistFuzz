@@ -12,6 +12,9 @@
 
 #define FUZZ_BYTES_SIZE 1024 * 1024
 
+#define FUZZ_COVERAGE_MAP_ENV_ID "AFLCplusplus_BRANCH_TRACE_SHM_ID"
+#define FUZZ_COVERAGE_MAP_SIZE (1u << 23)
+
 static inline int max(int a, int b) { return a > b ? a : b; }
 
 static inline int min(int a, int b) { return a > b ? b : a; }

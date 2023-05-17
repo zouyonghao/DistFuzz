@@ -5,7 +5,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/resource.h>
+#include <sys/shm.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 #include "dst_random.h"
@@ -83,8 +86,6 @@ int main(int argc, char **argv)
     pid_t child_pid = fork();
     if (child_pid == 0)
     {
-        // skel->bss->pid = getpid();
-        fprintf(stderr, "new pid is %d\n", getpid());
         if (execv(argv[1], &argv[1]))
         {
             perror("execve failed");
@@ -93,11 +94,22 @@ int main(int argc, char **argv)
     }
 
     skel->bss->pid = child_pid;
-    fprintf(stderr, "pid is %d\n", child_pid);
-    while (!stop)
+    wait(NULL);
+
+    /* Retrive fuzz_coverage_map */
+    if (getenv("DST_FUZZ") != NULL)
     {
-        // fprintf(stderr, ".");
-        sleep(1);
+        char *res_shm_fuzz_coverage_map = getenv(FUZZ_COVERAGE_MAP_ENV_ID);
+        if (!res_shm_fuzz_coverage_map)
+        {
+            fprintf(stderr, "%s", "\033[33m[FUZZ PRINT] Can not Get Environment Variable\033[0m\n");
+        }
+        else
+        {
+            fprintf(stderr, "\033[33m[FUZZ PRINT]Get Environment Variable %s\033[0m\n", res_shm_fuzz_coverage_map);
+            uint8_t *fuzz_coverage_map = (uint8_t *)shmat((int)atoi(res_shm_fuzz_coverage_map), NULL, 0);
+            memcpy(fuzz_coverage_map, skel->bss->fuzz_coverage_map, FUZZ_COVERAGE_MAP_SIZE);
+        }
     }
 
 cleanup:

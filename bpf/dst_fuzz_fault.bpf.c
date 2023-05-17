@@ -19,9 +19,21 @@ unsigned char should_record[SHOULD_RECORD_SIZE];
 /* this records filtered files and sockets */
 unsigned long record_fds[FD_SIZE];
 
+/* fuzz_bytes determines whether a syscall injected */
 unsigned char fuzz_bytes[FUZZ_BYTES_SIZE];
 
 unsigned volatile int fuzz_bit_index = 0;
+
+/* fuzz_coverage_map records coverage */
+unsigned char fuzz_coverage_map[FUZZ_COVERAGE_MAP_SIZE];
+unsigned int node_id = 0;
+unsigned long event_index = 0;
+static inline void record_coverage(bool is_send, int length)
+{
+    unsigned long hash_value = (event_index + is_send * 10 + length + node_id * 100) % FUZZ_COVERAGE_MAP_SIZE;
+    fuzz_coverage_map[hash_value]++;
+    event_index++;
+}
 
 unsigned long long dev;
 unsigned long long ino;
@@ -292,7 +304,7 @@ long static inline loop_fn(u32 index, void *ctx)
     return 0;
 }
 
-int static inline handle_events(struct pt_regs *ctx)
+int static inline handle_events(struct pt_regs *ctx, bool is_send, int length)
 {
     if (!is_current_pid_or_tgid(pid))
     {
@@ -320,6 +332,9 @@ int static inline handle_events(struct pt_regs *ctx)
             }
         }
     }
+
+    record_coverage(is_send, length);
+
     return 0;
 }
 
@@ -327,60 +342,80 @@ int static inline handle_events(struct pt_regs *ctx)
  * write syscalls: write, writev, pwritev, pwritev2
  */
 SEC("kprobe/__x64_sys_write")
-int BPF_KPROBE(sys_write) { return handle_events(ctx); }
+int BPF_KPROBE(sys_write, int fd, const void *buf, size_t count) { return handle_events(ctx, true, count); }
 
 SEC("kprobe/__x64_sys_writev")
-int BPF_KPROBE(sys_writev) { return handle_events(ctx); }
+int BPF_KPROBE(sys_writev, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, true, iovcnt); }
 
 SEC("kprobe/__x64_sys_pwritev")
-int BPF_KPROBE(sys_pwritev) { return handle_events(ctx); }
+int BPF_KPROBE(sys_pwritev, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, true, iovcnt); }
 
 SEC("kprobe/__x64_sys_pwritev2")
-int BPF_KPROBE(sys_pwritev2) { return handle_events(ctx); }
+int BPF_KPROBE(sys_pwritev2, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, true, iovcnt); }
 
 /**
  * read syscalls: read, readv, preadv, preadv2
  */
 SEC("kprobe/__x64_sys_read")
-int BPF_KPROBE(sys_read) { return handle_events(ctx); }
+int BPF_KPROBE(sys_read, int fd, void *buf, size_t count) { return handle_events(ctx, false, count); }
 
 SEC("kprobe/__x64_sys_readv")
-int BPF_KPROBE(sys_readv) { return handle_events(ctx); }
+int BPF_KPROBE(sys_readv, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, false, iovcnt); }
 
 SEC("kprobe/__x64_sys_preadv")
-int BPF_KPROBE(sys_preadv) { return handle_events(ctx); }
+int BPF_KPROBE(sys_preadv, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, false, iovcnt); }
 
 SEC("kprobe/__x64_sys_preadv2")
-int BPF_KPROBE(sys_preadv2) { return handle_events(ctx); }
+int BPF_KPROBE(sys_preadv2, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, false, iovcnt); }
 
 /**
  * recv syscalls: recv, recvfrom, recvmsg, recvmmsg
  */
 SEC("kprobe/__x64_sys_recv")
-int BPF_KPROBE(sys_recv) { return handle_events(ctx); }
+int BPF_KPROBE(sys_recv, int sockfd, void *buf, size_t len) { return handle_events(ctx, false, len); }
 
 SEC("kprobe/__x64_sys_recvfrom")
-int BPF_KPROBE(sys_recvfrom) { return handle_events(ctx); }
+int BPF_KPROBE(sys_recvfrom, int sockfd, void *buf, size_t len) { return handle_events(ctx, false, len); }
 
 SEC("kprobe/__x64_sys_recvmsg")
-int BPF_KPROBE(sys_recvmsg) { return handle_events(ctx); }
+int BPF_KPROBE(sys_recvmsg, int sockfd, struct msghdr *msg)
+{
+    struct msghdr copied_msg;
+    bpf_probe_read(&copied_msg, sizeof(copied_msg), msg);
+    return handle_events(ctx, false, copied_msg.msg_iter.count);
+}
 
 SEC("kprobe/__x64_sys_recvmmsg")
-int BPF_KPROBE(sys_recvmmsg) { return handle_events(ctx); }
+int BPF_KPROBE(sys_recvmmsg, int sockfd, struct mmsghdr *msg)
+{
+    struct mmsghdr copied_msg;
+    bpf_probe_read(&copied_msg, sizeof(copied_msg), msg);
+    return handle_events(ctx, false, copied_msg.msg_len);
+}
 
 /**
  * send syscalls: send, sendto, sendmsg, sendmmsg
  */
 SEC("kprobe/__x64_sys_send")
-int BPF_KPROBE(sys_send) { return handle_events(ctx); }
+int BPF_KPROBE(sys_send, int sockfd, const void *buf, size_t len) { return handle_events(ctx, true, len); }
 
 SEC("kprobe/__x64_sys_sendto")
-int BPF_KPROBE(sys_sendto) { return handle_events(ctx); }
+int BPF_KPROBE(sys_sendto, int sockfd, const void *buf, size_t len) { return handle_events(ctx, true, len); }
 
 SEC("kprobe/__x64_sys_sendmsg")
-int BPF_KPROBE(sys_sendmsg) { return handle_events(ctx); }
+int BPF_KPROBE(sys_sendmsg, int sockfd, struct msghdr *msg)
+{
+    struct msghdr copied_msg;
+    bpf_probe_read(&copied_msg, sizeof(copied_msg), msg);
+    return handle_events(ctx, true, copied_msg.msg_iter.count);
+}
 
 SEC("kprobe/__x64_sys_sendmmsg")
-int BPF_KPROBE(sys_sendmmsg) { return handle_events(ctx); }
+int BPF_KPROBE(sys_sendmmsg, int sockfd, struct mmsghdr *msg)
+{
+    struct mmsghdr copied_msg;
+    bpf_probe_read(&copied_msg, sizeof(copied_msg), msg);
+    return handle_events(ctx, true, copied_msg.msg_len);
+}
 
 char LICENSE[] SEC("license") = "Dual BSD/GPL";
