@@ -82,6 +82,12 @@ int main(int argc, char **argv)
         fprintf(stderr, "Failed to acquire namespace information, just skipped\n");
     }
 
+    /* Set node id */
+    if (getenv("NODE_ID") != NULL)
+    {
+        skel->bss->node_id = atoi(getenv("NODE_ID"));
+    }
+
     /* Start the target program */
     pid_t child_pid = fork();
     if (child_pid == 0)
