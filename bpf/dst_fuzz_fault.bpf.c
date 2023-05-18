@@ -328,7 +328,7 @@ int static inline handle_events(struct pt_regs *ctx, bool is_send, int length)
                 /**
                  * in our env, 0xfff ~= 1ms
                  */
-                bpf_loop(0xfff * 500, loop_fn, &ctx, 0);
+                bpf_loop(0xfff * 50, loop_fn, &ctx, 0);
             }
         }
     }
