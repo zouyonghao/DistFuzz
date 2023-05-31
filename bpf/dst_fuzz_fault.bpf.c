@@ -24,14 +24,34 @@ unsigned char fuzz_bytes[FUZZ_BYTES_SIZE];
 
 unsigned volatile int fuzz_bit_index = 0;
 
+uint64_t get_length_from_iovec(const struct iovec *iov, int iovcnt);
+
 /* fuzz_coverage_map records coverage */
 unsigned char fuzz_coverage_map[FUZZ_COVERAGE_MAP_SIZE];
 unsigned int node_id = 0;
 unsigned long event_index = 0;
-static inline void record_coverage(bool is_send, int length)
+static inline void record_coverage(bool is_send, int length, unsigned int fd, bool fault_injected)
 {
-    unsigned long hash_value = (event_index + is_send * 10 + length + node_id * 100) % FUZZ_COVERAGE_MAP_SIZE;
-    fuzz_coverage_map[hash_value]++;
+    // unsigned long hash_value =
+    //     (((event_index + length + fd + node_id * 100) << is_send) << fault_injected) % FUZZ_COVERAGE_MAP_SIZE;
+    unsigned long hash_value =
+        ((event_index + length + fd * 97 + node_id * 100 + is_send * 10) << fault_injected) % FUZZ_COVERAGE_MAP_SIZE;
+    unsigned long tmp = hash_value - 1;
+    if (tmp >= 0 && tmp < FUZZ_COVERAGE_MAP_SIZE && fuzz_coverage_map[tmp] > 0)
+    {
+        hash_value = (hash_value - 1) % FUZZ_COVERAGE_MAP_SIZE;
+    }
+
+    tmp = hash_value + 1;
+    if (tmp >= 0 && tmp < FUZZ_COVERAGE_MAP_SIZE && fuzz_coverage_map[tmp] > 0)
+    {
+        hash_value = (hash_value + 1) % FUZZ_COVERAGE_MAP_SIZE;
+    }
+
+    if (hash_value >= 0 && hash_value < FUZZ_COVERAGE_MAP_SIZE)
+    {
+        fuzz_coverage_map[hash_value]++;
+    }
     event_index++;
 }
 
@@ -306,17 +326,15 @@ long static inline loop_fn(u32 index, void *ctx)
 
 int static inline handle_events(struct pt_regs *ctx, bool is_send, int length)
 {
-    if (!is_current_pid_or_tgid(pid))
-    {
-        return 0;
-    }
     struct pt_regs *new_ctx = PT_REGS_SYSCALL_REGS(ctx);
     unsigned int fd = PT_REGS_PARM1_CORE_SYSCALL(new_ctx);
+    bool fault_injected = false;
     if (fd >= 0 && fd < FD_SIZE && record_fds[fd])
     {
         unsigned int b = fuzz_bit_index;
         if (get_bit(fuzz_bytes, FUZZ_BYTES_SIZE, fuzz_bit_index++))
         {
+            fault_injected = true;
             if (get_bit(fuzz_bytes, FUZZ_BYTES_SIZE, fuzz_bit_index++))
             {
                 bpf_printk("inject fault to fd %d.", fd);
@@ -333,7 +351,7 @@ int static inline handle_events(struct pt_regs *ctx, bool is_send, int length)
         }
     }
 
-    record_coverage(is_send, length);
+    record_coverage(is_send, length, fd, fault_injected);
 
     return 0;
 }
@@ -342,44 +360,118 @@ int static inline handle_events(struct pt_regs *ctx, bool is_send, int length)
  * write syscalls: write, writev, pwritev, pwritev2
  */
 SEC("kprobe/__x64_sys_write")
-int BPF_KPROBE(sys_write, int fd, const void *buf, size_t count) { return handle_events(ctx, true, count); }
+int BPF_KPROBE(sys_write, int fd, const void *buf, size_t count)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, true, count);
+}
 
 SEC("kprobe/__x64_sys_writev")
-int BPF_KPROBE(sys_writev, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, true, iovcnt); }
+int BPF_KPROBE(sys_writev, int fd, const struct iovec *iov, int iovcnt)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, true, get_length_from_iovec(iov, iovcnt));
+}
 
 SEC("kprobe/__x64_sys_pwritev")
-int BPF_KPROBE(sys_pwritev, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, true, iovcnt); }
+int BPF_KPROBE(sys_pwritev, int fd, const struct iovec *iov, int iovcnt)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, true, get_length_from_iovec(iov, iovcnt));
+}
 
 SEC("kprobe/__x64_sys_pwritev2")
-int BPF_KPROBE(sys_pwritev2, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, true, iovcnt); }
+int BPF_KPROBE(sys_pwritev2, int fd, const struct iovec *iov, int iovcnt)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, true, get_length_from_iovec(iov, iovcnt));
+}
 
 /**
  * read syscalls: read, readv, preadv, preadv2
  */
 SEC("kprobe/__x64_sys_read")
-int BPF_KPROBE(sys_read, int fd, void *buf, size_t count) { return handle_events(ctx, false, count); }
+int BPF_KPROBE(sys_read, int fd, void *buf, size_t count)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, false, count);
+}
 
 SEC("kprobe/__x64_sys_readv")
-int BPF_KPROBE(sys_readv, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, false, iovcnt); }
+int BPF_KPROBE(sys_readv, int fd, const struct iovec *iov, int iovcnt)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, false, get_length_from_iovec(iov, iovcnt));
+}
 
 SEC("kprobe/__x64_sys_preadv")
-int BPF_KPROBE(sys_preadv, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, false, iovcnt); }
+int BPF_KPROBE(sys_preadv, int fd, const struct iovec *iov, int iovcnt)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, false, get_length_from_iovec(iov, iovcnt));
+}
 
 SEC("kprobe/__x64_sys_preadv2")
-int BPF_KPROBE(sys_preadv2, int fd, const struct iovec *iov, int iovcnt) { return handle_events(ctx, false, iovcnt); }
+int BPF_KPROBE(sys_preadv2, int fd, const struct iovec *iov, int iovcnt)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, false, get_length_from_iovec(iov, iovcnt));
+}
 
 /**
  * recv syscalls: recv, recvfrom, recvmsg, recvmmsg
  */
 SEC("kprobe/__x64_sys_recv")
-int BPF_KPROBE(sys_recv, int sockfd, void *buf, size_t len) { return handle_events(ctx, false, len); }
+int BPF_KPROBE(sys_recv, int sockfd, void *buf, size_t len)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, false, len);
+}
 
 SEC("kprobe/__x64_sys_recvfrom")
-int BPF_KPROBE(sys_recvfrom, int sockfd, void *buf, size_t len) { return handle_events(ctx, false, len); }
+int BPF_KPROBE(sys_recvfrom, int sockfd, void *buf, size_t len)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, false, len);
+}
 
 SEC("kprobe/__x64_sys_recvmsg")
 int BPF_KPROBE(sys_recvmsg, int sockfd, struct msghdr *msg)
 {
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
     struct msghdr copied_msg;
     bpf_probe_read(&copied_msg, sizeof(copied_msg), msg);
     return handle_events(ctx, false, copied_msg.msg_iter.count);
@@ -388,6 +480,10 @@ int BPF_KPROBE(sys_recvmsg, int sockfd, struct msghdr *msg)
 SEC("kprobe/__x64_sys_recvmmsg")
 int BPF_KPROBE(sys_recvmmsg, int sockfd, struct mmsghdr *msg)
 {
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
     struct mmsghdr copied_msg;
     bpf_probe_read(&copied_msg, sizeof(copied_msg), msg);
     return handle_events(ctx, false, copied_msg.msg_len);
@@ -397,14 +493,32 @@ int BPF_KPROBE(sys_recvmmsg, int sockfd, struct mmsghdr *msg)
  * send syscalls: send, sendto, sendmsg, sendmmsg
  */
 SEC("kprobe/__x64_sys_send")
-int BPF_KPROBE(sys_send, int sockfd, const void *buf, size_t len) { return handle_events(ctx, true, len); }
+int BPF_KPROBE(sys_send, int sockfd, const void *buf, size_t len)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, true, len);
+}
 
 SEC("kprobe/__x64_sys_sendto")
-int BPF_KPROBE(sys_sendto, int sockfd, const void *buf, size_t len) { return handle_events(ctx, true, len); }
+int BPF_KPROBE(sys_sendto, int sockfd, const void *buf, size_t len)
+{
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
+    return handle_events(ctx, true, len);
+}
 
 SEC("kprobe/__x64_sys_sendmsg")
 int BPF_KPROBE(sys_sendmsg, int sockfd, struct msghdr *msg)
 {
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
     struct msghdr copied_msg;
     bpf_probe_read(&copied_msg, sizeof(copied_msg), msg);
     return handle_events(ctx, true, copied_msg.msg_iter.count);
@@ -413,9 +527,34 @@ int BPF_KPROBE(sys_sendmsg, int sockfd, struct msghdr *msg)
 SEC("kprobe/__x64_sys_sendmmsg")
 int BPF_KPROBE(sys_sendmmsg, int sockfd, struct mmsghdr *msg)
 {
+    if (!is_current_pid_or_tgid(pid))
+    {
+        return 0;
+    }
     struct mmsghdr copied_msg;
     bpf_probe_read(&copied_msg, sizeof(copied_msg), msg);
     return handle_events(ctx, true, copied_msg.msg_len);
+}
+
+uint64_t get_length_from_iovec(const struct iovec *iov, int iovcnt)
+{
+    uint64_t length = 0;
+    // for (uint64_t i = 0; i < iovcnt; i++) {
+    // 	struct iovec copied_iov;
+    //     bpf_probe_read(&copied_iov, sizeof(struct iovec), iov + sizeof(struct iovec) * i);
+    // 	length += copied_iov.iov_len;
+    // }
+
+    struct iovec copied_iov;
+    bpf_probe_read(&copied_iov, sizeof(struct iovec), iov);
+    length += copied_iov.iov_len;
+
+    if (iovcnt > 1)
+    {
+        bpf_printk("iov not read, iovcnt = %d", iovcnt);
+    }
+
+    return length;
 }
 
 char LICENSE[] SEC("license") = "Dual BSD/GPL";

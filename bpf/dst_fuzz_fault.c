@@ -102,6 +102,8 @@ int main(int argc, char **argv)
     skel->bss->pid = child_pid;
     wait(NULL);
 
+    // TODO: signal handle!
+
     /* Retrive fuzz_coverage_map */
     if (getenv("DST_FUZZ") != NULL)
     {
