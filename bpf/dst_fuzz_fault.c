@@ -21,7 +21,13 @@ static int libbpf_print_fn(enum libbpf_print_level level, const char *format, va
 
 static volatile sig_atomic_t stop;
 
-static void sig_int(int signo) { stop = 1; }
+static void sig_int(int signo)
+{
+    if (signo == SIGKILL || signo == SIGINT || signo == SIGQUIT)
+    {
+        stop = 1;
+    }
+}
 
 int main(int argc, char **argv)
 {
@@ -100,9 +106,20 @@ int main(int argc, char **argv)
     }
 
     skel->bss->pid = child_pid;
-    wait(NULL);
+    while (!stop)
+    {
+        int status;
+        /**
+         * If the WNOHANG bit is set in OPTIONS, and that child
+         * is not already dead, return (pid_t) 0.
+         */
+        if (waitpid(child_pid, &status, WNOHANG) != 0)
+        {
+            break;
+        }
+    }
 
-    // TODO: signal handle!
+    kill(child_pid, SIGKILL);
 
     /* Retrive fuzz_coverage_map */
     if (getenv("DST_FUZZ") != NULL)
