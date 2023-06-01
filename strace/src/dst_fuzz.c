@@ -88,7 +88,7 @@ uint64_t get_length_from_iovec(struct tcb *tcp, int iov_pos, int iovcnt_pos);
 uint64_t get_length_from_msg(struct tcb *tcp, int msg_pos);
 uint64_t get_length_from_mmsg(struct tcb *tcp, int msgvec_pos, int vlen_pos);
 
-uint64_t get_hash_value(bool is_send, uint64_t position, size_t length);
+uint64_t get_hash_value(bool is_send, uint64_t position, size_t length, bool fault_injected);
 
 // static int arch_set_error(struct tcb *);
 // #include "arch_regs.c"
@@ -103,10 +103,11 @@ static unsigned long tmp_offset = 0;
 
 static uint64_t event_index = 0;
 uint64_t
-get_hash_value(bool is_send, uint64_t position, size_t length)
+get_hash_value(bool is_send, uint64_t position, size_t length, bool fault_injected)
 {
 	int node_id = getenv("NODE_ID") != NULL ? atoi(getenv("NODE_ID")) : 0;
-	uint64_t hash_value = (event_index + is_send * 10 + length + node_id * 100 + position) %
+	uint64_t hash_value = ((event_index + is_send * 10 + length + node_id * 100 + position)
+			       << fault_injected) %
 			      FUZZ_COVERAGE_MAP_SIZE;
 	for (int i = 1; i <= ignore_range; i++) {
 		if (fuzz_coverage_map[hash_value - i] > 0) {
@@ -253,30 +254,20 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 	// ptrace(PTRACE_GETREGS, tcp->pid, NULL, &_regs);
 	// fprintf(stderr, "rip - fs_base is %llX\n", _regs.rip - _regs.fs_base);
 	unwinder.tcb_walk(tcp, print_call_cb, print_error_cb, NULL);
-	uint64_t hash_index = get_hash_value(is_send, tmp_offset, length);
-#ifdef ENABLE_KAFKA
-	if (use_kafka) {
-		if (rd_kafka_produce(topic_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY,
-				     &hash_index, sizeof(uint64_t), NULL, 0, NULL) == -1) {
-			fprintf(stderr, "%% Failed to produce to topic %s: %s\n",
-				KAFKA_COVERAGE_TOPIC, rd_kafka_err2str(rd_kafka_last_error()));
-		}
-	} else {
-#endif
-		fuzz_coverage_map[hash_index]++;
-#ifdef ENABLE_KAFKA
-	}
-#endif
+
+	bool fault_injected = false;
 
 	if (getenv("NO_FAULT") != NULL) {
-		return;
+		goto EXIT;
 	}
 
 	uint8_t random = __dst_get_random_uint8_t();
 	// fprintf(stderr, "random is %u\n", random);
 	if (random < 50) {
-		return;
+		goto EXIT;
 	}
+
+	fault_injected = true;
 
 	fprintf(stderr, "get file path %s\n", file_path);
 
@@ -359,6 +350,22 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		break;
 	}
 	}
+
+EXIT:
+	uint64_t hash_index = get_hash_value(is_send, tmp_offset, length, fault_injected);
+#ifdef ENABLE_KAFKA
+	if (use_kafka) {
+		if (rd_kafka_produce(topic_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY,
+				     &hash_index, sizeof(uint64_t), NULL, 0, NULL) == -1) {
+			fprintf(stderr, "%% Failed to produce to topic %s: %s\n",
+				KAFKA_COVERAGE_TOPIC, rd_kafka_err2str(rd_kafka_last_error()));
+		}
+	} else {
+#endif
+		fuzz_coverage_map[hash_index]++;
+#ifdef ENABLE_KAFKA
+	}
+#endif
 }
 
 void
