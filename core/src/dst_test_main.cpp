@@ -153,7 +153,7 @@ int main(int argc, char *argv[])
                   << "    --random_file         the random file name" << std::endl
                   << "    --fuzz_before_init    should we start fuzzing before the init operator (true or false)"
                   << std::endl
-                  << "    --start_with_strace   start the process with strace" << std::endl
+                  << "    --start_with_ebpf     start the process with dst_ebpf_fault" << std::endl
                   << std::endl;
         return 0;
     }
@@ -206,10 +206,10 @@ int main(int argc, char *argv[])
         fuzz_before_init = false;
     }
 
-    bool start_with_strace = false;
-    if (options.count("start_with_strace"))
+    bool start_with_ebpf = false;
+    if (options.count("start_with_ebpf"))
     {
-        start_with_strace = true;
+        start_with_ebpf = true;
     }
 
     log_init("log_test");
@@ -252,9 +252,9 @@ int main(int argc, char *argv[])
     }
     nm->set_node_count(node_count);
 
-    if (start_with_strace)
+    if (start_with_ebpf)
     {
-        nm->start_with_strace = true;
+        nm->start_with_ebpf = true;
     }
 
     if (!nm->start_all())
