@@ -1,0 +1,22 @@
+steps:
+  - label: "Launch jobs"
+    plugins:
+      - JuliaCI/julia#v1:
+          persist_depot_dirs: packages,artifacts,compiled
+          version: '1.7'
+    timeout_in_minutes: 15
+    agents:
+      queue: "juliaecosystem"
+      os: "linux"
+    commands: |
+      echo "--- Instantiate the environment"
+      julia --project=.buildkite -e 'import Pkg; Pkg.instantiate()'
+
+      echo "--- Precompile the environment"
+      julia --project=.buildkite -e 'import Pkg; Pkg.precompile()'
+
+      echo "--- Generate the Buildkite pipeline YAML files"
+      julia --project=.buildkite .buildkite/lib/generate.jl
+
+      echo "--- Upload the Buildkite pipeline YAML files"
+      julia --project=.buildkite .buildkite/lib/launch.jl

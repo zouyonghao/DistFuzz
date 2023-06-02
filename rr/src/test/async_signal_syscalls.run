@@ -1,0 +1,12 @@
+source `dirname $0`/util.sh
+
+# Without the syscallbuf, trying to record the large number of
+# syscalls in this test is impractical.
+skip_if_no_syscall_buf
+
+# 2^17 iterations is arbitrarily chosen to take ~3s on a fast machine
+record $TESTNAME 17
+
+replay
+check 'EXIT-SUCCESS'
+passed

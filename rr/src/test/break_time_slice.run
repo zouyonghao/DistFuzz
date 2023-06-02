@@ -1,0 +1,3 @@
+source `dirname $0`/util.sh
+record chew_cpu$bitness
+debug break_time_slice

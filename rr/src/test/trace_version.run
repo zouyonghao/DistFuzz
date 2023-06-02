@@ -1,0 +1,37 @@
+source `dirname $0`/util.sh
+
+TRACE_DIR=trace_0
+
+function expect_replay_fail {
+    replay
+    if [[ $(cat replay.err) == "" ]]; then
+        echo "Test '$TESTNAME' FAILED: replay should have failed, but it succeeded."
+        exit 1
+    fi
+    echo "  (replay failed as expected)"
+}
+
+record simple$bitness
+trace_dir="simple$bitness-$nonce-0"
+
+if [ ! -f "$trace_dir/version" ]; then
+    echo "Test '$TESTNAME' FAILED: version file not found in trace directory."
+    exit 1
+fi;
+
+echo "Moving version file away ..."
+mv "$trace_dir/version" ./version.tmp
+expect_replay_fail
+
+echo "Trying to replay with empty version file ..."
+echo "" > "$trace_dir/version"
+expect_replay_fail
+
+echo "Trying to replay with dummy version number ..."
+echo "-42\n" > "$trace_dir/version"
+expect_replay_fail
+
+echo "Restoring trace version file ..."
+mv ./version.tmp "$trace_dir/version"
+replay
+check EXIT-SUCCESS

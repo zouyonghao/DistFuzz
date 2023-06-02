@@ -1,0 +1,32 @@
+source `dirname $0`/util.sh
+
+SYNC_TOKEN=sleeping
+
+record $TESTNAME &             # sleep "forever"
+SUB_ID=$!
+
+echo "Waiting for token '$SYNC_TOKEN' from tracee ..."
+until grep -q $SYNC_TOKEN record.out; do
+    sleep 0
+    if ! kill -0 "$SUB_ID" >/dev/null 2>&1; then failed "subshell died, no need to longer wait for '$SYNC_TOKEN'"; exit; fi
+done
+
+rrpid=$(parent_pid_of $(pidof $TESTNAME-$nonce))
+
+echo "  done.  Delivering SIGTERM to $rrpid ..."
+kill -TERM $rrpid
+
+echo "  done."
+
+# Wait for 'record' to actually terminate. Otherwise we might start
+# replaying before the trace file has been completely written, and we might
+# fail to see the tracee write EXIT-SUCCESS.
+wait
+
+if [[ "record.out" == $(grep -l "EXIT-SUCCESS" record.out) ]]; then
+    echo "Test '$TESTNAME' FAILED: error during recording: tracer not interrupted in time."
+fi
+
+echo "Replaying ..."
+replay
+check ""

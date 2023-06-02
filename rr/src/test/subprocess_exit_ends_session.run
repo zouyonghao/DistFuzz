@@ -1,0 +1,6 @@
+source `dirname $0`/util.sh
+
+record fork_child_crash$bitness
+TARGET_PID=$(grep 'child ' record.out | awk '{print $2}')
+
+debug subprocess_exit_ends_session "-f $TARGET_PID"

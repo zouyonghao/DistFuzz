@@ -1,0 +1,2 @@
+source `dirname $0`/util.sh
+checkpoint_test prctl_name$bitness 11 13

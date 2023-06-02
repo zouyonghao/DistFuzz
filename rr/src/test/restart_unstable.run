@@ -1,0 +1,3 @@
+source `dirname $0`/util.sh
+record exit_group$bitness
+debug restart_unstable

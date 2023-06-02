@@ -1,0 +1,323 @@
+/* -*- Mode: C++; tab-width: 8; c-basic-offset: 2; indent-tabs-mode: nil; -*- */
+
+#ifndef RR_AUTO_REMOTE_SYSCALLS_H_
+#define RR_AUTO_REMOTE_SYSCALLS_H_
+
+#include <string.h>
+
+#include <vector>
+
+#include "Registers.h"
+#include "ScopedFd.h"
+#include "Task.h"
+
+namespace rr {
+
+class AutoRemoteSyscalls;
+class Task;
+
+/**
+ * Helpers to make remote syscalls on behalf of a Task.  Usage looks
+ * like
+ *
+ *    AutoRemoteSyscalls remote(t); // prepare remote syscalls
+ *    remote.syscall(syscall_number_for_open(remote.arch()), ...); // make
+ *syscalls
+ *    ...
+ *    // when |remote| goes out of scope, remote syscalls are finished
+ */
+
+/**
+ * Cookie used to restore stomped memory, usually prepared as the
+ * argument to a remote syscall.
+ */
+class AutoRestoreMem {
+public:
+  /**
+   * Write |mem| into address space of the Task prepared for
+   * remote syscalls in |remote|, in such a way that the write
+   * will be undone.  The address of the reserved mem space is
+   * available via |get|.
+   * If |mem| is null, data is not written, only the space is reserved.
+   */
+  AutoRestoreMem(AutoRemoteSyscalls& remote, const void* mem, ssize_t num_bytes)
+      : remote(remote) {
+    init(mem, num_bytes);
+  }
+
+  /**
+   * Convenience constructor for pushing a C string |str|, including
+   * the trailing '\0' byte.
+   */
+  AutoRestoreMem(AutoRemoteSyscalls& remote, const char* str) : remote(remote) {
+    init((const uint8_t*)str, strlen(str) + 1 /*null byte*/);
+  }
+
+  ~AutoRestoreMem();
+
+  /**
+   * Get a pointer to the reserved memory.
+   * Returns null if we failed.
+   */
+  remote_ptr<void> get() const { return addr; }
+
+  /**
+   * Return size of reserved memory buffer.
+   */
+  size_t size() const { return data.size(); }
+
+private:
+  void init(const void* mem, ssize_t num_bytes);
+
+  AutoRemoteSyscalls& remote;
+  /* Address of tmp mem. */
+  remote_ptr<void> addr;
+  /* Saved data. */
+  std::vector<uint8_t> data;
+  /* (We keep this around for error checking.) */
+  remote_ptr<void> saved_sp;
+  /* Length of tmp mem. */
+  size_t len;
+
+  AutoRestoreMem& operator=(const AutoRestoreMem&) = delete;
+  AutoRestoreMem(const AutoRestoreMem&) = delete;
+  void* operator new(size_t) = delete;
+  void operator delete(void*) = delete;
+};
+
+/**
+ * RAII helper to prepare a Task for remote syscalls and undo any
+ * preparation upon going out of scope. Note that this restores register
+ * values when going out of scope, so *all* changes to Task's register
+ * state are lost.
+ */
+class AutoRemoteSyscalls {
+public:
+  enum MemParamsEnabled { ENABLE_MEMORY_PARAMS, DISABLE_MEMORY_PARAMS };
+
+  /**
+   * Prepare |t| for a series of remote syscalls.
+   *
+   * NBBB!  Before preparing for a series of remote syscalls,
+   * the caller *must* ensure the callee will not receive any
+   * signals.  This code does not attempt to deal with signals.
+   */
+  AutoRemoteSyscalls(Task* t,
+                     MemParamsEnabled enable_mem_params = ENABLE_MEMORY_PARAMS);
+  /**
+   * Undo in |t| any preparations that were made for a series of
+   * remote syscalls.
+   */
+  ~AutoRemoteSyscalls();
+
+  /**
+   * If t's stack pointer doesn't look valid, temporarily adjust it to
+   * the top of *some* stack area.
+   */
+  void maybe_fix_stack_pointer();
+
+  /**
+   * "Initial" registers saved from the target task.
+   *
+   * NB: a non-const reference is returned because some power
+   * users want to update the registers that are restored after
+   * finishing remote syscalls.  Perhaps these users should be
+   * fixed, or you should just be careful.
+   */
+  Registers& regs() { return initial_regs; }
+
+  /**
+   * Undo any preparations to make remote syscalls in the context of |t|.
+   *
+   * This is usually called automatically by the destructor;
+   * don't call it directly unless you really know what you'd
+   * doing.  *ESPECIALLY* don't call this on a |t| other than
+   * the one passed to the constructor, unless you really know
+   * what you're doing.
+   */
+  void restore_state_to(Task* t);
+
+  /**
+   * Make |syscallno| with variadic |args| (limited to 6 on
+   * x86).  Return the raw kernel return value.
+   * Returns -ESRCH if the process dies or has died.
+   */
+  template <typename... Rest> long syscall(int syscallno, Rest... args) {
+    Registers callregs = regs();
+    // The first syscall argument is called "arg 1", so
+    // our syscall-arg-index template parameter starts
+    // with "1".
+    return syscall_helper<1>(syscallno, callregs, args...);
+  }
+
+  // Aborts on all errors.
+  // DEPRECATED. Use infallible_syscall_if_alive instead.
+  template <typename... Rest>
+  long infallible_syscall(int syscallno, Rest... args) {
+    Registers callregs = regs();
+    // The first syscall argument is called "arg 1", so
+    // our syscall-arg-index template parameter starts
+    // with "1".
+    long ret = syscall_helper<1>(syscallno, callregs, args...);
+    check_syscall_result(ret, syscallno, false);
+    return ret;
+  }
+
+  // Aborts on all errors other than -ESRCH. Aborts on -ESRCH
+  // if this is a replay task (they should never unexpectedly die).
+  template <typename... Rest>
+  long infallible_syscall_if_alive(int syscallno, Rest... args) {
+    Registers callregs = regs();
+    // The first syscall argument is called "arg 1", so
+    // our syscall-arg-index template parameter starts
+    // with "1".
+    long ret = syscall_helper<1>(syscallno, callregs, args...);
+    check_syscall_result(ret, syscallno);
+    return ret;
+  }
+
+  /** Returns null if the tracee is dead */
+  template <typename... Rest>
+  remote_ptr<void> infallible_syscall_ptr_if_alive(int syscallno, Rest... args) {
+    Registers callregs = regs();
+    long ret = syscall_helper<1>(syscallno, callregs, args...);
+    check_syscall_result(ret, syscallno);
+    return ret == -ESRCH ? 0 : ret;
+  }
+
+  /**
+   * Remote mmap syscalls are common and non-trivial due to the need to
+   * select either mmap2 or mmap.
+   * Returns null if the process dies or has died.
+   */
+  remote_ptr<void> infallible_mmap_syscall_if_alive(remote_ptr<void> addr, size_t length,
+                                                    int prot, int flags, int child_fd,
+                                                    uint64_t offset_bytes);
+
+  /** TODO replace with infallible_lseek_syscall_if_alive */
+  int64_t infallible_lseek_syscall(int fd, int64_t offset, int whence);
+
+  /** Close the fd in the child. If the child died, just ignore that. */
+  void infallible_close_syscall_if_alive(int child_fd);
+
+  /** The Task in the context of which we're making syscalls. */
+  Task* task() const { return t; }
+
+  /**
+   * A small helper to get at the Task's arch.
+   * Out-of-line to avoid including Task.h here.
+   */
+  SupportedArch arch() const;
+
+  /**
+   * Arranges for 'fd' to be transmitted to this process and returns
+   * our opened version of it.
+   * Returns a closed fd if the process dies or has died.
+   */
+  ScopedFd retrieve_fd(int fd);
+
+  /**
+   * Arranges for 'fd' to be transmitted to the tracee and returns
+   * a file descriptor in the tracee that corresponds to the same file
+   * description.
+   * Returns a negative value if this fails.
+   */
+  int send_fd(const ScopedFd &fd);
+
+  /**
+   * Arranges for 'fd' to be transmitted to the tracee and returns
+   * a file descriptor in the tracee that corresponds to the same file
+   * description.
+   * Aborts if that fails.
+   * Returns -ESRCH if the tracee is dead (and is not replaying)
+   */
+  int infallible_send_fd_if_alive(const ScopedFd& our_fd);
+
+  /**
+   * `send_fd` the given file descriptor, making sure that it ends up as fd
+   * `dup_to`, (dup'ing it there and closing the original if necessary)
+   * TODO replace with infallible_send_fd_dup_if_alive
+   */
+  void infallible_send_fd_dup(const ScopedFd& our_fd, int dup_to, int dup3_flags);
+
+  /**
+   * Remotely invoke in |t| the specified syscall with the given
+   * arguments.  The arguments must of course be valid in |t|,
+   * and no checking of that is done by this function.
+   *
+   * The syscall is finished in |t| and the result is returned.
+   */
+  long syscall_base(int syscallno, Registers& callregs);
+
+  MemParamsEnabled enable_mem_params() { return enable_mem_params_; }
+
+  /**
+   * When the syscall is 'clone', this will be recovered from the
+   * PTRACE_EVENT_FORK/VFORK/CLONE.
+   */
+  pid_t new_tid() { return new_tid_; }
+
+  /* Do the open/mmap/close dance for a particular file */
+  void finish_direct_mmap(remote_ptr<void> rec_addr, size_t length,
+                          int prot, int flags,
+                          const std::string& backing_file_name,
+                          int backing_file_open_flags,
+                          off64_t backing_offset_bytes,
+                          struct stat& real_file, std::string& real_file_name);
+
+  // Calling this with allow_death false is DEPRECATED.
+  void check_syscall_result(long ret, int syscallno, bool allow_death = true);
+
+private:
+  void setup_path(bool enable_singlestep_path);
+
+  /**
+   * "Recursively" build the set of syscall registers in
+   * |callregs|.  |Index| is the syscall arg that will be set to
+   * |arg|, and |args| are the remaining arguments.
+   */
+  template <int Index, typename T, typename... Rest>
+  long syscall_helper(int syscallno, Registers& callregs, T arg, Rest... args) {
+    callregs.set_arg<Index>(arg);
+    return syscall_helper<Index + 1>(syscallno, callregs, args...);
+  }
+  /**
+   * "Recursion" "base case": no more arguments to build, so
+   * just make the syscall and return the kernel return value.
+   */
+  template <int Index> long syscall_helper(int syscallno, Registers& callregs) {
+    return syscall_base(syscallno, callregs);
+  }
+
+  template <typename Arch> ScopedFd retrieve_fd_arch(int fd);
+  template <typename Arch> int send_fd_arch(const ScopedFd &fd);
+
+  Task* t;
+  Registers initial_regs;
+  remote_code_ptr initial_ip;
+  remote_ptr<void> initial_sp;
+  bool initial_at_seccomp;
+  remote_ptr<void> fixed_sp;
+  std::vector<uint8_t> replaced_bytes;
+  WaitStatus restore_wait_status;
+  ScopedFd pid_fd;
+
+  pid_t new_tid_;
+  /* Whether we had to mmap a scratch region because none was found */
+  bool scratch_mem_was_mapped;
+  bool use_singlestep_path;
+
+  MemParamsEnabled enable_mem_params_;
+
+  bool restore_sigmask;
+  sig_set_t sigmask_to_restore;
+
+  bool need_sigpending_renable;
+
+  AutoRemoteSyscalls& operator=(const AutoRemoteSyscalls&) = delete;
+  AutoRemoteSyscalls(const AutoRemoteSyscalls&) = delete;
+};
+
+} // namespace rr
+
+#endif // RR_AUTO_REMOTE_SYSCALLS_H_

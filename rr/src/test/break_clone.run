@@ -1,0 +1,3 @@
+source `dirname $0`/util.sh
+record clone$bitness
+debug break_clone
