@@ -882,6 +882,8 @@ void TaskSyscallState::process_syscall_results() {
     t->set_regs(r);
   }
 
+  dst_fuzz(t);
+
   for (auto& action : after_syscall_actions) {
     action(t);
   }

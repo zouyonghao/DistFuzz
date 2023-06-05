@@ -26,7 +26,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib/rr)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(BUILD_TESTS ON CACHE BOOL "Build tests")
+set(BUILD_TESTS OFF CACHE BOOL "Build tests")
 set(WILL_RUN_TESTS ${BUILD_TESTS} CACHE BOOL "Run tests")
 option(INSTALL_TESTSUITE "Install the testsuite")
 
@@ -76,6 +76,8 @@ else()
   set(VDSO_NAME "LINUX_2.6")
 endif()
 configure_file(src/preload/rr_page.ld.in src/preload/rr_page.ld @ONLY)
+
+include_directories(${CMAKE_SOURCE_DIR}/core/include)
 
 include(CheckCCompilerFlag)
 CHECK_C_COMPILER_FLAG("-fmacro-prefix-map=foo=bar" SUPPORTS_MACRO_PREFIX_MAP)
@@ -597,6 +599,7 @@ set(RR_SOURCES
   src/util.cc
   src/WaitManager.cc
   src/WaitStatus.cc
+  src/dst_fuzz.cc
   ${CMAKE_CURRENT_BINARY_DIR}/rr_trace.capnp.c++
   ${BLAKE_ARCH_DIR}/blake2b.c
 )
@@ -672,6 +675,7 @@ target_link_libraries(rr
   ${CMAKE_DL_LIBS}
   ${ZLIB_LDFLAGS}
   brotli
+  dst_core
 )
 
 if(staticlibs)
