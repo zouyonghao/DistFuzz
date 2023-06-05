@@ -131,7 +131,9 @@
         "unistd.h": "c",
         "resource.h": "c",
         "dst_random.h": "c",
-        "__bits": "cpp"
+        "__bits": "cpp",
+        "*.generated": "cpp",
+        "scno.h": "c"
     },
     "cmake.ctest.parallelJobs": 1,
     "files.watcherExclude": {
