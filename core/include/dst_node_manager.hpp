@@ -34,6 +34,7 @@ public:
     uint32_t node_count;
     ServerConfigurationGenerator *configuration_generator;
     bool start_with_ebpf = false;
+    bool start_with_rr = false;
 
     explicit NodeManager(ServerConfigurationGenerator *_configuration_generator)
         : configuration_generator(_configuration_generator), node_count(DEFAULT_NODE_COUNT)
@@ -189,6 +190,12 @@ public:
         {
             ni.process = new boost::process::child(
                 boost::process::search_path("dst_fuzz_fault").string() + " " + ni.start_command,
+                boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
+        }
+        else if (start_with_rr)
+        {
+            ni.process = new boost::process::child(
+                boost::process::search_path("rr").string() + " -o rr_rec_" + node_id_str + " " + ni.start_command,
                 boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
         }
         else

@@ -154,6 +154,7 @@ int main(int argc, char *argv[])
                   << "    --fuzz_before_init    should we start fuzzing before the init operator (true or false)"
                   << std::endl
                   << "    --start_with_ebpf     start the process with dst_ebpf_fault" << std::endl
+                  << "    --start_with_rr       start the process with rr" << std::endl
                   << std::endl;
         return 0;
     }
@@ -212,6 +213,12 @@ int main(int argc, char *argv[])
         start_with_ebpf = true;
     }
 
+    bool start_with_rr = false;
+    if (options.count("start_with_rr"))
+    {
+        start_with_rr = true;
+    }
+
     log_init("log_test");
 
     uint32_t test_case_count = 0;
@@ -255,6 +262,11 @@ int main(int argc, char *argv[])
     if (start_with_ebpf)
     {
         nm->start_with_ebpf = true;
+    }
+
+    if (start_with_rr)
+    {
+        nm->start_with_rr = true;
     }
 
     if (!nm->start_all())
