@@ -2,6 +2,7 @@
 #define DST_NODE_MANAGER_HEADER
 
 #include <boost/process.hpp>
+#include <csignal>
 #include <iostream>
 #include <regex>
 #include <string>
@@ -13,6 +14,8 @@
 #define DEFAULT_NODE_COUNT 3
 
 #define WAIT_PROCESS_START_MAX_COUNT 100000
+
+#define WAIT_PROCESS_RR_STOP_COUNT 100000
 
 struct NodeInfo
 {
@@ -80,7 +83,15 @@ public:
     {
         for (NodeInfo &ni : node_processes)
         {
-            ni.process->terminate();
+            if (start_with_rr)
+            {
+                kill(ni.process->id(), SIGTERM);
+                ni.process->wait();
+            }
+            else
+            {
+                ni.process->terminate();
+            }
             ni.should_alive = false;
         }
         return true;
@@ -121,7 +132,15 @@ public:
             return true;
         }
 
-        ni.process->terminate();
+        if (start_with_rr)
+        {
+            kill(ni.process->id(), SIGTERM);
+            ni.process->wait();
+        }
+        else
+        {
+            ni.process->terminate();
+        }
         ni.should_alive = false;
         return true;
     }
@@ -195,7 +214,8 @@ public:
         else if (start_with_rr)
         {
             ni.process = new boost::process::child(
-                boost::process::search_path("rr").string() + " -o rr_rec_" + node_id_str + " " + ni.start_command,
+                boost::process::search_path("rr").string() + " record -o rr_rec_" + node_id_str + "_" +
+                    std::to_string(ni.log_index) + " " + ni.start_command,
                 boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
         }
         else

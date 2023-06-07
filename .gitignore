@@ -231,3 +231,5 @@ general_test/bin/init_random.txt
 dist_general_test
 strace/compile_commands.json
 a.out
+
+rr_rec_*

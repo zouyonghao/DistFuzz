@@ -123,7 +123,7 @@ int main(int argc, char *argv[])
 {
     std::map<std::string, std::string> options;
     std::regex optregex("--(help|fuzz_before_init|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|"
-                        "check_after_fuzz|random_file|start_with_strace)"
+                        "check_after_fuzz|random_file|start_with_strace|start_with_rr)"
                         "(?:=((?:.|\n)*))?");
 
     for (char **opt = argv + 1; opt < argv + argc; opt++)

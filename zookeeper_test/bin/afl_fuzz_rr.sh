@@ -2,4 +2,5 @@
     ../../build/zookeeper_test/zookeeper_test_main \
     --node_count=5 \
     --normal_count=5 --critic_count=3 \
-    --check_after_fuzz=true
+    --check_after_fuzz=true \
+    --start_with_rr
