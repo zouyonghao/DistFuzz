@@ -257,6 +257,7 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 
 	bool fault_injected = false;
 
+	uint64_t hash_index = 0;
 	if (getenv("NO_FAULT") != NULL) {
 		goto EXIT;
 	}
@@ -352,7 +353,7 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 	}
 
 EXIT:
-	uint64_t hash_index = get_hash_value(is_send, tmp_offset, length, fault_injected);
+	hash_index = get_hash_value(is_send, tmp_offset, length, fault_injected);
 #ifdef ENABLE_KAFKA
 	if (use_kafka) {
 		if (rd_kafka_produce(topic_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY,
