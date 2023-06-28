@@ -147,7 +147,9 @@ if (CMAKE_ASM_COMPILER_ID STREQUAL "Clang")
 endif()
 
 option(force32bit "Force a 32-bit rr build, rather than both 64 and 32-bit. rr will only be able to record and replay 32-bit processes.")
-option(disable32bit "On a 64-bit platform, avoid requiring a 32-bit cross-compilation toolchain by not building 32-bit components. rr will be able to record 32-bit processes but not replay them.")
+set(disable32bit 
+  "On a 64-bit platform, avoid requiring a 32-bit cross-compilation toolchain by not building 32-bit components. rr will be able to record 32-bit processes but not replay them."
+  true)
 
 if(force32bit)
   set(rr_32BIT true)
@@ -168,7 +170,12 @@ else()
   set(rr_MBITNESS_OPTION)
 endif()
 
-option(staticlibs "Force usage of static linkage for non-standard libraries like capnproto")
+if (${DIST_FUZZ_STATIC_BUILD})
+message("-- Build static rr")
+set(staticlibs TRUE "Force usage of static linkage for non-standard libraries like capnproto")
+else()
+set(staticlibs FALSE "Force usage of static linkage for non-standard libraries like capnproto")
+endif()
 
 # Check that compiling 32-bit code on a 64-bit target works, if required.
 if(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "x86_64" AND rr_32BIT)
@@ -667,6 +674,22 @@ if(LOWERCASE_CMAKE_BUILD_TYPE STREQUAL "release")
   endif()
 endif()
 
+if (${DIST_FUZZ_STATIC_BUILD})
+target_link_libraries(rr
+  -static
+  # ${CMAKE_DL_LIBS}
+  # ${ZLIB_LDFLAGS}
+  brotli
+  dst_core
+  capnp
+  kj
+  z
+  m
+  rt
+)
+set(RR_MAIN_LINKER_FLAGS "-static ${RR_MAIN_LINKER_FLAGS}")
+else()
+
 if(LIBRT)
   target_link_libraries(rr ${LIBRT})
 endif()
@@ -678,10 +701,12 @@ target_link_libraries(rr
   dst_core
 )
 
+endif()
+
 if(staticlibs)
   # Urgh ... this might not work for everyone, but there doesn't seem to be
   # a way to persuade pkg-confing/pkg_check_modules to produce the right flags
-  target_link_libraries(rr -L/home/roc/lib -l:libcapnp.a -l:libkj.a)
+  # target_link_libraries(rr -L/home/roc/lib -l:libcapnp.a -l:libkj.a)
   # Note that this works for both clang++ and g++
   set(RR_MAIN_LINKER_FLAGS "-static-libstdc++ ${RR_MAIN_LINKER_FLAGS}")
 elseif(ANDROID)
