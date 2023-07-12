@@ -23,7 +23,7 @@
 
 * `redisraft` 需要 `clang-9`，因此必须修改本项目的`CMakeLists.txt`为`llvm-9`和`clang-9`
 
-* `rethinkdb` 编译时需要联网下载部分组件
+* `rethinkdb` 编译时需要联网下载部分组件，测试时需要取消strace的unwind功能(-k, unwinder.tcb_walk in dst_fuzz.c)
 
 * `ClickHouse` 暂未在 71.37 的 `docker` 中运行，仅在 71.79 的虚拟机上运行
 
