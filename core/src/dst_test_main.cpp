@@ -349,10 +349,10 @@ int main(int argc, char *argv[])
         }
     }
 
-    set_is_fuzzing(false);
     /** run some checkers before stop */
     system("sh check_before_stop.sh");
 
+    set_is_fuzzing(false);
 STOP:
     LOG_ERROR << "stopping...\n";
     nm->stop_all();

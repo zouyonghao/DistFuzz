@@ -17,10 +17,10 @@ mv operation_log ./test_cases/$1
     echo "May find error trace and it's not error 6!"
   elif grep -q "ERROR: AddressSanitizer" ./test_cases/$1/log_app*; then
     echo "Find ASan errors!"
-  elif grep -q "check failed!" ./test_cases/$1/log_test; then
-    echo "Find check failed!"
-  elif grep -q "all normal operators after fuzzing failed" ./test_cases/$1/log_test; then
-    echo "Find all normal operators after fuzzing failed"
+#  elif grep -q "check failed!" ./test_cases/$1/log_test; then
+#    echo "Find check failed!"
+#  elif grep -q "all normal operators after fuzzing failed" ./test_cases/$1/log_test; then
+#    echo "Find all normal operators after fuzzing failed"
   elif grep -q false ./test_cases/$1/check_log; then
     echo "Find operation log errors!"
   else

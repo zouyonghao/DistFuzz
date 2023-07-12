@@ -96,7 +96,7 @@ uint64_t get_hash_value(bool is_send, uint64_t position, size_t length, bool fau
 
 static uint8_t *fuzz_coverage_map;
 
-static int ignore_range = 1;
+// static int ignore_range = 1;
 
 // temp variables, should be restored after each syscall finished
 static unsigned long tmp_offset = 0;
@@ -109,6 +109,7 @@ get_hash_value(bool is_send, uint64_t position, size_t length, bool fault_inject
 	uint64_t hash_value = ((event_index + is_send * 10 + length + node_id * 100 + position)
 			       << fault_injected) %
 			      FUZZ_COVERAGE_MAP_SIZE;
+	/*
 	for (int i = 1; i <= ignore_range; i++) {
 		if (fuzz_coverage_map[hash_value - i] > 0) {
 			return hash_value - i;
@@ -117,10 +118,12 @@ get_hash_value(bool is_send, uint64_t position, size_t length, bool fault_inject
 			return hash_value + i;
 		}
 	}
+	*/
 	event_index++;
 	return hash_value;
 }
 
+/*
 static void
 print_call_cb(void *dummy, const char *binary_filename, const char *symbol_name,
 	      unwind_function_offset_t function_offset, unsigned long true_offset)
@@ -132,10 +135,12 @@ print_call_cb(void *dummy, const char *binary_filename, const char *symbol_name,
 	}
 }
 
+
 static void
 print_error_cb(void *dummy, const char *error, unsigned long true_offset)
 {
 }
+*/
 
 void
 handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_codes[],
@@ -174,6 +179,8 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		return;
 	}
 
+	uint8_t random = __dst_get_random_uint8_t();
+	bool fault_injected = false;
 	bool is_file = false;
 	bool is_eventfd = false;
 	switch (file_path[0]) {
@@ -181,7 +188,7 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		// fprintf(stderr, "fd %d in process %d is a socket\n", fd, tcp->pid);
 		break;
 
-	case 'p': /* pipe:[xxxx] */
+	case 'p': // pipe:[xxxx]
 		return;
 
 	default:
@@ -221,7 +228,8 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		}
 
 		if (strstr(file_path, "[eventfd]") != NULL) {
-			is_eventfd = true;
+			// is_eventfd = true;
+			goto EXIT;
 		}
 
 		/* Skip files in get_no_fault_files */
@@ -253,16 +261,15 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 	// struct user_regs_struct _regs;
 	// ptrace(PTRACE_GETREGS, tcp->pid, NULL, &_regs);
 	// fprintf(stderr, "rip - fs_base is %llX\n", _regs.rip - _regs.fs_base);
-	unwinder.tcb_walk(tcp, print_call_cb, print_error_cb, NULL);
+	// unwinder.tcb_walk(tcp, print_call_cb, print_error_cb, NULL);
 
-	bool fault_injected = false;
 
 	uint64_t hash_index = 0;
 	if (getenv("NO_FAULT") != NULL) {
 		goto EXIT;
 	}
 
-	uint8_t random = __dst_get_random_uint8_t();
+	fprintf(stderr, "get file path %s\n", file_path);
 	// fprintf(stderr, "random is %u\n", random);
 	if (random < 50) {
 		goto EXIT;
