@@ -81,7 +81,7 @@ void handle_random_event(RecordTask* t, bool is_send, size_t length,
   if (!get_is_fuzzing()) {
     if (!printed_fuzzing_stopped) {
       fprintf(stderr,
-              "strace: fuzzing is stopped, will use kernel_func directly.\n");
+              "rr: fuzzing is stopped, will use kernel_func directly.\n");
       printed_fuzzing_stopped = true;
     }
     return;
