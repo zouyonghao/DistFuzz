@@ -16,7 +16,9 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
+#ifdef ENABLE_KAFKA
 #include "librdkafka/rdkafka.h"
+#endif
 
 #define SHM_ENV_VAR "AFLCplusplus_SHM_ID"
 #define BRANCH_TRACE_SHM_ENV_VAR "AFLCplusplus_BRANCH_TRACE_SHM_ID"
@@ -69,11 +71,13 @@ __thread u32 stack_size = 0;
 
 __thread u8 is_new_thread = 1;
 
+#ifdef ENABLE_KAFKA
 /** Kafka variables */
 rd_kafka_conf_t *conf = NULL;
 rd_kafka_t *rk = NULL;
 rd_kafka_topic_t *topic_code_coverage = NULL;
 rd_kafka_topic_t *topic_order_coverage = NULL;
+#endif
 
 u32 thread_exists(pthread_t thread_id)
 {
@@ -211,6 +215,7 @@ void FuncSequenceRecord(u32 curLoc)
     (*concurrentFunctionCountVar) = ((*concurrentFunctionCountVar) ^ curLoc) >> 1;
     pthread_mutex_unlock(multiProcessMutex);
 
+#ifdef ENABLE_KAFKA
     /** If no shared mem is set, then use kafka to record */
     if (shmEnable == 0)
     {
@@ -221,6 +226,7 @@ void FuncSequenceRecord(u32 curLoc)
                     rd_kafka_err2str(rd_kafka_last_error()));
         }
     }
+#endif
 }
 
 void FuncEnterRecord(u32 curLoc)
@@ -356,7 +362,6 @@ void ShmDeclare(void)
         *concurrentFunctionCountVar = 0;
         multiProcessMutex = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
         pthread_mutex_init(multiProcessMutex, NULL);
-        conf = rd_kafka_conf_new();
         char hostname[128];
         char errstr[512];
         if (gethostname(hostname, sizeof(hostname)))
@@ -365,6 +370,8 @@ void ShmDeclare(void)
             exit(1);
         }
 
+#ifdef ENABLE_KAFKA
+        conf = rd_kafka_conf_new();
         if (rd_kafka_conf_set(conf, "client.id", hostname, errstr, sizeof(errstr)) != RD_KAFKA_CONF_OK)
         {
             fprintf(stderr, "%% %s\n", errstr);
@@ -394,6 +401,7 @@ void ShmDeclare(void)
             exit(1);
         }
         topic_order_coverage = rd_kafka_topic_new(rk, topic_order_coverage_str, topic_conf_2);
+#endif
     }
     else
     {

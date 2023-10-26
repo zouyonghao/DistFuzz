@@ -10,6 +10,10 @@ set(DIST_FUZZ_DEFAULT_TEST ON CACHE BOOL "Build default test like braft?")
 set(DIST_FUZZ_BUILD_COMPILER ON CACHE BOOL "Build C/C++ compiler?")
 set(DIST_FUZZ_BUILD_COVERAGE_COLLECTOR OFF CACHE BOOL "Build coverage collector with rdkafka?")
 
+set(DIST_FUZZ_BPF OFF CACHE BOOL "Build bpf fault injector?")
+set(DIST_FUZZ_RR OFF CACHE BOOL "Build rr replay and fault injector?")
+set(DIST_FUZZ_AEROSPIKE OFF CACHE BOOL "Build aerospike?")
+
 if (${DIST_FUZZ_STATIC_BUILD})
 set(Boost_USE_STATIC_LIBS ON)
 else()
@@ -36,7 +40,9 @@ add_subdirectory(redisraft_test)
 add_subdirectory(raftis_test)
 
 add_subdirectory(rethinkdb_test)
+if (${DIST_FUZZ_AEROSPIKE})
 add_subdirectory(aerospike_test)
+endif()
 add_subdirectory(clickhouse_test)
 add_subdirectory(test)
 
@@ -50,6 +56,10 @@ endif()
 
 add_subdirectory(general_test)
 
+if (${DIST_FUZZ_BPF})
 add_subdirectory(bpf)
+endif()
 
+if (${DIST_FUZZ_RR})
 add_subdirectory(rr)
+endif()
