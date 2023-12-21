@@ -11,8 +11,8 @@ void test_configuration_generator()
 void test_client_configuration_generator()
 {
     GeneralClientConfigurationGenerator gccg;
-    assert(gccg.get_configure_string(OP_READ, 3) == "./client.sh get");
-    assert(gccg.get_configure_string(OP_WRITE, 3, 100) == "./client.sh set 100");
+    assert(gccg.get_configure_string(OP_READ, 3) == "sh -c \"./client.sh get\"");
+    assert(gccg.get_configure_string(OP_WRITE, 3, 100) == "sh -c \"./client.sh set 100\"");
 }
 
 int main()

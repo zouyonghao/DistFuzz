@@ -49,7 +49,7 @@ class RethinkdbClientConfigurationGenerator : public ClientConfigurationGenerato
 public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
     {
-        std::string configure_string = "timeout 5 /usr/bin/java -jar "
+        std::string configure_string = "timeout 3 /usr/bin/java -jar "
                                        "/home/zyh/distributed-system-test/rethinkdb_test/client/target/"
                                        "rethinkdb-test-client-1.0-SNAPSHOT-jar-with-dependencies.jar " +
                                        std::to_string(node_count) + " ";
