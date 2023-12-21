@@ -88,7 +88,8 @@ uint64_t get_length_from_iovec(struct tcb *tcp, int iov_pos, int iovcnt_pos);
 uint64_t get_length_from_msg(struct tcb *tcp, int msg_pos);
 uint64_t get_length_from_mmsg(struct tcb *tcp, int msgvec_pos, int vlen_pos);
 
-uint64_t get_hash_value(bool is_send, uint64_t position, size_t length, bool fault_injected);
+// uint64_t get_hash_value(bool is_send, uint64_t position, size_t length, bool fault_injected);
+uint64_t get_hash_value(uint32_t syscall_no, uint64_t position, size_t length, bool fault_injected);
 
 // static int arch_set_error(struct tcb *);
 // #include "arch_regs.c"
@@ -96,27 +97,32 @@ uint64_t get_hash_value(bool is_send, uint64_t position, size_t length, bool fau
 
 static uint8_t *fuzz_coverage_map;
 
-static int ignore_range = 1;
-
 // temp variables, should be restored after each syscall finished
 static unsigned long tmp_offset = 0;
 
+// static int ignore_range = 1;
+// static int prev = 0;
 static uint64_t event_index = 0;
 uint64_t
-get_hash_value(bool is_send, uint64_t position, size_t length, bool fault_injected)
+get_hash_value(uint32_t syscall_no, uint64_t position, size_t length, bool fault_injected)
 {
 	int node_id = getenv("NODE_ID") != NULL ? atoi(getenv("NODE_ID")) : 0;
-	uint64_t hash_value = ((event_index + is_send * 10 + length + node_id * 100 + position)
+	uint64_t hash_value = ((event_index + syscall_no * 10 + length + node_id * 100 + position)
 			       << fault_injected) %
 			      FUZZ_COVERAGE_MAP_SIZE;
-	for (int i = 1; i <= ignore_range; i++) {
-		if (fuzz_coverage_map[hash_value - i] > 0) {
-			return hash_value - i;
-		}
-		if (fuzz_coverage_map[hash_value + 1] > 0) {
-			return hash_value + i;
-		}
-	}
+
+	// for (int i = 1; i <= ignore_range; i++) {
+	// 	if (fuzz_coverage_map[hash_value - i] > 0) {
+	// 		return hash_value - i;
+	// 	}
+	// 	if (fuzz_coverage_map[hash_value + 1] > 0) {
+	// 		return hash_value + i;
+	// 	}
+	// }
+
+	// uint32_t current_value = event_index + (((node_id + 1) << syscall_no) ^ length);
+	// uint32_t hash_value = (prev ^ current_value) % FUZZ_COVERAGE_MAP_SIZE;
+	// prev = current_value;
 	event_index++;
 	return hash_value;
 }
@@ -353,7 +359,7 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 	}
 
 EXIT:
-	hash_index = get_hash_value(is_send, tmp_offset, length, fault_injected);
+	hash_index = get_hash_value(tcp->scno, tmp_offset, length, fault_injected);
 #ifdef ENABLE_KAFKA
 	if (use_kafka) {
 		if (rd_kafka_produce(topic_coverage, RD_KAFKA_PARTITION_UA, RD_KAFKA_MSG_F_COPY,
