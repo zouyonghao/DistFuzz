@@ -5,7 +5,11 @@
 #include <operator/dst_default_client_operator.hpp>
 #include <operator/dst_default_init_operator.hpp>
 
-#define BIN_PATH "/home/zyh/braft/example/atomic/atomic_server"
+#ifndef BRAFT_ATOMIC_DIR
+#define BRAFT_ATOMIC_DIR "/home/zyh/braft/example/atomic/"
+#endif
+#define CLIENT_BIN_PATH BRAFT_ATOMIC_DIR "atomic_test"
+#define SERVER_BIN_PATH BRAFT_ATOMIC_DIR "atomic_server"
 #define BASE_PORT 8300
 #define IP "127.0.1.1"
 
@@ -18,7 +22,7 @@ class BraftConfigurationGenerator : public ServerConfigurationGenerator
 public:
     std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
-        std::string config = BIN_PATH " -reuse_addr -ip=" IP " -reuse_port -election_timeout_ms=500 ";
+        std::string config = SERVER_BIN_PATH " -reuse_addr -ip=" IP " -reuse_port -election_timeout_ms=100 ";
         config += "-port=" + std::to_string(BASE_PORT + node_id) + " ";
         config += "-conf=";
         for (uint32_t i = 0; i < node_count; i++)
@@ -43,7 +47,7 @@ public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...) override
     {
         /* TODO: the timeout value should be estimated automatically by running several tests before fuzzing. */
-        std::string configure_string = "timeout 3 /home/zyh/braft/example/atomic/atomic_test -conf=";
+        std::string configure_string = "timeout 3 " CLIENT_BIN_PATH " -conf=";
         for (uint32_t i = 0; i < node_count; i++)
         {
             configure_string += IP ":" + std::to_string(BASE_PORT + i) + ":0,";
