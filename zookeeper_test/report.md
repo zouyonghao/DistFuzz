@@ -21,6 +21,7 @@
 
     issues
     * https://issues.apache.org/jira/browse/ZOOKEEPER-2307
+    * https://issues.apache.org/jira/browse/ZOOKEEPER-4781
 
 2. Severe unrecoverable error *
 
