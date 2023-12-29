@@ -91,6 +91,10 @@
     ==20195==ABORTING
     ```
 
+    https://github.com/aerospike/aerospike-server/issues/33
+
+    CVE-2023-50577
+
 4. lose data
     issues
     * https://github.com/aerospike/aerospike-server/issues/35

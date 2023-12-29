@@ -186,6 +186,8 @@
     issues
     * https://github.com/apache/incubator-brpc/issues/1624
 
+    CVE-2023-50575
+
 10. Fatal error
     ```
     F1201 22:36:50.517096 33233 /home/zyh/brpc/src/brpc/event_dispatcher.cpp:360] Check failed: 0 == g_edisp[i].Start(&attr) (0 vs -1).
@@ -269,3 +271,9 @@
 
     ==29192==ABORTING
     ```
+
+13. memory leak if binding failed
+
+    https://github.com/apache/brpc/issues/1390
+
+    CVE-2023-50576
