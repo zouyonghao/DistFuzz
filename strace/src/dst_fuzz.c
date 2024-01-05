@@ -106,7 +106,9 @@ static uint64_t event_index = 0;
 uint64_t
 get_hash_value(uint32_t syscall_no, uint64_t position, size_t length, bool fault_injected)
 {
-	int node_id = getenv("NODE_ID") != NULL ? atoi(getenv("NODE_ID")) : 0;
+	// int node_id = getenv("NODE_ID") != NULL ? atoi(getenv("NODE_ID")) : 0;
+	position = 0;
+	int node_id = 0;
 	uint64_t hash_value = ((event_index + syscall_no * 10 + length + node_id * 100 + position)
 			       << fault_injected) %
 			      FUZZ_COVERAGE_MAP_SIZE;
