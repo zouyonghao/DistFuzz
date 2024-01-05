@@ -12,6 +12,21 @@
 
     fixed.
 
+    https://github.com/canonical/raft/pull/218
+    
+    ```
+    Node receives snapshot install and deletes all closed segments
+    preceding the snapshot.
+    After installing the snapshot, the node receives AppendEntries and
+    adds the entries to an open segment.
+    Node gets killed.
+    Node boots and UvLoad closes the open segment using start_index 1,
+    ignoring the index of the snapshot that is present in the data dir.
+    Node fails to start because the newly closed segment and the snapshot are
+    inconsistent with a message
+    raft_start(): io: last entry on disk has index 383, which is behind last snapshot's index 3072"
+    ```
+
 2. AddressSanitizer:DEADLYSIGNAL
     ```
     AddressSanitizer:DEADLYSIGNAL
