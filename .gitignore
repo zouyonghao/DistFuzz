@@ -233,3 +233,4 @@ strace/compile_commands.json
 a.out
 
 rr_rec_*
+braft_test/bin/output*
