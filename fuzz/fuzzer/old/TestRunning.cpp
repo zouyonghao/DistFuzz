@@ -791,7 +791,7 @@ u8 AddInterestingSeed(char **argv, u8 *mem, u32 len, u8 run_status)
         // {
         //     newBitFlag |= branchBitFlag;
         // }
-        newBitFlag = branchBitFlag;
+        newBitFlag = branchBitFlag == 2 ? 2 : 0;
     }
     // printf("newBitFlag %d\n", newBitFlag);
 #ifndef NO_CONCURRENCY_FUZZ
