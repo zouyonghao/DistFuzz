@@ -47,7 +47,7 @@ public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...) override
     {
         /* TODO: the timeout value should be estimated automatically by running several tests before fuzzing. */
-        std::string configure_string = "timeout 3 " CLIENT_BIN_PATH " -conf=";
+        std::string configure_string = "timeout 1 " CLIENT_BIN_PATH " -conf=";
         for (uint32_t i = 0; i < node_count; i++)
         {
             configure_string += IP ":" + std::to_string(BASE_PORT + i) + ":0,";
