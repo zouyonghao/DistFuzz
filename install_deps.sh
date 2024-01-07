@@ -22,7 +22,7 @@ sudo apt-get install \
     zookeeper \
     gcc-multilib \
     gawk gcc g++ libc++-dev liblzma-dev lzma-dev leiningen valgrind libelf1 libelf-dev zlib1g-dev bear \
-    capnproto libcapnp-dev g++-multilib cmake tmux curl -y > /dev/null && echo "apt-get dependencies success!"
+    capnproto libcapnp-dev g++-multilib cmake tmux curl net-tools uml-utilities -y > /dev/null && echo "apt-get dependencies success!"
 
 # NOTE:
 # libunwind-dev

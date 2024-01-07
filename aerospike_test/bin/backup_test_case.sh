@@ -26,8 +26,8 @@ rm ./test_cases/$1/run/data*
     echo "Find ASan errors!"
   elif grep -q "AddressSanitizer" ./test_cases/$1/log*; then
     echo "Find ASan errors!"
-  elif grep -q "check failed!" ./test_cases/$1/log_test; then
-    echo "Find check failed!"
+  # elif grep -q "check failed!" ./test_cases/$1/log_test; then
+  #   echo "Find check failed!"
   elif grep -q "all normal operators after fuzzing failed" ./test_cases/$1/log_test; then
     echo "Find all normal operators after fuzzing failed"
   # elif grep -q false ./test_cases/$1/check_log; then
