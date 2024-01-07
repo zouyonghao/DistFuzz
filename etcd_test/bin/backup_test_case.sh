@@ -29,6 +29,6 @@ rm -rf data* # data folder is too big to store.
     echo "Find operation check fail."
     # rm -rf ./test_cases/$1
   fi
-} &
+} 
 
 # ./env_clear.sh
