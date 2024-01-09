@@ -3,4 +3,4 @@ killall rethinkdb -9
 killall event_control
 
 rm -rf rethinkdb_data*
-sudo tunctl -d tap0
+tunctl -d tap0
