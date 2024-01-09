@@ -129,21 +129,21 @@ get_hash_value(uint32_t syscall_no, uint64_t position, size_t length, bool fault
 	return hash_value;
 }
 
-static void
-print_call_cb(void *dummy, const char *binary_filename, const char *symbol_name,
-	      unwind_function_offset_t function_offset, unsigned long true_offset)
-{
-	if (tmp_offset == 0 && strstr(binary_filename, pathname)) {
-		// fprintf(stderr, "pathname is %s\n", pathname);
-		// fprintf(stderr, "true_offset is %ld\n", true_offset);
-		tmp_offset = true_offset;
-	}
-}
+// static void
+// print_call_cb(void *dummy, const char *binary_filename, const char *symbol_name,
+// 	      unwind_function_offset_t function_offset, unsigned long true_offset)
+// {
+// 	if (tmp_offset == 0 && strstr(binary_filename, pathname)) {
+// 		// fprintf(stderr, "pathname is %s\n", pathname);
+// 		// fprintf(stderr, "true_offset is %ld\n", true_offset);
+// 		tmp_offset = true_offset;
+// 	}
+// }
 
-static void
-print_error_cb(void *dummy, const char *error, unsigned long true_offset)
-{
-}
+// static void
+// print_error_cb(void *dummy, const char *error, unsigned long true_offset)
+// {
+// }
 
 void
 handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_codes[],
@@ -261,7 +261,7 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 	// struct user_regs_struct _regs;
 	// ptrace(PTRACE_GETREGS, tcp->pid, NULL, &_regs);
 	// fprintf(stderr, "rip - fs_base is %llX\n", _regs.rip - _regs.fs_base);
-	unwinder.tcb_walk(tcp, print_call_cb, print_error_cb, NULL);
+	// unwinder.tcb_walk(tcp, print_call_cb, print_error_cb, NULL);
 
 	bool fault_injected = false;
 
