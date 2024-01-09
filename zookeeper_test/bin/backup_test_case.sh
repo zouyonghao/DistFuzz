@@ -3,6 +3,7 @@ mkdir -p test_cases/$1/run
 
 pwd
 
+rm ./strace_log*
 mv log* ./test_cases/$1
 cp *log ./test_cases/$1
 mv random_node* ./test_cases/$1
@@ -10,7 +11,6 @@ mv random.txt ./test_cases/$1
 mv init_random.txt ./test_cases/$1
 mv data* ./test_cases/$1
 mv zoo* ./test_cases/$1
-mv strace* ./test_cases/$1
 mv rr_rec_* ./test_cases/$1
 
 # checking the operation log!
@@ -36,6 +36,6 @@ mv rr_rec_* ./test_cases/$1
     echo "Find operation check fail."
     rm -rf ./test_cases/$1
   fi
-} &
+}
 
 # ./env_clear.sh

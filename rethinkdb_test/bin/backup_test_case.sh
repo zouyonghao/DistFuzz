@@ -2,6 +2,7 @@ mkdir -p test_cases/$1
 
 pwd
 
+rm ./strace_log*
 mv log* ./test_cases/$1
 mv rethinkdb_data* ./test_cases/$1
 mv random_node* ./test_cases/$1
