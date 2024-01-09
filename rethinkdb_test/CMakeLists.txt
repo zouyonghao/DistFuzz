@@ -17,7 +17,7 @@ file(GLOB RETHINKDB_TEST_MAIN_SRC
         )
 
 add_executable(rethinkdb_test_main ${RETHINKDB_TEST_MAIN_SRC})
-target_compile_options(rethinkdb_test_main PUBLIC -DNO_CONCURRENCY -DRUN_NORMAL_OPERATOR_COUNT=5 -DRUN_CRITICAL_OPERATOR_COUNT=3)
+target_compile_options(rethinkdb_test_main PUBLIC -DRUN_NORMAL_OPERATOR_COUNT=5 -DRUN_CRITICAL_OPERATOR_COUNT=3)
 target_link_libraries(rethinkdb_test_main
         -Wl,--whole-archive dst_default_operator
         -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
