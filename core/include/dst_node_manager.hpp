@@ -221,7 +221,7 @@ public:
         else
         {
             ni.process = new boost::process::child(boost::process::search_path("strace").string() +
-                                                       " -f -k -o strace_log_" + node_id_str + " " + ni.start_command,
+                                                       " -f -o strace_log_" + node_id_str + " " + ni.start_command,
                                                    boost::process::std_out > log_file,
                                                    boost::process::std_err > err_log_file, env);
         }
