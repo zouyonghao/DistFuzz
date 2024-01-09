@@ -158,6 +158,9 @@ public:
             init();
         }
 
+        std::string invoke_record_string = "{:process 0, :type :invoke, :f :" + OP_NAME_STR[OP_WRITE] + ", :value 0}";
+        __dst_event_record(invoke_record_string.c_str());
+
         int count = 0;
         while (count < MAX_TRY_COUNT)
         {
@@ -205,9 +208,9 @@ public:
             return false;
         }
 
-        std::string invoke_record_string =
-            "{:process " + std::to_string(0) + ", :type :invoke, :f :" + OP_NAME_STR[OP_WRITE] + ", :value 0}";
-        __dst_event_record(invoke_record_string.c_str());
+        std::string result_record_string =
+            "{:process 0, :type :ok, :f :" + OP_NAME_STR[OP_WRITE] + ", :value 0}";
+        __dst_event_record(result_record_string.c_str());
 
         return true;
     }
