@@ -4,7 +4,7 @@
 #include <cstdarg>
 #include <operator/dst_default_client_operator.hpp>
 
-#define BIN_PATH "/home/zyh/rethinkdb/build/release_clang_system/rethinkdb"
+#define BIN_PATH "/home/zyh/rethinkdb/build/debug_clang_system/rethinkdb"
 #define BASE_PORT 5000
 #define BASE_DRIVER_PORT 4000
 #define BASE_HTTP_PORT 8080
