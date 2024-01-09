@@ -64,11 +64,18 @@ public:
 
         fprintf(stderr, "connect success!\n");
 
+        std::string invoke_record_string = "{:process " + std::to_string(random_thread_id) +
+                                           ", :type :invoke, :f :" + OP_NAME_STR[op_name] + ", :value ";
+
+        std::string result_record_string = "{:process " + std::to_string(random_thread_id) + ", :type " + ":ok" +
+                                           ", :f :" + OP_NAME_STR[op_name] + ", :value ";
         switch (op_name)
         {
         case OP_READ:
         {
-            // __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
+
+            invoke_record_string = invoke_record_string + "nil" + "}";
+            __dst_event_record(invoke_record_string.c_str());
 
             as_record *p_rec = NULL;
             static const char *bins[] = {"test-bin", NULL};
@@ -81,7 +88,9 @@ public:
             char *val_as_str = as_val_tostring(as_bin_get_value(p_rec->bins.entries));
             printf("read value is %s\n", val_as_str);
 
-            // __dst_event_record(get_result_record(op_name, op_vector, 0, val_as_str, random_thread_id).c_str());
+            result_record_string = result_record_string + val_as_str + "}";
+            __dst_event_record(result_record_string.c_str());
+
             free(val_as_str);
             as_record_destroy(p_rec);
             break;
@@ -89,7 +98,6 @@ public:
         case OP_WRITE:
         {
             uint32_t random = __dst_get_random_uint32_t();
-            // __dst_event_record(get_invoke_record(op_name, op_vector, random_thread_id).c_str());
 
             as_record rec;
             as_record_inita(&rec, 1);
@@ -99,6 +107,9 @@ public:
             as_policy_write wpol;
             as_policy_write_init(&wpol);
             wpol.exists = AS_POLICY_EXISTS_CREATE_OR_REPLACE;
+
+            invoke_record_string = invoke_record_string + std::to_string(random) + "}";
+            __dst_event_record(invoke_record_string.c_str());
 
             if (aerospike_key_put(&as, &err, &wpol, &key, &rec) != AEROSPIKE_OK)
             {
@@ -115,7 +126,10 @@ public:
                 }
                 return false;
             }
-            // __dst_event_record(get_result_record(op_name, op_vector, 0, "", random_thread_id).c_str());
+
+            result_record_string = result_record_string + std::to_string(random) + "}";
+            __dst_event_record(result_record_string.c_str());
+
             as_record_destroy(&rec);
             break;
         }
@@ -190,6 +204,11 @@ public:
             std::cerr << "Run init failed!\n";
             return false;
         }
+
+        std::string invoke_record_string =
+            "{:process " + std::to_string(0) + ", :type :invoke, :f :" + OP_NAME_STR[OP_WRITE] + ", :value 0}";
+        __dst_event_record(invoke_record_string.c_str());
+
         return true;
     }
 };
