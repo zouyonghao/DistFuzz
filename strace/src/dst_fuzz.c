@@ -525,14 +525,14 @@ int
 compare_and_warning_regs_differences(const struct user_regs_struct *const new,
 				     const struct user_regs_struct *const old)
 {
-#define COMPARE_REG(X)                                                                             \
-	if (new->X != old->X) {                                                                    \
-		fprintf(stderr,                                                                    \
-			#X                                                                         \
-			" in new is %lld, in old is %lld, please care about the side effects!\n",  \
-			new->X, old->X);                                                           \
+#define COMPARE_REG(X)                                                                     \
+	if (new->X != old->X) {                                                                \
 		diff_count++;                                                                      \
 	}
+	// fprintf(stderr,
+	// 	#X
+	// 	" in new is %lld, in old is %lld, please care about the side effects!\n",
+	// 	new->X, old->X);
 	int diff_count = 0;
 	COMPARE_REG(r15);
 	COMPARE_REG(r14);
