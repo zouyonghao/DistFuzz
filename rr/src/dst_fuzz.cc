@@ -12,8 +12,8 @@
 
 using namespace rr;
 
-int READ_ERROR_CODES[] = { EAGAIN, EWOULDBLOCK, EBADF, EFAULT,
-                           EINTR,  EINVAL,      EIO };
+int READ_ERROR_CODES[] = { 0,      EAGAIN, EWOULDBLOCK, EBADF,
+                           EFAULT, EINTR,  EINVAL,      EIO };
 int WRITE_ERROR_CODES[] = { EAGAIN, EWOULDBLOCK, EBADF, EDESTADDRREQ, EDQUOT,
                             EFAULT, EFBIG,       EINTR, EINVAL,       EIO,
                             ENOSPC, EPERM,       EPIPE };
@@ -206,6 +206,7 @@ void handle_random_event(RecordTask* t, bool is_send, size_t length,
 
       break;
     case 1:
+      // fail
       if (is_eventfd) {
         ret_val = EAGAIN;
       } else {
@@ -213,9 +214,11 @@ void handle_random_event(RecordTask* t, bool is_send, size_t length,
       }
       r.set_syscall_result(-ret_val);
       t->set_regs(r);
-      fprintf(stderr, "inject fail to process %d syscall %ld\n", t->tid,
-              t->regs().original_syscallno());
+      fprintf(stderr, "inject fail to process %d syscall %ld, is_send? %d\n",
+              t->tid, t->regs().original_syscallno(), is_send);
       break;
+      // TODO: lost
+      // TODO: dup
     default:
       break;
   }
@@ -223,7 +226,8 @@ void handle_random_event(RecordTask* t, bool is_send, size_t length,
 EXIT:
   // uint64_t hash_index = get_hash_value(is_send, tmp_offset, length,
   // fault_injected);
-  uint64_t hash_index = get_hash_value(t->regs().original_syscallno(), 0, length, fault_injected);
+  uint64_t hash_index =
+      get_hash_value(t->regs().original_syscallno(), 0, length, fault_injected);
   fuzz_coverage_map[hash_index]++;
 }
 
