@@ -101,18 +101,6 @@ u8 timeout_given = 1;
 u32 exec_tmout = EXEC_TIMEOUT;
 u32 hang_tmout = EXEC_TIMEOUT;
 
-#ifdef USE_LICENSE
-#include "../license/license.h"
-#include <licensecc/licensecc.h>
-char g_tool_dir[300];
-string license_dir;
-#endif
-
-#ifdef USE_ST_LICENSE
-#include "license.h"
-string license_dir;
-#endif
-
 void MakeDirectory(void)
 {
     struct stat buffer
