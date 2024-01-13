@@ -93,7 +93,15 @@
 
     https://github.com/aerospike/aerospike-server/issues/33
 
-    CVE-2023-50577
+    **CVE-2023-50577**
+
+    To reproduce this, comment related fault filter in strace:
+    
+    ```c
+    if (strstr(file_path, "/sys") != NULL) {
+		return;
+	}
+    ```
 
 4. lose data
     issues
