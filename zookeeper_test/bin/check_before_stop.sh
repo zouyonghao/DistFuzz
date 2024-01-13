@@ -1,1 +1,1 @@
-python check-fle-states.py > check_before_stop.log 2>&1
+timeout 5 python check-fle-states.py > check_before_stop.log 2>&1
