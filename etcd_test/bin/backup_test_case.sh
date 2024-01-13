@@ -10,6 +10,7 @@ mv random_node* ./test_cases/$1
 mv random.txt ./test_cases/$1
 mv init_random.txt ./test_cases/$1
 rm -rf data* # data folder is too big to store.
+mv rr_rec_* ./test_cases/$1
 
 # checking the operation log!
 {
