@@ -88,18 +88,19 @@ public:
             if (start_with_rr)
             {
                 kill(ni.process->id(), SIGTERM);
-                ni.process->wait_for(std::chrono::milliseconds(100));
-                if (ni.process->running())
-                {
-                    kill(ni.process->id(), SIGINT);
-                    ni.process->wait_for(std::chrono::milliseconds(100));
-                }
-                if (ni.process->running())
-                {
-                    kill(ni.process->id(), SIGKILL);
-                    LOG_ERROR << "node seems fail to stop, use SIGKILL to kill it.\n";
-                    ni.process->wait();
-                }
+                ni.process->wait();
+                // ni.process->wait_for(std::chrono::milliseconds(100));
+                // if (ni.process->running())
+                // {
+                //     kill(ni.process->id(), SIGINT);
+                //     ni.process->wait_for(std::chrono::milliseconds(100));
+                // }
+                // if (ni.process->running())
+                // {
+                //     kill(ni.process->id(), SIGKILL);
+                //     LOG_ERROR << "node seems fail to stop, use SIGKILL to kill it.\n";
+                //     ni.process->wait();
+                // }
             }
             else
             {
@@ -114,13 +115,13 @@ public:
     {
         if (i > node_count - 1)
         {
-            std::cerr << "the index " << i << " too large, we only have " << node_count << " nodes.\n";
+            LOG_ERROR << "the index " << i << " too large, we only have " << node_count << " nodes.\n";
             return false;
         }
         NodeInfo &ni = node_processes[i];
         if (ni.should_alive)
         {
-            std::cerr << "the node " << i << " is alrealy started.\n";
+            LOG_ERROR << "the node " << i << " is alrealy started.\n";
             return true;
         }
         if (start_process(ni))
@@ -135,31 +136,32 @@ public:
     {
         if (i > node_count - 1)
         {
-            std::cerr << "the index " << i << " too large, we only have " << node_count << " nodes.\n";
+            LOG_ERROR << "the index " << i << " too large, we only have " << node_count << " nodes.\n";
             return false;
         }
         NodeInfo &ni = node_processes[i];
         if (!ni.should_alive)
         {
-            std::cerr << "the node " << i << " is alrealy stoped.\n";
+            LOG_ERROR << "the node " << i << " is alrealy stoped.\n";
             return true;
         }
 
         if (start_with_rr)
         {
             kill(ni.process->id(), SIGTERM);
-            ni.process->wait_for(std::chrono::milliseconds(100));
-            if (ni.process->running())
-            {
-                kill(ni.process->id(), SIGINT);
-                ni.process->wait_for(std::chrono::milliseconds(100));
-            }
-            if (ni.process->running())
-            {
-                kill(ni.process->id(), SIGKILL);
-                LOG_ERROR << "node seems fail to stop, use SIGKILL to kill it.\n";
-                ni.process->wait();
-            }
+            ni.process->wait();
+            // ni.process->wait_for(std::chrono::milliseconds(100));
+            // if (ni.process->running())
+            // {
+            //     kill(ni.process->id(), SIGINT);
+            //     ni.process->wait_for(std::chrono::milliseconds(100));
+            // }
+            // if (ni.process->running())
+            // {
+            //     kill(ni.process->id(), SIGKILL);
+            //     LOG_ERROR << "node seems fail to stop, use SIGKILL to kill it.\n";
+            //     ni.process->wait();
+            // }
         }
         else
         {
@@ -182,19 +184,19 @@ public:
             {
                 if (ni.process->exit_code() != 0)
                 {
-                    std::cerr << "node " << ni.node_id << " is unintentially terminiated.\n";
+                    LOG_ERROR << "node " << ni.node_id << " is unintentially terminiated.\n";
                     return false;
                 }
                 else
                 {
-                    std::cerr << "node " << ni.node_id << " is terminiated normally.\n";
+                    LOG_ERROR << "node " << ni.node_id << " is terminiated normally.\n";
                     /** TODO: true or false? */
                     return false;
                 }
             }
             else if (!ni.should_alive && ni.process->running())
             {
-                std::cerr << "node " << ni.node_id << " should be killed but still running.\n";
+                LOG_ERROR << "node " << ni.node_id << " should be killed but still running.\n";
                 return false;
             }
         }
