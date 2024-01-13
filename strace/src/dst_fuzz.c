@@ -47,7 +47,7 @@ static char *pathname;
  * So we need to specify all the possible error codes for read/write/recv/send.
  * NOTE: eventfd can only get EAGAIN according to https://man7.org/linux/man-pages/man2/eventfd.2.html
  */
-int READ_ERROR_CODES[] = { EAGAIN, EWOULDBLOCK, EBADF, EFAULT, EINTR, EINVAL, EIO };
+int READ_ERROR_CODES[] = { 0, EAGAIN, EWOULDBLOCK, EBADF, EFAULT, EINTR, EINVAL, EIO };
 int WRITE_ERROR_CODES[] = { EAGAIN, EWOULDBLOCK, EBADF, EDESTADDRREQ, EDQUOT, EFAULT, EFBIG,
 			    EINTR,  EINVAL,	 EIO,	ENOSPC,	      EPERM,  EPIPE };
 
