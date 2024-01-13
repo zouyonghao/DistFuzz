@@ -232,6 +232,8 @@ int main(int argc, char *argv[])
     itest_case_count_file >> test_case_count;
     itest_case_count_file.close();
 
+    system("sh env_init.sh");
+
     split_files(random_file, node_count);
 
     size_t critical_operator_size = Registry<CriticalOperator>::getItemVector().size();
@@ -240,8 +242,6 @@ int main(int argc, char *argv[])
     LOG_INFO << "normal operator run count = " << run_normal_operator_count << "\n";
     LOG_INFO << "critical_operator_size = " << critical_operator_size << "\n";
     LOG_INFO << "critical_operator run count = " << run_critic_operator_count << "\n";
-
-    system("sh env_init.sh");
 
     init_is_fuzzing();
     if (!fuzz_before_init)

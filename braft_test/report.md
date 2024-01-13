@@ -43,7 +43,7 @@
    https://github.com/baidu/braft/issues/268
    Fixed
 
-2. fail to rename *
+2. Fail to rename *
 
    issues
     * https://github.com/baidu/braft/issues/272
