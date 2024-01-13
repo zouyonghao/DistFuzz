@@ -9,6 +9,7 @@
 #include <vector>
 
 #include <dst_configuration_generator.hpp>
+#include <dst_log.hpp>
 #include <dst_registry.hpp>
 
 #define DEFAULT_NODE_COUNT 3
@@ -38,6 +39,7 @@ public:
     ServerConfigurationGenerator *configuration_generator;
     bool start_with_ebpf = false;
     bool start_with_rr = false;
+    bool start_with_criu = false;
 
     explicit NodeManager(ServerConfigurationGenerator *_configuration_generator)
         : configuration_generator(_configuration_generator), node_count(DEFAULT_NODE_COUNT)
@@ -86,7 +88,18 @@ public:
             if (start_with_rr)
             {
                 kill(ni.process->id(), SIGTERM);
-                ni.process->wait();
+                ni.process->wait_for(std::chrono::milliseconds(100));
+                if (ni.process->running())
+                {
+                    kill(ni.process->id(), SIGINT);
+                    ni.process->wait_for(std::chrono::milliseconds(100));
+                }
+                if (ni.process->running())
+                {
+                    kill(ni.process->id(), SIGKILL);
+                    LOG_ERROR << "node seems fail to stop, use SIGKILL to kill it.\n";
+                    ni.process->wait();
+                }
             }
             else
             {
@@ -135,7 +148,18 @@ public:
         if (start_with_rr)
         {
             kill(ni.process->id(), SIGTERM);
-            ni.process->wait();
+            ni.process->wait_for(std::chrono::milliseconds(100));
+            if (ni.process->running())
+            {
+                kill(ni.process->id(), SIGINT);
+                ni.process->wait_for(std::chrono::milliseconds(100));
+            }
+            if (ni.process->running())
+            {
+                kill(ni.process->id(), SIGKILL);
+                LOG_ERROR << "node seems fail to stop, use SIGKILL to kill it.\n";
+                ni.process->wait();
+            }
         }
         else
         {
@@ -216,6 +240,12 @@ public:
             ni.process = new boost::process::child(
                 boost::process::search_path("rr").string() + " record -o rr_rec_" + node_id_str + "_" +
                     std::to_string(ni.log_index) + " " + ni.start_command,
+                boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
+        }
+        else if (start_with_criu)
+        {
+            ni.process = new boost::process::child(
+                boost::process::search_path("criu").string() + " dump -t " + ni.start_command, // TODO
                 boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
         }
         else

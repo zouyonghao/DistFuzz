@@ -219,6 +219,12 @@ int main(int argc, char *argv[])
         start_with_rr = true;
     }
 
+    bool use_checkpoint = false;
+    if (options.count("use_checkpoint"))
+    {
+        use_checkpoint = true;
+    }
+
     log_init("log_test");
 
     uint32_t test_case_count = 0;
@@ -267,6 +273,11 @@ int main(int argc, char *argv[])
     if (start_with_rr)
     {
         nm->start_with_rr = true;
+    }
+
+    if (use_checkpoint)
+    {
+        nm->start_with_criu = true;
     }
 
     if (!nm->start_all())
