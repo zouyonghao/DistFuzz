@@ -4,8 +4,8 @@ mkdir -p test_cases/$1/run
 pwd
 
 rm ./strace_log*
-cp log* ./test_cases/$1
-cp *log ./test_cases/$1
+mv log* ./test_cases/$1
+mv *log ./test_cases/$1
 mv random_node* ./test_cases/$1
 mv random.txt ./test_cases/$1
 mv init_random.txt ./test_cases/$1
