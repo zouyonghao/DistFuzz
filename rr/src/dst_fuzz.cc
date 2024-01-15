@@ -12,6 +12,8 @@
 
 using namespace rr;
 
+#define MAX_DELAY_MILLSECONDS 1000
+
 int READ_ERROR_CODES[] = { 0,      EAGAIN, EWOULDBLOCK, EBADF,
                            EFAULT, EINTR,  EINVAL,      EIO };
 int WRITE_ERROR_CODES[] = { EAGAIN, EWOULDBLOCK, EBADF, EDESTADDRREQ, EDQUOT,
@@ -199,10 +201,12 @@ void handle_random_event(RecordTask* t, bool is_send, size_t length,
 
   switch (__dst_get_random_uint8_t() % 2) {
     case 0:
-      // delay
-      usleep(__dst_get_random_uint16_t() * 1e6);
+      // delay TODO: this delay seems not very useful as rr is single thread,
+      // maybe we should implement the force thread switch.
       fprintf(stderr, "inject delay to process %d syscall %ld\n", t->tid,
               t->regs().original_syscallno());
+
+      usleep((__dst_get_random_uint16_t() % MAX_DELAY_MILLSECONDS) * 1e3);
 
       break;
     case 1:
@@ -266,6 +270,9 @@ void dst_fuzz(RecordTask* t) {
       if (!res_shm_fuzz_coverage_map) {
         printf(
             "\033[33m[FUZZ PRINT] Can not Get Environment Variable\033[0m\n");
+
+        fuzz_coverage_map =
+            (uint8_t*)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
       } else {
         printf("\033[33m[FUZZ PRINT]Get Environment Variable %s\033[0m\n",
                res_shm_fuzz_coverage_map);

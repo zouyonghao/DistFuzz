@@ -525,8 +525,8 @@ int
 compare_and_warning_regs_differences(const struct user_regs_struct *const new,
 				     const struct user_regs_struct *const old)
 {
-#define COMPARE_REG(X)                                                                     \
-	if (new->X != old->X) {                                                                \
+#define COMPARE_REG(X)                                                                             \
+	if (new->X != old->X) {                                                                    \
 		diff_count++;                                                                      \
 	}
 	// fprintf(stderr,
@@ -593,6 +593,8 @@ init_dst_fuzz(void)
 		if (!res_shm_fuzz_coverage_map) {
 			fprintf(stderr, "%s",
 				"\033[33m[FUZZ PRINT] Can not Get Environment Variable\033[0m\n");
+			fuzz_coverage_map =
+				(uint8_t *)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
 
 #ifdef ENABLE_KAFKA
 			if (getenv("USE_KAFKA") != NULL) {
