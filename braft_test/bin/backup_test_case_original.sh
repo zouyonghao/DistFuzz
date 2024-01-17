@@ -15,6 +15,7 @@ mv random.txt ./test_cases/$1
 mv init_random.txt ./test_cases/$1
 mv operation_log ./test_cases/$1
 rm ./strace_log*
+mv rr_rec_* ./test_cases/$1
 
 # checking the operation log!
 {

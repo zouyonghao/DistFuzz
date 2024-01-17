@@ -17,13 +17,23 @@ mv rr_rec_* ./test_cases/$1
 {
   # ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
 
-  if grep -q "less than the current epoch" ./test_cases/$1/log_*; then
+  if grep -q "Unable to load database on disk" ./test_cases/$1/log_*; then
     echo "Find bug1"
     if [ -f found_bug1 ]; then
       echo "Bug1 has been found!"
     else
       echo "Bug1 has not been found!"
       touch found_bug1
+      touch new_found
+    fi
+  fi
+  if grep -q "less than the current epoch" ./test_cases/$1/log_*; then
+    echo "Find bug1_"
+    if [ -f found_bug1_ ]; then
+      echo "Bug1 has been found!"
+    else
+      echo "Bug1 has not been found!"
+      touch found_bug1_
       touch new_found
     fi
   fi

@@ -240,7 +240,7 @@ public:
         else if (start_with_rr)
         {
             ni.process = new boost::process::child(
-                boost::process::search_path("rr").string() + " record -o rr_rec_" + node_id_str + "_" +
+                boost::process::search_path("rr").string() + " record -n -o rr_rec_" + node_id_str + "_" +
                     std::to_string(ni.log_index) + " " + ni.start_command,
                 boost::process::std_out > log_file, boost::process::std_err > err_log_file, env);
         }

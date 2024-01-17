@@ -8,7 +8,8 @@ mv random_node* ./test_cases/$1
 mv random.txt ./test_cases/$1
 mv init_random.txt ./test_cases/$1
 mv operation_log ./test_cases/$1
-mv strace_log* ./test_cases/$1
+rm ./strace_log*
+mv rr_rec_* ./test_cases/$1
 
 # checking the operation log!
 {
@@ -86,21 +87,21 @@ mv strace_log* ./test_cases/$1
   fi
   if grep -q "Check failed: 0" ./test_cases/$1/log_*; then
     echo "Find bug 9"
-    if [ -f found_bug6 ]; then
-      echo "Bug6 has been found!"
+    if [ -f found_bug9 ]; then
+      echo "Bug9 has been found!"
     else
-      echo "Bug6 has not been found!"
-      touch found_bug6
+      echo "Bug9 has not been found!"
+      touch found_bug9
       touch new_found
     fi
   fi
   if grep -q "heap-use-after-free" ./test_cases/$1/log_*; then
-    echo "Find bug 9"
-    if [ -f found_bug6 ]; then
-      echo "Bug6 has been found!"
+    echo "Find bug 10"
+    if [ -f found_bug10 ]; then
+      echo "Bug10 has been found!"
     else
-      echo "Bug6 has not been found!"
-      touch found_bug6
+      echo "Bug10 has not been found!"
+      touch found_bug10
       touch new_found
     fi
   fi

@@ -8,12 +8,12 @@ pwd
 #     CHECK_RAFT_LOG_ERROR=0
 # fi
 
+rm ./strace_log*
 mv log* ./test_cases/$1
 mv c-raft_data* ./test_cases/$1
 mv random_node* ./test_cases/$1
 mv random.txt ./test_cases/$1
 mv init_random.txt ./test_cases/$1
-mv strace_log* ./test_cases/$1
 # mv operation_log ./test_cases/$1
 
 # checking the operation log!
