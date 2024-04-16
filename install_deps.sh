@@ -36,9 +36,9 @@ else
     # wget https://download.aerospike.com/artifacts/aerospike-client-c/5.2.0/aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz
     # for 22.04
     wget https://download.aerospike.com/artifacts/aerospike-client-c/6.1.1/aerospike-client-c-6.1.1.ubuntu22.04.x86_64.tgz
-    tar xvf aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz
-    cd aerospike-client-c-5.2.0.ubuntu18.04.x86_64
-    sudo dpkg -i aerospike-client-c-devel-5.2.0.ubuntu18.04.x86_64.deb
+    tar xvf aerospike-client-c-6.1.1.ubuntu22.04.x86_64.tgz
+    cd aerospike-client-c-6.1.1.ubuntu22.04.x86_64
+    sudo dpkg -i aerospike-client-c-devel-6.1.1.ubuntu22.04.x86_64.deb
     cd ..
     echo "install aerospike client lib success!"
 fi
