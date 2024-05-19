@@ -166,7 +166,7 @@ int main(int argc, char *argv[])
     }
 
     bool check_after_fuzz = false;
-    if (options.count("check_after_fuzz"))
+    if (options.count("check_after_fuzz") && options["check_after_fuzz"] == "true")
     {
         check_after_fuzz = true;
     }

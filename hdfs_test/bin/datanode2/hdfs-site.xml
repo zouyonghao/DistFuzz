@@ -1,0 +1,36 @@
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+    </property>
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:/home/zouyo/distributed-system-test/hdfs_test/bin/hadoop/hdfs/namenode</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address</name>
+        <value>localhost:9000</value>
+    </property>
+    <property>
+        <name>dfs.namenode.http-address</name>
+        <value>localhost:50070</value>
+    </property>
+
+    <!-- Configuration for DataNode 2 -->
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///home/zouyo/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2</value>
+    </property>
+    <property>
+        <name>dfs.datanode.address</name>
+        <value>localhost:50011</value>
+    </property>
+    <property>
+        <name>dfs.datanode.http.address</name>
+        <value>localhost:50076</value>
+    </property>
+    <property>
+        <name>dfs.datanode.ipc.address</name>
+        <value>localhost:50021</value>
+    </property>
+</configuration>

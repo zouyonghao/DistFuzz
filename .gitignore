@@ -235,3 +235,16 @@ a.out
 rr_rec_*
 braft_test/bin/output*
 found_*
+
+.uuid
+
+hdfs_test/bin/hadoop
+hdfs_test/bin/test_cases/
+hdfs_test/bin/output/
+hdfs_test/bin/file_lock
+hdfs_test/bin/operation_log
+hdfs_test/bin/sync_file
+hdfs_test/bin/sync_branch_cov_file
+hdfs_test/bin/test_case_count
+hdfs_test/bin/random.txt
+hdfs_test/bin/init_random.txt
