@@ -248,3 +248,4 @@ hdfs_test/bin/sync_branch_cov_file
 hdfs_test/bin/test_case_count
 hdfs_test/bin/random.txt
 hdfs_test/bin/init_random.txt
+hdfs_test/bin/a
