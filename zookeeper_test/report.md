@@ -8,7 +8,7 @@
         at org.apache.zookeeper.server.quorum.QuorumPeerMain.initializeAndRun(QuorumPeerMain.java:137)
         at org.apache.zookeeper.server.quorum.QuorumPeerMain.main(QuorumPeerMain.java:91)
     2021-11-01 10:38:34,849 [myid:4] - ERROR [main:QuorumPeerMain@114] - Unexpected exception, exiting abnormally
-    java.lang.RuntimeException: Unable to run quorum server 
+    java.lang.RuntimeException: Unable to run quorum server
         at org.apache.zookeeper.server.quorum.QuorumPeer.loadDataBase(QuorumPeer.java:1192)
         at org.apache.zookeeper.server.quorum.QuorumPeer.start(QuorumPeer.java:1130)
         at org.apache.zookeeper.server.quorum.QuorumPeerMain.runFromConfig(QuorumPeerMain.java:229)
@@ -56,6 +56,9 @@
     issues
     * https://issues.apache.org/jira/browse/ZOOKEEPER-4409
     * https://github.com/apache/zookeeper/pull/1774
+    * https://github.com/apache/zookeeper/pull/2163
+
+    **Fixed**
 
 4. Committing zxid 0x100000003 but next pending txn 0x100000002
     ```

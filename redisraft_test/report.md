@@ -276,6 +276,8 @@
     * https://github.com/RedisLabs/redisraft/issues/104
     * https://github.com/redis/hiredis/issues/490
 
+    **Fixed**
+
 2. panic
 
     ```

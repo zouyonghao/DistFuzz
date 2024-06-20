@@ -10,10 +10,10 @@
 
     https://github.com/canonical/raft/issues/199
 
-    fixed.
+    **Fixed**
 
     https://github.com/canonical/raft/pull/218
-    
+
     ```
     Node receives snapshot install and deletes all closed segments
     preceding the snapshot.
@@ -79,7 +79,7 @@
 
     https://github.com/canonical/raft/issues/219
 
-    fixed.
+    **Fixed.**
 
 4. heap-buffer-overflow
 
@@ -180,3 +180,5 @@
 
     issues
     * https://github.com/canonical/raft/pull/249
+
+    **Fixed**
