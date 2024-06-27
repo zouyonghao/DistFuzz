@@ -1,10 +1,10 @@
 <configuration>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://127.0.0.1:9000</value>
+        <value>hdfs://mycluster</value>
     </property>
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/tmp</value>
+        <value>/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/namenode2/tmp</value>
     </property>
 </configuration>
