@@ -23,6 +23,22 @@ public:
     }
 };
 
+
+class HdfsInitOperator : public DefaultInitOperator
+{
+public:
+    HdfsInitOperator() : DefaultInitOperator(10) {}
+
+    std::string get_write_zero_command()
+    {
+        boost::filesystem::ofstream a("./a");
+        a << 0;
+        a.close();
+        std::string configure_string = "timeout 3 /home/zyh/hadoop/bin/hdfs dfs -put ./a /a";
+        return configure_string;
+    }
+};
+
 REGISTER_NORMAL_OPERATOR(HdfsGet, new HdfsClientOperator(OP_READ, hdfs_client_configuration_generator));
 REGISTER_NORMAL_OPERATOR(HdfsSet, new HdfsClientOperator(OP_WRITE, hdfs_client_configuration_generator));
 
