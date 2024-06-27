@@ -8,7 +8,7 @@
 #include <operator/dst_default_client_operator.hpp>
 #include <operator/dst_default_init_operator.hpp>
 
-#define HADOOP_PATH "/home/zouyo/hadoop"
+#define HADOOP_PATH "/home/zyh/hadoop"
 
 #define BIN_PATH                                                                                                       \
     "java -cp " HADOOP_PATH ":" HADOOP_PATH "/share/hadoop/common/*:" HADOOP_PATH                                      \

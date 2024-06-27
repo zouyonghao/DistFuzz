@@ -41,7 +41,7 @@
 
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:///home/zouyo/distributed-system-test/hdfs_test/bin/hadoop/hdfs/namenode1</value>
+        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/namenode1</value>
     </property>
 
     <property>
@@ -67,7 +67,7 @@
     <!-- Configuration for DataNode 1 -->
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///home/zouyo/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode1</value>
+        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode1</value>
     </property>
     <property>
         <name>dfs.datanode.address</name>
@@ -94,7 +94,7 @@
     <!-- Configuration for DataNode 2 -->
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///home/zouyo/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2</value>
+        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2</value>
     </property>
     <property>
         <name>dfs.datanode.address</name>
@@ -112,7 +112,7 @@
     <!-- Configuration for DataNode 3 -->
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///home/zouyo/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3</value>
+        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3</value>
     </property>
     <property>
         <name>dfs.datanode.address</name>

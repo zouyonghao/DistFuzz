@@ -1,4 +1,4 @@
-export HADOOP_HOME=/home/zouyo/hadoop
+export HADOOP_HOME=/home/zyh/hadoop
 export PATH=$PATH:$HADOOP_HOME/bin:$JAVA_HOME/bin
 
 export HADOOP_CONF_DIR=./datanode1
