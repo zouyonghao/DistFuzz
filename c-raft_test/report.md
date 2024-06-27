@@ -145,6 +145,12 @@
 
     可能是误报（partial write fail)
 
+    There are two heap-buffer-overflows:
+    zyh@144ed63097a7:~/raft$ addr2line -e ./.libs/libraft.so 0x81ea0
+    /home/zyh/raft/src/byte.h:133
+    zyh@144ed63097a7:~/raft$ addr2line -e ./.libs/libraft.so 0x4c664
+    /home/zyh/raft/src/progress.c:252
+
 5. Memory leak in uvSnapshotLoadMeta
     ```
         buf.base = HeapMalloc(buf.len);
