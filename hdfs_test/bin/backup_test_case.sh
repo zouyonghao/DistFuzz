@@ -14,6 +14,7 @@ mv init_random.txt ./test_cases/$1
 # mv zoo* ./test_cases/$1
 # mv rr_rec_* ./test_cases/$1
 mv hadoop ./test_cases/$1
+mv core* ./test_cases/$1
 
 # checking the operation log!
 {
