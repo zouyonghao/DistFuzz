@@ -1,0 +1,100 @@
+2024-06-28 12:35:16,238 WARN org.apache.hadoop.util.NativeCodeLoader: Unable to load native-hadoop library for your platform... usi2024-06-28 12:35:16,405 INFO org.apache.h2024-06-28 12:35:17,133 INFO org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+2024-06-28 12:35:17,298 INFO org.apache.hadoop.metrics2.impl.MetricsSystemImpl: DataNode metrics system started
+2024-06-28 12:35:18,573 INFO org.apache.hadoop.hdfs.server.common.Util: dfs.datanode.fileio.profiling.sampling.percentage set to 0. Disabling file IO profiling
+2024-06-28 12:35:18,610 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Configured hostname is e07ff098d9e2
+2024-06-28 12:35:18,957 INFO org.apache.hadoop.hdfs.server.common.Util: dfs.datanode.fileio.profiling.sampling.percentage set to 0. Disabling file IO profiling
+2024-06-28 12:35:19,388 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting DataNode with maxLockedMemory = 0
+2024-06-28 12:35:20,239 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Opened streaming server at /127.0.0.1:50011
+2024-06-28 12:35:20,241 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Balancing bandwidth is 10485760 bytes/s
+2024-06-28 12:35:20,241 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Number threads for balancing is 50
+2024-06-28 12:35:20,285 INFO org.eclipse.jetty.util.log: Logging initialized @5993ms to org.eclipse.jetty.util.log.Slf4jLog
+2024-06-28 12:35:20,383 WARN org.apache.hadoop.security.authentication.server.AuthenticationFilter: Unable to initialize FileSignerSecretProvider, falling back to use random secrets. Reason: Could not read signature secret file: /home/zyh/hadoop-http-auth-signature-secret
+2024-06-28 12:35:20,390 INFO org.apache.hadoop.http.HttpRequestLog: Http request log for http.requests.datanode is not defined
+2024-06-28 12:35:20,395 INFO org.apache.hadoop.http.HttpServer2: Added global filter 'safety' (class=org.apache.hadoop.http.HttpServer2$QuotingInputFilter)
+2024-06-28 12:35:20,397 INFO org.apache.hadoop.http.HttpServer2: Added filter static_user_filter (class=org.apache.hadoop.http.lib.StaticUserWebFilter$StaticUserFilter) to context datanode
+2024-06-28 12:35:20,397 INFO org.apache.hadoop.http.HttpServer2: Added filter static_user_filter (class=org.apache.hadoop.http.lib.StaticUserWebFilter$StaticUserFilter) to context static
+2024-06-28 12:35:20,428 INFO org.apache.hadoop.http.HttpServer2: Jetty bound to port 36311
+2024-06-28 12:35:20,429 INFO org.eclipse.jetty.server.Server: jetty-9.4.43.v20210629; built: 2021-06-30T11:07:22.254Z; git: 526006ecfa3af7f1a27ef3a288e2bef7ea9dd7e8; jvm 11.0.21+9-post-Ubuntu-0ubuntu120.04
+2024-06-28 12:35:20,456 INFO org.eclipse.jetty.server.session: DefaultSessionIdManager workerName=node0
+2024-06-28 12:35:20,456 INFO org.eclipse.jetty.server.session: No SessionScavenger set, using defaults
+2024-06-28 12:35:20,457 INFO org.eclipse.jetty.server.session: node0 Scavenging every 660000ms
+2024-06-28 12:35:20,470 INFO org.eclipse.jetty.server.handler.ContextHandler: Started o.e.j.s.ServletContextHandler@50eca7c6{static,/static,jar:file:/home/zyh/hadoop/share/hadoop/hdfs/hadoop-hdfs-3.2.4-tests.jar!/webapps/static,AVAILABLE}
+2024-06-28 12:35:20,702 INFO org.eclipse.jetty.server.handler.ContextHandler: Started o.e.j.w.WebAppContext@51650883{datanode,/,file:///tmp/jetty-localhost-36311-hadoop-hdfs-3_2_4-tests_jar-_-any-7129406237559710579/webapp/,AVAILABLE}{jar:file:/home/zyh/hadoop/share/hadoop/hdfs/hadoop-hdfs-3.2.4-tests.jar!/webapps/datanode}
+2024-06-28 12:35:20,710 INFO org.eclipse.jetty.server.AbstractConnector: Started ServerConnector@43b4fe19{HTTP/1.1, (http/1.1)}{localhost:36311}
+2024-06-28 12:35:20,711 INFO org.eclipse.jetty.server.Server: Started @6418ms
+2024-06-28 12:35:21,089 INFO org.apache.hadoop.hdfs.server.datanode.web.DatanodeHttpServer: Listening HTTP traffic on /127.0.0.1:50076
+2024-06-28 12:35:21,096 INFO org.apache.hadoop.util.JvmPauseMonitor: Starting JVM pause monitor
+2024-06-28 12:35:21,098 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: dnUserName = zyh
+2024-06-28 12:35:21,098 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: supergroup = supergroup
+2024-06-28 12:35:21,142 INFO org.apache.hadoop.ipc.CallQueueManager: Using callQueue: class java.util.concurrent.LinkedBlockingQueue, queueCapacity: 1000, scheduler: class org.apache.hadoop.ipc.DefaultRpcScheduler, ipcBackoff: false.
+2024-06-28 12:35:21,157 INFO org.apache.hadoop.ipc.Server: Starting Socket Reader #1 for port 50021
+2024-06-28 12:35:21,356 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Opened IPC server at /127.0.0.1:50021
+2024-06-28 12:35:21,374 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Refresh request received for nameservices: null
+2024-06-28 12:35:21,382 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting BPOfferServices for nameservices: <default>
+2024-06-28 12:35:21,390 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Block pool <registering> (Datanode Uuid unassigned) service to localhost/127.0.0.1:9000 starting to offer service
+2024-06-28 12:35:21,395 INFO org.apache.hadoop.ipc.Server: IPC Server listener on 50021: starting
+2024-06-28 12:35:21,395 INFO org.apache.hadoop.ipc.Server: IPC Server Responder: starting
+2024-06-28 12:35:22,462 INFO org.apache.hadoop.ipc.Client: Retrying connect to server: localhost/127.0.0.1:9000. Already tried 0 time(s); retry policy is RetryUpToMaximumCountWithFixedSleep(maxRetries=10, sleepTime=1000 MILLISECONDS)
+2024-06-28 12:35:22,649 INFO org.apache.hadoop.hdfs.server.common.Storage: Using 1 threads to upgrade data directories (dfs.datanode.parallel.volumes.load.threads.num=1, dataDirs=1)
+2024-06-28 12:35:22,726 INFO org.apache.hadoop.hdfs.server.common.Storage: Lock on /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2/in_use.lock acquired by nodename 963195@e07ff098d9e2
+2024-06-28 12:35:22,727 INFO org.apache.hadoop.hdfs.server.common.Storage: Storage directory with location [DISK]file:/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2 is not formatted for namespace 898051735. Formatting...
+2024-06-28 12:35:22,728 INFO org.apache.hadoop.hdfs.server.common.Storage: Generated new storageID DS-95ea8f92-1fa1-4f39-b667-9e655856449e for directory /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2 
+2024-06-28 12:35:22,843 INFO org.apache.hadoop.hdfs.server.common.Storage: Analyzing storage directories for bpid BP-134450730-172.17.0.4-1719570918401
+2024-06-28 12:35:22,843 INFO org.apache.hadoop.hdfs.server.common.Storage: Locking is disabled for /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2/current/BP-134450730-172.17.0.4-1719570918401
+2024-06-28 12:35:22,844 INFO org.apache.hadoop.hdfs.server.common.Storage: Block pool storage directory for location [DISK]file:/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2 and block pool id BP-134450730-172.17.0.4-1719570918401 is not formatted. Formatting ...
+2024-06-28 12:35:22,844 INFO org.apache.hadoop.hdfs.server.common.Storage: Formatting block pool BP-134450730-172.17.0.4-1719570918401 directory /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2/current/BP-134450730-172.17.0.4-1719570918401/current
+2024-06-28 12:35:22,938 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Setting up storage: nsid=898051735;bpid=BP-134450730-172.17.0.4-1719570918401;lv=-57;nsInfo=lv=-65;cid=mycluster;nsid=898051735;c=1719570918401;bpid=BP-134450730-172.17.0.4-1719570918401;dnuuid=null
+2024-06-28 12:35:23,017 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Generated and persisted new Datanode UUID 274cab07-a95d-451f-a76b-5e1e5d6e05ae
+2024-06-28 12:35:23,028 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: The datanode lock is a read write lock
+2024-06-28 12:35:23,114 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Added new volume: DS-95ea8f92-1fa1-4f39-b667-9e655856449e
+2024-06-28 12:35:23,114 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Added volume - [DISK]file:/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2, StorageType: DISK
+2024-06-28 12:35:23,118 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.MemoryMappableBlockLoader: Initializing cache loader: MemoryMappableBlockLoader.
+2024-06-28 12:35:23,123 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Registered FSDatasetState MBean
+2024-06-28 12:35:23,128 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Adding block pool BP-134450730-172.17.0.4-1719570918401
+2024-06-28 12:35:23,129 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Scanning block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2...
+2024-06-28 12:35:23,137 WARN org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: dfsUsed file missing in /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2/current/BP-134450730-172.17.0.4-1719570918401/current, will proceed with Du for space computation calculation, 
+2024-06-28 12:35:23,154 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Time taken to scan block pool BP-134450730-172.17.0.4-1719570918401 on /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2: 25ms
+2024-06-28 12:35:23,154 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Total time to scan all replicas for block pool BP-134450730-172.17.0.4-1719570918401: 26ms
+2024-06-28 12:35:23,155 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Adding replicas to map for block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2...
+2024-06-28 12:35:23,155 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.BlockPoolSlice: Replica Cache file: /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2/current/BP-134450730-172.17.0.4-1719570918401/current/replicas doesn't exist 
+2024-06-28 12:35:23,157 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Time to add replicas to map for block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2: 2ms
+2024-06-28 12:35:23,157 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Total time to add all replicas to map for block pool BP-134450730-172.17.0.4-1719570918401: 3ms
+2024-06-28 12:35:23,158 INFO org.apache.hadoop.hdfs.server.datanode.checker.ThrottledAsyncChecker: Scheduling a check for /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2
+2024-06-28 12:35:23,165 INFO org.apache.hadoop.hdfs.server.datanode.checker.DatasetVolumeChecker: Scheduled health check for volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2
+2024-06-28 12:35:23,167 INFO org.apache.hadoop.hdfs.server.datanode.VolumeScanner: Now scanning bpid BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2
+2024-06-28 12:35:23,168 INFO org.apache.hadoop.hdfs.server.datanode.VolumeScanner: VolumeScanner(/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2, DS-95ea8f92-1fa1-4f39-b667-9e655856449e): finished scanning block pool BP-134450730-172.17.0.4-1719570918401
+2024-06-28 12:35:23,178 INFO org.apache.hadoop.hdfs.server.datanode.VolumeScanner: VolumeScanner(/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2, DS-95ea8f92-1fa1-4f39-b667-9e655856449e): no suitable block pools found to scan.  Waiting 1814399989 ms.
+2024-06-28 12:35:23,183 INFO org.apache.hadoop.hdfs.server.datanode.DirectoryScanner: Periodic Directory Tree Verification scan starting at 6/28/24, 2:16 PM with interval of 21600000ms
+2024-06-28 12:35:23,189 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Block pool BP-134450730-172.17.0.4-1719570918401 (Datanode Uuid 274cab07-a95d-451f-a76b-5e1e5d6e05ae) service to localhost/127.0.0.1:9000 beginning handshake with NN
+2024-06-28 12:35:23,240 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Block pool Block pool BP-134450730-172.17.0.4-1719570918401 (Datanode Uuid 274cab07-a95d-451f-a76b-5e1e5d6e05ae) service to localhost/127.0.0.1:9000 successfully registered with NN
+2024-06-28 12:35:23,240 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: For namenode localhost/127.0.0.1:9000 using BLOCKREPORT_INTERVAL of 21600000msec CACHEREPORT_INTERVAL of 10000msec Initial delay: 0msec; heartBeatInterval=3000
+2024-06-28 12:35:24,333 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Namenode Block pool BP-134450730-172.17.0.4-1719570918401 (Datanode Uuid 274cab07-a95d-451f-a76b-5e1e5d6e05ae) service to localhost/127.0.0.1:9000 trying to claim ACTIVE state with txid=1
+2024-06-28 12:35:24,333 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Acknowledging ACTIVE Namenode Block pool BP-134450730-172.17.0.4-1719570918401 (Datanode Uuid 274cab07-a95d-451f-a76b-5e1e5d6e05ae) service to localhost/127.0.0.1:9000
+2024-06-28 12:35:24,398 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Successfully sent block report 0x51fea7c54006654 to namenode: localhost/127.0.0.1:9000,  containing 1 storage report(s), of which we sent 1. The reports had 0 total blocks and used 1 RPC(s). This took 5 msec to generate and 58 msecs for RPC and NN processing. Got back one command: FinalizeCommand/5.
+2024-06-28 12:35:24,399 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Got finalize command for block pool BP-134450730-172.17.0.4-1719570918401
+2024-06-28 12:35:26,243 WARN org.apache.hadoop.hdfs.server.datanode.DataNode: IOException in offerService
+java.io.EOFException: End of File Exception between local host is: "e07ff098d9e2/172.17.0.4"; destination host is: "localhost":9000; : java.io.EOFException; For more details see:  http://wiki.apache.org/hadoop/EOFException
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at org.apache.hadoop.net.NetUtils.wrapWithMessage(NetUtils.java:842)
+	at org.apache.hadoop.net.NetUtils.wrapException(NetUtils.java:795)
+	at org.apache.hadoop.ipc.Client.getRpcResponse(Client.java:1616)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1558)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1455)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:231)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine$Invoker.invoke(ProtobufRpcEngine.java:118)
+	at com.sun.proxy.$Proxy19.sendHeartbeat(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.DatanodeProtocolClientSideTranslatorPB.sendHeartbeat(DatanodeProtocolClientSideTranslatorPB.java:168)
+	at org.apache.hadoop.hdfs.server.datanode.BPServiceActor.sendHeartBeat(BPServiceActor.java:524)
+	at org.apache.hadoop.hdfs.server.datanode.BPServiceActor.offerService(BPServiceActor.java:658)
+	at org.apache.hadoop.hdfs.server.datanode.BPServiceActor.run(BPServiceActor.java:855)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.io.EOFException
+	at java.base/java.io.DataInputStream.readInt(DataInputStream.java:397)
+	at org.apache.hadoop.ipc.Client$IpcStreams.readResponse(Client.java:1921)
+	at org.apache.hadoop.ipc.Client$Connection.receiveRpcResponse(Client.java:1238)
+	at org.apache.hadoop.ipc.Client$Connection.run(Client.java:1134)
+2024-06-28 12:35:27,378 WARN org.apache.hadoop.util.NativeCodeLoader: Unable to load native-hadoop library for your platform... usi2024-06-28 12:35:27,555 INFO org.apache.h2024-06-28 12:35:28,254 INFO org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+2024-06-28 12:35:28,419 INFO org.apache.hadoop.metrics2.impl.MetricsSystemImpl: DataNode metrics system started

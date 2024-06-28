@@ -1,0 +1,4 @@
+2024-06-28 13:19:12,995 WARN org.apache.hadoop.util.NativeCodeLoader: Unable to load native-hadoop library for your platform... usi2024-06-28 13:19:13,207 INFO org.apache.h2024-06-28 13:19:13,355 WARN org.apache.hadoop.metrics2.impl.MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-datanode.properties,hadoop-metrics22024-06-28 13:19:13,843 INFO org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+2024-06-28 13:19:14,652 INFO org.apache.hadoop.metrics2.impl.MetricsSystemImpl: DataNode metrics system started
+2024-06-28 13:19:15,060 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Configured hostname is e07ff098d9e2
+2024-06-28 13:19:15,376 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Starting DataNode with maxLockedMemory = 0
