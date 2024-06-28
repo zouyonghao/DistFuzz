@@ -45,6 +45,11 @@ public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
     {
         std::string configure_string = "timeout 3 " HADOOP_PATH "/bin/hdfs dfs ";
+        if (__dst_get_random_uint8_t() > 128)
+        {
+            // use namenode2
+            configure_string += "-fs hdfs://localhost:9001 ";
+        }
         va_list random_nums;
         va_start(random_nums, node_count);
         switch (op_name)

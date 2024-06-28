@@ -44,19 +44,18 @@
         <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/namenode1</value>
     </property>
 
+    <!-- ZKFC settings (ZooKeeper-based failover controller) -->
+    <property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>shell(/home/zyh/distributed-system-test/hdfs_test/bin/kill_nn2.sh)</value>
+    </property>
     <property>
         <name>dfs.ha.automatic-failover.enabled</name>
         <value>true</value>
     </property>
-
     <property>
-        <name>dfs.client.failover.proxy.provider.mycluster</name>
-        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
-    </property>
-
-    <property>
-        <name>dfs.journalnode.edits.dir</name>
-        <value>/tmp/hadoop/dfs/journalnode</value>
+        <name>dfs.ha.zkfc.port</name>
+        <value>8019</value>
     </property>
 
     <property>
@@ -64,7 +63,12 @@
         <value>localhost:2181</value>
     </property>
 
-    <!-- Configuration for DataNode 1 -->
+    <property>
+        <name>dfs.ha.namenode.id</name>
+        <value>nn1</value>
+    </property>
+
+<!-- 
     <property>
         <name>dfs.datanode.data.dir</name>
         <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode1</value>
@@ -83,16 +87,6 @@
     </property>
 
     <property>
-        <name>dfs.nameservice.id</name>
-        <value>mycluster</value>
-    </property>
-    <property>
-        <name>dfs.ha.namenode.id</name>
-        <value>nn1</value>
-    </property>
-
-    <!-- Configuration for DataNode 2 -->
-    <property>
         <name>dfs.datanode.data.dir</name>
         <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2</value>
     </property>
@@ -109,7 +103,6 @@
         <value>localhost:50021</value>
     </property>
 
-    <!-- Configuration for DataNode 3 -->
     <property>
         <name>dfs.datanode.data.dir</name>
         <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3</value>
@@ -125,5 +118,5 @@
     <property>
         <name>dfs.datanode.ipc.address</name>
         <value>localhost:50022</value>
-    </property>
+    </property> -->
 </configuration>

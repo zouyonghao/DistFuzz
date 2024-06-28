@@ -7,7 +7,12 @@ hdfs journalnode -Ddfs.journalnode.rpc-address=localhost:8485 -Ddfs.journalnode.
 hdfs journalnode -Ddfs.journalnode.rpc-address=localhost:8486 -Ddfs.journalnode.http-address=localhost:8489 -Ddfs.journalnode.edits.dir=/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/dfs/journalnode2 &
 hdfs journalnode -Ddfs.journalnode.rpc-address=localhost:8487 -Ddfs.journalnode.http-address=localhost:8490 -Ddfs.journalnode.edits.dir=/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/dfs/journalnode3 &
 
-export HADOOP_CONF_DIR=./namenode1
+/home/zyh/zookeeper/bin/zkServer.sh start
+
+sleep 2
+
+export HADOOP_CONF_DIR=/home/zyh/distributed-system-test/hdfs_test/bin/namenode1
+
 java -cp \
     $HADOOP_CONF_DIR:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:/home/zyh/hadoop/share/hadoop/hdfs/*:/home/zyh/hadoop/share/hadoop/hdfs/lib/* \
     org.apache.hadoop.hdfs.server.namenode.NameNode -format -force -nonInteractive -clusterId mycluster
@@ -16,9 +21,12 @@ java -cp \
     $HADOOP_CONF_DIR:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:/home/zyh/hadoop/share/hadoop/hdfs/*:/home/zyh/hadoop/share/hadoop/hdfs/lib/* \
     org.apache.hadoop.hdfs.server.namenode.NameNode &
 
-$HADOOP_HOME/bin/hdfs zkfc &
+sleep 1
 
-export HADOOP_CONF_DIR=./namenode2
+HADOOP_PID_DIR=./hadoop/hdfs/namenode1 $HADOOP_HOME/bin/hdfs zkfc -formatZK -force -nonInteractive
+HADOOP_PID_DIR=./hadoop/hdfs/namenode1 $HADOOP_HOME/bin/hdfs zkfc &
+
+export HADOOP_CONF_DIR=/home/zyh/distributed-system-test/hdfs_test/bin/namenode2
 java -cp \
     $HADOOP_CONF_DIR:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:/home/zyh/hadoop/share/hadoop/hdfs/*:/home/zyh/hadoop/share/hadoop/hdfs/lib/* \
     org.apache.hadoop.hdfs.server.namenode.NameNode -format -force -nonInteractive -clusterId mycluster
@@ -27,4 +35,6 @@ java -cp \
     $HADOOP_CONF_DIR:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/common/lib/*:/home/zyh/hadoop/share/hadoop/hdfs/*:/home/zyh/hadoop/share/hadoop/hdfs/lib/* \
     org.apache.hadoop.hdfs.server.namenode.NameNode &
 
-$HADOOP_HOME/bin/hdfs zkfc &
+sleep 1
+
+HADOOP_PID_DIR=./hadoop/hdfs/namenode2 $HADOOP_HOME/bin/hdfs zkfc &
