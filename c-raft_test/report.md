@@ -188,3 +188,8 @@
     * https://github.com/canonical/raft/pull/249
 
     **Fixed**
+
+6. Assertion `r->last_applied <= r->commit_index' failed
+    ```
+    server: src/replication.c:1490: int replicationApply(struct raft *): Assertion `r->last_applied <= r->commit_index' failed.
+    ```
