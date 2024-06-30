@@ -254,3 +254,5 @@ dqlite_test/bin/dqlite_data*
 dqlite_test/bin/test_cases/
 dqlite_test/bin/file_lock
 dqlite_test/bin/output
+dqlite_test/bin/init_random.txt
+dqlite_test/bin/*.txt
