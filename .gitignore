@@ -250,3 +250,7 @@ hdfs_test/bin/random.txt
 hdfs_test/bin/init_random.txt
 hdfs_test/bin/a
 */bin/core.*
+dqlite_test/bin/dqlite_data*
+dqlite_test/bin/test_cases/
+dqlite_test/bin/file_lock
+dqlite_test/bin/output

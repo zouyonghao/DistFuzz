@@ -16,6 +16,7 @@
 | aerospike     | aerospike-server | http://oslab:7800/zyh/aerospike-server.git                                              | v5.6.0.4        | 376K |
 | Zookeeper     | zookeeper        | \\\\oslab\workspace\zyh\apache-zookeeper-3.7.0-bin.tar.gz                               | v3.5.1          | 231K |
 | etcd          | etcd             | https://github.com/etcd-io/etcd/releases/download/v3.5.1/etcd-v3.5.1-linux-amd64.tar.gz | v2.2.0          | 249K |
+| dqlite        | dqlite           | https://github.com/canonical/dqlite/archive/refs/tags/v1.14.0.zip                       | v1.14.0         |      |
 
 **注意**
 
@@ -43,6 +44,41 @@
    ```
 
 * `Zookeeper` 需要将`jar`包重命名为`zookeeper.jar`
+
+* `dqlite`
+
+   ```
+   cd
+   wget https://github.com/canonical/raft/archive/refs/tags/v0.17.1.zip
+   unzip v0.17.1.zip
+   mv raft-0.17.1/ raft
+   cd raft
+   autoreconf -i
+   ./configure --enable-debug --enable-sanitize
+   make -j10
+   sudo make install
+   sudo ldconfig
+
+   cd
+   wget https://github.com/canonical/dqlite/archive/refs/tags/v1.14.0.zip
+   unzip v1.14.0.zip
+   mv dqlite-1.14.0/ dqlite
+   cd dqlite
+   sudo apt install pkg-config autoconf automake libtool make libuv1-dev libsqlite3-dev liblz4-dev
+   autoreconf -i
+   ./configure --enable-debug --enable-sanitize
+   make -j10
+   sudo make install
+   sudo ldconfig
+
+   cd
+   git clone https://github.com/canonical/go-dqlite.git
+   wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz
+   sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
+   echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
+   source ~/.bashrc
+   go install -asan -tags nosqlite3 ./cmd/dqlite-demo
+   ```
 
 * TODO: 如果使用checkpoint，strace应改为attach模式，类似启动NuRaft的方式。(see nuraft_test/src/node_manager.cpp)
 
