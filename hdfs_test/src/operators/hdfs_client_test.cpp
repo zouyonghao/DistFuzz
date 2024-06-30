@@ -42,4 +42,4 @@ public:
 REGISTER_NORMAL_OPERATOR(HdfsGet, new HdfsClientOperator(OP_READ, hdfs_client_configuration_generator));
 REGISTER_NORMAL_OPERATOR(HdfsSet, new HdfsClientOperator(OP_WRITE, hdfs_client_configuration_generator));
 
-REGISTER_NORMAL_OPERATOR(Init, new HdfsClientOperator(OP_WRITE, hdfs_client_configuration_generator));
+REGISTER_NORMAL_OPERATOR(Init, new HdfsInitOperator);
