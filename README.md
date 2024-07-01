@@ -47,11 +47,11 @@
 
 * `dqlite`
 
-   ```
+   ```shell
    cd
-   wget https://github.com/canonical/raft/archive/refs/tags/v0.17.1.zip
-   unzip v0.17.1.zip
-   mv raft-0.17.1/ raft
+   wget https://github.com/canonical/raft/archive/refs/tags/v0.16.0.zip
+   unzip v0.16.0.zip
+   mv raft-0.16.0/ raft
    cd raft
    autoreconf -i
    ./configure --enable-debug --enable-sanitize
@@ -60,9 +60,9 @@
    sudo ldconfig
 
    cd
-   wget https://github.com/canonical/dqlite/archive/refs/tags/v1.14.0.zip
-   unzip v1.14.0.zip
-   mv dqlite-1.14.0/ dqlite
+   wget https://github.com/canonical/dqlite/archive/refs/tags/v1.13.0.zip
+   unzip v1.13.0.zip
+   mv dqlite-1.13.0/ dqlite
    cd dqlite
    sudo apt install pkg-config autoconf automake libtool make libuv1-dev libsqlite3-dev liblz4-dev
    autoreconf -i
@@ -72,11 +72,17 @@
    sudo ldconfig
 
    cd
-   git clone https://github.com/canonical/go-dqlite.git
+   wget https://github.com/canonical/go-dqlite/archive/refs/tags/v1.11.9.zip
+   unzip v1.11.9.zip
+   mv go-dqlite-1.11.9/ go-dqlite
+   
+   # delete -Wl,-z,now from /internal/bindings/build.go**
+
    wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz
    sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
    echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
    source ~/.bashrc
+   cd go-dqlite
    go install -asan -tags nosqlite3 ./cmd/dqlite-demo
    ```
 
