@@ -40,6 +40,7 @@ public:
     bool start_with_ebpf = false;
     bool start_with_rr = false;
     bool start_with_criu = false;
+    std::vector<NodeInfo> node_processes;
 
     explicit NodeManager(ServerConfigurationGenerator *_configuration_generator)
         : configuration_generator(_configuration_generator), node_count(DEFAULT_NODE_COUNT)
@@ -263,9 +264,6 @@ public:
         ni.log_index++;
         return true;
     }
-
-private:
-    std::vector<NodeInfo> node_processes;
 };
 
 #define REGISTER_NODE_MANAGER(node_manager_name, node_manager)                                                         \
