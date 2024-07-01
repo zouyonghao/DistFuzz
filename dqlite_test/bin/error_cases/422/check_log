@@ -1,0 +1,3 @@
+/home/zyh/distributed-system-test/dqlite_test/bin/test_cases/422/operation_log	{:valid? true,
+ :configs ({:model {:value nil}, :last-op nil, :pending []})}
+true
