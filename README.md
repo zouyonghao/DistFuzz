@@ -76,7 +76,14 @@
    unzip v1.11.9.zip
    mv go-dqlite-1.11.9/ go-dqlite
    
-   # delete -Wl,-z,now from /internal/bindings/build.go**
+   # delete -Wl,-z,now from /internal/bindings/build.go
+   # change threshold parameter in dqlite-demo.go
+   # options := []app.Option{
+   #   app.WithAddress(db), app.WithCluster(*join), app.WithLogFunc(logFunc),
+	#   app.WithDiskMode(diskMode), 
+   #   app.WithSnapshotParams(dqlite.SnapshotParams{Threshold: 1, Trailing: 5})
+   # }
+   # import (... "github.com/canonical/go-dqlite" ...)
 
    wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz
    sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
