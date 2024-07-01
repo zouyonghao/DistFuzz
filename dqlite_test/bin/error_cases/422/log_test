@@ -1,0 +1,25 @@
+spliting files...
+normal_operator_size = 3
+normal operator run count = 3
+critical_operator_size = 3
+critical_operator run count = 2
+[1;31mrunning test case 422[0m
+start nodes....
+Run init operator
+running operator DqliteGet
+running operator DqliteGet
+running operator DqliteSet
+running operator RandomKill
+running operator DqliteGet
+running operator DqliteGet
+running operator DqliteGet
+running operator NoopOperator
+running operator DqliteGet
+running operator DqliteGet
+running operator DqliteGet
+node 0 is unintentially terminiated.
+check failed!
+stopping...
+check failed!
+backup test cases
+423

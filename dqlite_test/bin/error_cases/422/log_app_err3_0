@@ -1,0 +1,20 @@
+[33m[FUZZ PRINT]Get Environment Variable 32857[0m
+[33mYou are running in a fuzzing environment[0m
+get file path /tmp/.join4268450286
+inject delay to process 371863 syscall 1
+get file path /tmp/.info.yaml2973112969
+inject delay to process 371863 syscall 1
+get file path /tmp/.cluster.yaml3592876677
+inject delay to process 371863 syscall 1
+get file path /home/zyh/distributed-system-test/dqlite_test/bin/dqlite_data3/127.0.0.1:4003/.probe (deleted)
+inject fail to process 371863 syscall 1
+LIBRAFT   1719786480210211949 src/start.c:155 starting
+LIBRAFT   1719786480210739653 src/uv_list.c:97 ignore cluster.yaml
+LIBRAFT   1719786480210799094 src/uv_list.c:97 ignore info.yaml
+LIBRAFT   1719786480210853744 src/uv_list.c:97 ignore join
+LIBRAFT   1719786480210912254 src/uv.c:485 start index 1, 0 entries
+LIBRAFT   1719786480210966678 src/uv.c:487 no snapshot
+LIBRAFT   1719786480211026617 src/start.c:163 current_term:0 voted_for:0 start_index:1 n_entries:0
+LIBRAFT   1719786480211082714 src/start.c:201 restore 0 entries starting at 1
+LIBDQLITE 1719786480211142177 impl_listen:55 impl listen
+LIBRAFT   1719786480211205416 src/convert.c:23 old_state:0 new_state:1
