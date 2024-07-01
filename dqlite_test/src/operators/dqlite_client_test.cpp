@@ -1,4 +1,5 @@
 #include <dqlite_configuration_generator.hpp>
+#include <operator/dst_start_new_node.hpp>
 
 
 static DqliteClientConfigurationGenerator *dqlite_client_configuration_generator =
@@ -35,6 +36,7 @@ public:
         uint32_t node = __dst_get_random_uint8_t() % node_count + BASE_API_PORT;
         configure_string += "-X PUT -d 0 ";
         configure_string += "http://127.0.0.1:" + std::to_string(node) + "/my-key";
+        sleep(1);
         return configure_string;
     }
 };
@@ -43,3 +45,5 @@ REGISTER_NORMAL_OPERATOR(DqliteGet, new DqliteClientOperator(OP_READ, dqlite_cli
 REGISTER_NORMAL_OPERATOR(DqliteSet, new DqliteClientOperator(OP_WRITE, dqlite_client_configuration_generator));
 
 REGISTER_NORMAL_OPERATOR(Init, new DqliteInitOperator);
+
+REGISTER_CRITICAL_OPERATOR(StartNewNode, new StartNewNode);

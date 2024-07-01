@@ -65,6 +65,7 @@ public:
             break;
         }
         va_end(random_nums);
+        sleep(1);
         return configure_string;
     }
 };
