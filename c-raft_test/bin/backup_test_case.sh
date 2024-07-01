@@ -34,9 +34,9 @@ mv rr_rec* ./test_cases/$1
   # elif grep -q true ./test_cases/$1/check_log; then
   #     echo "No errors, deleting logs..."
   #     rm -rf ./test_cases/$1
-  elif grep -q "Assert" ./test_cases/$1/log_app*; then
+  elif grep -q "Assert" ./test_cases/$1/log_*; then
     echo "Find assert failed!"
-  elif grep -q "assert" ./test_cases/$1/log_app*; then
+  elif grep -q "assert" ./test_cases/$1/log_*; then
     echo "Find assert failed!"
   elif grep -q "check failed!" ./test_cases/$1/log_test; then
     echo "Find check failed!"
