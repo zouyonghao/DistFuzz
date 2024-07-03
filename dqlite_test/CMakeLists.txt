@@ -9,10 +9,13 @@ file(GLOB DQLITE_TEST_MAIN_SRC
         "src/*.cpp"
         "src/operators/*.cpp"
         ${CMAKE_SOURCE_DIR}/core/src/dst_test_main.cpp
+        ${CMAKE_SOURCE_DIR}/core/src/operator/dst_random_kill.cpp
+        ${CMAKE_SOURCE_DIR}/core/src/operator/dst_random_start.cpp
+        ${CMAKE_SOURCE_DIR}/core/src/operator/dst_default_client_operator.cpp
         )
 
 add_executable(dqlite_test_main ${DQLITE_TEST_MAIN_SRC})
 target_link_libraries(dqlite_test_main
-        -Wl,--whole-archive dst_default_operator
+        # -Wl,--whole-archive dst_default_operator
         -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
 target_compile_options(dqlite_test_main PUBLIC -DNO_CONCURRENCY)
