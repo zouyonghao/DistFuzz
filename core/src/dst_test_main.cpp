@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <regex>
@@ -39,13 +40,17 @@ void run_init_operator()
     }
 }
 
-void run_some_normal_operators(int number, int normal_sleep_ms)
+void run_some_normal_operators(int number, int normal_sleep_ms, bool fuzz_normal_events, bool fuzz_time)
 {
     size_t operator_size = Registry<NormalOperator>::getItemVector().size();
     for (int i = 0; i < number && operator_size > 0; i++)
     {
         std::this_thread::sleep_for(std::chrono::microseconds(normal_sleep_ms));
-        uint32_t index = __dst_get_random_uint8_t() % operator_size;
+        uint32_t index = 0;
+        if (fuzz_normal_events)
+        {
+            uint32_t index = __dst_get_random_uint8_t() % operator_size;
+        }
         LOG_INFO << "running operator " << Registry<NormalOperator>::getItemVector()[index].first << "\n";
         std::thread t1([index]() { Registry<NormalOperator>::getItemVector()[index].second->_do(); });
 
@@ -70,7 +75,11 @@ void run_some_normal_operators(int number, int normal_sleep_ms)
 #endif // NO_CONCURRENCY
         t1.join();
     }
-    // std::this_thread::sleep_for(std::chrono::seconds(3));
+
+    if (fuzz_time)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(__dst_get_random_uint8_t()));
+    }
 }
 
 void split_files(std::string &initial_file, uint32_t node_count)
@@ -123,6 +132,7 @@ int main(int argc, char *argv[])
 {
     std::map<std::string, std::string> options;
     std::regex optregex("--(help|fuzz_before_init|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|"
+                        "no_fuzz_normal_events|no_fuzz_time|"
                         "check_after_fuzz|random_file|start_with_strace|start_with_ebpf|start_with_rr|use_checkpoint)"
                         "(?:=((?:.|\n)*))?");
 
@@ -143,18 +153,21 @@ int main(int argc, char *argv[])
 
     if (options.count("help"))
     {
-        std::cerr << "    --help                print this usage" << std::endl
-                  << "    --node_count          the nodes needs to run" << std::endl
-                  << "    --normal_sleep_ms     the sleep time between normal operators" << std::endl
-                  << "    --normal_count        the normal operators count" << std::endl
-                  << "    --critic_sleep_ms     the sleep time between critic operators" << std::endl
-                  << "    --critic_count        the critic operators count" << std::endl
-                  << "    --check_after_fuzz    whether to run some normal operators after fuzz" << std::endl
-                  << "    --random_file         the random file name" << std::endl
-                  << "    --fuzz_before_init    should we start fuzzing before the init operator (true or false)"
+        std::cerr << "    --help                  print this usage" << std::endl
+                  << "    --node_count            the nodes needs to run" << std::endl
+                  << "    --normal_sleep_ms       the sleep time between normal operators" << std::endl
+                  << "    --normal_count          the normal operators count" << std::endl
+                  << "    --critic_sleep_ms       the sleep time between critic operators" << std::endl
+                  << "    --critic_count          the critic operators count" << std::endl
+                  << "    --check_after_fuzz      whether to run some normal operators after fuzz" << std::endl
+                  << "    --random_file           the random file name" << std::endl
+                  << "    --fuzz_before_init      should we start fuzzing before the init operator (true or false)"
                   << std::endl
-                  << "    --start_with_ebpf     start the process with dst_ebpf_fault" << std::endl
-                  << "    --start_with_rr       start the process with rr" << std::endl
+                  << "    --start_with_ebpf       start the process with dst_ebpf_fault" << std::endl
+                  << "    --start_with_rr         start the process with rr" << std::endl
+                  << std::endl
+                  << "    --no_fuzz_normal_events with this option, normal events are generated randomly" << std::endl
+                  << "    --no_fuzz_time          with this option, time interval is set to 100ms" << std::endl
                   << std::endl;
         return 0;
     }
@@ -225,6 +238,18 @@ int main(int argc, char *argv[])
         use_checkpoint = true;
     }
 
+    bool fuzz_normal_events = true;
+    if (options.count("no_fuzz_normal_events"))
+    {
+        fuzz_normal_events = false;
+    }
+
+    bool fuzz_time = true;
+    if (options.count("no_fuzz_time"))
+    {
+        fuzz_time = false;
+    }
+
     log_init("log_test");
 
     uint32_t test_case_count = 0;
@@ -253,8 +278,7 @@ int main(int argc, char *argv[])
     bool check_failed = false;
     bool all_operators_after_fuzzing_failed = true;
 
-    LOG_INFO << "\033[1;31m"
-             << "running test case " << test_case_count << "\033[0m\n";
+    LOG_INFO << "\033[1;31m" << "running test case " << test_case_count << "\033[0m\n";
     LOG_INFO << "start nodes....\n";
     /** We should only have 1 NodeManager. */
     NodeManager *nm = SingletonRegistry<NodeManager>::getItem();
@@ -293,21 +317,31 @@ int main(int argc, char *argv[])
         i.second->node_count = node_count;
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(__dst_get_random_uint16_t() % 1000));
+    if (fuzz_time)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(__dst_get_random_uint8_t()));
+    }
 
     run_init_operator();
     set_is_fuzzing(true);
     /** the normal operator may change after running init operator */
     normal_operator_size = Registry<NormalOperator>::getItemVector().size();
-    run_some_normal_operators(run_normal_operator_count, normal_sleep_ms);
+    run_some_normal_operators(run_normal_operator_count, normal_sleep_ms, fuzz_normal_events, fuzz_time);
 
     for (int i = 0; i < run_critic_operator_count && critical_operator_size > 0; i++)
     {
-        std::this_thread::sleep_for(std::chrono::microseconds(__dst_get_random_uint16_t() + critic_sleep_ms));
+        if (fuzz_time)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(__dst_get_random_uint8_t() + critic_sleep_ms));
+        }
+        else
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(critic_sleep_ms));
+        }
         uint32_t index = __dst_get_random_uint8_t() % critical_operator_size;
         LOG_INFO << "running operator " << Registry<CriticalOperator>::getItemVector()[index].first << "\n";
         Registry<CriticalOperator>::getItemVector()[index].second->_do();
-        run_some_normal_operators(run_normal_operator_count, normal_sleep_ms);
+        run_some_normal_operators(run_normal_operator_count, normal_sleep_ms, fuzz_normal_events, fuzz_time);
     }
 
     /** check server availability */
