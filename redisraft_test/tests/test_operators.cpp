@@ -3,6 +3,7 @@
 //
 #include <cassert>
 #include <operator/dst_default_operator.hpp>
+#include <iostream>
 
 int main()
 {

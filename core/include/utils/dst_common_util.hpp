@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <string>
+#include <iostream>
 
 #include <boost/process.hpp>
 
