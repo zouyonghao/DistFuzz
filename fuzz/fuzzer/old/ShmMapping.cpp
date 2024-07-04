@@ -75,7 +75,7 @@ void ShmSetup()
 {
     shmId = SingleShmSetup(globalTraceBit, MAP_SIZE, SHM_ENV_VAR);
     global_state_shmid = SingleShmSetup(globalStateBit, MAP_SIZE, GLOBAL_STATE_ENV_VAR);
-    variable_count_shmid = SingleShmSetup(variableStateChangeCount, sizeof(u32), VARIABLE_COUNT_SHM_ENV_VAR);
+    variable_count_shmid = SingleShmSetup(variableStateChangeCount, sizeof(u64), VARIABLE_COUNT_SHM_ENV_VAR);
 
     branch_trace_shmid = SingleShmSetup(branchTraceBit, MAP_SIZE, BRANCH_TRACE_SHM_ENV_VAR);
 
