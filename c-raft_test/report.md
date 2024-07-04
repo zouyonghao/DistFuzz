@@ -203,3 +203,40 @@
     ```
     server: src/replication.c:1138: int replicationAppend(struct raft *, const struct raft_append_entries *, raft_index *, _Bool *): Assertion `request->args.n_entries == n' failed.
     ```
+
+9. Assertion `t->read.len > 0' failed.
+    ```
+    LIBRAFT   1719786478761513999 src/start.c:155 starting
+    LIBRAFT   1719786478761942716 src/uv_list.c:92 segment 0000000000000001-0000000000000001
+    LIBRAFT   1719786478761995532 src/uv_list.c:97 ignore cluster.yaml
+    LIBRAFT   1719786478762038516 src/uv_list.c:97 ignore info.yaml
+    LIBRAFT   1719786478762082263 src/uv_list.c:71 ignore metadata1
+    LIBRAFT   1719786478762129766 src/uv_segment.c:891 load segment 0000000000000001-0000000000000001
+    LIBRAFT   1719786478762477304 src/uv.c:485 start index 1, 1 entries
+    LIBRAFT   1719786478762520575 src/uv.c:487 no snapshot
+    LIBRAFT   1719786478762561970 src/start.c:163 current_term:1 voted_for:0 start_index:1 n_entries:1
+    LIBRAFT   1719786478762613587 src/start.c:201 restore 1 entries starting at 1
+    LIBRAFT   1719786478762743986 src/configuration.c:342 restore most recent configuration
+    LIBRAFT   1719786478762786189 src/configuration.c:343 === CONFIG START ===
+    LIBRAFT   1719786478762829543 src/configuration.c:348 id:3297041220608546238 address:127.0.0.1:4000 role:1
+    LIBRAFT   1719786478762868548 src/configuration.c:350 === CONFIG END ===
+    LIBDQLITE 1719786478762918142 impl_listen:55 impl listen
+    LIBRAFT   1719786478762967585 src/convert.c:23 old_state:0 new_state:1
+    LIBRAFT   1719786478763015462 src/convert.c:38 clear follower state
+    LIBRAFT   1719786478763056044 src/convert.c:23 old_state:1 new_state:2
+    LIBRAFT   1719786478763101528 src/convert.c:168 self elect and convert to leader
+    LIBRAFT   1719786478763141442 src/convert.c:49 clear candidate state
+    LIBRAFT   1719786478763186925 src/convert.c:23 old_state:2 new_state:3
+    LIBDQLITE 1719786478764101607 conn__start:290 conn start
+    LIBDQLITE 1719786478764185987 gateway__init:18 gateway init
+    LIBDQLITE 1719786479299052685 read_message_cb:186 read error -4095
+    LIBDQLITE 1719786479299154749 conn__stop:330 conn stop
+    LIBDQLITE 1719786479299209819 gateway__close:80 gateway close
+    LIBDQLITE 1719786479299477531 conn__start:290 conn start
+    LIBDQLITE 1719786479299523190 gateway__init:18 gateway init
+    LIBDQLITE 1719786479299865741 gateway__handle:1280 gateway handle
+    LIBDQLITE 1719786479299911680 handle_leader:201 handle leader
+    LIBDQLITE 1719786479299965583 handle_leader:216 handle leader - dispatch to 3297041220608546238
+    LIBDQLITE 1719786479300103672 gateway__resume:1327 gateway resume - finished
+    dqlite-demo: src/lib/transport.c:15: alloc_cb: Assertion `t->read.len > 0' failed.
+    ```
