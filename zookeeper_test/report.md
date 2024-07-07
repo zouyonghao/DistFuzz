@@ -95,6 +95,9 @@
 
     issues
     * https://issues.apache.org/jira/browse/ZOOKEEPER-1330
+    * https://github.com/pravega/zookeeper-operator/issues/393
+
+    **Fixed**
 
 6. Client fail
     ```
@@ -164,3 +167,13 @@
 
     issues
     * https://issues.apache.org/jira/browse/ZOOKEEPER-4410?jql=text%20~%20%22Unable%20to%20read%20additional%20data%20from%20client%22
+
+7. NullPointerException in Learner.java
+
+    ```
+    2024-07-04 19:38:49,333 [myid:3] - WARN  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):Follower@131] - Exception when following the leader
+    java.lang.NullPointerException
+            at org.apache.zookeeper.server.quorum.Learner.syncWithLeader(Learner.java:652)
+            at org.apache.zookeeper.server.quorum.Follower.followLeader(Follower.java:109)
+            at org.apache.zookeeper.server.quorum.QuorumPeer.run(QuorumPeer.java:1514)
+    ```
