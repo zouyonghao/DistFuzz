@@ -14,11 +14,15 @@ file(GLOB CRAFT_TEST_MAIN_SRC
         "src/*.cpp"
         "src/operators/*.cpp"
         ${CMAKE_SOURCE_DIR}/core/src/dst_test_main.cpp
+        ${CMAKE_SOURCE_DIR}/core/src/operator/dst_random_kill.cpp
+        ${CMAKE_SOURCE_DIR}/core/src/operator/dst_random_start.cpp
+        ${CMAKE_SOURCE_DIR}/core/src/operator/dst_default_client_operator.cpp
+        ${CMAKE_SOURCE_DIR}/core/src/operator/dst_default_operator.cpp
         )
 
 add_executable(c-raft_test_main ${CRAFT_TEST_MAIN_SRC})
 target_link_libraries(c-raft_test_main
-        -Wl,--whole-archive dst_default_operator
+        # -Wl,--whole-archive dst_default_operator
         -Wl,--no-whole-archive dst_core rt pthread ${Boost_LIBRARIES})
 target_compile_options(c-raft_test_main PUBLIC -DNO_CONCURRENCY)
 
