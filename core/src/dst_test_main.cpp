@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 {
     std::map<std::string, std::string> options;
     std::regex optregex("--(help|fuzz_before_init|node_count|normal_sleep_ms|normal_count|critic_sleep_ms|critic_count|"
-                        "no_fuzz_normal_events|no_fuzz_time|"
+                        "no_fuzz_normal_events|no_fuzz_time|no_reduction|"
                         "check_after_fuzz|random_file|start_with_strace|start_with_ebpf|start_with_rr|use_checkpoint)"
                         "(?:=((?:.|\n)*))?");
 
@@ -168,6 +168,8 @@ int main(int argc, char *argv[])
                   << std::endl
                   << "    --no_fuzz_normal_events with this option, normal events are generated randomly" << std::endl
                   << "    --no_fuzz_time          with this option, time interval is set to 100ms" << std::endl
+                  << std::endl
+                  << "    --no_reduction          close the sequence reduction" << std::endl
                   << std::endl;
         return 0;
     }
@@ -248,6 +250,12 @@ int main(int argc, char *argv[])
     if (options.count("no_fuzz_time"))
     {
         fuzz_time = false;
+    }
+
+    if (options.count("no_reduction"))
+    {
+        // add NO_REDUCTION to the environment
+        setenv("NO_REDUCTION", "1", 1);
     }
 
     log_init("log_test");

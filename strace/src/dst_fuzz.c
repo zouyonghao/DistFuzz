@@ -26,6 +26,8 @@
 
 #define FUZZ_COVERAGE_MAP_ENV_ID "AFLCplusplus_BRANCH_TRACE_SHM_ID"
 
+#define GLOBAL_INDEX_SHM_ENV_VAR "AFLCplusplus_VARIABLE_COUNT_SHMD_ID"
+
 #define FUZZ_COVERAGE_MAP_SIZE (1u << 23)
 
 struct exec_params {
@@ -97,6 +99,8 @@ uint64_t get_hash_value(uint32_t syscall_no, uint64_t position, size_t length, b
 
 static uint8_t *fuzz_coverage_map;
 
+static uint64_t *global_index;
+
 // temp variables, should be restored after each syscall finished
 static unsigned long tmp_offset = 0;
 
@@ -109,7 +113,12 @@ get_hash_value(uint32_t syscall_no, uint64_t position, size_t length, bool fault
 	// int node_id = getenv("NODE_ID") != NULL ? atoi(getenv("NODE_ID")) : 0;
 	position = 0;
 	int node_id = 0;
-	uint64_t hash_value = ((event_index + syscall_no * 10 + length + node_id * 100 + position)
+	int index = event_index;
+	if (getenv("NO_REDUCTION") != NULL) {
+		node_id = atoi(getenv("NODE_ID"));
+		index = *global_index;
+	}
+	uint64_t hash_value = ((index + syscall_no * 10 + length + node_id * 100 + position)
 			       << fault_injected) %
 			      FUZZ_COVERAGE_MAP_SIZE;
 
@@ -126,6 +135,7 @@ get_hash_value(uint32_t syscall_no, uint64_t position, size_t length, bool fault
 	// uint32_t hash_value = (prev ^ current_value) % FUZZ_COVERAGE_MAP_SIZE;
 	// prev = current_value;
 	event_index++;
+	(*global_index)++;
 	return hash_value;
 }
 
@@ -607,6 +617,18 @@ init_dst_fuzz(void)
 				res_shm_fuzz_coverage_map);
 			fuzz_coverage_map =
 				(uint8_t *)shmat((int)atoi(res_shm_fuzz_coverage_map), NULL, 0);
+		}
+
+		char *res_shm_fuzz_global_index = getenv(GLOBAL_INDEX_SHM_ENV_VAR);
+		if (!res_shm_fuzz_global_index) {
+			fprintf(stderr, "%s",
+				"\033[33m[FUZZ PRINT] Can not Get Environment Variable global_index\033[0m\n");
+			global_index = (uint64_t *)malloc(sizeof(uint64_t));
+			*global_index = 0;
+		} else {
+			fprintf(stderr, "\033[33m[FUZZ PRINT]Get global_index %s\033[0m\n",
+				res_shm_fuzz_global_index);
+			global_index = (uint64_t *)shmat((int)atoi(res_shm_fuzz_global_index), NULL, 0);
 		}
 	} else {
 		fuzz_coverage_map = (uint8_t *)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
