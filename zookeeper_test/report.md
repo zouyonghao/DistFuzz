@@ -96,6 +96,7 @@
     issues
     * https://issues.apache.org/jira/browse/ZOOKEEPER-1330
     * https://github.com/pravega/zookeeper-operator/issues/393
+    * https://github.com/apache/zookeeper/pull/1770
 
     **Fixed**
 
@@ -176,4 +177,16 @@
             at org.apache.zookeeper.server.quorum.Learner.syncWithLeader(Learner.java:652)
             at org.apache.zookeeper.server.quorum.Follower.followLeader(Follower.java:109)
             at org.apache.zookeeper.server.quorum.QuorumPeer.run(QuorumPeer.java:1514)
+    ```
+
+8. NullPointerException in ServerCnxnFactory.java
+
+    ```
+    2024-01-08 12:20:56,590 [myid:2] - WARN  [CommitProcessor:2:ZooKeeperServer@1046] - Failed to register with JMX
+    java.lang.NullPointerException
+            at org.apache.zookeeper.server.ServerCnxnFactory.registerConnection(ServerCnxnFactory.java:217)
+            at org.apache.zookeeper.server.ZooKeeperServer.finishSessionInit(ZooKeeperServer.java:1040)
+            at org.apache.zookeeper.server.FinalRequestProcessor.processRequest(FinalRequestProcessor.java:226)
+            at org.apache.zookeeper.server.quorum.CommitProcessor.processWrite(CommitProcessor.java:477)
+            at org.apache.zookeeper.server.quorum.CommitProcessor.run(CommitProcessor.java:381)
     ```
