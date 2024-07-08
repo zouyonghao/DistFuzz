@@ -1,0 +1,171 @@
+[33m[FUZZ PRINT]Get Environment Variable 3[0m
+[33mYou are running in a fuzzing environment[0m
+LIBRAFT   1720276293422660792 src/start.c:143 starting
+LIBRAFT   1720276293423162645 src/uv_list.c:97 ignore cluster.yaml
+LIBRAFT   1720276293423228902 src/uv_list.c:97 ignore info.yaml
+LIBRAFT   1720276293423280103 src/uv_list.c:97 ignore join
+LIBRAFT   1720276293423340623 src/uv.c:483 start index 1, 0 entries
+LIBRAFT   1720276293423409957 src/uv.c:485 no snapshot
+LIBRAFT   1720276293423461527 src/start.c:151 current_term:0 voted_for:0 start_index:1 n_entries:0
+LIBRAFT   1720276293423514801 src/start.c:181 restore 0 entries starting at 1
+LIBDQLITE 1720276293423568413 impl_listen:55 impl listen
+LIBRAFT   1720276293423636340 src/convert.c:23 old_state:0 new_state:1
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276251105722046 conn__start:290 conn start
+LIBDQLITE 1720276251105865109 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276251107661561 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276251107835894 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276251108216271 gateway__resume:1327 gateway resume - finished
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276251116049194 read_message_cb:186 read error -4095
+random is 0
+random is 0
+LIBDQLITE 1720276251116262980 conn__stop:330 conn stop
+random is 0
+random is 0
+LIBDQLITE 1720276251116484385 gateway__close:80 gateway close
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276252228725240 conn__start:290 conn start
+LIBDQLITE 1720276252228806642 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276252239485688 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276252239553454 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276252239724841 gateway__resume:1327 gateway resume - finished
+random is 0
+LIBDQLITE 1720276252246074899 read_message_cb:186 read error -4095
+LIBDQLITE 1720276252246139565 conn__stop:330 conn stop
+LIBDQLITE 1720276252246196751 gateway__close:80 gateway close
+LIBDQLITE 1720276254462129949 conn__start:290 conn start
+LIBDQLITE 1720276254462209087 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276254471584877 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276254471647606 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276254471818730 gateway__resume:1327 gateway resume - finished
+random is 0
+LIBDQLITE 1720276254472764973 read_message_cb:186 read error -4095
+LIBDQLITE 1720276254472809564 conn__stop:330 conn stop
+LIBDQLITE 1720276254472848761 gateway__close:80 gateway close
+LIBDQLITE 1720276256678947828 conn__start:290 conn start
+LIBDQLITE 1720276256679663243 gateway__init:18 gateway init
+LIBDQLITE 1720276256679716418 conn__start:290 conn start
+LIBDQLITE 1720276256679729004 gateway__init:18 gateway init
+LIBDQLITE 1720276256679770105 conn__start:290 conn start
+LIBDQLITE 1720276256679782261 gateway__init:18 gateway init
+LIBDQLITE 1720276256679826334 conn__start:290 conn start
+LIBDQLITE 1720276256679837547 gateway__init:18 gateway init
+LIBDQLITE 1720276256679929252 conn__start:290 conn start
+LIBDQLITE 1720276256679941709 gateway__init:18 gateway init

@@ -1,0 +1,818 @@
+[33m[FUZZ PRINT]Get Environment Variable 3[0m
+[33mYou are running in a fuzzing environment[0m
+LIBRAFT   1720276274984940883 src/start.c:143 starting
+LIBRAFT   1720276274985734763 src/uv_list.c:97 ignore cluster.yaml
+LIBRAFT   1720276274985818991 src/uv_list.c:97 ignore info.yaml
+LIBRAFT   1720276274985906627 src/uv_list.c:97 ignore join
+LIBRAFT   1720276274986004957 src/uv.c:483 start index 1, 0 entries
+LIBRAFT   1720276274986092147 src/uv.c:485 no snapshot
+LIBRAFT   1720276274986186745 src/start.c:151 current_term:0 voted_for:0 start_index:1 n_entries:0
+LIBRAFT   1720276274986283046 src/start.c:181 restore 0 entries starting at 1
+LIBDQLITE 1720276274986374876 impl_listen:55 impl listen
+LIBRAFT   1720276274986474858 src/convert.c:23 old_state:0 new_state:1
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276275154263813 conn__start:290 conn start
+LIBDQLITE 1720276275154470940 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276275155855242 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276275156039326 handle_describe:1248 handle describe
+random is 0
+random is 0
+LIBDQLITE 1720276275156399127 gateway__resume:1327 gateway resume - finished
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276275158321371 read_message_cb:186 read error -4095
+LIBDQLITE 1720276275158478532 conn__stop:330 conn stop
+random is 0
+random is 0
+LIBDQLITE 1720276275158617610 gateway__close:80 gateway close
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276275163073937 conn__start:290 conn start
+LIBDQLITE 1720276275163115328 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276275164165816 raft_connect:111 raft_connect
+LIBDQLITE 1720276275164211131 raftProxyAccept:271 raft proxy accept
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276275164857572 src/recv_append_entries.c:36 self:2647784271167160607 from:3297041220608546238@127.0.0.1:4000 leader_commit:12 n_entries:1 prev_log_index:12 prev_log_term:1, term:1
+LIBRAFT   1720276275164902908 src/recv.c:127 remote term 1 is higher than 0 -> bump local term
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276275297897189 src/replication.c:952 no entry at index 12 -> reject
+LIBDQLITE 1720276275298043361 impl_connect:169 impl connect id:3297041220608546238 address:127.0.0.1:4000
+LIBRAFT   1720276275300727488 src/uv_send.c:213 no connection available -> enqueue message
+LIBDQLITE 1720276275300772012 connect_work_cb:63 connect work cb
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276275302623234 connect_after_work_cb:139 connect after work cb status 0
+LIBRAFT   1720276275302865256 src/uv_send.c:279 connect attempt completed -> status unknown error
+LIBRAFT   1720276275302903256 src/uv_send.c:237 send pending messages
+LIBRAFT   1720276275302943821 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBDQLITE 1720276285342678031 conn__start:290 conn start
+LIBDQLITE 1720276285342818088 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276285346093059 raft_connect:111 raft_connect
+LIBDQLITE 1720276285346166831 raftProxyAccept:271 raft proxy accept
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276285392408556 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276285392547797 src/recv.c:127 remote term 3 is higher than 1 -> bump local term
+LIBRAFT   1720276285622393567 src/replication.c:952 no entry at index 13 -> reject
+LIBDQLITE 1720276285622497193 impl_connect:169 impl connect id:13281499603337896014 address:127.0.0.1:4001
+LIBRAFT   1720276285622602446 src/uv_send.c:213 no connection available -> enqueue message
+random is 0
+LIBDQLITE 1720276285622679676 connect_work_cb:63 connect work cb
+random is 0
+random is 0
+LIBDQLITE 1720276285626385671 connect_after_work_cb:139 connect after work cb status 0
+LIBRAFT   1720276285626735530 src/uv_send.c:279 connect attempt completed -> status unknown error
+LIBRAFT   1720276285626787039 src/uv_send.c:237 send pending messages
+LIBRAFT   1720276285626835044 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276286345088526 src/recv_install_snapshot.c:31 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 conf_index:13 last_index:13 last_term:1 term:3
+LIBRAFT   1720276286345676871 src/uv_snapshot.c:643 put snapshot at 13, keeping 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276286720148433 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276286720217989 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBRAFT   1720276286792304081 src/uv_snapshot.c:522 snapshot write start
+LIBRAFT   1720276287046966233 src/uv_snapshot.c:530 snapshot write end 0
+LIBRAFT   1720276287140543733 src/uv_list.c:97 ignore cluster.yaml
+LIBRAFT   1720276287140665644 src/uv_list.c:97 ignore info.yaml
+LIBRAFT   1720276287140766685 src/uv_list.c:71 ignore metadata1
+LIBRAFT   1720276287140860689 src/uv_list.c:71 ignore metadata2
+LIBRAFT   1720276287140964134 src/uv_list.c:97 ignore snapshot-1-13-247140484
+LIBRAFT   1720276287141349626 src/uv_list.c:82 snapshot snapshot-1-13-247140484.meta
+random is 0
+random is 0
+LIBRAFT   1720276287220911503 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276287221068843 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBDQLITE 1720276287273363674 fsm__restore:676 fsm restore
+LIBDQLITE 1720276287273614179 db__init:21 db init demo
+LIBDQLITE 1720276287274048936 open_follower_conn:90 open follower conn: demo page_size:4096
+LIBDQLITE 1720276287277208663 VfsRestore:2685 vfs restore filename demo size 24728
+LIBRAFT   1720276287277621754 src/configuration.c:342 configuration restore from snapshot
+LIBRAFT   1720276287277735725 src/configuration.c:343 === CONFIG START ===
+LIBRAFT   1720276287277833899 src/configuration.c:348 id:3297041220608546238 address:127.0.0.1:4000 role:1
+LIBRAFT   1720276287277926894 src/configuration.c:348 id:17420813620724927643 address:127.0.0.1:4002 role:1
+LIBRAFT   1720276287278023602 src/configuration.c:348 id:13281499603337896014 address:127.0.0.1:4001 role:1
+LIBRAFT   1720276287278115287 src/configuration.c:348 id:8555475892603318358 address:127.0.0.1:4003 role:0
+LIBRAFT   1720276287278206698 src/configuration.c:348 id:6664710540108407977 address:127.0.0.1:4004 role:0
+LIBRAFT   1720276287278297969 src/configuration.c:348 id:2647784271167160607 address:127.0.0.1:4005 role:0
+LIBRAFT   1720276287278386707 src/configuration.c:350 === CONFIG END ===
+LIBRAFT   1720276287278531308 src/replication.c:1233 restored snapshot with last index 13
+LIBRAFT   1720276287278682324 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276287720444200 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276287720515811 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276288221506525 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276288221634159 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276288720782488 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276288720852571 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276289222968886 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276289223102919 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276289729490325 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276289729622325 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276290224199592 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276290224329486 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276290723812004 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276290723883659 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276291225641985 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276291225784525 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276291725886805 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276291726027359 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276292227144067 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276292227273615 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276292726909955 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276292727004113 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276293229393091 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276293229553495 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276293728582355 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276293728660178 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276294229791604 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276294229880820 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276294731213306 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276294731357096 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276295231964099 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276295232096177 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276295730907250 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276295730973334 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276296233432266 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276296233565806 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276296733229933 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276296733298963 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276297234296082 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276297234487021 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276297734240539 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276297734311115 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276298262093144 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276298262228028 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276298735197400 src/recv_append_entries.c:36 self:2647784271167160607 from:13281499603337896014@127.0.0.1:4001 leader_commit:13 n_entries:0 prev_log_index:13 prev_log_term:1, term:3
+LIBRAFT   1720276298735268399 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBDQLITE 1720276298817038844 conn__start:290 conn start
+LIBDQLITE 1720276298817066650 gateway__init:18 gateway init
+LIBDQLITE 1720276298817110620 conn__start:290 conn start
+LIBDQLITE 1720276298817117465 gateway__init:18 gateway init
+LIBDQLITE 1720276298817165179 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276298817172901 handle_describe:1248 handle describe
+LIBDQLITE 1720276298817210525 gateway__resume:1327 gateway resume - finished
+LIBDQLITE 1720276298817294888 read_message_cb:186 read error -4095
+LIBDQLITE 1720276298817301588 conn__stop:330 conn stop
+LIBDQLITE 1720276298817306183 gateway__close:80 gateway close
+LIBDQLITE 1720276298817369816 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276298817384316 handle_describe:1248 handle describe
+LIBDQLITE 1720276298817423965 gateway__resume:1327 gateway resume - finished
+LIBDQLITE 1720276298817467629 conn__start:290 conn start
+LIBDQLITE 1720276298817479237 gateway__init:18 gateway init
+LIBDQLITE 1720276298817529476 read_message_cb:186 read error -4095
+LIBDQLITE 1720276298817535745 conn__stop:330 conn stop
+LIBDQLITE 1720276298817539476 gateway__close:80 gateway close
+LIBDQLITE 1720276298817615475 conn__start:290 conn start
+LIBDQLITE 1720276298817623736 gateway__init:18 gateway init
+LIBDQLITE 1720276298817666547 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276298817675027 handle_describe:1248 handle describe
+LIBDQLITE 1720276298817702873 gateway__resume:1327 gateway resume - finished
+LIBDQLITE 1720276298817760963 read_message_cb:186 read error -4095
+LIBDQLITE 1720276298817767076 conn__stop:330 conn stop
+LIBDQLITE 1720276298817771010 gateway__close:80 gateway close
+LIBDQLITE 1720276298817889283 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276298817899249 handle_describe:1248 handle describe
+LIBDQLITE 1720276298817928008 gateway__resume:1327 gateway resume - finished
+LIBDQLITE 1720276298817997934 read_message_cb:186 read error -4095
+LIBDQLITE 1720276298818003393 conn__stop:330 conn stop
+LIBDQLITE 1720276298818007108 gateway__close:80 gateway close
+LIBDQLITE 1720276298818258089 conn__start:290 conn start
+LIBDQLITE 1720276298818280662 gateway__init:18 gateway init
+LIBDQLITE 1720276298818346884 dqlite_node_stop:753 dqlite node stop
+LIBDQLITE 1720276298818393993 conn__stop:330 conn stop
+LIBDQLITE 1720276298818410553 gateway__close:80 gateway close
+LIBRAFT   1720276298818461152 src/convert.c:38 clear follower state
+LIBRAFT   1720276298818491139 src/convert.c:23 old_state:1 new_state:0
+LIBDQLITE 1720276298818553083 impl_close:208 impl close
+LIBDQLITE 1720276298819069952 fsm__close:736 fsm close
+LIBDQLITE 1720276298819138117 raftProxyClose:261 raft proxy close
+LIBDQLITE 1720276298819161433 VfsClose:2056 vfs close
+g_index:19 prev_log_term:1, term:1
+LIBRAFT   1720276240458533796 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276240959182409 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:19 n_entries:0 prev_log_index:19 prev_log_term:1, term:1
+LIBRAFT   1720276240959314800 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276241459105584 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:19 n_entries:0 prev_log_index:19 prev_log_term:1, term:1
+LIBRAFT   1720276241459239998 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276241960296589 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:19 n_entries:0 prev_log_index:19 prev_log_term:1, term:1
+LIBRAFT   1720276241960366511 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276242460688162 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:19 n_entries:0 prev_log_index:19 prev_log_term:1, term:1
+LIBRAFT   1720276242460776062 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276242608634376 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:19 n_entries:1 prev_log_index:19 prev_log_term:1, term:1
+LIBRAFT   1720276242608727364 src/uv_prepare.c:164 create open segment open-5
+random is 0
+LIBRAFT   1720276242966878452 src/replication.c:842 I/O completed on follower: status 0
+LIBRAFT   1720276242967076611 src/configuration.c:342 uncommitted config change
+LIBRAFT   1720276242967206115 src/configuration.c:343 === CONFIG START ===
+LIBRAFT   1720276242967338862 src/configuration.c:348 id:3297041220608546238 address:127.0.0.1:4000 role:1
+LIBRAFT   1720276242967512185 src/configuration.c:348 id:14816074730766202673 address:127.0.0.1:4002 role:1
+LIBRAFT   1720276242967639126 src/configuration.c:348 id:4592300153133337821 address:127.0.0.1:4001 role:1
+LIBRAFT   1720276242967767926 src/configuration.c:348 id:4000045540641147486 address:127.0.0.1:4003 role:0
+LIBRAFT   1720276242967888424 src/configuration.c:348 id:8497468299731807256 address:127.0.0.1:4004 role:0
+LIBRAFT   1720276242968007335 src/configuration.c:348 id:15798688038218318417 address:127.0.0.1:4005 role:0
+LIBRAFT   1720276242968149278 src/configuration.c:348 id:5621754219166226649 address:127.0.0.1:4006 role:2
+LIBRAFT   1720276242968268429 src/configuration.c:348 id:1603527981055016833 address:127.0.0.1:4007 role:2
+LIBRAFT   1720276242968385390 src/configuration.c:348 id:8226913863356806011 address:127.0.0.1:4008 role:2
+LIBRAFT   1720276242968500471 src/configuration.c:350 === CONFIG END ===
+LIBRAFT   1720276242968656414 src/uv_send.c:218 connection available -> write message
+random is 0
+LIBRAFT   1720276243087517471 src/uv_prepare.c:230 completed creation of open-5
+LIBDQLITE 1720276243244519544 conn__start:290 conn start
+LIBDQLITE 1720276243244580637 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276243251269670 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276243251310580 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276243251459434 gateway__resume:1327 gateway resume - finished
+random is 0
+LIBDQLITE 1720276243251754140 read_message_cb:186 read error -4095
+LIBDQLITE 1720276243251791407 conn__stop:330 conn stop
+LIBDQLITE 1720276243251827307 gateway__close:80 gateway close
+random is 0
+random is 0
+LIBRAFT   1720276243461574753 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:20 n_entries:0 prev_log_index:20 prev_log_term:1, term:1
+LIBRAFT   1720276243461658311 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276243962123035 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:20 n_entries:0 prev_log_index:20 prev_log_term:1, term:1
+LIBRAFT   1720276243962208223 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276244462819396 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:20 n_entries:0 prev_log_index:20 prev_log_term:1, term:1
+LIBRAFT   1720276244462883652 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276244878750913 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:20 n_entries:1 prev_log_index:20 prev_log_term:1, term:1
+random is 0
+LIBRAFT   1720276244935454365 src/replication.c:842 I/O completed on follower: status 0
+LIBRAFT   1720276244935713119 src/configuration.c:342 uncommitted config change
+LIBRAFT   1720276244935849956 src/configuration.c:343 === CONFIG START ===
+LIBRAFT   1720276244935983903 src/configuration.c:348 id:3297041220608546238 address:127.0.0.1:4000 role:1
+LIBRAFT   1720276244936100378 src/configuration.c:348 id:14816074730766202673 address:127.0.0.1:4002 role:1
+LIBRAFT   1720276244936220332 src/configuration.c:348 id:4592300153133337821 address:127.0.0.1:4001 role:1
+LIBRAFT   1720276244936337179 src/configuration.c:348 id:4000045540641147486 address:127.0.0.1:4003 role:0
+LIBRAFT   1720276244936449560 src/configuration.c:348 id:8497468299731807256 address:127.0.0.1:4004 role:0
+LIBRAFT   1720276244936567848 src/configuration.c:348 id:15798688038218318417 address:127.0.0.1:4005 role:0
+LIBRAFT   1720276244936685175 src/configuration.c:348 id:5621754219166226649 address:127.0.0.1:4006 role:2
+LIBRAFT   1720276244936801503 src/configuration.c:348 id:1603527981055016833 address:127.0.0.1:4007 role:2
+LIBRAFT   1720276244936915150 src/configuration.c:348 id:8226913863356806011 address:127.0.0.1:4008 role:2
+LIBRAFT   1720276244937034614 src/configuration.c:348 id:11154601935498297589 address:127.0.0.1:4009 role:2
+LIBRAFT   1720276244937152962 src/configuration.c:350 === CONFIG END ===
+LIBRAFT   1720276244937288216 src/uv_send.c:218 connection available -> write message
+random is 0
+LIBDQLITE 1720276245057965793 conn__start:290 conn start
+LIBDQLITE 1720276245058030181 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276245065023499 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276245065080609 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276245065243408 gateway__resume:1327 gateway resume - finished
+random is 0
+LIBDQLITE 1720276245067388437 read_message_cb:186 read error -4095
+LIBDQLITE 1720276245067464495 conn__stop:330 conn stop
+LIBDQLITE 1720276245067516094 gateway__close:80 gateway close
+random is 0
+random is 0
+LIBRAFT   1720276245463858739 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:21 n_entries:0 prev_log_index:21 prev_log_term:1, term:1
+LIBRAFT   1720276245463948137 src/replication.c:1523 take snapshot at 21
+LIBDQLITE 1720276245464052450 VfsShallowSnapshot:2524 vfs snapshot filename demo
+LIBRAFT   1720276245464341565 src/uv_snapshot.c:643 put snapshot at 21, keeping 5
+LIBRAFT   1720276245464565915 src/uv_finalize.c:39 finalize open-3 into 0000000000000020-0000000000000021
+LIBRAFT   1720276245464648295 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBRAFT   1720276245853985709 src/uv_snapshot.c:522 snapshot write start
+random is 0
+random is 0
+LIBRAFT   1720276245964942091 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:21 n_entries:0 prev_log_index:21 prev_log_term:1, term:1
+LIBRAFT   1720276245965079812 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBRAFT   1720276246087821446 src/uv_snapshot.c:530 snapshot write end 0
+LIBRAFT   1720276246126347002 src/uv_list.c:92 segment 0000000000000014-0000000000000017
+LIBRAFT   1720276246126569501 src/uv_list.c:92 segment 0000000000000018-0000000000000019
+LIBRAFT   1720276246126772590 src/uv_list.c:92 segment 0000000000000020-0000000000000021
+LIBRAFT   1720276246126923980 src/uv_list.c:97 ignore cluster.yaml
+LIBRAFT   1720276246127063200 src/uv_list.c:97 ignore info.yaml
+LIBRAFT   1720276246127199164 src/uv_list.c:71 ignore metadata1
+LIBRAFT   1720276246127566026 src/uv_list.c:92 segment open-4
+LIBRAFT   1720276246127874299 src/uv_list.c:92 segment open-5
+LIBRAFT   1720276246128021340 src/uv_list.c:97 ignore snapshot-1-17-247089181
+LIBRAFT   1720276246128480803 src/uv_list.c:82 snapshot snapshot-1-17-247089181.meta
+LIBRAFT   1720276246128618084 src/uv_list.c:97 ignore snapshot-1-19-247093596
+LIBRAFT   1720276246129093303 src/uv_list.c:82 snapshot snapshot-1-19-247093596.meta
+LIBRAFT   1720276246129233750 src/uv_list.c:97 ignore snapshot-1-21-247099604
+LIBRAFT   1720276246129896656 src/uv_list.c:82 snapshot snapshot-1-21-247099604.meta
+random is 0
+random is 0
+LIBRAFT   1720276246465640469 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:21 n_entries:0 prev_log_index:21 prev_log_term:1, term:1
+LIBRAFT   1720276246465806809 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276246966763751 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:21 n_entries:0 prev_log_index:21 prev_log_term:1, term:1
+LIBRAFT   1720276246966946841 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276247467282837 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:21 n_entries:0 prev_log_index:21 prev_log_term:1, term:1
+LIBRAFT   1720276247467502935 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276247968787521 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:21 n_entries:0 prev_log_index:21 prev_log_term:1, term:1
+LIBRAFT   1720276247968879783 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276248469569614 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:21 n_entries:0 prev_log_index:21 prev_log_term:1, term:1
+LIBRAFT   1720276248469717232 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276248684841764 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:21 n_entries:1 prev_log_index:21 prev_log_term:1, term:1
+LIBRAFT   1720276248684919997 src/uv_prepare.c:164 create open segment open-6
+random is 0
+LIBRAFT   1720276248763702325 src/replication.c:842 I/O completed on follower: status 0
+LIBRAFT   1720276248763887678 src/configuration.c:342 uncommitted config change
+LIBRAFT   1720276248763991359 src/configuration.c:343 === CONFIG START ===
+LIBRAFT   1720276248764089663 src/configuration.c:348 id:3297041220608546238 address:127.0.0.1:4000 role:1
+LIBRAFT   1720276248764184481 src/configuration.c:348 id:14816074730766202673 address:127.0.0.1:4002 role:1
+LIBRAFT   1720276248764277463 src/configuration.c:348 id:4592300153133337821 address:127.0.0.1:4001 role:1
+LIBRAFT   1720276248764372861 src/configuration.c:348 id:4000045540641147486 address:127.0.0.1:4003 role:0
+LIBRAFT   1720276248764466399 src/configuration.c:348 id:8497468299731807256 address:127.0.0.1:4004 role:0
+LIBRAFT   1720276248764559987 src/configuration.c:348 id:15798688038218318417 address:127.0.0.1:4005 role:0
+LIBRAFT   1720276248764652555 src/configuration.c:348 id:5621754219166226649 address:127.0.0.1:4006 role:2
+LIBRAFT   1720276248764745516 src/configuration.c:348 id:1603527981055016833 address:127.0.0.1:4007 role:2
+LIBRAFT   1720276248764841004 src/configuration.c:348 id:8226913863356806011 address:127.0.0.1:4008 role:2
+LIBRAFT   1720276248764934499 src/configuration.c:348 id:11154601935498297589 address:127.0.0.1:4009 role:2
+LIBRAFT   1720276248765028283 src/configuration.c:348 id:3234914820896168198 address:127.0.0.1:4010 role:2
+LIBRAFT   1720276248765121578 src/configuration.c:350 === CONFIG END ===
+LIBRAFT   1720276248765234689 src/uv_send.c:218 connection available -> write message
+random is 0
+LIBRAFT   1720276248820796719 src/uv_prepare.c:230 completed creation of open-6
+LIBDQLITE 1720276248948139133 conn__start:290 conn start
+LIBDQLITE 1720276248948227602 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276248952621564 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276248952696127 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276248952903424 gateway__resume:1327 gateway resume - finished
+random is 0
+LIBDQLITE 1720276248953667831 read_message_cb:186 read error -4095
+LIBDQLITE 1720276248953720650 conn__stop:330 conn stop
+LIBDQLITE 1720276248953770602 gateway__close:80 gateway close
+random is 0
+random is 0
+LIBRAFT   1720276249470500846 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:22 n_entries:0 prev_log_index:22 prev_log_term:1, term:1
+LIBRAFT   1720276249470681766 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276249970236060 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:22 n_entries:0 prev_log_index:22 prev_log_term:1, term:1
+LIBRAFT   1720276249970292195 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276250471116757 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:22 n_entries:0 prev_log_index:22 prev_log_term:1, term:1
+LIBRAFT   1720276250471189263 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276250941133257 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:22 n_entries:1 prev_log_index:22 prev_log_term:1, term:1
+random is 0
+LIBRAFT   1720276250996015293 src/replication.c:842 I/O completed on follower: status 0
+LIBRAFT   1720276250996129778 src/configuration.c:342 uncommitted config change
+LIBRAFT   1720276250996172280 src/configuration.c:343 === CONFIG START ===
+LIBRAFT   1720276250996212388 src/configuration.c:348 id:3297041220608546238 address:127.0.0.1:4000 role:1
+LIBRAFT   1720276250996250539 src/configuration.c:348 id:14816074730766202673 address:127.0.0.1:4002 role:1
+LIBRAFT   1720276250996289220 src/configuration.c:348 id:4592300153133337821 address:127.0.0.1:4001 role:1
+LIBRAFT   1720276250996327114 src/configuration.c:348 id:4000045540641147486 address:127.0.0.1:4003 role:0
+LIBRAFT   1720276250996366356 src/configuration.c:348 id:8497468299731807256 address:127.0.0.1:4004 role:0
+LIBRAFT   1720276250996404694 src/configuration.c:348 id:15798688038218318417 address:127.0.0.1:4005 role:0
+LIBRAFT   1720276250996443189 src/configuration.c:348 id:5621754219166226649 address:127.0.0.1:4006 role:2
+LIBRAFT   1720276250996480995 src/configuration.c:348 id:1603527981055016833 address:127.0.0.1:4007 role:2
+LIBRAFT   1720276250996519363 src/configuration.c:348 id:8226913863356806011 address:127.0.0.1:4008 role:2
+LIBRAFT   1720276250996557464 src/configuration.c:348 id:11154601935498297589 address:127.0.0.1:4009 role:2
+LIBRAFT   1720276250996596364 src/configuration.c:348 id:3234914820896168198 address:127.0.0.1:4010 role:2
+LIBRAFT   1720276250996635129 src/configuration.c:348 id:7360006043314548487 address:127.0.0.1:4011 role:2
+LIBRAFT   1720276250996672653 src/configuration.c:350 === CONFIG END ===
+LIBRAFT   1720276250996720744 src/uv_send.c:218 connection available -> write message
+random is 0
+LIBDQLITE 1720276251106364049 conn__start:290 conn start
+LIBDQLITE 1720276251106420545 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276251111437885 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276251111483927 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276251111604307 gateway__resume:1327 gateway resume - finished
+random is 0
+LIBDQLITE 1720276251119311898 read_message_cb:186 read error -4095
+LIBDQLITE 1720276251119359329 conn__stop:330 conn stop
+LIBDQLITE 1720276251119418487 gateway__close:80 gateway close
+random is 0
+random is 0
+LIBRAFT   1720276251472405621 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:23 n_entries:0 prev_log_index:23 prev_log_term:1, term:1
+LIBRAFT   1720276251472481176 src/replication.c:1523 take snapshot at 23
+LIBDQLITE 1720276251472592030 VfsShallowSnapshot:2524 vfs snapshot filename demo
+LIBRAFT   1720276251472712791 src/uv_snapshot.c:643 put snapshot at 23, keeping 5
+LIBRAFT   1720276251472915403 src/uv_finalize.c:39 finalize open-4 into 0000000000000022-0000000000000023
+LIBRAFT   1720276251473108096 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBRAFT   1720276251858365713 src/uv_snapshot.c:522 snapshot write start
+random is 0
+random is 0
+LIBRAFT   1720276251971463869 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:23 n_entries:0 prev_log_index:23 prev_log_term:1, term:1
+LIBRAFT   1720276251971527208 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBRAFT   1720276252027911708 src/uv_snapshot.c:530 snapshot write end 0
+LIBRAFT   1720276252161090131 src/uv_list.c:92 segment 0000000000000014-0000000000000017
+LIBRAFT   1720276252161160022 src/uv_list.c:92 segment 0000000000000018-0000000000000019
+LIBRAFT   1720276252161207105 src/uv_list.c:92 segment 0000000000000020-0000000000000021
+LIBRAFT   1720276252161307284 src/uv_list.c:92 segment 0000000000000022-0000000000000023
+LIBRAFT   1720276252161351330 src/uv_list.c:97 ignore cluster.yaml
+LIBRAFT   1720276252161396466 src/uv_list.c:97 ignore info.yaml
+LIBRAFT   1720276252161435489 src/uv_list.c:71 ignore metadata1
+LIBRAFT   1720276252161479242 src/uv_list.c:92 segment open-5
+LIBRAFT   1720276252161576620 src/uv_list.c:92 segment open-6
+LIBRAFT   1720276252161621712 src/uv_list.c:97 ignore snapshot-1-19-247093596
+LIBRAFT   1720276252161769054 src/uv_list.c:82 snapshot snapshot-1-19-247093596.meta
+LIBRAFT   1720276252161812437 src/uv_list.c:97 ignore snapshot-1-21-247099604
+LIBRAFT   1720276252161946200 src/uv_list.c:82 snapshot snapshot-1-21-247099604.meta
+LIBRAFT   1720276252161989088 src/uv_list.c:97 ignore snapshot-1-23-247105612
+LIBRAFT   1720276252162208925 src/uv_list.c:82 snapshot snapshot-1-23-247105612.meta
+LIBDQLITE 1720276252229045792 conn__start:290 conn start
+LIBDQLITE 1720276252229213725 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276252239628498 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276252239697379 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276252239877612 gateway__resume:1327 gateway resume - finished
+random is 0
+LIBDQLITE 1720276252250547879 read_message_cb:186 read error -4095
+LIBDQLITE 1720276252250618660 conn__stop:330 conn stop
+LIBDQLITE 1720276252250680192 gateway__close:80 gateway close
+random is 0
+random is 0
+LIBRAFT   1720276252471955040 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:23 n_entries:0 prev_log_index:23 prev_log_term:1, term:1
+LIBRAFT   1720276252472013683 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276252974322683 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:23 n_entries:0 prev_log_index:23 prev_log_term:1, term:1
+LIBRAFT   1720276252974479723 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276253474558604 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:23 n_entries:0 prev_log_index:23 prev_log_term:1, term:1
+LIBRAFT   1720276253474718290 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276253975302715 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:23 n_entries:0 prev_log_index:23 prev_log_term:1, term:1
+LIBRAFT   1720276253975403788 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276254186345516 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:23 n_entries:1 prev_log_index:23 prev_log_term:1, term:1
+LIBRAFT   1720276254186417485 src/uv_prepare.c:164 create open segment open-7
+random is 0
+LIBRAFT   1720276254303595823 src/replication.c:842 I/O completed on follower: status 0
+LIBRAFT   1720276254303680032 src/configuration.c:342 uncommitted config change
+LIBRAFT   1720276254303723747 src/configuration.c:343 === CONFIG START ===
+LIBRAFT   1720276254303764145 src/configuration.c:348 id:3297041220608546238 address:127.0.0.1:4000 role:1
+LIBRAFT   1720276254303810937 src/configuration.c:348 id:14816074730766202673 address:127.0.0.1:4002 role:1
+LIBRAFT   1720276254303923718 src/configuration.c:348 id:4592300153133337821 address:127.0.0.1:4001 role:1
+LIBRAFT   1720276254304056462 src/configuration.c:348 id:4000045540641147486 address:127.0.0.1:4003 role:0
+LIBRAFT   1720276254304143468 src/configuration.c:348 id:8497468299731807256 address:127.0.0.1:4004 role:0
+LIBRAFT   1720276254304213959 src/configuration.c:348 id:15798688038218318417 address:127.0.0.1:4005 role:0
+LIBRAFT   1720276254304273367 src/configuration.c:348 id:5621754219166226649 address:127.0.0.1:4006 role:2
+LIBRAFT   1720276254304317323 src/configuration.c:348 id:1603527981055016833 address:127.0.0.1:4007 role:2
+LIBRAFT   1720276254304367916 src/configuration.c:348 id:8226913863356806011 address:127.0.0.1:4008 role:2
+LIBRAFT   1720276254304409680 src/configuration.c:348 id:11154601935498297589 address:127.0.0.1:4009 role:2
+LIBRAFT   1720276254304450076 src/configuration.c:348 id:3234914820896168198 address:127.0.0.1:4010 role:2
+LIBRAFT   1720276254304490956 src/configuration.c:348 id:7360006043314548487 address:127.0.0.1:4011 role:2
+LIBRAFT   1720276254304530880 src/configuration.c:348 id:17006164131557597576 address:127.0.0.1:4012 role:2
+LIBRAFT   1720276254304570567 src/configuration.c:350 === CONFIG END ===
+LIBRAFT   1720276254304621917 src/uv_send.c:218 connection available -> write message
+random is 0
+LIBRAFT   1720276254395218259 src/uv_prepare.c:230 completed creation of open-7
+LIBDQLITE 1720276254466817887 conn__start:290 conn start
+LIBDQLITE 1720276254466883761 gateway__init:18 gateway init
+random is 0
+random is 0
+random is 0
+random is 0
+random is 0
+LIBDQLITE 1720276254474400343 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276254474460807 handle_describe:1248 handle describe
+random is 0
+LIBDQLITE 1720276254474620409 gateway__resume:1327 gateway resume - finished
+random is 0
+LIBDQLITE 1720276254476073645 read_message_cb:186 read error -4095
+LIBDQLITE 1720276254476128561 conn__stop:330 conn stop
+LIBDQLITE 1720276254476181098 gateway__close:80 gateway close
+random is 0
+random is 0
+LIBRAFT   1720276254977484370 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:24 n_entries:0 prev_log_index:24 prev_log_term:1, term:1
+LIBRAFT   1720276254977654047 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276255477380883 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:24 n_entries:0 prev_log_index:24 prev_log_term:1, term:1
+LIBRAFT   1720276255477547232 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276255978670242 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:24 n_entries:0 prev_log_index:24 prev_log_term:1, term:1
+LIBRAFT   1720276255978829685 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+random is 0
+random is 0
+LIBRAFT   1720276256478229552 src/recv_append_entries.c:36 self:15798688038218318417 from:3297041220608546238@127.0.0.1:4000 leader_commit:24 n_entries:0 prev_log_index:24 prev_log_term:1, term:1
+LIBRAFT   1720276256478299976 src/uv_send.c:218 connection available -> write message
+random is 0
+random is 0
+LIBDQLITE 1720276256678774920 conn__start:290 conn start
+LIBDQLITE 1720276256678811030 gateway__init:18 gateway init
+LIBDQLITE 1720276256678974008 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276256678987964 handle_describe:1248 handle describe
+LIBDQLITE 1720276256679050930 gateway__resume:1327 gateway resume - finished
+LIBDQLITE 1720276256679109064 conn__start:290 conn start
+LIBDQLITE 1720276256679123258 gateway__init:18 gateway init
+LIBDQLITE 1720276256679192133 read_message_cb:186 read error -4095
+LIBDQLITE 1720276256679204018 conn__stop:330 conn stop
+LIBDQLITE 1720276256679214049 gateway__close:80 gateway close
+LIBDQLITE 1720276256679307789 conn__start:290 conn start
+LIBDQLITE 1720276256679319098 gateway__init:18 gateway init
+LIBDQLITE 1720276256679348335 conn__start:290 conn start
+LIBDQLITE 1720276256679357368 gateway__init:18 gateway init
+LIBDQLITE 1720276256679448079 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276256679460477 handle_describe:1248 handle describe
+LIBDQLITE 1720276256679509507 gateway__handle:1280 gateway handle
+LIBDQLITE 1720276256679523529 handle_describe:1248 handle describe
+LIBDQLITE 1720276256679559929 gateway__resume:1327 gateway resume - finished
+LIBDQLITE 1720276256679571815 gateway__resume:1327 gateway resume - finished
+LIBDQLITE 1720276256679614982 conn__start:290 conn start
+LIBDQLITE 1720276256679626674 gateway__init:18 gateway init
+LIBDQLITE 1720276256679728341 conn__start:290 conn start
+LIBDQLITE 1720276256679741216 gateway__init:18 gateway init
+LIBDQLITE 1720276256679773088 conn__start:290 conn start
+LIBDQLITE 1720276256679781140 gateway__init:18 gateway init
+LIBDQLITE 1720276256679978964 gateway__handle:1280 gateway handle
