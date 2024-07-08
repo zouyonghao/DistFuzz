@@ -1704,13 +1704,13 @@ LIBRAFT   1720276275743221493 src/uv_snapshot.c:117 is_empty snapshot-1-9-247125
 =================================================================
 ==2760859==ERROR: AddressSanitizer: heap-use-after-free on address 0x613000020140 at pc 0x7f3514979bbc bp 0x7f34c73cc720 sp 0x7f34c73cc710
 READ of size 1 at 0x613000020140 thread T8
-    #0 0x7f3514979bbb  (/usr/local/lib/libraft.so.2+0x67bbb)
+    #0 0x7f3514979bbb  (/usr/local/lib/libraft.so.2+0x67bbb)     /home/zyh/raft/src/uv_segment.c:91
     #1 0x7f351466d780  (/lib/x86_64-linux-gnu/libc.so.6+0x45780)
     #2 0x7f351466d6a1  (/lib/x86_64-linux-gnu/libc.so.6+0x456a1)
     #3 0x7f351466d684  (/lib/x86_64-linux-gnu/libc.so.6+0x45684)
     #4 0x7f351466dc9d  (/lib/x86_64-linux-gnu/libc.so.6+0x45c9d)
-    #5 0x7f3514972bb4  (/usr/local/lib/libraft.so.2+0x60bb4)
-    #6 0x7f351498a283  (/usr/local/lib/libraft.so.2+0x78283)
+    #5 0x7f3514972bb4  (/usr/local/lib/libraft.so.2+0x60bb4)              /home/zyh/raft/src/uv_list.c:112
+    #6 0x7f351498a283  (/usr/local/lib/libraft.so.2+0x78283)              /home/zyh/raft/src/uv_snapshot.c:715
     #7 0x7f351446651d  (/lib/x86_64-linux-gnu/libuv.so.1+0xc51d)
     #8 0x7f3514a01608  (/lib/x86_64-linux-gnu/libpthread.so.0+0x8608)
     #9 0x7f3514747352  (/lib/x86_64-linux-gnu/libc.so.6+0x11f352)
@@ -1718,15 +1718,15 @@ READ of size 1 at 0x613000020140 thread T8
 0x613000020140 is located 64 bytes inside of 384-byte region [0x613000020100,0x613000020280)
 freed by thread T8 here:
     #0 0x7f3514b4540f  (/lib/x86_64-linux-gnu/libasan.so.5+0x10d40f)
-    #1 0x7f3514972b18  (/usr/local/lib/libraft.so.2+0x60b18)
-    #2 0x7f351498a283  (/usr/local/lib/libraft.so.2+0x78283)
+    #1 0x7f3514972b18  (/usr/local/lib/libraft.so.2+0x60b18)              /home/zyh/raft/src/uv_list.c:104
+    #2 0x7f351498a283  (/usr/local/lib/libraft.so.2+0x78283)              /home/zyh/raft/src/uv_snapshot.c:715
     #3 0x7f351446651d  (/lib/x86_64-linux-gnu/libuv.so.1+0xc51d)
 
 previously allocated by thread T8 here:
     #0 0x7f3514b45c3e  (/lib/x86_64-linux-gnu/libasan.so.5+0x10dc3e)
-    #1 0x7f351497c366  (/usr/local/lib/libraft.so.2+0x6a366)
-    #2 0x7f3514972e3b  (/usr/local/lib/libraft.so.2+0x60e3b)
-    #3 0x7f351498a283  (/usr/local/lib/libraft.so.2+0x78283)
+    #1 0x7f351497c366  (/usr/local/lib/libraft.so.2+0x6a366)              /home/zyh/raft/src/uv_segment.c:74
+    #2 0x7f3514972e3b  (/usr/local/lib/libraft.so.2+0x60e3b)              /home/zyh/raft/src/uv_list.c:88
+    #3 0x7f351498a283  (/usr/local/lib/libraft.so.2+0x78283)              /home/zyh/raft/src/uv_snapshot.c:715
     #4 0x7f351446651d  (/lib/x86_64-linux-gnu/libuv.so.1+0xc51d)
 
 Thread T8 created by T7 here:

@@ -240,3 +240,7 @@
     LIBDQLITE 1719786479300103672 gateway__resume:1327 gateway resume - finished
     dqlite-demo: src/lib/transport.c:15: alloc_cb: Assertion `t->read.len > 0' failed.
     ```
+
+10. UAF
+    * dqlite_test/bin/error_cases/9843/log_app_err0_0
+    * https://github.com/canonical/dqlite/pull/669
