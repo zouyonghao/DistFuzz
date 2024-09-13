@@ -48,7 +48,7 @@ void run_some_normal_operators(int number, int normal_sleep_ms, bool fuzz_normal
         if (fuzz_time)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(
-                10000 * (__dst_get_random_uint8_t() % 20)
+                10 * (__dst_get_random_uint8_t() % 20)
                 ));
         }
         else
@@ -350,7 +350,7 @@ int main(int argc, char *argv[])
         if (fuzz_time)
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(
-                10000 * (__dst_get_random_uint8_t() % 20)
+                10 * (__dst_get_random_uint8_t() % 20)
                 ));
         }
         else
