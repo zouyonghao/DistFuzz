@@ -45,7 +45,16 @@ void run_some_normal_operators(int number, int normal_sleep_ms, bool fuzz_normal
     size_t operator_size = Registry<NormalOperator>::getItemVector().size();
     for (int i = 0; i < number && operator_size > 0; i++)
     {
-        std::this_thread::sleep_for(std::chrono::microseconds(normal_sleep_ms));
+        if (fuzz_time)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(
+                10000 * (__dst_get_random_uint8_t() % 20)
+                ));
+        }
+        else
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(normal_sleep_ms));
+        }
         uint32_t index = 0;
         if (fuzz_normal_events)
         {
@@ -340,7 +349,9 @@ int main(int argc, char *argv[])
     {
         if (fuzz_time)
         {
-            std::this_thread::sleep_for(std::chrono::milliseconds(__dst_get_random_uint8_t() + critic_sleep_ms));
+            std::this_thread::sleep_for(std::chrono::milliseconds(
+                10000 * (__dst_get_random_uint8_t() % 20)
+                ));
         }
         else
         {
@@ -377,9 +388,9 @@ int main(int argc, char *argv[])
         }
         LOG_ERROR << "The remaining alive node count is " << alive_node_count << "\n";
         set_is_fuzzing(false);
-        LOG_INFO << "Fuzzing is stopped, now we wait for 3 seconds and then"
+        LOG_INFO << "Fuzzing is stopped, now we wait for 1 seconds and then"
                     " run some normal operators to see whether it works as usual.\n";
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
 
         for (int i = 0; i < run_normal_operator_count && normal_operator_size > 0; i++)
         {
