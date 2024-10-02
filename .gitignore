@@ -252,3 +252,4 @@ dqlite_test/bin/file_lock
 dqlite_test/bin/output
 dqlite_test/bin/init_random.txt
 dqlite_test/bin/*.txt
+braft_test/bin/proto.log
