@@ -3,9 +3,9 @@ export PATH=$PATH:$HADOOP_HOME/bin:$JAVA_HOME/bin
 
 rm hadoop/hadoop.log
 
-hdfs journalnode -Ddfs.journalnode.rpc-address=localhost:8485 -Ddfs.journalnode.http-address=localhost:8488 -Ddfs.journalnode.edits.dir=/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/dfs/journalnode1 &
-hdfs journalnode -Ddfs.journalnode.rpc-address=localhost:8486 -Ddfs.journalnode.http-address=localhost:8489 -Ddfs.journalnode.edits.dir=/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/dfs/journalnode2 &
-hdfs journalnode -Ddfs.journalnode.rpc-address=localhost:8487 -Ddfs.journalnode.http-address=localhost:8490 -Ddfs.journalnode.edits.dir=/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/dfs/journalnode3 &
+hdfs journalnode -Ddfs.journalnode.rpc-address=127.0.0.1:8485 -Ddfs.journalnode.http-address=127.0.0.1:8488 -Ddfs.journalnode.edits.dir=/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/dfs/journalnode1 &
+hdfs journalnode -Ddfs.journalnode.rpc-address=127.0.0.1:8486 -Ddfs.journalnode.http-address=127.0.0.1:8489 -Ddfs.journalnode.edits.dir=/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/dfs/journalnode2 &
+hdfs journalnode -Ddfs.journalnode.rpc-address=127.0.0.1:8487 -Ddfs.journalnode.http-address=127.0.0.1:8490 -Ddfs.journalnode.edits.dir=/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/dfs/journalnode3 &
 
 /home/zyh/zookeeper/bin/zkServer.sh start
 
