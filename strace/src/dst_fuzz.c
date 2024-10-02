@@ -656,6 +656,7 @@ init_kafka_producer(void)
 	rd_kafka_t *rk = NULL; // TODO: this leaked, but I don't care
 	char hostname[128];
 	char errstr[512];
+	fprintf(stderr, "bootstrap server: %s\n", KAFKA_BOOTSTRAP_SERVER);
 	if (gethostname(hostname, sizeof(hostname))) {
 		fprintf(stderr, "%% Failed to lookup hostname\n");
 		exit(1);
@@ -671,12 +672,13 @@ init_kafka_producer(void)
 		fprintf(stderr, "%% %s\n", errstr);
 		exit(1);
 	}
-	if (!(rk = rd_kafka_new(RD_KAFKA_PRODUCER, conf, errstr, sizeof(errstr)))) {
+	rk = rd_kafka_new(RD_KAFKA_PRODUCER, conf, errstr, sizeof(errstr));
+	if (!rk) {
 		fprintf(stderr, "%% Failed to create new producer: %s\n", errstr);
 		exit(1);
 	}
 	rd_kafka_topic_conf_t *topic_conf = rd_kafka_topic_conf_new();
-	if (rd_kafka_topic_conf_set(topic_conf, "acks", "0", errstr, sizeof(errstr)) !=
+	if (rd_kafka_topic_conf_set(topic_conf, "acks", "1", errstr, sizeof(errstr)) !=
 	    RD_KAFKA_CONF_OK) {
 		fprintf(stderr, "%% %s\n", errstr);
 		exit(1);

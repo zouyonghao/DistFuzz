@@ -786,6 +786,19 @@ Valid options are: yes, no.])
 
 AM_CONDITIONAL([BUILD_STATIC], [test "x$enable_static" != xno])
 
+AC_ARG_ENABLE([kafka],
+        [AS_HELP_STRING([--enable-kafka=yes|no],
+                [whether to link rdkafka, default is no])],
+        [case "$enableval" in
+                yes|no) enable_kafka="$enableval" ;;
+                *) AC_MSG_ERROR([bad value $enableval for enable-kafka option.
+Valid options are: yes, no.])
+                ;;
+         esac],
+        [enable_kafka=no])
+
+AM_CONDITIONAL([ENABLE_KAFKA], [test "x$enable_kafka" != xno])
+
 AC_CONFIG_FILES([Makefile
 		 bundled/Makefile
 		 debian/changelog

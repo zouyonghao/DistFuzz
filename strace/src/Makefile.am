@@ -50,8 +50,12 @@ endif
 strace_LDADD = libstrace.a $(clock_LIBS) $(timer_LIBS) \
 	../../build/core/libdst_core.a \
 	-llzma -lpthread -lstdc++
-	
-# -lrdkafka
+
+if ENABLE_KAFKA
+strace_CFLAGS += -DENABLE_KAFKA
+strace_LDADD += -lrdkafka
+endif
+
 strace_SOURCES = strace.c
 
 noinst_PROGRAMS = disable_ptrace_get_syscall_info disable_ptrace_getregset
