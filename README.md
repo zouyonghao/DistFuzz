@@ -1,115 +1,97 @@
-分布式模糊测试
+## DistFuzz
 
-测试时首先构建 distributed-system-test 项目，然后测试某项目时再分别构建其对应工程，注意clone工程是必须要特定目录名称
+### Description
 
-一般对应项目中包含 `build.sh`，直接使用即可
+DistFuzz is a research fuzzing tool to effectively find bugs in distributed systems. It supports different kinds of distributed system inputs including regular input, faults and timing interval, and uses network message sequences with symmetry-based pruning as fuzzing feedback. It can minimize the initialization time and reproduce bugs with checkpointing and offline record/replay.
 
-| 项目          | 目录名           | 对应源码或下载地址                                                                      | version         | LOC  |
-| ------------- | ---------------- | --------------------------------------------------------------------------------------- | --------------- | ---- |
-| braft         | braft            | http://oslab:7800/zyh/braft, http://oslab:7800/zyh/brpc                                 | commit 0c5a5942 | 89K  |
-| c-raft        | **raft**         | http://oslab:7800/zyh/craft                                                             | commit 37af7cdb | 75K  |
-| nuraft        | **NuRaft**       | http://oslab:7800/zyh/nuraft                                                            | commit 5a7a40e5 | 149K |
-| redisraft     | redisraft        | http://oslab:7800/zyh/redisraft, http://oslab:7800/zyh/redis                            | commit e18c3860 | 148K |
-| floyd(raftis) | floyd            | https://github.com/Qihoo360/floyd                                                       |
-| rethinkdb     | rethinkdb        | http://oslab:7800/zyh/rethinkdb                                                         | v2.4.1          | 271K |
-| ClickHouse    | ClickHouse       | \\\\oslab\workspace\zyh\ClickHouse_21.9.2.17                                            | v21.9.2.17      | 557K |
-| aerospike     | aerospike-server | http://oslab:7800/zyh/aerospike-server.git                                              | v5.6.0.4        | 376K |
-| Zookeeper     | zookeeper        | \\\\oslab\workspace\zyh\apache-zookeeper-3.7.0-bin.tar.gz                               | v3.5.1          | 231K |
-| etcd          | etcd             | https://github.com/etcd-io/etcd/releases/download/v3.5.1/etcd-v3.5.1-linux-amd64.tar.gz | v2.2.0          | 249K |
-| dqlite        | dqlite           | https://github.com/canonical/dqlite/archive/refs/tags/v1.14.0.zip                       | v1.14.0         |      |
+### Current supported distributed systems
 
-**注意**
+* Braft
+* NuRaft
+* Dqlite
+* Redis
+* RethinkDB
+* AerospikeDB
+* ClickHouse
+* etcd
+* ZooKeeper
+* HDFS
 
-* `floyd` 需要使用 `ubuntu 14.04`，`docker` 镜像为 `ubuntu_14.04_dst_floyd`
+### Installation
 
-* `redisraft` 需要 `clang-9`，因此必须修改本项目的`CMakeLists.txt`为`llvm-9`和`clang-9`
+We recommend you to run the tool using the Docker image we provide.
 
-* `rethinkdb` 编译时需要联网下载部分组件，测试时需要取消strace的unwind功能(-k, unwinder.tcb_walk in dst_fuzz.c)
+```
+docker pull zouyonghao/distfuzz:artifact
+docker run -it zouyonghao/distfuzz:artifact bash
+su zyh && cd
+```
 
-* `ClickHouse` 暂未在 71.37 的 `docker` 中运行，仅在 71.79 的虚拟机上运行
+If you want to build the Docker container or install the tool and dependencies yourself, please refer to [INSTALL.md](INSTALL.md).
 
-* `ClickHouse` 代码位于`ftp`上，使用下列方法获取
+### Usage
 
-   ```
-   smbclient '\\oslab\workspace' -N -c 'prompt OFF; cd zyh; mget ClickHouse_21.9.2.17.tar.gz'
-   ```
+#### Fuzzing
+For each system, there is a folder called `${SYSTEM}_test`, e.g., `braft_test`. You need to enter the folder `${SYSTEM}_test/bin` and use the script `fuzz.sh` to run the fuzzing test.
 
-* `ClickHouse` 需要新版本`cmake`，使用如下方式安装
+```bash
+# For the systems evaluated in the paper:
 
-   ```
-   wget https://github.com/Kitware/CMake/releases/download/v3.21.3/cmake-3.21.3-linux-x86_64.sh
-   chmod +x cmake-3.21.3-linux-x86_64.sh
-   ./cmake-3.21.3-linux-x86_64.sh
-   修改 .bashrc，加入cmake执行路径
-   ```
+# braft
+cd DistFuzz/braft_test/bin && ./fuzz.sh
 
-* `Zookeeper` 需要将`jar`包重命名为`zookeeper.jar`
+# AerospikeDB
+cd DistFuzz/aerospike_test/bin && ./fuzz.sh
 
-* `dqlite`
+# Dqlite
+cd DistFuzz/dqlite_test/bin && ./fuzz.sh
 
-   ```shell
-   cd
-   wget https://github.com/canonical/raft/archive/refs/tags/v0.16.0.zip
-   unzip v0.16.0.zip
-   mv raft-0.16.0/ raft
-   cd raft
-   autoreconf -i
-   ./configure --enable-debug --enable-sanitize
-   make -j10
-   sudo make install
-   sudo ldconfig
+# RethinkDB
+cd DistFuzz/rethinkdb_test/bin && ./fuzz.sh
 
-   cd
-   wget https://github.com/canonical/dqlite/archive/refs/tags/v1.13.0.zip
-   unzip v1.13.0.zip
-   mv dqlite-1.13.0/ dqlite
-   cd dqlite
-   sudo apt install pkg-config autoconf automake libtool make libuv1-dev libsqlite3-dev liblz4-dev
-   autoreconf -i
-   ./configure --enable-debug --enable-sanitize
-   make -j10
-   sudo make install
-   sudo ldconfig
+# etcd
+cd DistFuzz/etcd_test/bin && ./fuzz.sh
 
-   cd
-   wget https://github.com/canonical/go-dqlite/archive/refs/tags/v1.11.9.zip
-   unzip v1.11.9.zip
-   mv go-dqlite-1.11.9/ go-dqlite
-   
-   # delete -Wl,-z,now from /internal/bindings/build.go
-   # change threshold parameter in dqlite-demo.go
-   # options := []app.Option{
-   #   app.WithAddress(db), app.WithCluster(*join), app.WithLogFunc(logFunc),
-	#   app.WithDiskMode(diskMode), 
-   #   app.WithSnapshotParams(dqlite.SnapshotParams{Threshold: 1, Trailing: 5})
-   # }
-   # import (... "github.com/canonical/go-dqlite" ...)
+# ZooKeeper
+cd DistFuzz/zookeeper_test/bin && ./fuzz.sh
+```
 
-   wget https://go.dev/dl/go1.22.4.linux-amd64.tar.gz
-   sudo tar -C /usr/local -xzf go1.22.4.linux-amd64.tar.gz
-   echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bashrc
-   source ~/.bashrc
-   cd go-dqlite
-   go install -asan -tags nosqlite3 ./cmd/dqlite-demo
-   ```
+#### Analyzing results
 
-* TODO: 如果使用checkpoint，strace应改为attach模式，类似启动NuRaft的方式。(see nuraft_test/src/node_manager.cpp)
+After fuzzing for a while, you can check error cases under `DistFuzz/${SYSTEM}_test/bin/test_cases` and fuzzing status in the file `DistFuzz/${SYSTEM}_test/bin/output/fuzzer1/plot-curve` (`bc:` for coverage).
 
-* TODO: 使用 rr-debugger 可以实现多进程 record/replay，需要实现syscall的错误注入，即可替换目前的strace模式。
-* TODO: 使用 rr-debugger 后，checkpoint的实现需要用rr-debugger启动criu restore ... (目前似乎不支持!)
+#### Reproducing
 
-**新增项目**
+To reproduce a bug, you need to copy the `init_random.txt` file in your target bug folder, e.g., `test_cases/100`, to the current folder. Then you need to modify and run the script `reproduce.sh`.
 
-添加新测试项目时需要增加、修改的文件：
+We provide example bug reproduction Docker images we used during our communication with developers. Please note that `rr` has requirements for CPU and our recent tested CPUs are `Intel i9-10980XE` and `Intel(R) Xeon(R) Gold 6248R`.
 
-1. 实现`node_manager`
-   
-   主要是实现 `ServerConfigurationGenerator`
+```bash
+# For etcd-1 https://github.com/etcd-io/etcd/issues/13493
+docker pull zouyonghao/etcd-13493
+docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyonghao/etcd-13493 bash
+# The rr version installed is a modified version of DistFuzz.
+rr replay -a /root/test_cases/3169/rr_rec_1_0/
 
-2. operators
-   
-   一般需要实现多个，主要是 `ClientConfigurationGenerator` 和自定义 operators
+# For etcd-2 https://github.com/etcd-io/raft/issues/18
+docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyonghao/etcd-10166 bash
+rr replay -a /root/10166/rr_rec_2_0/
 
-3. backup_test_case.sh
-   
-   用于备份和检查相关日志、数据
+# For ZooKeeper-[1-8]
+docker pull docker pull zouyonghao/distfuzz:zookeeper-rr
+rr replay -a /home/zyh/zookeeper-[1-8]
+```
+
+### Code Structure
+
+* `core` contains the core libs of DistFuzz including shared memory, common events (like killing node), node manager and the main test logic.
+* `fuzz` contains the fuzzer that managers seeds and shared memory.
+* `strace` is the default fault injector and network sequence collector.
+* `rr` is the modified version of rr-debugger. It is used for record/replay but now it can also directly be used as the fault inject and network sequence collector. So, it actually can replace `strace` in the new version. But it's slower than `strace`.
+* `bpf` can also replace `strace` and has better performance as it uses BPF as the fault injector. But its fault injection feature is limited. For example, it can only delay network messages or file operations within ~50ms. This is due to the limitation of BPF.
+* `${SYSTEM}_test/src` and `${SYSTEM}_test/include` contain the custom events for the specific system.
+* `${SYSTEM}_test/bin` contains the scripts for the specific system.
+
+### Found bugs
+
+Please check the [FOUND_BUGS.md](FOUND_BUGS.md)
