@@ -1,7 +1,0 @@
-[{:process 1804289383, :type :invoke, :f :read, :value nil},
-{:process 846930886, :type :invoke, :f :read, :value nil},
-{:process 1681692777, :type :invoke, :f :write, :value 3666503840},
-{:process 1714636915, :type :invoke, :f :read, :value nil},
-{:process 1957747793, :type :invoke, :f :write, :value 2036389746},
-{:process 424238335, :type :invoke, :f :write, :value 3745610869},
-]
