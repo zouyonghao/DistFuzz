@@ -68,9 +68,24 @@ RUN apt update && \
   lua-bitop \
   lua-cjson \
   libtool \
+  libuv1-dev \
+  liblz4-dev \
+  npm \
+  coffeescript \
+  libcurl4-openssl-dev \
+  zlib1g-dev \
+  libsqlite3-dev \
   --no-install-recommends -y && \
   apt clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install Node.js 16 for RethinkDB
+RUN curl -sL https://deb.nodesource.com/setup_16.x -o setup_16.x && \
+  chmod +x setup_16.x && \
+  sed -i '/sleep/d' setup_16.x && \
+  ./setup_16.x && \
+  apt-get install -y nodejs && \
+  npm install -g browserify@13.1.0
 
 # Install lein
 RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
@@ -119,14 +134,53 @@ RUN git clone https://github.com/zouyonghao/aerospikedb-test.git aerospike-serve
   ./build.sh
 
 # Dqlite https://github.com/zouyonghao/dqlite-test.git
+## Install golang 1.22.4
+RUN wget https://golang.org/dl/go1.14.4.linux-amd64.tar.gz && \
+  sudo tar -C /usr/local -xzf go1.14.4.linux-amd64.tar.gz && \
+  mkdir -p /home/zyh/go/{bin,pkg,src} && \
+  rm go1.14.4.linux-amd64.tar.gz
 
+ENV PATH="/usr/local/go/bin:$PATH"
+ENV GOPATH="/home/zyh/go"
+
+RUN sudo apt update && \
+  sudo apt install -y 
+RUN git clone https://github.com/zouyonghao/dqlite-test.git dqlite-test && \
+  cd dqlite-test && \
+  cd raft && \
+  autoreconf -i && \
+  ./configure --enable-example && \
+  make -j$(nproc) && \
+  sudo make install && \
+  cd ../dqlite && \
+  autoreconf -i && \
+  ./configure && \
+  make -j$(nproc) && \
+  sudo make install && \
+  cd ../go-dqlite && \
+  go install -tags libsqlite3 ./cmd/dqlite-demo
+
+# use Python2 to build
+RUN sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 10
 # RethinkDB https://github.com/zouyonghao/rethinkdb-test.git
+RUN git clone https://github.com/zouyonghao/rethinkdb-test.git rethinkdb && \
+  cd rethinkdb && \
+  ./build.sh
 
 # We use a newer version of etcd because the old version in the paper is buggy and is only used for comparison purpose.
 # etcd https://github.com/etcd-io/etcd/releases/download/v3.5.1/etcd-v3.5.1-linux-amd64.tar.gz
+RUN wget https://github.com/etcd-io/etcd/releases/download/v3.5.1/etcd-v3.5.1-linux-amd64.tar.gz && \
+  tar xvf etcd-v3.5.1-linux-amd64.tar.gz && \
+  mv etcd-v3.5.1-linux-amd64 etcd && \
+  rm etcd-v3.5.1-linux-amd64.tar.gz
 
 # We use a newer version of ZooKeeper because the old version in the paper is buggy and is only used for comparison purpose.
 # ZooKeeper https://archive.apache.org/dist/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0.tar.gz
+RUN wget https://archive.apache.org/dist/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0-bin.tar.gz && \
+  tar xvf apache-zookeeper-3.7.0-bin.tar.gz && \
+  mv apache-zookeeper-3.7.0-bin zookeeper && \
+  mv zookeeper/lib/zookeeper-3.7.0.jar zookeeper/lib/zookeeper.jar && \
+  rm apache-zookeeper-3.7.0-bin.tar.gz
 
 # build DistFuzz
 COPY --chown=zyh:zyh . DistFuzz
@@ -141,5 +195,10 @@ RUN cd DistFuzz/strace && \
   ./bootstrap && \
   ./configure && \
   make -j$(nproc)
+
+# build rethinkdb client
+RUN cd /home/zyh/DistFuzz/rethinkdb_test/client && ./build.sh
+
+RUN sudo chown -R zyh:zyh /var/log/zookeeper
 
 ENV PATH="/home/zyh/DistFuzz/build/rr/bin:/home/zyh/DistFuzz/strace/src:$PATH"

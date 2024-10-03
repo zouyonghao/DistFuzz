@@ -9,7 +9,7 @@ public:
     EtcdInitOperator() : DefaultInitOperator() {}
     std::string get_write_zero_command() override
     {
-        std::string configure_string = "timeout 3 /home/zyh/etcd/bin/etcdctl --endpoints=";
+        std::string configure_string = "timeout 3 /home/zyh/etcd/etcdctl --endpoints=";
         for (uint32_t i = 0; i < node_count; i++)
         {
             configure_string += IP ":" + std::to_string(BASE_ETCD_PORT + i);

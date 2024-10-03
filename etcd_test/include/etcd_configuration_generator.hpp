@@ -6,7 +6,7 @@
 #include <operator/dst_default_client_operator.hpp>
 #include <operator/dst_default_init_operator.hpp>
 
-#define BIN_PATH "/home/zyh/etcd/bin/etcd"
+#define BIN_PATH "/home/zyh/etcd/etcd"
 #define BASE_ETCD_PORT 2380
 #define BASE_CLIENT_PORT 2480
 #define IP "127.0.1.1"
@@ -71,7 +71,7 @@ class EtcdClientConfigurationGenerator : public ClientConfigurationGenerator
 public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
     {
-        std::string configure_string = "timeout 3 /home/zyh/etcd/bin/etcdctl --endpoints=";
+        std::string configure_string = "timeout 3 /home/zyh/etcd/etcdctl --endpoints=";
         for (uint32_t i = 0; i < node_count; i++)
         {
             configure_string += IP ":" + std::to_string(BASE_ETCD_PORT + i);

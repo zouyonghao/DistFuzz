@@ -1,7 +1,0 @@
-symbol_init success!
-[33mYou are running in a fuzzing environment[0m
-PRELOAD: fuzzing is stopped, will use kernel_func directly.
-'/proc/self/fd/7' points to '/home/zyh/zookeeper/lib/zookeeper-3.7.0.jar'
-'/proc/self/fd/7' points to '/home/zyh/zookeeper/lib/zookeeper-3.7.0.jar'
-'/proc/self/fd/58' points to '/home/zyh/distributed-system-test/zookeeper_test/bin/data1/version-2/log.1000000001'
-'/proc/self/fd/59' points to '/home/zyh/distributed-system-test/zookeeper_test/bin/data1/version-2/log.1000000001'
