@@ -14,7 +14,8 @@
 FROM ubuntu:20.04
 
 # Install dependencies
-RUN apt-get update && sudo apt-get install \
+RUN apt update && \
+  DEBIAN_FRONTEND=noninteractive apt install \
   libboost-all-dev \
   rapidjson-dev \
   clang-9 clang-11 llvm-11 \
@@ -35,22 +36,34 @@ RUN apt-get update && sudo apt-get install \
   zookeeper \
   gcc-multilib \
   gawk gcc g++ libc++-dev liblzma-dev lzma-dev leiningen valgrind libelf1 libelf-dev zlib1g-dev bear \
-  capnproto libcapnp-dev g++-multilib cmake tmux curl net-tools uml-utilities openjdk-11-jdk
+  capnproto libcapnp-dev g++-multilib cmake tmux curl net-tools uml-utilities openjdk-11-jdk -y && \
+  apt clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install lein
-RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein &&
-  mv lein /usr/bin/lein &&
+RUN wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
+  mv lein /usr/bin/lein && \
   chmod +x /usr/bin/lein
 
 # Install aerospike-client-c
-RUN wget https://download.aerospike.com/artifacts/aerospike-client-c/5.2.0/aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz &&
-  tar xvf aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz &&
-  cd aerospike-client-c-5.2.0.ubuntu18.04.x86_64 &&
-  sudo dpkg -i aerospike-client-c-devel-5.2.0.ubuntu18.04.x86_64.deb
+RUN wget https://download.aerospike.com/artifacts/aerospike-client-c/5.2.0/aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz && \
+  tar xvf aerospike-client-c-5.2.0.ubuntu18.04.x86_64.tgz && \
+  cd aerospike-client-c-5.2.0.ubuntu18.04.x86_64 && \
+  dpkg -i aerospike-client-c-devel-5.2.0.ubuntu18.04.x86_64.deb
 
 # Install criu
-RUN https://github.com/checkpoint-restore/criu/archive/refs/tags/v4.0.tar.gz &&
-  tar xvf v4.0.tar.gz &&
-  cd criu-4.0 &&
-  make &&
+RUN https://github.com/checkpoint-restore/criu/archive/refs/tags/v4.0.tar.gz && \
+  tar xvf v4.0.tar.gz && \
+  cd criu-4.0 && \
+  make && \
   make install
+
+USER zyh
+
+WORKDIR /home/zyh
+
+RUN git clone https://github.com/zouyonghao/DistFuzz.git && \
+  cd DistFuzz && \
+  mkdir build && \
+  cmake .. && \
+  make -j$(nproc)

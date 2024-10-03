@@ -22,9 +22,7 @@ DistFuzz is a research fuzzing tool to effectively find bugs in distributed syst
 We recommend you to run the tool using the Docker image we provide.
 
 ```
-docker pull zouyonghao/distfuzz:artifact
 docker run -it zouyonghao/distfuzz:artifact bash
-su zyh && cd
 ```
 
 If you want to build the Docker container or install the tool and dependencies yourself, please refer to [INSTALL.md](INSTALL.md).
