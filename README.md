@@ -91,6 +91,7 @@ rr replay -a /home/zyh/zookeeper-[1-8]
 * `bpf` can also replace `strace` and has better performance as it uses BPF as the fault injector. But its fault injection feature is limited. For example, it can only delay network messages or file operations within ~50ms. This is due to the limitation of BPF.
 * `${SYSTEM}_test/src` and `${SYSTEM}_test/include` contain the custom events for the specific system.
 * `${SYSTEM}_test/bin` contains the scripts for the specific system.
+* `general_test` works as a template for user to understand how to add a new target system to DistFuzz.
 
 ### Found bugs
 
