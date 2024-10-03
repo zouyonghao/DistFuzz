@@ -68,8 +68,7 @@ We provide example bug reproduction Docker images we used during our communicati
 
 ```bash
 # For etcd-1 https://github.com/etcd-io/etcd/issues/13493
-docker pull zouyonghao/etcd-13493
-docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyonghao/etcd-13493 bash
+docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyonghao/etcd-13493 bash
 # The rr version installed is a modified version of DistFuzz.
 rr replay -a /root/test_cases/3169/rr_rec_1_0/
 
@@ -78,7 +77,7 @@ docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyo
 rr replay -a /root/10166/rr_rec_2_0/
 
 # For ZooKeeper-[1-8]
-docker pull docker pull zouyonghao/distfuzz:zookeeper-rr
+docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyonghao/distfuzz:zookeeper-rr bash
 rr replay -a /home/zyh/zookeeper-[1-8]
 ```
 
