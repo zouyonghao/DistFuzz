@@ -24,7 +24,7 @@ public:
             retry_command(command, MAX_TRY_COUNT);
         }
 
-        if (retry_command("timeout 3 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh set 0",
+        if (retry_command("timeout 3 bash /home/zyh/DistFuzz/redisraft_test/bin/run_client.sh set 0",
                           MAX_TRY_COUNT))
         {
 

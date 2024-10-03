@@ -10,7 +10,7 @@
 
 #define CONFIG_FILE_PIECE_SERVICE_1 "service {\n\tuser zyh\n\tgroup zyh\n\tpaxos-single-replica-limit 0\n"
 /* Add pidfile, work-directory */
-#define PID_FILE_PREFIX "\tpidfile /home/zyh/distributed-system-test/aerospike_test/bin/run/asd_pid"
+#define PID_FILE_PREFIX "\tpidfile /home/zyh/DistFuzz/aerospike_test/bin/run/asd_pid"
 #define WORK_DIRECTORY_PREFIX "\twork-directory run/work"
 #define CONFIG_FILE_PIECE_SERVICE_2 "\n\tproto-fd-max 1500\n\trun-as-daemon false\n}\n"
 
@@ -22,7 +22,7 @@
 
 #define CONFIG_FILE_PIECE_LOGGING_1 "\nlogging {\n"
 /* Add file */
-#define FILE_PREFIX "\tfile /home/zyh/distributed-system-test/aerospike_test/bin/run/log"
+#define FILE_PREFIX "\tfile /home/zyh/DistFuzz/aerospike_test/bin/run/log"
 #define CONFIG_FILE_PIECE_LOGGING_2 " {\n\t\tcontext any info\n\t}\n}\n"
 
 #define CONFIG_FILE_PIECE_NETWORK_1 "\nnetwork {\n\tservice {\n\t\taddress 127.0.1.1\n\taccess-address 127.0.1.1\n"

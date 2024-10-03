@@ -41,13 +41,13 @@
 
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/namenode1</value>
+        <value>file:///home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/namenode1</value>
     </property>
 
     <!-- ZKFC settings (ZooKeeper-based failover controller) -->
     <property>
         <name>dfs.ha.fencing.methods</name>
-        <value>shell(/home/zyh/distributed-system-test/hdfs_test/bin/kill_nn2.sh)</value>
+        <value>shell(/home/zyh/DistFuzz/hdfs_test/bin/kill_nn2.sh)</value>
     </property>
     <property>
         <name>dfs.ha.automatic-failover.enabled</name>
@@ -71,7 +71,7 @@
 <!-- 
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode1</value>
+        <value>file:///home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode1</value>
     </property>
     <property>
         <name>dfs.datanode.address</name>
@@ -88,7 +88,7 @@
 
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2</value>
+        <value>file:///home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode2</value>
     </property>
     <property>
         <name>dfs.datanode.address</name>
@@ -105,7 +105,7 @@
 
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3</value>
+        <value>file:///home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3</value>
     </property>
     <property>
         <name>dfs.datanode.address</name>

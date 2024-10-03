@@ -5,6 +5,6 @@
     </property>
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/namenode1/tmp</value>
+        <value>/home/zyh/DistFuzz/hdfs_test/bin/hadoop/namenode1/tmp</value>
     </property>
 </configuration>

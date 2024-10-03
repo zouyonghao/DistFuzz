@@ -5,11 +5,11 @@
         "DefaultInstrumentor"
     ],
     "additional_link_args": [
-        "/root/distributed-system-test/build/fuzz/CMakeFiles/default_instrument_lib.dir/instrumentor_lib/default_instrument_lib.c.o",
-        "/root/distributed-system-test/build/core/libdst_random.so",
-        "-Wl,-rpath=/root/distributed-system-test/build/core/",
-        "/root/distributed-system-test/build/core/libdst_event.so",
-        "-Wl,-rpath=/root/distributed-system-test/build/core/",
+        "/root/DistFuzz/build/fuzz/CMakeFiles/default_instrument_lib.dir/instrumentor_lib/default_instrument_lib.c.o",
+        "/root/DistFuzz/build/core/libdst_random.so",
+        "-Wl,-rpath=/root/DistFuzz/build/core/",
+        "/root/DistFuzz/build/core/libdst_event.so",
+        "-Wl,-rpath=/root/DistFuzz/build/core/",
         "-fsanitize=address"
     ],
     "additional_compile_args": [

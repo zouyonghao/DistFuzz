@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/home/zyh/distributed-system-test/core/include"
+                "/home/zyh/DistFuzz/core/include"
             ],
             "defines": ["__USE_GNU"],
             "compilerPath": "/usr/bin/gcc",

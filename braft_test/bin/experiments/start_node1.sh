@@ -1,6 +1,6 @@
 bin_path=/home/zyh/braft/example/atomic
 
-LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
+LD_PRELOAD=/home/zyh/DistFuzz/build/preload_module/libdst_preload.so \
 __DST_ENV_RANDOM_FILE__=random_node1.txt \
 NODE_NAME=node1 \
 NODE_ID=1 \

@@ -28,8 +28,8 @@ public:
 };
 
 /* The ClientConfigurationGenerator for redisraft, the example is as follows:
- * timeout 2 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh get
- * timeout 2 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh set 1
+ * timeout 2 bash /home/zyh/DistFuzz/redisraft_test/bin/run_client.sh get
+ * timeout 2 bash /home/zyh/DistFuzz/redisraft_test/bin/run_client.sh set 1
  */
 class RedisraftClientConfigurationGenerator : public ClientConfigurationGenerator
 {
@@ -37,7 +37,7 @@ public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
     {
         std::string configure_string =
-            "timeout 3 bash /home/zyh/distributed-system-test/redisraft_test/bin/run_client.sh ";
+            "timeout 3 bash /home/zyh/DistFuzz/redisraft_test/bin/run_client.sh ";
         va_list random_nums;
         va_start(random_nums, node_count);
         switch (op_name)

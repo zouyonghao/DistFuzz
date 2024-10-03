@@ -63,7 +63,7 @@ fi
 CEPH_ROOT=/home/zyh/ceph/
 CEPH_BUILD_DIR=/home/zyh/ceph/build/
 MGR_PYTHON_PATH=$CEPH_ROOT/src/pybind/mgr
-CEPH_ASOK_DIR=/home/zyh/distributed-system-test/ceph_test/bin/out
+CEPH_ASOK_DIR=/home/zyh/DistFuzz/ceph_test/bin/out
 CEPH_PORT=40743
 
 # use CEPH_BUILD_ROOT to vstart from a 'make install'

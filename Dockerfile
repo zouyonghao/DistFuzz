@@ -63,6 +63,11 @@ RUN apt update && \
   xmlto \
   python3-pip \
   sudo \
+  liblua5.1-dev \
+  liblua5.1-0 \
+  lua-bitop \
+  lua-cjson \
+  libtool \
   --no-install-recommends -y && \
   apt clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -95,19 +100,8 @@ USER zyh
 
 WORKDIR /home/zyh
 
-# We use the following ${SYSTEM}-test repos to simplify the build process.
-# brpc & braft: https://github.com/zouyonghao/brpc-test.git https://github.com/zouyonghao/braft-test
-# AerospikeDB https://github.com/zouyonghao/aerospikedb-test.git
-# Dqlite https://github.com/zouyonghao/dqlite-test.git
-# RethinkDB https://github.com/zouyonghao/rethinkdb-test.git
-
-# We use a newer version of etcd because the old version in the paper is buggy and is only used for comparison purpose.
-# etcd https://github.com/etcd-io/etcd/releases/download/v3.5.1/etcd-v3.5.1-linux-amd64.tar.gz
-
-# We use a newer version of ZooKeeper because the old version in the paper is buggy and is only used for comparison purpose.
-# ZooKeeper https://archive.apache.org/dist/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0.tar.gz
-
 # build brpc & braft
+# brpc & braft: https://github.com/zouyonghao/brpc-test.git https://github.com/zouyonghao/braft-test
 RUN git clone https://github.com/zouyonghao/brpc-test.git brpc && \
   cd brpc && \
   sh config_brpc.sh --headers=/usr/include --libs=/usr/lib && \
@@ -118,6 +112,22 @@ RUN git clone https://github.com/zouyonghao/braft-test.git braft && \
   cd braft && \
   ./build.sh
 
+# build AerospikeDB
+# AerospikeDB https://github.com/zouyonghao/aerospikedb-test.git
+RUN git clone https://github.com/zouyonghao/aerospikedb-test.git aerospike-server && \
+  cd aerospike-server && \
+  ./build.sh
+
+# Dqlite https://github.com/zouyonghao/dqlite-test.git
+
+# RethinkDB https://github.com/zouyonghao/rethinkdb-test.git
+
+# We use a newer version of etcd because the old version in the paper is buggy and is only used for comparison purpose.
+# etcd https://github.com/etcd-io/etcd/releases/download/v3.5.1/etcd-v3.5.1-linux-amd64.tar.gz
+
+# We use a newer version of ZooKeeper because the old version in the paper is buggy and is only used for comparison purpose.
+# ZooKeeper https://archive.apache.org/dist/zookeeper/zookeeper-3.7.0/apache-zookeeper-3.7.0.tar.gz
+
 # build DistFuzz
 COPY --chown=zyh:zyh . DistFuzz
 RUN cd DistFuzz && \
@@ -125,3 +135,11 @@ RUN cd DistFuzz && \
   cd build && \
   cmake .. && \
   make -j$(nproc)
+
+# build strace
+RUN cd DistFuzz/strace && \
+  ./bootstrap && \
+  ./configure && \
+  make -j$(nproc)
+
+ENV PATH="/home/zyh/DistFuzz/build/rr/bin:/home/zyh/DistFuzz/strace/src:$PATH"

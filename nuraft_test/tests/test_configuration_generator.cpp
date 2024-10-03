@@ -10,7 +10,7 @@ void test_client_configuration_generator()
 {
     NuraftClientConfigurationGenerator nccg;
     assert(nccg.get_configure_string(OP_READ, 3) ==
-           "timeout 2 bash /home/zyh/distributed-system-test/nuraft_test/bin/run_client.sh get");
+           "timeout 2 bash /home/zyh/DistFuzz/nuraft_test/bin/run_client.sh get");
 }
 
 void test_system()

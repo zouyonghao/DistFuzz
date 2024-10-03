@@ -5,7 +5,7 @@
     </property>
     <property>
         <name>dfs.namenode.name.dir</name>
-        <value>file:/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/namenode</value>
+        <value>file:/home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/namenode</value>
     </property>
     <property>
         <name>dfs.namenode.rpc-address</name>
@@ -19,7 +19,7 @@
     <!-- Configuration for DataNode 2 -->
     <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode2</value>
+        <value>file:///home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode2</value>
     </property>
     <property>
         <name>dfs.datanode.address</name>

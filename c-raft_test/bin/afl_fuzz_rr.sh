@@ -1,5 +1,5 @@
 # ../../build/fuzz/fuzzer -i input -o output -M fuzzer1 -f init_random.txt \
-#     /bin/bash /home/zyh/distributed-system-test/c-raft_test/bin/run_test.sh
+#     /bin/bash /home/zyh/DistFuzz/c-raft_test/bin/run_test.sh
 
 ../../build/fuzz/fuzzer -b -i input -o output -M fuzzer1 -f init_random.txt \
     ../../build/c-raft_test/c-raft_test_main \

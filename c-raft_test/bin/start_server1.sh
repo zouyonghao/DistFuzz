@@ -7,6 +7,6 @@ CRAFT_SERVER_PATH=/home/zyh/raft/example
 # $CRAFT_SERVER_PATH/server `pwd`/data2 2  &
 
 # $CRAFT_SERVER_PATH/server ./c-raft_data0 1 9000 9000 9001 9002 &
-LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
+LD_PRELOAD=/home/zyh/DistFuzz/build/preload_module/libdst_preload.so \
 __DST_ENV_RANDOM_FILE__=random_node1.txt $CRAFT_SERVER_PATH/server ./c-raft_data1 2 9001 9000 9001 9002 >> log1 2>&1 &
 # $CRAFT_SERVER_PATH/server ./c-raft_data2 3 9003 9004 9005 9003 &

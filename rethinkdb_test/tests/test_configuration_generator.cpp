@@ -16,17 +16,17 @@ void test_client_configuration_generator()
     RethinkdbClientConfigurationGenerator rccg;
     assert(rccg.get_configure_string(OP_READ, 3) ==
            "timeout 3 /usr/bin/java -jar "
-           "/home/zyh/distributed-system-test/rethinkdb_test/client/target/"
+           "/home/zyh/DistFuzz/rethinkdb_test/client/target/"
            "rethinkdb-test-client-1.0-SNAPSHOT-jar-with-dependencies.jar 3 get");
 
     assert(rccg.get_configure_string(OP_WRITE, 3, 1) ==
            "timeout 3 /usr/bin/java -jar "
-           "/home/zyh/distributed-system-test/rethinkdb_test/client/target/"
+           "/home/zyh/DistFuzz/rethinkdb_test/client/target/"
            "rethinkdb-test-client-1.0-SNAPSHOT-jar-with-dependencies.jar 3 set 1");
 
     assert(rccg.get_configure_string(OP_CAS, 3, 1, 2) ==
            "timeout 3 /usr/bin/java -jar "
-           "/home/zyh/distributed-system-test/rethinkdb_test/client/target/"
+           "/home/zyh/DistFuzz/rethinkdb_test/client/target/"
            "rethinkdb-test-client-1.0-SNAPSHOT-jar-with-dependencies.jar 3 cas 1 2");
 }
 

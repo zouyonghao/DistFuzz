@@ -10,7 +10,7 @@ set(DIST_FUZZ_BUILD_COVERAGE_COLLECTOR OFF CACHE BOOL "Build coverage collector 
 
 set(DIST_FUZZ_BPF OFF CACHE BOOL "Build bpf fault injector?")
 set(DIST_FUZZ_RR ON CACHE BOOL "Build rr replay and fault injector?")
-set(DIST_FUZZ_AEROSPIKE OFF CACHE BOOL "Build aerospike?")
+set(DIST_FUZZ_AEROSPIKE ON CACHE BOOL "Build aerospike?")
 
 if (${DIST_FUZZ_STATIC_BUILD})
 set(Boost_USE_STATIC_LIBS ON)

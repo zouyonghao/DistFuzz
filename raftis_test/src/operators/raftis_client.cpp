@@ -1,7 +1,7 @@
 // #include <operator/dst_default_client_operator.hpp>
 
 // static const std::string RAFTIS_CLIENT =
-//     "bash /root/distributed-system-test/raftis_test/bin/run_client.sh";
+//     "bash /root/DistFuzz/raftis_test/bin/run_client.sh";
 // static const std::string UNFINISHED_COMMAND =
 //     "timeout 3 " + RAFTIS_CLIENT + " ";
 

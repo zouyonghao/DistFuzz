@@ -2,19 +2,19 @@ service {
 	user zyh
 	group zyh
 	paxos-single-replica-limit 0
-	pidfile /home/zyh/Desktop/hdd/distributed-system-test/aerospike_test/bin/boot_time_test/data/asd_pid1
-	work-directory data/work1
+	pidfile /home/zyh/Desktop/hdd/DistFuzz/aerospike_test/bin/boot_time_test/data/asd_pid4
+	work-directory data/work4
 
 	proto-fd-max 1024
 	run-as-daemon true
 }
 
 mod-lua {
-	user-path data/work1/usr/udf/lua
+	user-path data/work4/usr/udf/lua
 }
 
 logging {
-	file /home/zyh/Desktop/hdd/distributed-system-test/aerospike_test/bin/boot_time_test/data/log1 {
+	file /home/zyh/Desktop/hdd/DistFuzz/aerospike_test/bin/boot_time_test/data/log4 {
 		context any info
 	}
 }
@@ -23,17 +23,17 @@ network {
 	service {
 		address 127.0.1.1
 	access-address 127.0.1.1
-		port 2001
+		port 2004
 	}
 
 	heartbeat {
 		mode mesh
 		address 127.0.1.1
-		port 5001
+		port 5004
 		mesh-seed-address-port 127.0.1.1 5000
+		mesh-seed-address-port 127.0.1.1 5001
 		mesh-seed-address-port 127.0.1.1 5002
 		mesh-seed-address-port 127.0.1.1 5003
-		mesh-seed-address-port 127.0.1.1 5004
 
 		interval 100
 		timeout 3
@@ -42,10 +42,10 @@ network {
 
 	fabric {
 		address 127.0.1.1
-		port 4001
+		port 4004
 	}
 	info {
-		port 3001
+		port 3004
 
 	}
 }
@@ -55,7 +55,7 @@ namespace test {
 	memory-size 1G
 
 	storage-engine device {
-		file data/data1
+		file data/data4
 		filesize 10M
 		data-in-memory true
 	}

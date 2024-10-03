@@ -7,11 +7,11 @@ sleep infinity >calc1.pipe &
 sleep infinity >calc2.pipe &
 sleep infinity >calc3.pipe &
 
-# LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
+# LD_PRELOAD=/home/zyh/DistFuzz/build/preload_module/libdst_preload.so \
 bash -c "$bin_path/calc_server 1 127.0.1.1:10001 < calc1.pipe >> log0_0.log" 2>&1 &
-# LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
+# LD_PRELOAD=/home/zyh/DistFuzz/build/preload_module/libdst_preload.so \
 bash -c "$bin_path/calc_server 2 127.0.1.1:10002 < calc2.pipe >> log1_0.log" 2>&1 &
-# LD_PRELOAD=/home/zyh/distributed-system-test/build/preload_module/libdst_preload.so \
+# LD_PRELOAD=/home/zyh/DistFuzz/build/preload_module/libdst_preload.so \
  bash -c "$bin_path/calc_server 3 127.0.1.1:10003 < calc3.pipe >> log2_0.log" 2>&1 &
 
 sleep 1

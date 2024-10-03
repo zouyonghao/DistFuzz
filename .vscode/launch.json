@@ -139,7 +139,7 @@
             "name": "click_house_test",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/zyh/distributed-system-test/build/clickhouse_test/clickhouse_test_main",
+            "program": "/home/zyh/DistFuzz/build/clickhouse_test/clickhouse_test_main",
             "args": [
                 "init_random.txt"
             ],
@@ -318,7 +318,7 @@
             "name": "braft_test_gdb",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/zyh/distributed-system-test/build/braft_test/braft_test_main",
+            "program": "/home/zyh/DistFuzz/build/braft_test/braft_test_main",
             "args": [
                 "init_random.txt"
             ],
@@ -339,7 +339,7 @@
             "name": "compiler_gdb",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/zyh/distributed-system-test/build/fuzz/default_compiler",
+            "program": "/home/zyh/DistFuzz/build/fuzz/default_compiler",
             "args": [
                 "test.cpp",
                 "-c"
@@ -361,7 +361,7 @@
             "name": "compiler3",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/zyh/distributed-system-test/build/fuzz/default_compiler",
+            "program": "/home/zyh/DistFuzz/build/fuzz/default_compiler",
             "args": [
                 "-o",
                 "CMakeFiles/cmTC_d5ad5.dir/CMakeCCompilerABI.c.o",
@@ -385,7 +385,7 @@
             "name": "compiler2",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/zyh/distributed-system-test/build/fuzz/default_compiler",
+            "program": "/home/zyh/DistFuzz/build/fuzz/default_compiler",
             "args": [
                 "test_with_lib.cpp",
                 "test_lib.cpp",
@@ -408,7 +408,7 @@
             "name": "proxy_server1",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/zyh/distributed-system-test/build/proxy_server/proxy_server",
+            "program": "/home/zyh/DistFuzz/build/proxy_server/proxy_server",
             "args": [
                 "proxy-config.json"
             ],
@@ -429,7 +429,7 @@
             "name": "proxy_server2",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/zyh/distributed-system-test/build/proxy_server/proxy_server",
+            "program": "/home/zyh/DistFuzz/build/proxy_server/proxy_server",
             "args": [
                 "proxy-config.json"
             ],

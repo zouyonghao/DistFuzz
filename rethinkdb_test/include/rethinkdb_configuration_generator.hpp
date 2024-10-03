@@ -37,11 +37,11 @@ public:
 };
 
 /* The ClientConfigurationGenerator for redisraft, the example is as follows:
- * /usr/bin/java -jar /home/zyh/distributed-system-test/rethinkdb_test/client/target/
+ * /usr/bin/java -jar /home/zyh/DistFuzz/rethinkdb_test/client/target/
  * rethinkdb-test-client-1.0-SNAPSHOT-jar-with-dependencies.jar get
- * /usr/bin/java -jar /home/zyh/distributed-system-test/rethinkdb_test/client/target/
+ * /usr/bin/java -jar /home/zyh/DistFuzz/rethinkdb_test/client/target/
  * rethinkdb-test-client-1.0-SNAPSHOT-jar-with-dependencies.jar set 1
- * /usr/bin/java -jar /home/zyh/distributed-system-test/rethinkdb_test/client/target/
+ * /usr/bin/java -jar /home/zyh/DistFuzz/rethinkdb_test/client/target/
  * rethinkdb-test-client-1.0-SNAPSHOT-jar-with-dependencies.jar cas 1 2
  */
 class RethinkdbClientConfigurationGenerator : public ClientConfigurationGenerator
@@ -50,7 +50,7 @@ public:
     std::string get_configure_string(OP_NAME op_name, uint32_t node_count, ...)
     {
         std::string configure_string = "timeout 3 /usr/bin/java -jar "
-                                       "/home/zyh/distributed-system-test/rethinkdb_test/client/target/"
+                                       "/home/zyh/DistFuzz/rethinkdb_test/client/target/"
                                        "rethinkdb-test-client-1.0-SNAPSHOT-jar-with-dependencies.jar " +
                                        std::to_string(node_count) + " ";
         va_list random_nums;
