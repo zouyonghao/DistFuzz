@@ -1,6 +1,6 @@
 # Found bugs by DistFuzz
 
-| System     | ID           | Description                                                  | URL                                                                                         | Checker      | Confirmed? | Fixed? |
+| System     | <div style="width:290px">ID</div>            | Description                                                  | URL                                                                                         | Checker      | Confirmed? | Fixed? |
 | ---------- | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | ------------ | ---------- | ------ |
 | Braft      | Braft-1      | Memory leak                                                  | [braft-268](https://github.com/baidu/braft/issues/268)                                      | ASan         | Yes        |        |
 | Braft      | Braft-2      | Fail to rename                                               | [braft-272](https://github.com/baidu/braft/issues/272)                                      | Log          | Yes        | Yes    |
