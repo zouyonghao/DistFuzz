@@ -115,7 +115,7 @@ USER zyh
 
 WORKDIR /home/zyh
 
-# build brpc & braft
+# Build brpc & braft
 # brpc & braft: https://github.com/zouyonghao/brpc-test.git https://github.com/zouyonghao/braft-test
 RUN git clone https://github.com/zouyonghao/brpc-test.git brpc && \
   cd brpc && \
@@ -127,7 +127,7 @@ RUN git clone https://github.com/zouyonghao/braft-test.git braft && \
   cd braft && \
   ./build.sh
 
-# build AerospikeDB
+# Build AerospikeDB
 # AerospikeDB https://github.com/zouyonghao/aerospikedb-test.git
 RUN git clone https://github.com/zouyonghao/aerospikedb-test.git aerospike-server && \
   cd aerospike-server && \
@@ -143,24 +143,22 @@ RUN wget https://golang.org/dl/go1.14.4.linux-amd64.tar.gz && \
 ENV PATH="/usr/local/go/bin:$PATH"
 ENV GOPATH="/home/zyh/go"
 
-RUN sudo apt update && \
-  sudo apt install -y 
 RUN git clone https://github.com/zouyonghao/dqlite-test.git dqlite-test && \
   cd dqlite-test && \
   cd raft && \
   autoreconf -i && \
-  ./configure --enable-example && \
+  ./configure --enable-example --prefix=/usr && \
   make -j$(nproc) && \
   sudo make install && \
   cd ../dqlite && \
   autoreconf -i && \
-  ./configure && \
+  ./configure --prefix=/usr && \
   make -j$(nproc) && \
   sudo make install && \
   cd ../go-dqlite && \
   go install -tags libsqlite3 ./cmd/dqlite-demo
 
-# use Python2 to build
+# Use Python2 to build
 RUN sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 10
 # RethinkDB https://github.com/zouyonghao/rethinkdb-test.git
 RUN git clone https://github.com/zouyonghao/rethinkdb-test.git rethinkdb && \
@@ -182,21 +180,27 @@ RUN wget https://archive.apache.org/dist/zookeeper/zookeeper-3.7.0/apache-zookee
   mv zookeeper/lib/zookeeper-3.7.0.jar zookeeper/lib/zookeeper.jar && \
   rm apache-zookeeper-3.7.0-bin.tar.gz
 
-# build DistFuzz
+# Install Knossos
+RUN git clone https://github.com/zouyonghao/knossos-test.git knossos && \
+  cd knossos && \
+  lein run data/cas-register/good/cas-register-bug.edn
+
+# Build DistFuzz
 COPY --chown=zyh:zyh . DistFuzz
+
 RUN cd DistFuzz && \
   mkdir build && \
   cd build && \
   cmake .. && \
   make -j$(nproc)
 
-# build strace
+# Build strace
 RUN cd DistFuzz/strace && \
   ./bootstrap && \
   ./configure && \
   make -j$(nproc)
 
-# build rethinkdb client
+# Build rethinkdb client
 RUN cd /home/zyh/DistFuzz/rethinkdb_test/client && ./build.sh
 
 RUN sudo chown -R zyh:zyh /var/log/zookeeper
