@@ -92,4 +92,4 @@ rr replay -a /home/zyh/zookeeper-[1-8]
 
 ### Found bugs
 
-Please check the [FOUND_BUGS.md](FOUND_BUGS.md)
+Please check the [FOUND_BUGS.txt](FOUND_BUGS.txt)
