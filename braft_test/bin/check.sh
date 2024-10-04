@@ -1,4 +1,4 @@
 
 cd ~/knossos
 
-lein run --model cas-register $1
+lein run --model cas-register0 $1
