@@ -5,7 +5,7 @@
     2021.07.06 03:33:04.593550 [ 84719 ] {} <Fatal> : Logical error: 'It's new replica, but database is not empty'.
     2021.07.06 03:33:04.594935 [ 84725 ] {} <Fatal> BaseDaemon: ########################################
     2021.07.06 03:33:04.595317 [ 84725 ] {} <Fatal> BaseDaemon: (version 21.7.1.1, build id: 76979A87D7F7914B) (from thread 84719) (no query) Received signal Aborted (6)
-    2021.07.06 03:33:04.595417 [ 84725 ] {} <Fatal> BaseDaemon: 
+    2021.07.06 03:33:04.595417 [ 84725 ] {} <Fatal> BaseDaemon:
     2021.07.06 03:33:04.595601 [ 84725 ] {} <Fatal> BaseDaemon: Stack trace: 0x7ffa2726918b 0x7ffa27248859 0x1219e9f8 0x1219ee11 0x1206b545 0x29eb5dae 0x29f575d0 0x29f56885 0x2a39454d 0x2a3d5b6f 0x2a3d5a3a 0x2a3d5932 0x2a3d56b9 0x2a3d537d 0x2a3d533d 0x2a3d5315 0x2a3d52e5 0x12176f1c 0x121748d5 0x1224e169 0x122612bf 0x122610fd 0x12260fc5 0x12260379 0x7ffa270ba609 0x7ffa27345293
     2021.07.06 03:33:04.596007 [ 84725 ] {} <Fatal> BaseDaemon: 4. gsignal @ 0x4618b in /usr/lib/x86_64-linux-gnu/libc-2.31.so
     2021.07.06 03:33:04.596139 [ 84725 ] {} <Fatal> BaseDaemon: 5. abort @ 0x25859 in /usr/lib/x86_64-linux-gnu/libc-2.31.so
@@ -77,7 +77,7 @@
     ```
     2021.07.14 23:21:42.995190 [ 4704 ] {} <Fatal> BaseDaemon: ########################################
     2021.07.14 23:21:42.995686 [ 4704 ] {} <Fatal> BaseDaemon: (version 21.3.14.1, build id: CB01F09E927CD981) (from thread 4395) (query_id: 99582031-2502-4321-8db3-57a21c918a1f) Received signal Aborted (6)
-    2021.07.14 23:21:42.995820 [ 4704 ] {} <Fatal> BaseDaemon: 
+    2021.07.14 23:21:42.995820 [ 4704 ] {} <Fatal> BaseDaemon:
     2021.07.14 23:21:42.996014 [ 4704 ] {} <Fatal> BaseDaemon: Stack trace: 0x7ffa68b33fb7 0x7ffa68b35921 0x7ffa68b2548a 0x7ffa68b25502 0x1f1c0812 0x1f1db8ba 0x2075db02 0x20759ae4 0x220a1360 0x220bdae0 0x23565ae4 0x23566680 0x23bc5f56 0x23bbe00f 0x23bbb8c7 0x7ffa683376db 0x7ffa68c1671f
     2021.07.14 23:21:42.996249 [ 4704 ] {} <Fatal> BaseDaemon: 4. raise @ 0x3efb7 in /lib/x86_64-linux-gnu/libc-2.27.so
     2021.07.14 23:21:42.996390 [ 4704 ] {} <Fatal> BaseDaemon: 5. abort @ 0x40921 in /lib/x86_64-linux-gnu/libc-2.27.so

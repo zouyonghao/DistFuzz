@@ -24,7 +24,7 @@
 2. Read old data?
 
     test_cases/1547
-    
+
     issues
     * https://github.com/aerospike/aerospike-server/issues/30
 
@@ -96,7 +96,7 @@
     **CVE-2023-50577**
 
     To reproduce this, comment related fault filter in strace:
-    
+
     ```c
     if (strstr(file_path, "/sys") != NULL) {
 		return;

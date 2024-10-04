@@ -80,6 +80,8 @@
     ==17041==ABORTING
     ```
 
+    https://github.com/rethinkdb/rethinkdb/issues/6956
+
 2. memory leak
 
     ```
@@ -107,6 +109,8 @@
         #17 0x2ae90e5 in linux_thread_pool_t::start_thread(void*) /home/zyh/rethinkdb/src/arch/runtime/thread_pool.cc:185:28
         #18 0x7f3a7b4a06da in start_thread (/lib/x86_64-linux-gnu/libpthread.so.0+0x76da)
     ```
+
+    https://github.com/rethinkdb/rethinkdb/issues/6956
 
 3. stack-use-after-scope
 
@@ -150,7 +154,7 @@
     0x0fefe6be6630: f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8
     Shadow byte legend (one shadow byte represents 8 application bytes):
     Addressable:           00
-    Partially addressable: 01 02 03 04 05 06 07 
+    Partially addressable: 01 02 03 04 05 06 07
     Heap left redzone:       fa
     Freed heap region:       fd
     Stack left redzone:      f1
@@ -179,7 +183,7 @@
     error: Callstack overflow in a coroutine
     error: Backtrace:
     error: Fri Apr 23 09:11:36 2021
-        
+
         1 [0x161f52b]: __interceptor_backtrace+0x5b at ??:?
         2 [0x17150f5]: rethinkdb_backtrace(void**, int) at rethinkdb_backtrace.cc:123
         3 [0x2c8641e]: backtrace_t::backtrace_t() at backtrace.cc:213
@@ -310,7 +314,7 @@
     Server ready, "virtual_lt5" e22dca83-aa60-4cf3-af1d-a9aa50d566c8
     Connected to server "virtual_f6w" d66da52a-54f5-494d-bec3-d85ba6b90fdf
     error: Sun Apr 25 08:29:44 2021
-        
+
         1 [0x7f610b]: __interceptor_backtrace+0x5b at ??:?
         2 [0x126476e]: backtrace_t::backtrace_t() at backtrace.cc:213
         3 [0x1267698]: lazy_backtrace_formatter_t::lazy_backtrace_formatter_t() at backtrace.cc:297
@@ -335,7 +339,7 @@
     error: Guarantee failed: [iterator_and_is_new.second] value to be inserted already exists. don't do that.
     error: Backtrace:
     error: Sun Apr 25 08:31:58 2021
-        
+
         1 [0x7f610b]: __interceptor_backtrace+0x5b at ??:?
         2 [0x126476e]: backtrace_t::backtrace_t() at backtrace.cc:213
         3 [0x1267698]: lazy_backtrace_formatter_t::lazy_backtrace_formatter_t() at backtrace.cc:297
@@ -353,13 +357,13 @@
     ```
     Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
     error: Error in thread 1 in ./src/clustering/generic/registrar.hpp at line 134:
-    error: Guarantee failed: [it->second == nullptr] 
+    error: Guarantee failed: [it->second == nullptr]
     error: Backtrace:
     ==30784==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7f63042caec0; bottom 0x7f62fe293000; size: 0x000006037ec0 (100892352)
     False positive error reports may follow
     For details see https://github.com/google/sanitizers/issues/189
     error: Mon Apr 26 04:10:37 2021
-        
+
         1 [0x7f610b]: __interceptor_backtrace+0x5b at ??:?
         2 [0x126476e]: backtrace_t::backtrace_t() at backtrace.cc:213
         3 [0x1267698]: lazy_backtrace_formatter_t::lazy_backtrace_formatter_t() at backtrace.cc:297
