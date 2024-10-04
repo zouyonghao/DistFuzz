@@ -60,7 +60,7 @@ After fuzzing for a while, you can check error cases under `DistFuzz/${SYSTEM}_t
 
 #### Reproducing
 
-To reproduce a bug, you need to copy the `init_random.txt` file in your target bug folder, e.g., `test_cases/100`, to the current folder. Then you need to modify and run the script `reproduce.sh`.
+To reproduce a bug, you need to copy the `init_random.txt` file in your target bug folder, e.g., `test_cases/100`, to the current folder. Then you need to use `rr` to reproduce the bug. The time for reproducing bugs is not guaranteed.
 
 We provide example bug reproduction Docker images we used during our communication with developers. Please note that `rr` has requirements for CPU and our recent tested CPUs are `Intel i9-10980XE` and `Intel(R) Xeon(R) Gold 6248R`.
 
