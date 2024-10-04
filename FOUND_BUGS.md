@@ -1,6 +1,21 @@
 # Found bugs by DistFuzz
 
-| System     | <div style="width:1000px">ID</div>            | Description                                                  | URL                                                                                         | Checker      | Confirmed? | Fixed? |
+<style>
+table th:first-of-type {
+    width: 10%;
+}
+table th:nth-of-type(2) {
+    width: 10%;
+}
+table th:nth-of-type(3) {
+    width: 50%;
+}
+table th:nth-of-type(4) {
+    width: 30%;
+}
+</style>
+
+| System     | ID           | Description                                                  | URL                                                                                         | Checker      | Confirmed? | Fixed? |
 | ---------- | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | ------------ | ---------- | ------ |
 | Braft      | Braft-1      | Memory leak                                                  | [braft-268](https://github.com/baidu/braft/issues/268)                                      | ASan         | Yes        |        |
 | Braft      | Braft-2      | Fail to rename                                               | [braft-272](https://github.com/baidu/braft/issues/272)                                      | Log          | Yes        | Yes    |
