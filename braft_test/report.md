@@ -1,4 +1,4 @@
-1. Memory leak
+### Memory leak
 
     ```
     =================================================================
@@ -40,34 +40,35 @@
     SUMMARY: AddressSanitizer: 146 byte(s) leaked in 3 allocation(s).
     ```
 
-   https://github.com/baidu/braft/issues/268
+   <https://github.com/baidu/braft/issues/268>
+
    Fixed
 
-2. Fail to rename *
+### Fail to rename
 
    issues
-    * https://github.com/baidu/braft/issues/272
+    * <https://github.com/baidu/braft/issues/272>
 
    related logs
     * error_cases/100
 
-3. Met raft error *
+### Met raft error
 
    issues
-    * https://github.com/baidu/braft/issues/273
+    * <https://github.com/baidu/braft/issues/273>
 
    related logs
     * error_cases/1486
 
-4. grpc Too many open files
+### grpc Too many open files
 
    issues
-    * https://github.com/grpc/grpc/issues/20418
+    * <https://github.com/grpc/grpc/issues/20418>
 
    related logs
     * error_cases/1486
 
-5. Check failed: meta.term == header.term
+### Check failed: meta.term == header.term
 
     ```
     I0418 23:23:48.741300 83193 /home/zyh/braft/example/atomic/server.cpp:300] Node becomes leader
@@ -111,12 +112,12 @@
 
     ```
    issues
-    * https://github.com/baidu/braft/issues/279
+    * <https://github.com/baidu/braft/issues/279>
 
    related logs
     * error_cases/8181
 
-6. Check failed: false. Did you forget to call truncate_suffix
+### Check failed: false. Did you forget to call truncate_suffix
 
     ```
     F0420 08:05:14.767930 83223 /home/zyh/braft/src/braft/log_manager.cpp:310] Can't truncate logs before _applied_id=9, last_log_kept=8
@@ -138,22 +139,23 @@
 
     ```
    issues
-    * https://github.com/baidu/braft/issues/280
+    * <https://github.com/baidu/braft/issues/280>
 
    related logs
     * error_cases/8181
 
-7. too many `reject term_unmatched AppendEntries`
+### too many `reject term_unmatched AppendEntries`
 
     issues
     * https://github.com/baidu/braft/issues/330
 
-8. 一个Node stepped down 之后，集群无法响应客户端请求
+### 一个Node stepped down 之后，集群无法响应客户端请求
 
     issues
     * https://github.com/baidu/braft/issues/338
 
-9. brpc ASan error
+### brpc ASan error
+
     ```
     E1201 22:37:01.713448 34144 /home/zyh/brpc/src/bthread/task_control.cpp:167] Fail to create _workers[2], Resource temporarily unavailable
     E1201 22:37:01.713607 34144 /home/zyh/brpc/src/bthread/bthread.cpp:92] Fail to init g_task_control
@@ -188,7 +190,8 @@
 
     CVE-2023-50575
 
-10. Fatal error
+### Fatal error
+
     ```
     F1201 22:36:50.517096 33233 /home/zyh/brpc/src/brpc/event_dispatcher.cpp:360] Check failed: 0 == g_edisp[i].Start(&attr) (0 vs -1).
     #0 0x55dbcc135d30 logging::LogMessage::~LogMessage()
@@ -206,7 +209,8 @@
     #12 0x55dbcbea5aaa _start
     ```
 
-11. heap-use-after-free
+### heap-use-after-free
+
     ```
     ==31226==ERROR: AddressSanitizer: heap-use-after-free on address 0x606000013258 at pc 0x0000008c4dbd bp 0x7fd8bfed6060 sp 0x7fd8bfed6058
     READ of size 1 at 0x606000013258 thread T4
@@ -246,7 +250,8 @@
         #7 0x7fd988c3ec86  (/lib/x86_64-linux-gnu/libc.so.6+0x21c86)
     ```
 
-12. SEGV
+### SEGV
+
     ```
     AddressSanitizer:DEADLYSIGNAL
     =================================================================
@@ -272,7 +277,7 @@
     ==29192==ABORTING
     ```
 
-13. memory leak if binding failed
+### memory leak if binding failed
 
     https://github.com/apache/brpc/issues/1390
 

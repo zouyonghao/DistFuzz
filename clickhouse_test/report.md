@@ -1,4 +1,4 @@
-1. Logic error
+### Logic error
    **An expected behavior, but the server should not crash.**
 
     ```
@@ -39,7 +39,7 @@
 
     https://github.com/ClickHouse/ClickHouse/issues/26015
 
-2. Floating point inexact result
+### Floating point inexact result
     **Not a bug**
 
     ```
@@ -72,7 +72,7 @@
     可能是 checkpoint 的问题？
     https://github.com/ClickHouse/ClickHouse/issues/26300
 
-3. create db fatal log
+### create db fatal log
 
     ```
     2021.07.14 23:21:42.995190 [ 4704 ] {} <Fatal> BaseDaemon: ########################################

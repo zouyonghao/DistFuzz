@@ -1,4 +1,4 @@
-1. stack-use-after-scope
+### stack-use-after-scope
 
     ```
     Server got SIGINT from pid 0, uid 0; shutting down...
@@ -82,7 +82,7 @@
 
     https://github.com/rethinkdb/rethinkdb/issues/6956
 
-2. memory leak
+### memory leak
 
     ```
     =================================================================
@@ -112,7 +112,7 @@
 
     https://github.com/rethinkdb/rethinkdb/issues/6956
 
-3. stack-use-after-scope
+### stack-use-after-scope
 
     ```
     =================================================================
@@ -175,7 +175,7 @@
     ==81600==ABORTING
     ```
 
-4. ?  clang 的bug
+### a bug of clang
 
     ```
     Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
@@ -287,7 +287,7 @@
     error: Exiting.
     ```
 
-5. multiple tables?
+### multiple tables
     ```
     com.rethinkdb.gen.exc.ReqlOpFailedError: Table `test.test` is ambiguous; there are multiple tables with that name.
         at com.rethinkdb.ErrorBuilder.build(ErrorBuilder.java:79)
@@ -302,7 +302,7 @@
 
     known issue: https://github.com/rethinkdb/rethinkdb/issues/4521
 
-6. Guarantee failed
+### Guarantee failed
     ```
     Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
     error: Error in thread 6 in src/rpc/connectivity/cluster.cc at line 1348:
@@ -331,7 +331,7 @@
 
     https://github.com/rethinkdb/rethinkdb/issues/3077
 
-7. Grarantee failed
+### Grarantee failed
 
     ```
     Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
@@ -352,7 +352,7 @@
     error: Exiting.
     ```
 
-8. Guarantee failed: [it->second == nullptr]
+### Guarantee failed: [it->second == nullptr]
 
     ```
     Version: rethinkdb 2.3.2-windows-beta-588-g4251c1-dirty (CLANG 9.0.0 (tags/RELEASE_900/final))
@@ -377,7 +377,7 @@
     error: Exiting.
     ```
 
-9. Guarantee failed: [peer.ips().size() > 0]
+### Guarantee failed: [peer.ips().size() > 0]
 
     ```
     Version: rethinkdb 2.3.6-fallback (CLANG 9.0.0 (tags/RELEASE_900/final))
@@ -397,7 +397,7 @@
     error: Exiting.
     ```
 
-10. stack overflow
+### stack overflow
     ```
     ==3712480==WARNING: ASan is ignoring requested __asan_handle_no_return: stack top: 0x7fdd8cdc2c80; bottom 0x7fdd86eac000; size: 0x000005f16c80 (99708032)                                                                                                                               False positive error reports may follow                                                                                                                                                                                                                                                 For details see https://github.com/google/sanitizers/issues/189                                                                                                                                                                                                                         warn: Problem when checking for new versions of RethinkDB: HTTP request to update.rethinkdb.com failed.                                                                                                                                                                                 =================================================================                                                                                                                                                                                                                       ==3712480==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x7fdd86ed10e8 at pc 0x00000082f680 bp 0x7fdd86ed0230 sp 0x7fdd86ecf9f8
     WRITE of size 24 at 0x7fdd86ed10e8 thread T9

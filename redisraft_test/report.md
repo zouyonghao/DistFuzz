@@ -1,4 +1,4 @@
-1. Assertion `(c->flags & REDIS_SUBSCRIBED || c->flags & REDIS_MONITORING)' failed.
+### Assertion `(c->flags & REDIS_SUBSCRIBED || c->flags & REDIS_MONITORING)' failed.
     ```
     20927:C 12 May 2021 02:42:51.216 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
     20927:C 12 May 2021 02:42:51.217 # Redis version=255.255.255, bits=64, commit=e01c92a5, modified=0, pid=20927, just started
@@ -278,7 +278,7 @@
 
     **Fixed**
 
-2. panic
+### panic
 
     ```
     103913:M 17 May 2021 13:17:50.850 # <redisraft> 
@@ -557,7 +557,7 @@
     issues
     * https://github.com/RedisLabs/redisraft/issues/107
 
-3. heap-buffer-overflow
+### heap-buffer-overflow
 
     ```
     1423:M 25 Sep 2021 14:43:52.986 * <redisraft> RedisRaft starting, arguments: raft-log-filename raftlog2.db addr 127.0.1.1:5002
@@ -913,8 +913,7 @@
 
     **Fixed**
 
-
-4. assertion failed
+### assertion failed
     ```
     redis-server: log.c:63: void EntryCacheAppend(EntryCache *, raft_entry_t *, raft_index_t): Assertion `cache->start_idx + cache->len == idx' failed.
     === REDIS BUG REPORT START: Cut & paste starting from here ===

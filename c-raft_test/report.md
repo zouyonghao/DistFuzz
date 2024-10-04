@@ -1,4 +1,4 @@
-1. failed to start after killing
+### failed to start after killing
 
     ```
     1: starting
@@ -27,7 +27,7 @@
     raft_start(): io: last entry on disk has index 383, which is behind last snapshot's index 3072"
     ```
 
-2. AddressSanitizer:DEADLYSIGNAL
+### AddressSanitizer:DEADLYSIGNAL
     ```
     AddressSanitizer:DEADLYSIGNAL
     =================================================================
@@ -50,7 +50,7 @@
 
     ```
 
-3. AddressSanitizer: bad-free
+### AddressSanitizer: bad-free
 
     ```
     ==24124==WARNING: AddressSanitizer failed to allocate 0x312e302e302e3732 bytes
@@ -81,7 +81,7 @@
 
     **Fixed.**
 
-4. heap-buffer-overflow
+### heap-buffer-overflow
 
     ```
     =================================================================
@@ -151,7 +151,7 @@
     zyh@144ed63097a7:~/raft$ addr2line -e ./.libs/libraft.so 0x4c664
     /home/zyh/raft/src/progress.c:252
 
-5. Memory leak in uvSnapshotLoadMeta
+### Memory leak in uvSnapshotLoadMeta
     ```
         buf.base = HeapMalloc(buf.len);
         if (buf.base == NULL) {
@@ -189,22 +189,22 @@
 
     **Fixed**
 
-6. Assertion `r->last_applied <= r->commit_index' failed
+### Assertion `r->last_applied <= r->commit_index' failed
     ```
     server: src/replication.c:1490: int replicationApply(struct raft *): Assertion `r->last_applied <= r->commit_index' failed.
     ```
 
-7. Assertion `r->state == RAFT_FOLLOWER || r->state == RAFT_CANDIDATE'
+### Assertion `r->state == RAFT_FOLLOWER || r->state == RAFT_CANDIDATE'
     ```
     server: src/recv_append_entries.c:89: int recvAppendEntries(struct raft *, raft_id, const char *, const struct raft_append_entries *): Assertion `r->state == RAFT_FOLLOWER || r->state == RAFT_CANDIDATE' failed.
     ```
 
-8. Assertion `request->args.n_entries == n'
+### Assertion `request->args.n_entries == n'
     ```
     server: src/replication.c:1138: int replicationAppend(struct raft *, const struct raft_append_entries *, raft_index *, _Bool *): Assertion `request->args.n_entries == n' failed.
     ```
 
-9. Assertion `t->read.len > 0' failed.
+### Assertion `t->read.len > 0' failed.
     ```
     LIBRAFT   1719786478761513999 src/start.c:155 starting
     LIBRAFT   1719786478761942716 src/uv_list.c:92 segment 0000000000000001-0000000000000001
@@ -241,6 +241,6 @@
     dqlite-demo: src/lib/transport.c:15: alloc_cb: Assertion `t->read.len > 0' failed.
     ```
 
-10. UAF
+### UAF
     * dqlite_test/bin/error_cases/9843/log_app_err0_0
     * https://github.com/canonical/dqlite/pull/669

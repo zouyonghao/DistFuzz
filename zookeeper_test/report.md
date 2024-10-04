@@ -1,4 +1,4 @@
-1. Unable to load database on disk
+### Unable to load database on disk
     ```
     2021-11-01 10:38:34,848 [myid:4] - ERROR [main:QuorumPeer@1191] - Unable to load database on disk
     java.io.IOException: The accepted epoch, 9 is less than the current epoch, a
@@ -23,7 +23,7 @@
     * https://issues.apache.org/jira/browse/ZOOKEEPER-2307
     * https://issues.apache.org/jira/browse/ZOOKEEPER-4781
 
-2. Severe unrecoverable error *
+### Severe unrecoverable error *
 
     ```
     2021-11-01 10:55:41,215 [myid:4] - ERROR [SyncThread:4:ZooKeeperCriticalThread@49] - Severe unrecoverable error, from thread : SyncThread:4
@@ -45,7 +45,7 @@
     * https://issues.apache.org/jira/browse/ZOOKEEPER-2247
     * https://issues.apache.org/jira/browse/ZOOKEEPER-4408
 
-3. NullPointerException in SendAckRequestProcessor
+### NullPointerException in SendAckRequestProcessor
     ```
     java.lang.NullPointerException
         at org.apache.zookeeper.server.quorum.SendAckRequestProcessor.flush(SendAckRequestProcessor.java:67)
@@ -60,7 +60,7 @@
 
     **Fixed**
 
-4. Committing zxid 0x100000003 but next pending txn 0x100000002
+### Committing zxid 0x100000003 but next pending txn 0x100000002
     ```
     2021-11-23 17:02:48,009 [myid:2] - INFO  [WorkerReceiver[myid=2]:FastLeaderElection$Messenger$WorkerReceiver@390] - Notification: my state:FOLLOWING; n.sid:4, n.state:LOOKING, n.leader:4, n.round:0x2, n.peerEpoch:0x1, n.zxid:0x0, message format version:0x2, n.config version:0x0
     2021-11-23 17:02:48,113 [myid:2] - WARN  [QuorumPeer[myid=2](plain=[0:0:0:0:0:0:0:0]:2182)(secure=disabled):Follower@172] - Got zxid 0x100000001 expected 0x1
@@ -78,7 +78,7 @@
     error logs
     * error_cases/8000
 
-5. ZooKeeperServer not running
+### ZooKeeperServer not running
     ```
     2021-11-23 13:16:36,113 [myid:3] - WARN  [NIOWorkerThread-4:NIOServerCnxn@380] - Close of session 0x0
     java.io.IOException: ZooKeeperServer not running
@@ -100,7 +100,7 @@
 
     **Fixed**
 
-6. Client fail
+### Client fail
     ```
     2021-11-30 15:01:17,592 [myid:3] - INFO  [QuorumPeer[myid=3](plain=0.0.0.0:2183)(secure=disabled):QuorumPeer@1512] - FOLLOWING
     2021-11-30 15:01:17,593 [myid:3] - INFO  [QuorumPeer[myid=3](plain=0.0.0.0:2183)(secure=disabled):ZooKeeperServer@1300] - minSessionTimeout set to 400
@@ -169,7 +169,7 @@
     issues
     * https://issues.apache.org/jira/browse/ZOOKEEPER-4410?jql=text%20~%20%22Unable%20to%20read%20additional%20data%20from%20client%22
 
-7. NullPointerException in Learner.java
+### NullPointerException in Learner.java
 
     ```
     2024-07-04 19:38:49,333 [myid:3] - WARN  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):Follower@131] - Exception when following the leader
@@ -179,7 +179,7 @@
             at org.apache.zookeeper.server.quorum.QuorumPeer.run(QuorumPeer.java:1514)
     ```
 
-8. NullPointerException in ServerCnxnFactory.java
+### NullPointerException in ServerCnxnFactory.java
 
     ```
     2024-01-08 12:20:56,590 [myid:2] - WARN  [CommitProcessor:2:ZooKeeperServer@1046] - Failed to register with JMX

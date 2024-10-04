@@ -1,4 +1,4 @@
-1. slice bounds out of range
+### slice bounds out of range
     issues:
     * https://github.com/etcd-io/etcd/issues/13493
 
@@ -129,9 +129,9 @@
                 /tmp/etcd-release-3.5.1/etcd/release/etcd/raft/node.go:230 +0x375
         couraged!","address":"127.0.1.1:2482"
     ```
-2. etcd-3517
+### etcd-3517
 
-3. tocommit() is out of range
+### tocommit() is out of range
 
     ```
         {"level":"info","ts":"2024-01-07T19:15:23.577+0100","caller":"etcdmain/etcd.go:72","msg":"Running: ","args":["/home/zyh/etcd/bin/etcd","--name","node2","--data-dir","./data2","--heartbeat-interval","100","--election-timeout","500","--socket-reuse-port","--socket-reuse-address","--initial-cluster-token","etcd-cluster","--initial-cluster-state","new","--initial-advertise-peer-urls","http://127.0.1.1:2382","--listen-peer-urls","http://127.0.1.1:2382","--listen-client-urls","http://127.0.1.1:2482","--advertise-client-urls","http://127.0.1.1:2482","--initial-cluster","node0=http://127.0.1.1:2380,node1=http://127.0.1.1:2381,node2=http://127.0.1.1:2382,node3=http://127.0.1.1:2383,node4=http://127.0.1.1:2384"]}

@@ -1,10 +1,10 @@
-1. safemode bug
+### safemode bug
 
     This is a trivial bug that can be found by any tools actually
 
     https://issues.apache.org/jira/browse/HDFS-16508
 
-2. NullPointerException
+### NullPointerException
 
     ```
     2024-06-28 03:07:58,649 WARN org.apache.hadoop.hdfs.server.datanode.DataNode: IOException in offerService
@@ -33,7 +33,7 @@
             at org.apache.hadoop.ipc.Client$Connection.run(Client.java:1134)
     ```
 
-3. IPC's epoch 1 is not the current writer epoch
+### IPC's epoch 1 is not the current writer epoch
 
     ```
     2024-06-28 03:07:57,334 WARN org.apache.hadoop.hdfs.qjournal.client.QuorumJournalManager: Remote journal 127.0.0.1:8485 failed to write txns 4-5. Will try to write to this JN again after the next log roll.
