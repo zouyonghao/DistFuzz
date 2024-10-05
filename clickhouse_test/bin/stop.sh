@@ -1,4 +1,5 @@
 killall clickhouse-keeper -9
+killall clickhouse -9
 # ps -ef | grep clickhouse-server | grep -v grep | awk '{print $2}' | xargs kill -9
 # rm -rf data*
 # rm -rf log*

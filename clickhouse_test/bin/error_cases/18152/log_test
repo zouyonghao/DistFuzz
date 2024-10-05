@@ -1,785 +1,0 @@
-ZooKeeper JMX enabled by default
-Using config: zookeeper/zoo.cfg
-Starting zookeeper ... STARTED
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Processing configuration file 'config1.xml'.
-Processing configuration file 'config0.xml'.
-Processing configuration file 'config2.xml'.
-Logging error to run/log0
-Logging errors to run/err_log0
-Logging error to run/log1
-Logging errors to run/err_log1
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-Logging fatal to run/log2
-Logging errors to run/err_log2
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'select 1'
-1
-+ break
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config1.xml -q 'select 1'
-1
-+ break
-+ (( 1 ))
-+ (( 1 ))
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config2_for_proxy.xml -q 'select 1'
-1
-+ break
-+ CLIENT=/home/zyh/ClickHouse/build/programs/clickhouse-client
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config2.xml -q 'ALTER TABLE ü\(úÅ~é…¶Y©IİÃ³*(<ZutÒùY§tÉ [j[2Ã£â®£ºşíÔ®Øh*÷<ñä¾ìÔ ADD COLUMN ü¬Í”Î‡MÚùÆxñÜÍYxıG:rÊå†·SAO¦å
-°Å\ø;îà\§ó»št¶{šõ@éX!‡ÁF0àØ9xålTèOÓ¡]f9±h4Ó2ÏøLP¢6)vFü@ñYª¬ÔK9EGÒÓû¹}ßƒxãÆªR UInt32;'
-Reading random file (null)
-spliting files...
-Reading random file random.txt
-[1;31mrunning test case 18152[0m
-start nodes and proxies
-normal operator_size = 34
-running operator ClickHouseDropTable1
-run concurrent normal operation
-running operator ClickHouseSelectRandom0
-run concurrent normal operation
-running operator ClickHouseCreateTableRandom2
-bash client_drop.sh config1.xml ıä«|¤gI¸XA8ô}8„g<»Î?ìm0³š(2ïMšF¢NØ0éL¢]`'WıÏJ"q jÎ9×ì¿àE˜ ™>›ê¦OC,ZL|EZîˆ!»’Lîg&lˆ	Ãªn_«*	4™pë€bÔ-á±°×	à™Z˜ş¯‰…™ª¡ ê  
-bash client_select_random.sh config0.xml ¯[ƒô‰xá^ä\B× jıåx’?“‚Î2ÖwÙxq 
-run concurrent normal operation
-running operator ClickHouseSelect1
-running operator ClickHouseCreateReplicatedDB1
-bash client_select.sh config1.xml ò·E;+*[ò€ÕÉróRéx¤È‡Ò­¯WEúO÷ 
-run concurrent normal operation
-bash client_create_table_random.sh config2.xml E¼Š*)BìW6_uOY/A?É%«;ê±!(ÿŞÆµ"»òv_csöîü¡tÂ:ØÊñ ÙşlI¸
-Oş>h+ŠxÜ:iÙå¹yá  ¤°"ÍÆ„ÆìÒ…nÖ£Ì˜©ÇåWlÕˆ)¥(vÃƒå2°CQïzÙ nãdß¦Š@‹ =tÈ¢èÒP¡9üuT©/“”óó”Š‡ÿîİa-î©:‡êË!bzÿòª‰q’ÈøwÜk¶<ÎdHñËf”6Ëú¹j &Í¿ ¡º:âQƒ2ø‘±h¥/(3 õQ%ê¢²‘|y,Ô­Áçb° 8JŠ‚>H0T.«ßÑu³VäDóú/QDgVABB>ş"û—lú\§g¢D´ŒMnĞî	ê9÷«ğ¤úï40K:ĞÅ:Ğ<ÀyA9VNUÏrÚ­Jä˜àÊfy„šuX5ø»io›@ç»¶g¦¦ Yf»VN¹´…y;BDÎyº}áBã6IÓ-ù
-& sæ‚5Â ×ş2¾Bí»eË¯™Ü®æ@dNOÉuˆ‹*ĞWÊ¿ƒy"«âŠoàÏšµí}Ñò'üÉ+¨!ÊP¼ÁE|êRï‡!Ş?¾ÓôCH/N›’:¹SğsĞ™u§şXKYâ¿‰º¨Eüs%a;ç­9šw[ ö°ÍüÍe}éeğK¢¢¾I<éß§½h´)fCiC&o$\ßEæû¨ÚÂß<rÿaÿ­‘Ïé€êA¶_•l66º5üêÁ·A,«ÎØ½2KNòTX>_ó¼Jş…\î3Ø” 
-running operator ClickHouseAlter2
-bash client_create_db_replicated.sh config1.xml Å<S,^Ö®,®gûC‡Ì;ä! ~W6ÅZ1¾?ïàFú²A©¶4¿¯- ~„İ+¥¾Y_\ å^^Ï‚qEÛM
-+Csì­¡¾•tò3n+xáˆÿÈsÓá¹iÿ—#’­{Ù"›–"Mò`»íKc%SíVP! -G 
-run concurrent normal operation
-running operator ClickHouseInsertRandom0
-bash client_alter_test.sh config2.xml ü\(úÅ~é…¶Y©IİÃ³*(<ZutÒùY§tÉ [j[2Ã£â®£ºşíÔ®Øh*÷<ñä¾ìÔ ü¬Í”Î‡MÚùÆxñÜÍYxıG:rÊå†·SAO¦å
-°Å\ø;îà\§ó»št¶{šõ@éX!‡ÁF0àØ9xålTèOÓ¡]f9±h4Ó2ÏøLP¢6)vFü@ñYª¬ÔK9EGÒÓû¹}ßƒxãÆªR  ç)Ö¸†bŠ¦MŠ@$IiÅÙ%Í‰*˜n›éış›êNŸ57%¥=àÏ	Ğ’âÛiL’¤—–bÃ>İ<zˆb-TşßI+_±@£ç[yv@Ú*hãv¾€#Éî³Ğ~Ò¢¢^Enª#^dû’óº¬[N<…’ÅÈéèÛNªbVTşğî«Ã†eŞNÊu¾ËùÉ6Á„qÍ‹ƒ?	°Nğ˜Ö kN¼ÊsêV<xØvb‡í$ÀFŸUŠDˆàÙõã™}!ËRÿ¸Ëà‹ 
-operator_size = 10
-bash client_insert_random.sh config0.xml GYG)‰œ¶ô_ÀbZñûËk€Şcê½TöºV
-Ñ?ÕjêËSØÖ»ßƒkW$X|ìò@¢ê/ÖBAô‚ßÈ'f‚;ª©\Óõ8ö"”»ãDİ	¤³[¨o<GsŸÖXÆ·õ}uVÊ ÙuìLÕ¸~w¶¨Å£”ò—¥¢A˜‚Z_ZÿÈ7Äw;šm ˜†Ê@C”\6`]H¯d&%<–gü0Éå™QHWV¡=3<4»Yé*ß±çÙ!y“¦ËDH½ä\â™Ç˜YîœÊáè»GäLÄ±¸U€#BNŞ Ù9ıOy½Eş¡ño} 
-running operator NoopOperator
-normal operator_size = 34
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsertRandom0
-running operator ClickHouseCreateReplicatedDB2
-bash client_insert.sh config0.xml ñÑD]P„€GÂ•	·üoÌ;[”¶2æ0©ÚÔpm`¸.=‹XíÎh|~Y`¢Œ«A8j¾ “		ÀJZá‘3Û	®”Ô[£àíWØ„Ìê¥şØ&¥A hA5û§‘]¨•eæ¢xµ_Óº;vÓPô?ªç#=ìU+–OBÓœÃ8ßQ¿ÍÒ	Åb:­ï}ù_ÅFr­d•r¶²ADDì£ë8%füuQºù$”ûUit§’¨ËÏ=<+èü6¨Æ:xÛ‡œDaDğÆ	ëØ=:é€\¶VH“ç·şÊİx	ëSô^Ñ*ªÿ  
-run concurrent normal operation
-running operator ClickHouseAlter1
-executing command `echo do nothing`
-run concurrent normal operation
-running operator ClickHouseInsertRandom0
-running operator ClickHouseAlter0
-run concurrent normal operation
-running operator ClickHouseCreateTable0
-bash client_insert_random.sh config0.xml “—oÅ=£E³á	‹úòïØı$é…Îƒ ˆ Š¼×ü@Ğù©5ª’À]ß9kíÀe>Jß >+ûå¯®>+û³ålÇ.nâ¸éÅñMóğHóí¹¨SêøûPÔ5 XÆ«¾nÎ»ı(ë]Z²¹¯xúÁ¬ ˜èóÌÕÿœ|›‹4VÕşÏ•™óîŒT!8U’¬'¬S‹ÌªÈ¾GbH ŸM•p¥•Ír^T ÍT ÍĞBT’8Å]f*q½ƒ%bÑÉ~éõ¢Gí ·ŞëÀíoE°ádMŞJÏ‹ôgÔhÖC¦TüŒòí
-‘ 
-bash client_alter_test.sh config1.xml Mü¶‹M_
-Æº£„³¸ôl”¥ïÎ=k‰bŠ¼@Ğù©5ª’À]ß9kíÀe>Jß _è¯®>+óísı¹:ù/ ër-]N¹¯xúÁ¬/›EkØ2˜3üèóÌÕÿœ|›‹4VÕşÏ•™óîŒT!8Uğº [¬ÌªÈ¾GbH ŸM•p¥•Ír^T ÍĞBT’8Å]f8Å]f*q½ƒ%bÑÉŞëa¬Æ®éÀíoEMŞJÏ‹ôgÔhÖC¦Tü›Ğÿ 
-bash client_create_db_replicated.sh config2.xml ½Ê _#¥3#<6-…êe´–ÕYkôll”¥ïÎ=k‰bŠ¼Ğ×ü@Ğù©©5ª’À]ß9kíÀe]ß9kíÀe>Jß _è¯®>+û³ålÇ.nû³ålÇ.nâ¸éÅñMóğHóísı¹:ù/¨SêøHóóğHóísı¹:ù/¨SêøûPÔ5 XÆ«¾nÎnÎ»ı(ë]Z²N]N¹¯xúÁ¬/›¬Á/›EkØ2˜3üèóÌÕ gÔhÖC¦Tüdo nothing
-+ CLIENT=/home/zyh/ClickHouse/build/programs/clickhouse-client
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config1.xml -q 'ALTER TABLE Mü¶‹M_
-Æº£„³¸ôl”¥ïÎ=k‰bŠ¼@Ğù©5ª’À]ß9kíÀe>Jß ADD COLUMN _è¯®>+óísı¹:ù/ UInt32;'
-+ CLIENT=/home/zyh/ClickHouse/build/programs/clickhouse-client
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'ALTER TABLE €Û“ ADD COLUMN ô UInt32;'
-›ĞÿŠ´:›ĞÿŠ´:ú96ĞÿŠ´:ú96ÄıBjX‰\PÒœÅ ÂİQÅ£‰¢)u€ë¶„ûàX-“ëb©é€Û“ ô ,”ÕÜ©Ht·ƒ©İò¿=âÿ‚àd<c¸sl24õáÎ!ø.*9´#–ßÙG‹SÀÓ{•%6WjuâŒP`²î0ÉÅ¿ôè,ŒòÊí›
-‘#.(¸’İ‚«’	NÇ{äñáqÍó?ëw|4ëÍfe/ÿ
-·U|sqæÀHMò@p»×²vOíŠtÓÔ©c9ü÷ 
-bash client_insert_random.sh config0.xml ü@Ğù©5ª’À]À]ß9kíÀe>Jß 9kíÀe>Jß _è¯®>+Ç.nâ¸éÅñMóğHóísı¹:ù/¨¸éÅñMóğHóísıóğHósı¹:ù/¨SêøûPÔ5 XÆ«¾nÎ»ınÎ»(nkô¬8Ñ8›ÅÁ Q]è|,r-]N¹¯xúÁ¬/›EkØ2˜3üèóÌÕ/›EkÌÕÿœ|233èóÌÕÿœ|›‹4VÕşÏ•™óîŒT! ]f*q½ƒ%bÑÉÑÉ‹’Œ#-1ÉÏD¡ï+şB*ùeĞˆ©}÷:÷·Şëa¬Æ®éÀéÀíoE°ádMŞJÃÆÃÆ¤¡&Ävø
-*µ­pq¡£‰ÎøÏ‹ôgÔhÖC¦Tü›ĞÿŠ´:ú96ÄıBjXĞĞÿŠ´ú96ÄıBjX‰\PÒœÅ ÂİQÅ£#­¿ÔjØ'ÚÕÏfj‰¢)u€ë¶„ûàX-“ëb©é€Û““ ¸sl24õáÎ!ø.*9´9´#–ÙG‹ÀÓ{•%6WâŒuŒP`²¢½0ÉÅ¿ôèòÊí›
-‘#.İ‚«’	Íó?ëw|4ëÍëfe|4ëÍe/ÿ
-·U|sqæÀHMò@p»×p»×²vOíŠtÓÔ©c9ü 
-run concurrent normal operation
-running operator ClickHouseCreateTableRandom2
-bash client_create_table.sh config0.xml ì»jÓ‰¡µ\Î2ŞTŸ?/£,^H ˆrˆíåB®uˆôıÙÀX’¡ŸLtø? úù„<“¨çÎ%ªdûÏĞe.(HşŠ½–Ë ëşnÑ‹‹ßìœ£Fª&„'‘š—c¦BBJ 5ªÃsd¢Â²»sJ3äî¤T®£À¿j”ÑFF]£:o;ÒD¤K~HÇ’à~w¸ˆ2ìÙjP,‘Lñè¹uë¢L>¬¤,ÈZÅÂx8»Sò4>kàé dÂ&oÙ·ñ*¤³_µıØàévy0Ë·´–R®-7×É
- u `p,ıúç/)EšÙÈÁ·Ûë'–Šd­£FãËŸ(Š7RŞ¦kñÈâÄØ>¤Øí|DQg®êœÎÑºî3=‘ó“·ØŞó7/Œs£Hœ7jä‘q18IªÖ$„ÃĞÌ|»Á³ŸŒi®rnÔ–¹İòTİÓÑ³hÇ—ì”µ×ÆQ*d3û°÷/ë> â|àà6] ³¡Ñ}-ÀHw×ñã°›ĞTÛ¢[y/01?L¹|·:şŞ×³¯0YU—Ö³
-¾ ê
-m*¬İÉ…³µÓğwE½¼™Ûi=€™êœã‰Ş¼Uˆ,°“İp«vé‘u÷¨ÆåÚî“E½·ôgè‡QË Á!H¨1çö10ª€=A}‹-Ö#¶ë©†$¤˜F6ÇŸ™¦{IâülÀ§F8šNûë_Ö¦9*US'Ç;kÑ3u$Ê¦#´	‘I¹l¶hØÃø#ç…>#ÕN¨M÷r—!ú.,Kg?¬Ã5XÀrkÊHxÂm7 @Ÿ•Ú:ä;²v¢:é?Ä}mÏ)Gj¡èŠØ½uT¤˜¬$UÆ67ø§± BÿTÅÆ„ÅŒìI³Å\@Ér 
-bash client_alter_test.sh config0.xml €Û“ ô ,”ÕÜ©Htàd<c¸sl24õáÎ!G‹S{•%6WjuâŒP`²¢½î0ÉÅ¿ôè,òÊí›
-‘#.İ‚«’’NÇ{äñáqó?ëw|4ëëÍfe/ÿ
-·U|sqæÀHMò@p»ÀHMò@p»×²vOíŠtÓÔ©c9üpTfI÷÷Ez9JÒØ(X*®&»~#‘ãHq2‰|1Ap5^@tÏ†,5Aò(Gêµ Ka€åH=ôX°3H?3O×Ü~Uk–Ô8&aB0•³ \ÁhéE‹e–¨€¬qâïÀê'¼nôø©Š$ŞXà+¼•rñË@2cTÕ>±Iô ¶ÚNÎW^¢È&Ü‰4—3ÆñÚYqxÿà¢æ¿^‡_~Ñ´Ö,L 3îrJ£Ha£?âVäÖI¤¦^FÛ’,pˆêÍt™bO¼>/GêhÊáÈg¹7`JˆÜ¢k0k"°îä»@f~@ßD®ğõæ:{9
-òF !Yİã8p¢(`kX4Dø±Ijî'Ù@>ÄL»ºS>u1Ş(r_kÅàåâ+¿·&TH 
-bash client_create_table_random.sh config2.xml è„˜<ƒı´³¼d=bè8#æ“Rb&æô H‡1™„hS:æ>] â-ñvØ¶ÔÚui’7Ê—û·Ú9Ùû5İ¦ƒ¥‘ÄB‘­(àa¦ô®0ğ|{)rÓcj//4ê^õùæNÍ¦ül=kÿ#æSsàéfš¥w"Åç6Dğ•l¼¡×}~ôğ¨I\ıÓ%6&â8—[}R¯súgrˆÅô½wÆ-Pœó™«NC4çDhÜkñq7§ˆÄ¡¥I
-Ê†œ!Ù0U(ì±…¾ “ğG)0Ç÷%G•¾­#ÉŸP9™PwâÓ^5Ùu{¾¥”HiÄ4=O­èØÉŞ=0u·‘á2¸%¢Ã>×µ»ŞV~Úc¬NpâOp+‹/â¿—*í¡³½¿ÿœëx9¼NÆë;w!­‘xó4â2›­ +‘=ş­Q‚ö¦ºª5¿i.µZj¡Âÿ½ßEÎò<ˆ›íFY1Îg•-µÈoqøÊa _³k,Ô×šÅü —sÒ¾ßJ¡4Âßtn¼ÍEnUQß²¨zæW*¥;å‡ìhË ‚›ôˆb’T€zL*ÈI²¡ÀğÛÃ‚GÃ=	â[QqNĞÁ~xw2ër41P@ÔpnvİÔÇ,’¨F4/´&äRñkY$¯y¡!aØH­–Ã±¨õ´Úhˆ-KX$¯ä¨âÏ–],õŞÕEF¤,êdœ¥åéÕİr'ø–² f •àÁ…ep.ª;_F‘a(C…ÿLâñpä ×hoÂ[ã"I¯sP·.ßZekÑ©Š·ñšp ğruÛ± †Cğÿ‚HMzufWBP€ dŒıçÜÏ‚/óÏºç2Ä(+Ñu€›¯b±c“œÆ\Dï§jùdŒ3q.LAáÉÍG7¸Y}
-”é´ÙÓCş_ š«ÚÎäLŸÑ†2Â½fBÅĞg_²Îy5s³'Àœf$,qD{ßËÊgÇAFŞ÷Õ»#ÃSú1Ë…™K¬ØÕÆ£C¬<Åˆrœ¶¾"æ½Séo
-M¨¸§°°^Ş£\EâT°Éô¸½–{6À7ÜúEƒ??S6 WÄ0¾i 
-running operator KillNode0
-normal operator_size = 34
-running operator ClickHouseCreateTable1
-run concurrent normal operation
-running operator ClickHouseCreateDB0
-running operator ClickHouseSelectRandom0
-run concurrent normal operation
-bash client_create_db.sh config0.xml ¸ŠÇ)-·âæ)x)—÷b|VvÑ7UúƒÖÚYI‘ÕÖàÌ£ÈƒošĞ´ò¢Í bash client_create_table.sh config1.xml úY¾0I)ÑûŒ.®Ç
- ëp¸ˆ‘øÌf±Yé^ı +:ÏÕJ4 TØ*ÏOéa,T„ÔÍÑ¬/x>Fù¦/ŸX],bN ¼¯ZÆ&.|Æb"ôhòçB¡p—,&‰¤Ø„Ê ÓcD ºÕyfââÆGÜ^¶â	]W5wE( c8Âl£Ø‡äqª*Ig‡’‚wuËfƒn"¢oéªÄi†Eá¸Yk$Ôºöº«Ö¢²y†ç\bD‘¶91²~Ê¤!ìü{]{ú>DTâ\`:Âî@àù¥ë— ãg \ÿg­>]ƒÇu9®ØkµôÊÄh¬ ©ÉOgl‹³½äê¿Œ‰è©¼J.¤Çr¨HY§3‰§X
-L
-ßËÌ?Ú>–": ÖQcZfXöğöH©O¦¾¡uM* ğ½¹,?\ª·Ë*ö8¿NP
-Ä^Î¡ŠÇ)-·âæ)x)—÷b|ëuƒ“%r=KÑ±àVvÑ7UƒÖÚYI‘Ös¶°pŠØ‡÷>º¸jwç_ càÌ£Èƒoš´ò É¹È]§S2.fóŠõ•V!¨øŠÕvXb‰òEã i)ˆ…ï’ò»õÊ:àKk(KqlÅ¼5ÎCñª
-“ÜÌ	÷,”İ¦o running operator ClickHouseCreateTable2
-
-
-bash client_select_random.sh config0.xml G¶Øf{¨ÃV<„'ºp^>CÃ|hWü‡»—ZÏÃYJ=(¾B n¾’ùTqĞÈC™\‡Û°µ¬6x´Ã	 ¯{°»SLÂ^bI"N73‚MK*”\î=wÕ‘N#?ù‘o$–èë•ıÍaáÀµÔJ©; ™’Ş/ú„Üÿék¤ÿiÊ‡MWxç[™VcU/f~ÙL?ø’)°İxIŞyñÜ:ÒEóG¿tUÑ°ÂfIöNüO|Š,lãz/êª=Qä•üläıpóp¸èíÿ@¥fàmÔËûJ«G8XĞam ŒAå\eşÛÎ+…-çêlŒsR[o·;£™ÅÈA«ÑŸÓŸYC¢¤<•¨çşwwÀ)j 
-running operator ClickHouseCreateReplicatedDB2
-bash client_create_table.sh config2.xml 4 Ã”ŞÿŞÔ´T›Ğ¼d¾Q‘ˆ™Zœj€ğ6P=ËŒl†3Ç2.)™_ÆøÎºõ—6¢àÂAM^RJÒòn¨Hw¹}à:ºÿĞšîIŸ×’ÿ[¼({d äèšÄ®©9àWmŒ—?a¿w=	D˜şé/®ÿiÉÈœ%çbTwù‡ #é1…€R¬¦Œì¤YµÁiø
-ÔZqçTK	1cškÊŞqL"€ã\9å¬¸¶®	ÒÙ•@ù7¤»öªïÑô?(6™Ø¨Y¥ÿa‡ˆãLŒ(ˆyÓÌ]fŞ™ZÎl |zC yí·Rğô+„G” îŒEú{¨¾ªİ¢ò_*±w1iKº9r"5]¡b²Ó;œ6Ö‘¥oüªû	árfîòfÁ¶šÏã3:˜xI%ñ:!Ó®U;‰0ú"Ã<†ó\ƒù½á1<¹^À:Øùl«nè:!>Ëò,|ïïŞR˜ìÛĞÃÿšg˜ßkŸâºYrÌœ¨ûşR6örÿ¤uR‘ƒâK=ª¶ÍZ¸Ú¾2/êUk“ÿ' Æ½şX×[E${`§0¼ˆ×³ Ô4Zü÷yœ3œ¨>úgp¨QX·ŒröË\™*‰ØŞ’²AşRBhÇÑÖÔ‹U¦äì£^­Æ5¬Şª‚OH§ëÂ"ã282#Sy²'œ…uµÒ$†e€0£>ı—)-Î>2ğƒ }[?´	Æ?±83<mÓì’/ Dìü£Z±ƒäë.ƒÁô9m˜qwì@´„\ø°ĞÂÃ‡¨oSÒõ»×‘]8²=\ˆ.­>ÀéC]I‡¦1¸\KQ*"ËÃc€A7[BÁ[HVºVù íúO•Qû×Å>ú‚?uìøHXª«+¦}Á*6b—%y—ág2/ı¹$[ÒVépiÌd…Ö€xj%,fŒÀ³ĞÂ[?†ÔX|4¦ÜR*Ã,B¨ÜÀñzƒÁ\İqXBù5ë¦IÅTò³–ÔÊ¥}º®]ÿoDÆ4µ>¥"ŸxËl<´.œW+ri`s&Âfp892àeÚä^Ä@À¿]î©,‰õ’1 ˜*·û›âC˜]yî–à °'NÒT<üGR2‹Ò½£µõúÆåßNÄP¶İjFüê2"şñ6pU]|:ÊlI!ÜF6_g§2?XÉˆŸ‚íq{¶¸ŸÍUõ¼ T…ø·_¬>=ı‰=ışM¬h@Ù$-r\Œ 
-run concurrent normal operation
-running operator ClickHouseDeleteData2
-run concurrent normal operation
-running operator ClickHouseSelect2
-running operator ClickHouseDropTable1
-bash client_create_db_replicated.sh config2.xml –ÉÛA.9ÌLôŞïêHTjéö!ÂRÎ¬#„[2%mŠ™ö4p-ÀyÎ^)Pò(r@’›0¨„1Z4‹3çk 4oŸ1Ùº_ŒMÌ6§a†ªÁ¿S²_d ØèÒXhYUN]SíV· cÄ^G}Ç; È¶4–i1‚ãĞ˜¯B]*”¤Šƒé#¥ñ™/éÅ'9n7Ÿ‹Û AÈj—¸ˆí 
-run concurrent normal operation
-running operator ClickHouseCreateReplicatedDB1
-bash client_select.sh config2.xml ‡’Šêf+’©Ô!iQvşÚº‹İ[#0L€É¶\1W­L{Ñ´“úl‘D£ÓÃà<×0¾Y×íÃ&Ú­E;C¯ü×å»Õe©}‹í;ééql×M·¸êëÆÖ(àŞ¹ 
-rm -rf run/data2
-bash client_drop.sh config1.xml ‰#S_Ê¾¹WµÈÏÍ¥˜¢øìâı¶N<D"„yÌ\H—'§ 
-bash client_create_db_replicated.sh config1.xml ¤?”Áôo<8%ùjPpõáÅÃ6é­/¨ ©Æ¬î-“ùIdSD•iâi½×Á{'1M HûÁÁu”udPç°4éd¸–øß- ¢¸G¶Ã@wrˆÆŠ‘óœYf"™· €’9„rÊîY¡%WºÏ.…µÆæ"«ì‡m/ĞŞuôNõ»)“¬íì`
-„mÊuÉ~¾l¥»gOb(½ĞæîÓ².Ñı'¹½k†À§[#â@EJˆ!«DòÔ	°¢¯„!²å)!€6Â ¿[yáì¹÷ÜIål'0î’µI;ş<µ×€;cb¯9šMgPÑªïX@eq¨Úlbl‰Ã˜ëoiËeçc>œı·|+0½DÖb4©jÎù®ñÀaè˜ı¬S LY–íFG¾œçİäÂQ?WŞâBõxÖ!ìEş@v¹Lù¤ÿ@Ø=­¬ËWÿ¬n½ÙäÓAën9M6V;õ½ğ8^J¶~ıD¹XåW2Ö¼rã©­iÖ£Ã^XB3X€µm}[øÉQñnJ0É’gèú3	²7A:Í*PI"ãğ'WÜÈûã¬{^8	Ò> °j©hqÁ2Ì*åöQ 
-running operator KillNode1
-normal operator_size = 34
-running operator ClickHouseInsertRandom2
-run concurrent normal operation
-running operator ClickHouseSelectRandom2
-node1 already killed!
-running operator ClickHouseDropTable2
-bash client_select_random.sh config2.xml ›?´ÅmíT àS˜ ³œè](_QÆÀÙ-a6!¾TªÒ†éÅhYx¤X¯àŒÙÌfvÑ‘Åá{–¡Œ 
-æ N\iÂUmCmC=òdˆ“"V 
-run concurrent normal operation
-running operator ClickHouseDropTable0
-bash client_insert_random.sh config2.xml åcåOÆDóÊW…‰hRË!p;5¼}²µ<º5®–”ü-¸iK^¬<ãÆ×42(:©ùGXYw—û‰ÊxçD7tIcâ/˜ÚvıÄ1’İìÕªûb½ÏB¬ñ”ù Ún^TÏcó	â«ö¢Ã¿èÄ§?KÏl,cKNãÎ3Ò%Ì%¹4£—»·£ÓÑB¡™ë×¤îC)ÿet
-ïqyï×t¹)¿ÁYc	Í”’oâæhÄÑ‘]_ÄÅ'£ëcDëùÅGË·Ñ›úH©Ş|ğ7Ú)¨§0ã`ívßp©? x¯àŒŞ½üÙÌfvÑ‘ÅázmI¡§U'ÃnUmC=ò“Vëäq«¦ÚuÇ6‹Ï[zh¤–'5ÑŸÓ¿:3ÅäbG•¬h’`^¯µi/Ã‹ú[@-µ6 i>‹²„Íi‚}İƒÉß×š·™ÂxÃqÂ3ò;$Åà8µ’ŠİŒÑ®Gq™š¥şƒCV3¯ª3‡¢#Q hé´9#ö®a8¤féóÅÏÓ=W…TıM‘ş‹JÿC±Õ‰ŸPæO*(şŒÔr;.ÉÓ¬w™Õ…0JŒZÆÉ{v÷ÀŞ§-ámá#øíİ–‚kj¾$/ —ú×ê¢‰º¼÷$Æ“ Œ@‡“š‚Z9sD/XB çÃ„áÏ÷+U¶n–¨­U=Û[Ê{{‚C’Ûì•ÂÌñë‰GDùş¾ıĞ	·;Î[ öæg3vg|•kA:ä.SŞ„Ëa'ë 
-running operator bash client_drop.sh config2.xml ğìR;J‹ºØß};¨¯ ÷?VÏ>gºƒß:åY•kšUØpR#¤o·‚ Jnéô…§e³0£LM¸e=8*fHÒ4ó }Ì'@Ğ¯5½ ÿé»aO®v—|Z'|?İ„g&6Ë9`ÛÕRç«êdé¼çVß	•woÎ…ˆ­«,É_È”dSQãu â˜{ª;W†(w?S!Cé…')ópÑîÕDõmìDGŒòÔl¾×lĞF“í¥f|P ClickHouseCreateTableRandom1
-
-run concurrent normal operation
-running operator ClickHouseSelectRandom0
-running operator ClickHouseCreateReplicatedDB1
-run concurrent normal operation
-running operator ClickHouseCreateReplicatedDB2
-bash client_drop.sh config0.xml 6ù	Ë J7²¼Ú^%Wx{5x™	‹·æ:éåô!fÚyG½‰àºê£ 
-run concurrent normal operation
-running operator ClickHouseSCode: 62. DB::Exception: Syntax error: failed at position 15 ('ı'): ıä«|¤gI¸XA8ô}8„g<»Î?ìm0³š(2ïMšF¢NØ0éL¢]`'WıÏJ"q. Unrecognized token: 'ı'
-
-elect2
-bash client_select_random.sh config0.xml £¹ş 6RIJ³=vdİ­#Õƒ¥96~V*hŞ
-ä+«–õdJs|ŒF+W/²>¤º&³÷yBKl¬£s ~ »Hîh|A§Éí±VÁP¨UQçÍQô4øJC‰ÖDÇ¸Ò´ÙÆå¹ƒEĞãFÑ+|¶¥…,“ùUÖ]èA2I8€jh£ğø08¦üe¨ğ`[H"“Ÿh j+›¶ 
-bash client_create_table_random.sh config1.xml ,C5®cº¹d¨CÃ•uqğŸ`Q‚ïA«ÈF
-8Ó¢Ç.ú!Ûù)Ï¼ötœ×é6d"HV\ç*Ü]3›qxÂoÁ…w%cpN|NsıÍŞúÌÅ"gXÔÅ¾Áàà˜ë/î4<ÛÈr¿Ù„ƒÔàJô](ƒæ^#²”d] õ}¥ù¸`h2LH-ùıA#$½oehÆ`ê]ÃÁm%‘=¢İo:¾¹~ËÎ
-•µ,ƒmJ£â²FÓ~´ J³ÌØ"X˜N¥C
-*ï¿Òy5:ìîË‰†§‚lq§Mm4ŸN	ÔRv‚çãmz OŠîœü Ö±—ÄT{ô’.Š Ìmé‰	îOR—±ùŒXÀ+°H&ŞZÖDÔ³È· RP=ì:BôVv™Ü3éª.9² A>³ÖtÂÏa&T ¥²ö¤á¥“‰ zìá–âËÚş®ùjr*Kl‹*Ì‚7­7V¢
-Ìÿ·Ÿ
-e=rÕŠ)6Ÿ ¨Šv5çhİ´N‚ÙÂ„|Ír>™0Ü¯hkÚ#ÿèñá—b£#«Úé‹­ËèØÓ%m…[›‡4èGO¸xÏÌÕxæ"*»±z¨öYºMpº‹¾)¬"u²ÉµûJi~š´ö ‹c&Y+P7 %•äpãu› Õ¹¡óMŞ(,”¦9ƒÈİL×É¨‚ˆqŒFÚ
-n/#l¶o/'7Ö5Ë ÚZ± ˜ŒÁ0ïùÿ]Í´ˆé˜qÁ ş#Û1rk‘{,à~7ø¯ğdç­5‚Mê†C°“nRSfx¹D¤zšîôˆŸŞKóì4/@µgÙq
- 7§D°l©ìcSî½öª¤“õVîy´„#Â8[¯	™!³e/8Eäw&áÌØ 
-bash client_create_db_replicated.sh config1.xml º$m©|>`ı (nûrpáUI@"-IùSK¸¨9ÛÈ<M{¾ª‘`Ÿ“#%î¬L@zÿõ™KGepsWÄ¥ELA„®Å	åßQ«:… Oçºrç:j$õí4mè1'‘6yR«tâãÜ†%kLé+ğÊXÌ©"…Ïpò	é ¯lè‘#ü gnôıÀzvDr=Ÿ‹ØsùZU­ú·|ÎF_§	¿SoÁñ{û¬IaÎæÒÕé“ÈÙ}Ôá…‡¹p3 À½ö,£Yôm3á+­Ìº~2 3úbMÆ§Sâu5}í¸(Cck2ƒ=£²`½Œ
-x×WZËTÌpµÚ” À(b:‹áÚÒ ºâu¤“f‹ÌèçÁ¯ã•ğ=øLõÌ´`³ğÇ‚~'uSbI¹¯®ævR$¶ª8½O«0Uæ‹6ŞagjA”éu÷Ê@{º.ëÒ¼ı-ÂËd:]+5'XÊí†‚øù=¸IûÖ>U³=ÓE¼¢tÔnG…mJªıƒ“ì”7Ù¹ó¯¤¼E±ÙH½“ø¤á®lşwÄÊy>sQùÅ	ƒÖõÂ¥pH$ı)İÏÆÉÉ3ì±ršÎÚ0•j[6ågO€ğ·Å£2°€²*…ÔÍŞ^U™F¨¶.ÜNjHÿZB–ºiXÖÂƒÚ—‰_ãSñ[Pµ 
-bash client_select.sh config2.xml «t‡Šä”ÃÔ•=Øù:¬åyêÊ…Ö3şŠÌ%ïÛµ‘Uä iXfó½M;{ÒìI®4*d~ô’kXû®@*VWÄ»Ut…šf`i°©>Ôó:Œ†0¥+á…®j 
-bash client_create_db_replicated.sh config2.xml ®6Î¬ù®¶…y/É`#bdÖ<Z4¬T±Iôá]+åÓ|e¥Ã¶©.
-È¼Û}½'àÀáÇìzÜ-,2D*êwkË?E_”¿3Tµ·%ı3ˆå†šÀİ‘®R·‚‡IhøtTx›_”¡†0uâG=rmS§Ög-ï™f¿aym‘dPq‘0%b	f˜ÏL !ˆn¢^_CKñ¼C¬80ÁÔ!Ú„˜…7ã§cr±Šö’]öû]ûø1…ÓzİÖ4dïò….v‘ï›ùŒ~Œú.r‹¨Í ’˜µ@óuJ÷Í—32ş_Wğ›à}ÒÑÓ~ÑµUæwºÎEj°úñÆÀœo¼ïwÃ¢çtä»EûjÇ§Ìê0czd£fÆl£cî´/y¥Kæ$òÊ¼0^ïÄœ¾;?;4°Ãn-›„­ÄÓ¿ 
-running operator ForceKillNode0
-normal operator_size = 34
-running operator ClickHouseCreateDB1
-node0 already killed!
-run concurrent normal operation
-running operator ClickHouseDeleteData1
-bash client_create_db.sh config1.xml J	aÖştì*¹gm²‡¾‹ní†W 
-running operator ClickHouseInsertRandom1
-run concurrent normal operation
-running operator ClickHouseDeleteData2
-running operator ClickHouseCreateTable0
-run concurrent normal operation
-running operator ClickHouseInsertRandom2
-run concurrent normal operation
-running operator ClickHouseAlter1
-run concurrent normal operation
-running operator ClickHouseCreateReplicatedDB1
-running operator NoopOperator
-bash client_create_table.sh config0.xml ›ªš}´—Í®#=}Gs½ıF?úµå§©}­a’`OğY,™6—4û«ˆßğsIØI‰2Jà0‹,ÁÊcÔ¶6FäH´ğŠò’&[ÄàÇÅzb8€ İlµg®«´H9e]âç=¤€Í\"{j<¾|s³‘{LY”¡%¨æİm0ñ8–3,ú.$î«¥5EB©NWØ(@›‘eßmÚÂ;×ÿr“°x$PÂH7º"Âÿé¯wóío{[¬ô‰¡øÚ—²¡•×,dÉ‡­bW€8a »îã?q…L}§<0Ù†RùM‡ÉKì/j’´CÀ¶|ÆÃ·bâ¨Í¡³;5{'ª•Y’í*~‚€ºkÄÔ¡íà‰J<í(´½îò’¢a-*QrÇ!!B¬Ü#ìO~ì†{¶™ÿÃ5¾Î» ÎhpÜÇÏÓ"ıy^çÉ˜t,Ú ø¸Ìø¼6\(/­Û36š®Í»}iRöŒ@>"’¡7"ÌXQ„ÈûDø´ózÓáS”lñ¢.ïáÔœäˆÙ>½“Z¡d+b×näĞk‰™=’ÿÛ—c³î#ĞÚBÕ5Î…M˜´¤tfb2õ¶ƒ„‰á)ó  ­âPT,W,|ÑüÕŞúÏ8z#è9˜„Ûå„IŞé«T÷CïxnëjÍáŸK ß¸ÙëhŸ“rŒ^z@,}Û[¸‘X6eHñYM¾«1^X	|'ç_ïG¬CÆ*R<š—,¼Ü_>wŠÊÛ&œ¢O£;ÿÖJB7<Ëh‰;                                                                                                                                 
-normal operator_size = 34
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsert0
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsert0
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsert0
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsert0
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsert0
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-bash client_ido nothing
-Code: 62. DB::Exception: Syntax error: failed at position 21 ('ı'): ıåx’?“‚Î2ÖwÙxq where key=¯[ƒô‰xá^ä\B×;. Unrecognized token: 'ı'
-
-Code: 62. DB::Exception: Syntax error: failed at position 14 ('.') (line 1, col 14): .E¼Š*)BìW6_uOY/A?É%«;ê±!(ÿŞÆµ"»òv_csöîü¡tÂ:ØÊñ ÙşlI¸
-Oş>h+ŠxÜ:iÙå¹yá  ¤°"ÍÆ„ÆìÒ…nÖ£Ì˜©ÇåWlÕˆ)¥(vÃƒå2°CQïzÙ (nãdß¦Š@‹ Date, &Í¿ UInt64, ¡º:â. Expected one of: identifier, compound identifier, list of elements, IF NOT EXISTS
-
-Code: 62. DB::Exception: Syntax error: failed at position 29 ('') (line 1, col 29): G)‰œ¶ô_ÀbZñûËk€Şcê½TöºV
-Ñ?ÕjêËSØÖ»ßƒkW$X|ìò@¢ê/ÖBAô‚ßÈ'f‚;ª©\Óõ8ö"”»ãDİ	¤³[¨o<GsŸÖXÆ·õ}uVÊ ÙuìLÕ¸~w¶¨Å£”ò—¥¢A˜‚Z_ZÿÈ7Äw;šm ˜†Ê@C”\6`]H¯d&%<–gü. Unrecognized token: ''
-
-Code: 62. DB::Exception: Syntax error: failed at position 35 ('ò'): ò·E;+*[ò€ÕÉróRéx¤È‡Ò­¯WEúO÷;. Unrecognized token: 'ò'
-
-+ CLIENT=/home/zyh/ClickHouse/build/programs/clickhouse-client
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config1.xml -q 'ALTER TABLE  ADD COLUMN  UInt32;'
-clickhouse-server: ../src/Interpreters/InterpreterCreateQuery.cpp:270: DB::BlockIO DB::InterpreterCreateQuery::createDatabase(DB::ASTCreateQuery &): Assertion `removed' failed.
-Code: 62. DB::Exception: Syntax error: failed at position 13 ('ü') (line 1, col 13): ü\(úÅ~é…¶Y©IİÃ³*(<ZutÒùY§tÉ [j[2Ã£â®£ºşíÔ®Øh*÷<ñä¾ìÔ ADD COLUMN ü¬Í”Î‡MÚùÆxñÜÍYxıG:rÊå†·SAO¦å
-°Å\ø;îà\§ó»št¶{šõ@éX!‡ÁF0àØ9xålTèOÓ¡]f. Unrecognized token: 'ü'
-
-proxy_server: no process found
-Code: 62. DB::Exception: Syntax error: failed at position 13 ('€'): €Û“ ADD COLUMN ô UInt32;. Unrecognized token: '€'
-
-Code: 62. DB::Exception: Syntax error: failed at position 21 ('ì') (line 1, col 21): ì»jÓ‰¡µ\Î2ŞTŸ?/£,^H (ˆrˆíåB®uˆôıÙÀX’¡ŸLtø? Date, úù„<“¨çÎ%ªdûÏĞe.(HşŠ½–Ë ëşnÑ‹‹ßìœ£Fª&„'‘š—c¦BBJ UInt64, dÂ&oÙ·ñ*¤³_µıØàévy0Ë·´–R®-7×É
- u. Unrecognized token: 'ì'
-
-Code: 62. DB::Exception: Syntax error: failed at position 13 ('') (line 1, col 13): Mü¶‹M_
-Æº£„³¸ôl”¥ïÎ=k‰bŠ¼@Ğù©5ª’À]ß9kíÀe>Jß ADD COLUMN _è¯®>+óísı¹:ù/ UInt32;. Unrecognized token: ''
-
-Code: 32. DB::Exception: Attempt to read after eof: while receiving packet from localhost:5002
-
-Code: event_control: no process found
-32. DB::Exception: Attempt to read after eof: while receiving packet from localhost:5000
-
-Code: 62. DB::Exception: Syntax error: failed at position 17 ('¸'): ¸ŠÇ)-·âæ)x)—÷b|VvÑ7UúƒÖÚYI‘ÕÖàÌ£ÈƒošĞ´ò¢Í;. Unrecognized token: '¸'
-
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config2.xml -q 'ALTER TABLE 45452 ADD COLUMN AddedNested1 Nested(A UInt32, B UInt64) AFTER ü¬Í”Î‡MÚùÆxñÜÍYxıG:rÊå†·SAO¦å
-°Å\ø;îà\§ó»št¶{šõ@éX!‡ÁF0àØ9xålTèOÓ¡]f9±h4Ó2ÏøLP¢6)vFü@ñYª¬ÔK9EGÒÓû¹}ßƒxãÆªR;'
-Code: 62. DB::Exception: Syntax error: failed at position 15 (''): ‰#S_Ê¾¹WµÈÏÍ¥˜¢øìâı¶N<D"„yÌ\H—'§ . Unrecognized token: ''
-
-Code: 62. DB::Exception: Syntax error: failed at position 19 ('è'): è¯®>+Ç.nâ¸éÅñMóğHóísı¹:ù/¨¸éÅñMóğHóísıóğHósı¹:ù/¨SêøûPÔ5 values (ü@Ğù©5ª’À]À]ß9kíÀe>Jß, 9kíÀe>Jß);. Unrecognized token: 'è'
-
-Code: 62. DB::Exception: Syntax error: failed at position 43 ('('): ('/clickhouse/databases/–ÉÛA.9ÌLôŞïêHTjéö!ÂRÎ¬#„[2%mŠ™ö4p-ÀyÎ^)Pò(r@’›0¨„1Z4‹3çk', '4oŸ1Ùº_ŒMÌ6§a†ªÁ¿S²_d', 'È¶4–i1‚ãĞ˜¯B]*”¤Šƒé#¥ñ™/éÅ'9n. Unmatched parentheses: (
-
-Code: 62. DB::Exception: Syntax error: failed at position 18 ('>'): >+ûå¯®>+û³ålÇ.nâ¸éÅñMóğHóí¹¨SêøûPÔ5 values (“—oÅ=£E³á	‹úòïØı$é…Îƒ ˆ, Š¼×ü@Ğù©5ª’À]ß9kíÀe>Jß);. Expected identifier
-
-Code: 62. DB::Exception: Syntax error: failed at position 20 ('¯'): ¯{°»SLÂ^bI"N73‚MK*”\î=wÕ‘N#?ù‘o$–èë•ıÍaáÀµÔJ©; ™’Ş/ú„Üÿék¤ÿiÊ‡MWxç[™VcU/f~ÙL?ø’)°İxIŞyñÜ:ÒEóG¿tUÑ°ÂfIöNüO|Š,lãz/êª=Qä•üläıpóp¸èíÿ@¥fàm. Unrecognized token: '¯'
-
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config1.xml -q 'ALTER TABLE 45682 ADD COLUMN AddedNested1 Nested(A UInt32, B UInt64) AFTER _è¯®>+óísı¹:ù/;'
-Code: 62. DB::Exception: Syntax error: failed at position 21 ('ú') (line 1, col 21): úY¾0I)ÑûŒ.®Ç
- (ëp¸ˆ‘øÌf±Yé^ı Date, ¼¯ZÆ&.|Æb"ôhòçB¡p—,&‰¤Ø„Ê UInt64, ãg \ÿg­>]ƒÇu9®ØkµôÊÄh¬ ©ÉOgl‹³½äê¿Œ‰è©¼J.¤Çr¨HY§3‰§X
-L
-ßËÌ?Ú>–": Int32). Unrecognized token: 'ú'
-
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config0.xml -q 'ALTER TABLE 45732 ADD COLUMN AddedNested1 Nested(A UInt32, B UInt64) AFTER ô;'
-Code: 62. DB::Exception: Syntax error: failed at position 227 ('¹') (line 2, col 31): ¹½k†À§[#â@EJˆ!«DòÔ	°¢¯„!²å)!€6Â ¿[yáì¹÷ÜIål'0î’µI;ş<µ×€;cb¯9šMgPÑªïX@eq¨Úlbl‰Ã˜ëoiËeçc>œı·|+0½DÖb4©jÎù®ñÀaè˜ı¬S');. Unrecognized token: '¹'
-
-ZooKeeper JMX enabled by default
-Code: 62. DB::Exception: Syntax error: failed at position 23 ('('): (Ã”ŞÿŞÔ´T›Ğ¼d¾Q‘ˆ™Zœj€ğ6P=ËŒl†3Ç2.)™_ÆøÎºõ—6¢àÂAM^RJÒòn¨Hw¹}à:ºÿĞšîIŸ×’ÿ[¼({d Date, }[?´	Æ?±83<mÓì’/ Dìü£Z±ƒäë.ƒÁô9m˜qwì@´„\ø°ĞÂÃ‡¨oS. Unmatched parentheses: (
-
-Using config: zookeeper/zoo.cfg
-Code: 62. DB::Exception: Syntax error: failed at position 35 ('‡'): ‡’Šêf+’©Ô!iQvşÚº‹İ[#0L€É¶\1W­L{Ñ´“úl‘D£ÓÃà<×0¾Y×íÃ&Ú­E;C¯ü×å»Õe©}‹í;ééql×M·¸êëÆÖ(àŞ¹;. Unrecognized token: '‡'
-
-Stopping zookeeper ... STOPPED
-Code: 62. DB::Exception: Syntax error: failed at position 14 ('.') (line 1, col 14): .,C5®cº¹d¨CÃ•uqğŸ`Q‚ïA«ÈF
-8Ó¢Ç.ú!Ûù)Ï¼ötœ×é6d"HV\ç*Ü]3›qxÂoÁ…w%cpN|NsıÍŞúÌÅ"gXÔÅ¾Áàà˜ë/î4<ÛÈr¿Ù„ƒÔàJô](ƒæ^#²”d] (õ}¥ù¸`h2LH-ùıA#$½oehÆ`ê]ÃÁm%‘=¢İo:¾. Expected one of: identifier, compound identifier, list of elements, IF NOT EXISTS
-
-Code: 62. DB::Exception: Syntax error: failed at position 14 ('.') (line 1, col 14): .è„˜<ƒı´³¼d=bè8#æ“Rb&æô H‡1™„hS:æ>] (â-ñvØ¶ÔÚui’7Ê—û·Ú9Ùû5İ¦ƒ¥‘ÄB‘­(àa¦ô®0ğ|{)rÓcj//4ê^õùæNÍ¦ül=kÿ#æSsàéfš¥w"Åç6Dğ•l¼¡×}~ôğ¨I\ıÓ%6&â8—[}R¯súgrˆÅô½. Expected one of: identifier, compound identifier, list of elements, IF NOT EXISTS
-
-Code: 62. DB::Exception: Syntax error: failed at position 20 ('à'): àS˜ ³œè](_QÆÀÙ-a6!¾TªÒ†éÅhYx¤X¯àŒÙÌfvÑ‘Åá{–¡Œ where key=›?´ÅmíT;. Unrecognized token: 'à'
-
-
-Usage:
- kill [options] <pid> [...]
-
-Options:
- <pid> [...]            send signal to every <pid> listed
- -<signal>, -s, --signal <signal>
-                        specify the <signal> to be sent
- -l, --list=[<signal>]  list all signal names, or convert one to a name
- -L, --table            list all signal names in a nice table
-
- -h, --help     display this help and exit
- -V, --version  output version information and exit
-
-For more details see kill(1).
-Code: 62. DB::Exception: Syntax error: failed at position 20 ('') (line 1, col 20): 6RIJ³=vdİ­#Õƒ¥96~V*hŞ
-ä+«–õdJs|ŒF+W/²>¤º&³÷yBKl¬£s where key=£¹ş;. Unrecognized token: ''
-
-Code: 62. DB::Exception: Syntax error: failed at position 114 ('à') (line 2, col 8): àÀáÇìzÜ-,2D*êwkË?E_”¿3Tµ·%ı3ˆå†šÀİ‘®R·‚‡IhøtTx›_”¡†0uâG=rmS§Ög-ï™f¿aym‘dPq‘0%b	f˜ÏL', '!ˆn¢^_CKñ¼C¬80ÁÔ!Ú„˜…7ã§cr±Šö’]öû]ûø1…ÓzİÖ4dïò….v‘ï›ùŒ~Œú.. Unrecognized token: 'à'
-
-Code: 62. DB::Exception: Syntax error: failed at position 15 ('6'): 6ù	Ë. Expected one of: identifier, IF EXISTS
-
-
-Usage:
- kill [options] <pid> [...]
-
-Options:
- <pid> [...]            send signal to every <pid> listed
- -<signal>, -s, --signal <signal>
-                        specify the <signal> to be sent
- -l, --list=[<signal>]  list all signal names, or convert one to a name
- -L, --table            list all signal names in a nice table
-
- -h, --help     display this help and exit
- -V, --version  output version information and exit
-
-For more details see kill(1).
-Code: 62. DB::Exception: Syntax error: failed at position 19 ('¯') (line 1, col 19): ¯àŒŞ½üÙÌfvÑ‘ÅázmI¡§U'ÃnUmC=ò“Vëäq«¦ÚuÇ6‹Ï[zh¤–'5ÑŸÓ¿:3ÅäbG•¬h’`^¯µi/Ã‹ú[@-µ6 values (åcåOÆDóÊW…‰hRË!p;5¼}²µ<º5®–”ü-¸iK^¬<ãÆ×42(:©ùGXYw—û. Unrecognized token: '¯'
-
-Code: 62. DB::Exception: Syntax error: failed at position 35 ('«'): «t‡Šä”ÃÔ•=Øù:¬åyêÊ…Ö3şŠÌ%ïÛµ‘Uä;. Unrecognized token: '«'
-
-Code: 62. DB::Exception: Syntax error: failed at position 27 (','): , );. Expected one of: COLUMNS, identifier, compound identifier, asterisk, qualified asterisk, COLUMNS matcher, list of elements, insert element
-
-/home/zyh/distributed-system-test/clickhouse_test/bin
-Code: 62. DB::Exception: Syntax error: failed at position 15 ('ğ'): ğìR;J‹ºØß};¨¯. Unrecognized token: 'ğ'
-
-Code: 62. DB::Exception: Syntax error: failed at position 167 ('‘'): ‘6yR«tâãÜ†%kLé+ğÊXÌ©"…Ïpò	é', '¯lè‘#ü');. Unrecognized token: '‘'
-
-mv: cannot stat '*log': No such file or directory
-mv: cannot stat 'operation_log': No such file or directory
-./test_cases/18152/run/log1:2021.07.14 23:21:42.995190 [ 4704 ] {} <Fatal> BaseDaemon: ########################################
-./test_cases/18152/run/log1:2021.07.14 23:21:42.995686 [ 4704 ] {} <Fatal> BaseDaemon: (version 21.3.14.1, build id: CB01F09E927CD981) (from thread 4395) (query_id: 99582031-2502-4321-8db3-57a21c918a1f) Received signal Aborted (6)
-./test_cases/18152/run/log1:2021.07.14 23:21:42.995820 [ 4704 ] {} <Fatal> BaseDaemon: 
-./test_cases/18152/run/log1:2021.07.14 23:21:42.996014 [ 4704 ] {} <Fatal> BaseDaemon: Stack trace: 0x7ffa68b33fb7 0x7ffa68b35921 0x7ffa68b2548a 0x7ffa68b25502 0x1f1c0812 0x1f1db8ba 0x2075db02 0x20759ae4 0x220a1360 0x220bdae0 0x23565ae4 0x23566680 0x23bc5f56 0x23bbe00f 0x23bbb8c7 0x7ffa683376db 0x7ffa68c1671f
-./test_cases/18152/run/log1:2021.07.14 23:21:42.996249 [ 4704 ] {} <Fatal> BaseDaemon: 4. raise @ 0x3efb7 in /lib/x86_64-linux-gnu/libc-2.27.so
-./test_cases/18152/run/log1:2021.07.14 23:21:42.996390 [ 4704 ] {} <Fatal> BaseDaemon: 5. abort @ 0x40921 in /lib/x86_64-linux-gnu/libc-2.27.so
-./test_cases/18152/run/log1:2021.07.14 23:21:42.996511 [ 4704 ] {} <Fatal> BaseDaemon: 6. ? @ 0x3048a in /lib/x86_64-linux-gnu/libc-2.27.so
-./test_cases/18152/run/log1:2021.07.14 23:21:42.996625 [ 4704 ] {} <Fatal> BaseDaemon: 7. ? @ 0x30502 in /lib/x86_64-linux-gnu/libc-2.27.so
-Find Fatal!
-Code: 62. DB::Exception: Syntax error: failed at position 18 ('COLUMN'): COLUMN  UInt32;. Expected one of: ADD COLUMN, DROP COLUMN, CLEAR COLUMN, MODIFY COLUMN, RENAME COLUMN, COMMENT COLUMN, MODIFY ORDER BY, MODIFY SAMPLE BY, MODIFY TTL, MATERIALIZE TTL, MODIFY SETTING, MODIFY QUERY, ADD INDEX, DROP INDEX, CLEAR INDEX, MATERIALIZE INDEX, ADD CONSTRAINT, DROP CONSTRAINT, ATTACH PARTITION, ATTACH PART, DETACH PARTITION, DETACH PART, DROP PARTITION, DROP PART, MOVE PARTITION, MOVE PART, DROP DETACHED PARTITION, DROP DETACHED PART, FETCH PARTITION, REPLACE PARTITION, FREEZE, DELETE, UPDATE, REMOVE TTL, ON, a list of ALTER commands, ALTER command
-
-Code: 62. DB::Exception: Syntax error: failed at position 27 (','): , );. Expected one of: COLUMNS, identifier, compound identifier, asterisk, qualified asterisk, COLUMNS matcher, list of elements, insert element
-
-+ /home/zyh/ClickHouse/build/programs/clickhouse-client -c config1.xml -q 'ALTER TABLE 46932 ADD COLUMN AddedNested1 Nested(A UInt32, B UInt64) AFTER ;'
-Code: 62. DB::Exception: Syntax error: failed at position 19 ('a'): aÖştì*¹gm²‡¾‹ní†W;. Expected one of: ENGINE, ON, UUID, storage definition, INTO OUTFILE, FORMAT, SETTINGS, end of query
-
-Code: 62. DB::Exception: Syntax error: failed at position 13 ('45452') (line 1, col 13): 45452 ADD COLUMN AddedNested1 Nested(A UInt32, B UInt64) AFTER ü¬Í”Î‡MÚùÆxñÜÍYxıG:rÊå†·SAO¦å
-°Å\ø;îà\§ó»št¶{šõ@éX!‡ÁF0àØ9xålTèOÓ¡]f9±h4Ó2ÏøLP¢. Expected identifier
-
-Code: Code: 210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)Code: Code: 
-210
-. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)210
-. 
-DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)210
-. 
-DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-Code: Code: Code: Code: Code: 210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)210210
-. . 210
-210DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000). . 
-
-DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-
-
-
-
-Code: Code: 210210. . DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-
-
-Code: 210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-Code: 210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-Code: 
-210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-Code: Code: 210210. . DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-Code: Code: 
-
-Code: 210210. . DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-
-
-210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-Code: Code: 210. Code: Code: DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)210
-. 
-DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-210210
-. . DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-
-
-Code: 210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5000)
-
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-Code: 210. DB::NetException: Connection refused (localhost:5000)
-
-Code: 210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5002)
-
-Code: 210. DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5002)
-
-Code: 210. DB::NetException: Connection refused (localhost:5002)
-
-Code: 32. DB::Exception: Attempt to read after eof: while receiving packet from localhost:5001
-
-Code: Code: Code: Code: 210. 210DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5001). 
-210DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5001)
-. 
-DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5001)210
-
-. 
-DB::NetException: Connection reset by peer, while reading from socket (127.0.0.1:5001)
-
-nsert.sh config0.xml   
-executing command `echo do nothing`
-rm -rf run/data1
-bash client_insert_random.sh config1.xml    
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-bash client_insert_random.sh config2.xml    
-rm -rf run/data2
-bash client_create_db_replicated.sh config1.xml    
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-bash client_alter_test.sh config1.xml   
-stopping...
-normal operator_size = 34
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsert0
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsert0
-bash client_insert.sh config0.xml   
-running operator ClickHouseInsert0
-run concurrent normal operation
-running operator ClickHouseInsert0
-running operator ClickHouseInsert0
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-run concurrent normal operation
-running operator ClickHouseInsert0
-bash client_insert.sh config0.xml   
-running operator ClickHouseInsert0
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-run concurrent normal operation
-running operator ClickHouseInsert0
-bash client_insert.sh config0.xml   
-bash client_insert.sh config0.xml   
-backup test cases
-bash client_insert.sh config0.xml   
-18153

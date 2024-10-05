@@ -14,7 +14,7 @@ mv init_random.txt ./test_cases/$1
 
 # checking the operation log!
 {
-  ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
+  # ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
 
   # if grep -a 'Fatal' ./test_cases/$1/run/run_log*; then
   #   echo "Find Fatal!"

@@ -1,8 +1,0 @@
-Receive need record message: {:process 1151465087, :type :invoke, :f :, :value nil}
-Receive need record message: {:process 1031841407, :type :invoke, :f :, :value nil}
-Receive need record message: {:process 243320447, :type :invoke, :f :, :value nil}
-Receive need record message: {:process 1031841407, :type :ok, :f :, :value nil}
-Receive need record message: {:process 1151465087, :type :ok, :f :, :value nil}
-Receive need record message: {:process 218142335, :type :invoke, :f :, :value nil}
-Receive need record message: {:process 218142335, :type :ok, :f :, :value nil}
-receive sigkill, closing...

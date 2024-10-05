@@ -7,10 +7,10 @@
 #include <dst_node_manager.hpp>
 #include <operator/dst_default_client_operator.hpp>
 
-#define BIN_PATH "/home/zyh/ClickHouse/build/programs/clickhouse-keeper"
+#define BIN_PATH "/usr/bin/clickhouse keeper"
 #define BASE_ZK_PORT 9181
 #define BASE_INNER_PORT 44444
-#define BASE_XML_PATH "/home/zyh/DistFuzz/clickhouse_test/bin/enable_keeper.xml"
+#define BASE_XML_PATH "./enable_keeper.xml"
 #define IP "127.0.1.1"
 
 /* The ServerConfigurationGenerator for clickhouse-keeper, the example is as follows:

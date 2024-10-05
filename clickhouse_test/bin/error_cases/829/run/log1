@@ -1,6 +1,0 @@
-2021.07.06 21:47:44.354027 [ 31070 ] {} <Fatal> BaseDaemon: ########################################
-2021.07.06 21:47:44.354499 [ 31070 ] {} <Fatal> BaseDaemon: (version 21.3.14.1, build id: DD9B04F1C9692020) (from thread 30668) (query_id: 4a8433d1-dbf8-40c1-b11d-0f289c64abcc) Received signal Aborted (6)
-2021.07.06 21:47:44.354637 [ 31070 ] {} <Fatal> BaseDaemon: 
-2021.07.06 21:47:44.354762 [ 31070 ] {} <Fatal> BaseDaemon: Stack trace: 0x7fcb858bbfb7
-2021.07.06 21:47:44.354969 [ 31070 ] {} <Fatal> BaseDaemon: 0. gsignal @ 0x3efb7 in /lib/x86_64-linux-gnu/libc-2.27.so
-2021.07.06 21:47:44.521930 [ 30644 ] {} <Fatal> Application: Child process was terminated by signal 9 (KILL). If it is not done by 'forcestop' command or manually, the possible cause is OOM Killer (see 'dmesg' and look at the '/var/log/kern.log' for the details).
