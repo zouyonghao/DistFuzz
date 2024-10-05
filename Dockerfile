@@ -180,6 +180,14 @@ RUN wget https://archive.apache.org/dist/zookeeper/zookeeper-3.7.0/apache-zookee
   mv zookeeper/lib/zookeeper-3.7.0.jar zookeeper/lib/zookeeper.jar && \
   rm apache-zookeeper-3.7.0-bin.tar.gz
 
+# Install ClickHouse
+RUN wget https://github.com/ClickHouse/ClickHouse/releases/download/v21.9.2.17-stable/clickhouse-common-static_21.9.2.17_amd64.deb && \
+  sudo dpkg -i clickhouse-common-static_21.9.2.17_amd64.deb && \
+  rm clickhouse-common-static_21.9.2.17_amd64.deb && \
+  wget https://github.com/ClickHouse/ClickHouse/releases/download/v21.9.2.17-stable/clickhouse-server_21.9.2.17_all.deb && \
+  sudo dpkg -i clickhouse-server_21.9.2.17_all.deb && \
+  rm clickhouse-server_21.9.2.17_all.deb
+
 # Install Knossos
 RUN git clone https://github.com/zouyonghao/knossos-test.git knossos && \
   cd knossos && \

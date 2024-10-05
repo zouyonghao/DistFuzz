@@ -22,7 +22,7 @@ DistFuzz is a research fuzzing tool to effectively find bugs in distributed syst
 We recommend you to run the tool using the Docker image we provide.
 
 ```
-docker run -it --network none --cap-add=NET_ADMIN --device=/dev/net/tun --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyonghao/distfuzz:artifact
+docker run -it --network none --cap-add=NET_ADMIN --device=/dev/net/tun --cap-add=SYS_PTRACE -cap-add=SYS_NICE --cap-add=IPC_LOCK --security-opt seccomp=unconfined zouyonghao/distfuzz:artifact
 ```
 
 If you want to build the Docker container or install the tool and dependencies yourself, please refer to [INSTALL.md](INSTALL.md).
@@ -46,6 +46,9 @@ cd DistFuzz/dqlite_test/bin && ./fuzz.sh
 
 # RethinkDB
 cd DistFuzz/rethinkdb_test/bin && ./fuzz.sh
+
+# ClickHouse
+cd DistFuzz/clickhouse_test/bin && ./fuzz.sh
 
 # etcd
 cd DistFuzz/etcd_test/bin && ./fuzz.sh
