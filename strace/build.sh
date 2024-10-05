@@ -1,3 +1,3 @@
 ./bootstrap
-./configure --with-libunwind --enable-static=no
+./configure --enable-static=no
 make -j8
