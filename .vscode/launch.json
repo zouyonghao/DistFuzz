@@ -139,17 +139,16 @@
             "name": "click_house_test",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/zyh/DistFuzz/build/clickhouse_test/clickhouse_test_main",
+            "program": "${workspaceFolder}/build/clickhouse_test/clickhouse_test_main",
             "args": [
-                "init_random.txt"
+                "--node_count=5",
+                "--normal_count=3",
+                "--critic_count=2",
+                "--check_after_fuzz=true"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/clickhouse_test/bin",
             "environment": [
-                {
-                    "name": "REPLAY",
-                    "value": "true"
-                }
             ],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -605,6 +604,38 @@
                     "ignoreFailures": true
                 }
             ]
-        }
+        },
+        {
+            "name": "strace_clickhouse",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/strace/src/strace",
+            "args": [
+                "-o",
+                "strace.log",
+                "-f",
+                "/usr/bin/clickhouse",
+                "keeper",
+                "--config",
+                "enable_keeper0.xml"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/clickhouse_test/bin",
+            "environment": [
+                {
+                    "name": "DST_FUZZ",
+                    "value": "1"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
     ]
 }
