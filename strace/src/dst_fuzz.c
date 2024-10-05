@@ -631,6 +631,7 @@ init_dst_fuzz(void)
 			global_index = (uint64_t *)shmat((int)atoi(res_shm_fuzz_global_index), NULL, 0);
 		}
 	} else {
+		global_index = (uint64_t *)malloc(sizeof(uint64_t));
 		fuzz_coverage_map = (uint8_t *)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
 	}
 
