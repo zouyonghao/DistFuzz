@@ -41,7 +41,7 @@ struct exec_params {
 };
 extern struct exec_params params_for_tracee;
 
-static char *pathname;
+// static char *pathname;
 
 /**
  * According to https://man7.org/linux/man-pages/man2/_syscall.2.html,
@@ -293,9 +293,9 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 	last_injected = true;
 
 	/*
-	 * strace uses the inject_vec[current_personality] which is also a list of 
+	 * strace uses the inject_vec[current_personality] which is also a list of
 	 * inject_opts so we must alloc a list of inject_opts here which wastes much memory.
-	 * 
+	 *
 	 * TODO: optimize the memory usage.
 	 */
 	struct inject_opts *opts = malloc(sizeof(struct inject_opts) * (tcp->scno + 1));
@@ -470,7 +470,7 @@ dst_fuzz_syscall_exiting_finish(struct tcb *tcp)
 		ptrace(PTRACE_GETREGS, tcp->pid, NULL, &regs);
 		if (compare_and_warning_regs_differences(&regs, stored_regs) < 2) {
 			/*
-			* we set rax to orig_rax, because it is changed after last 
+			* we set rax to orig_rax, because it is changed after last
 			* syscall, and the old syscall's number is stored in orig_rax.
 			*/
 			regs.rax = stored_regs->orig_rax;
@@ -635,16 +635,16 @@ init_dst_fuzz(void)
 		fuzz_coverage_map = (uint8_t *)malloc(FUZZ_COVERAGE_MAP_SIZE * sizeof(uint8_t));
 	}
 
-	pathname = strace_malloc(strlen(params_for_tracee.argv[0]) + 10);
-	if (params_for_tracee.argv[0][0] == '.') {
-		if (params_for_tracee.argv[0][1] == '.') {
-			strcpy(pathname, params_for_tracee.argv[0] + 3);
-		} else {
-			strcpy(pathname, params_for_tracee.argv[0] + 2);
-		}
-	} else {
-		strcpy(pathname, params_for_tracee.argv[0]);
-	}
+	// pathname = strace_malloc(strlen(params_for_tracee.argv[0]) + 10);
+	// if (params_for_tracee.argv[0][0] == '.') {
+	// 	if (params_for_tracee.argv[0][1] == '.') {
+	// 		strcpy(pathname, params_for_tracee.argv[0] + 3);
+	// 	} else {
+	// 		strcpy(pathname, params_for_tracee.argv[0] + 2);
+	// 	}
+	// } else {
+	// 	strcpy(pathname, params_for_tracee.argv[0]);
+	// }
 
 	is_dst_fuzz = true;
 }
