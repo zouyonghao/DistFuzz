@@ -10,7 +10,7 @@ STARTUP_MSG:   java = 11.0.21
 ************************************************************/
 2024-06-28 12:35:16,944 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: registered UNIX signal handlers for [TERM, HUP, INT]
 2024-06-28 12:35:17,349 WARN org.apache.hadoop.util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-2024-06-28 12:35:18,236 INFO org.apache.hadoop.hdfs.server.datanode.checker.ThrottledAsyncChecker: Scheduling a check for [DISK]file:/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3
+2024-06-28 12:35:18,236 INFO org.apache.hadoop.hdfs.server.datanode.checker.ThrottledAsyncChecker: Scheduling a check for [DISK]file:/home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3
 2024-06-28 12:35:18,544 WARN org.apache.hadoop.metrics2.impl.MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-datanode.properties,hadoop-metrics2.properties
 2024-06-28 12:35:18,718 INFO org.apache.hadoop.metrics2.impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
 2024-06-28 12:35:19,700 INFO org.apache.hadoop.hdfs.server.common.Util: dfs.datanode.fileio.profiling.sampling.percentage set to 0. Disabling file IO profiling
@@ -46,34 +46,34 @@ STARTUP_MSG:   java = 11.0.21
 2024-06-28 12:35:22,948 INFO org.apache.hadoop.ipc.Server: IPC Server Responder: starting
 2024-06-28 12:35:22,948 INFO org.apache.hadoop.ipc.Server: IPC Server listener on 50022: starting
 2024-06-28 12:35:23,272 INFO org.apache.hadoop.hdfs.server.common.Storage: Using 1 threads to upgrade data directories (dfs.datanode.parallel.volumes.load.threads.num=1, dataDirs=1)
-2024-06-28 12:35:23,425 INFO org.apache.hadoop.hdfs.server.common.Storage: Lock on /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3/in_use.lock acquired by nodename 963198@e07ff098d9e2
-2024-06-28 12:35:23,427 INFO org.apache.hadoop.hdfs.server.common.Storage: Storage directory with location [DISK]file:/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3 is not formatted for namespace 898051735. Formatting...
-2024-06-28 12:35:23,429 INFO org.apache.hadoop.hdfs.server.common.Storage: Generated new storageID DS-d2882846-68fb-4fcc-aef1-9ff03b01151f for directory /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3 
+2024-06-28 12:35:23,425 INFO org.apache.hadoop.hdfs.server.common.Storage: Lock on /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3/in_use.lock acquired by nodename 963198@e07ff098d9e2
+2024-06-28 12:35:23,427 INFO org.apache.hadoop.hdfs.server.common.Storage: Storage directory with location [DISK]file:/home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3 is not formatted for namespace 898051735. Formatting...
+2024-06-28 12:35:23,429 INFO org.apache.hadoop.hdfs.server.common.Storage: Generated new storageID DS-d2882846-68fb-4fcc-aef1-9ff03b01151f for directory /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3 
 2024-06-28 12:35:23,737 INFO org.apache.hadoop.hdfs.server.common.Storage: Analyzing storage directories for bpid BP-134450730-172.17.0.4-1719570918401
-2024-06-28 12:35:23,738 INFO org.apache.hadoop.hdfs.server.common.Storage: Locking is disabled for /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3/current/BP-134450730-172.17.0.4-1719570918401
-2024-06-28 12:35:23,739 INFO org.apache.hadoop.hdfs.server.common.Storage: Block pool storage directory for location [DISK]file:/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3 and block pool id BP-134450730-172.17.0.4-1719570918401 is not formatted. Formatting ...
-2024-06-28 12:35:23,739 INFO org.apache.hadoop.hdfs.server.common.Storage: Formatting block pool BP-134450730-172.17.0.4-1719570918401 directory /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3/current/BP-134450730-172.17.0.4-1719570918401/current
+2024-06-28 12:35:23,738 INFO org.apache.hadoop.hdfs.server.common.Storage: Locking is disabled for /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3/current/BP-134450730-172.17.0.4-1719570918401
+2024-06-28 12:35:23,739 INFO org.apache.hadoop.hdfs.server.common.Storage: Block pool storage directory for location [DISK]file:/home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3 and block pool id BP-134450730-172.17.0.4-1719570918401 is not formatted. Formatting ...
+2024-06-28 12:35:23,739 INFO org.apache.hadoop.hdfs.server.common.Storage: Formatting block pool BP-134450730-172.17.0.4-1719570918401 directory /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3/current/BP-134450730-172.17.0.4-1719570918401/current
 2024-06-28 12:35:23,912 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Setting up storage: nsid=898051735;bpid=BP-134450730-172.17.0.4-1719570918401;lv=-57;nsInfo=lv=-65;cid=mycluster;nsid=898051735;c=1719570918401;bpid=BP-134450730-172.17.0.4-1719570918401;dnuuid=null
 2024-06-28 12:35:24,051 INFO org.apache.hadoop.hdfs.server.datanode.DataNode: Generated and persisted new Datanode UUID 18361e24-98ea-4847-b7f1-1a238ef79b62
 2024-06-28 12:35:24,087 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: The datanode lock is a read write lock
 2024-06-28 12:35:24,288 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Added new volume: DS-d2882846-68fb-4fcc-aef1-9ff03b01151f
-2024-06-28 12:35:24,288 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Added volume - [DISK]file:/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3, StorageType: DISK
+2024-06-28 12:35:24,288 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Added volume - [DISK]file:/home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3, StorageType: DISK
 2024-06-28 12:35:24,295 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.MemoryMappableBlockLoader: Initializing cache loader: MemoryMappableBlockLoader.
 2024-06-28 12:35:24,303 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Registered FSDatasetState MBean
 2024-06-28 12:35:24,313 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Adding block pool BP-134450730-172.17.0.4-1719570918401
-2024-06-28 12:35:24,315 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Scanning block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3...
-2024-06-28 12:35:24,334 WARN org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: dfsUsed file missing in /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3/current/BP-134450730-172.17.0.4-1719570918401/current, will proceed with Du for space computation calculation, 
-2024-06-28 12:35:24,396 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Time taken to scan block pool BP-134450730-172.17.0.4-1719570918401 on /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3: 78ms
+2024-06-28 12:35:24,315 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Scanning block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3...
+2024-06-28 12:35:24,334 WARN org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: dfsUsed file missing in /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3/current/BP-134450730-172.17.0.4-1719570918401/current, will proceed with Du for space computation calculation, 
+2024-06-28 12:35:24,396 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Time taken to scan block pool BP-134450730-172.17.0.4-1719570918401 on /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3: 78ms
 2024-06-28 12:35:24,396 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Total time to scan all replicas for block pool BP-134450730-172.17.0.4-1719570918401: 83ms
-2024-06-28 12:35:24,398 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Adding replicas to map for block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3...
-2024-06-28 12:35:24,398 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.BlockPoolSlice: Replica Cache file: /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3/current/BP-134450730-172.17.0.4-1719570918401/current/replicas doesn't exist 
-2024-06-28 12:35:24,404 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Time to add replicas to map for block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3: 6ms
+2024-06-28 12:35:24,398 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Adding replicas to map for block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3...
+2024-06-28 12:35:24,398 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.BlockPoolSlice: Replica Cache file: /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3/current/BP-134450730-172.17.0.4-1719570918401/current/replicas doesn't exist 
+2024-06-28 12:35:24,404 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Time to add replicas to map for block pool BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3: 6ms
 2024-06-28 12:35:24,404 INFO org.apache.hadoop.hdfs.server.datanode.fsdataset.impl.FsDatasetImpl: Total time to add all replicas to map for block pool BP-134450730-172.17.0.4-1719570918401: 8ms
-2024-06-28 12:35:24,405 INFO org.apache.hadoop.hdfs.server.datanode.checker.ThrottledAsyncChecker: Scheduling a check for /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3
-2024-06-28 12:35:24,423 INFO org.apache.hadoop.hdfs.server.datanode.checker.DatasetVolumeChecker: Scheduled health check for volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3
-2024-06-28 12:35:24,427 INFO org.apache.hadoop.hdfs.server.datanode.VolumeScanner: Now scanning bpid BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3
+2024-06-28 12:35:24,405 INFO org.apache.hadoop.hdfs.server.datanode.checker.ThrottledAsyncChecker: Scheduling a check for /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3
+2024-06-28 12:35:24,423 INFO org.apache.hadoop.hdfs.server.datanode.checker.DatasetVolumeChecker: Scheduled health check for volume /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3
+2024-06-28 12:35:24,427 INFO org.apache.hadoop.hdfs.server.datanode.VolumeScanner: Now scanning bpid BP-134450730-172.17.0.4-1719570918401 on volume /home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3
 2024-06-28 12:35:24,462 INFO org.apache.hadoop.hdfs.server.datanode.DirectoryScanner: Periodic Directory Tree Verification scan starting at 6/28/24, 4:22 PM with interval of 21600000ms
-2024-06-28 12:35:24,929 INFO org.apache.hadoop.hdfs.server.datanode.VolumeScanner: VolumeScanner(/home/zyh/distributed-system-test/hdfs_test/bin/hadoop/hdfs/datanode3, DS-d2882846-68fb-4fcc-aef1-9ff03b01151f): no suitable block pools found to scan.  Waiting 1814399498 ms.
+2024-06-28 12:35:24,929 INFO org.apache.hadoop.hdfs.server.datanode.VolumeScanner: VolumeScanner(/home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode3, DS-d2882846-68fb-4fcc-aef1-9ff03b01151f): no suitable block pools found to scan.  Waiting 1814399498 ms.
 2024-06-28 12:35:26,299 WARN org.apache.hadoop.hdfs.server.datanode.DataNode: IOException in offerService
 java.io.IOException: DestHost:destPort localhost:9000 , LocalHost:localPort e07ff098d9e2/172.17.0.4:0. Failed on local exception: java.io.IOException: Error reading responses
 	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)

@@ -201,6 +201,12 @@ RUN git clone https://github.com/zouyonghao/redis-test.git redis-test && \
   cd ../redisraft && \
   ./build.sh
 
+# Install HDFS
+RUN wget https://archive.apache.org/dist/hadoop/common/hadoop-3.2.4/hadoop-3.2.4.tar.gz && \
+  tar xvf hadoop-3.2.4.tar.gz && \
+  mv hadoop-3.2.4 hadoop && \
+  rm hadoop-3.2.4.tar.gz
+
 # Install Knossos
 RUN git clone https://github.com/zouyonghao/knossos-test.git knossos && \
   cd knossos && \
