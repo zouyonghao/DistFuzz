@@ -25,9 +25,8 @@ public:
             ni.start_command, boost::process::std_out > log_file, boost::process::std_err > err_log_file, env,
             boost::process::std_in < "calc" + std::to_string(ni.node_id + 1) + ".pipe");
         std::cout << "pid is " << ni.process->id() << std::endl;
-        strace_process = new boost::process::child("/home/zyh/strace/src/strace -f -o strace_log_" + node_id_str +
-                                                       " -p " + std::to_string(ni.process->id()),
-                                                   env);
+        strace_process = new boost::process::child("/home/zyh/DistFuzz/strace/src/strace -f -o strace_log_" + node_id_str +
+                                                       " -p " + std::to_string(ni.process->id()), env);
         return true;
     }
 };

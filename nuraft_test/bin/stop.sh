@@ -13,3 +13,5 @@ killall event_control
 # rm calc3.pipe
 
 # ./clear.sh
+
+rm -rf *.pipe
