@@ -188,6 +188,11 @@ RUN wget https://github.com/ClickHouse/ClickHouse/releases/download/v21.9.2.17-s
   sudo dpkg -i clickhouse-server_21.9.2.17_all.deb && \
   rm clickhouse-server_21.9.2.17_all.deb
 
+# Install NuRaft
+RUN git clone https://github.com/zouyonghao/NuRaft-test.git NuRaft && \
+  cd NuRaft && \
+  ./build.sh
+
 # Install Knossos
 RUN git clone https://github.com/zouyonghao/knossos-test.git knossos && \
   cd knossos && \
