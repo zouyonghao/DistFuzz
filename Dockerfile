@@ -193,6 +193,14 @@ RUN git clone https://github.com/zouyonghao/NuRaft-test.git NuRaft && \
   cd NuRaft && \
   ./build.sh
 
+# Install Redis
+RUN git clone https://github.com/zouyonghao/redis-test.git redis-test && \
+  cd redis-test && \
+  cd redis && \
+  ./build.sh && \
+  cd ../redisraft && \
+  ./build.sh
+
 # Install Knossos
 RUN git clone https://github.com/zouyonghao/knossos-test.git knossos && \
   cd knossos && \

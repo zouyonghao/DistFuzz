@@ -15,7 +15,7 @@ public:
     bool _do() override
     {
         sleep(1);
-        system(("redis-cli -h " IP " -p " + std::to_string(BASE_PORT) + " raft.cluster init").c_str());
+        system(("timeout 2 redis-cli -h " IP " -p " + std::to_string(BASE_PORT) + " raft.cluster init").c_str());
         for (int i = 1; i < node_count; i++)
         {
             std::string command = "timeout 2 redis-cli -h " IP " -p " + std::to_string(BASE_PORT + i) +

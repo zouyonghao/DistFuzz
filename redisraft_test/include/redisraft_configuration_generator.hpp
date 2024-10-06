@@ -4,8 +4,8 @@
 #include <cstdarg>
 #include <operator/dst_default_client_operator.hpp>
 
-#define BIN_PATH "/home/zyh/redis/src/redis-server"
-#define LIB_PATH "/home/zyh/redisraft/redisraft.so"
+#define BIN_PATH "/home/zyh/redis-test/redis/src/redis-server"
+#define LIB_PATH "/home/zyh/redis-test/redisraft/redisraft.so"
 #define BASE_PORT 5001
 #define IP "127.0.1.1"
 
