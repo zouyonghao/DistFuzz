@@ -47,6 +47,9 @@ cd DistFuzz/aerospike_test/bin && ./fuzz.sh
 # Dqlite
 cd DistFuzz/dqlite_test/bin && ./fuzz.sh
 
+# Redis
+cd DistFuzz/redisraft_test/bin && ./fuzz.sh
+
 # RethinkDB
 cd DistFuzz/rethinkdb_test/bin && ./fuzz.sh
 
