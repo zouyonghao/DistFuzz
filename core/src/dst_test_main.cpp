@@ -274,7 +274,7 @@ int main(int argc, char *argv[])
     itest_case_count_file >> test_case_count;
     itest_case_count_file.close();
 
-    system("sh env_init.sh");
+    system(("sh env_init.sh " + std::to_string(node_count)).c_str());
 
     split_files(random_file, node_count);
 
