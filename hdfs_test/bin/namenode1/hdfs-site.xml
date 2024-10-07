@@ -68,7 +68,12 @@
         <value>nn1</value>
     </property>
 
-<!-- 
+    <property>
+        <name>dfs.permissions</name>
+        <value>false</value>
+    </property>
+
+<!--
     <property>
         <name>dfs.datanode.data.dir</name>
         <value>file:///home/zyh/DistFuzz/hdfs_test/bin/hadoop/hdfs/datanode1</value>

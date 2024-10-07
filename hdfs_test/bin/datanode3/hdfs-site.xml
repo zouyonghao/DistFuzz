@@ -33,4 +33,9 @@
         <name>dfs.datanode.ipc.address</name>
         <value>127.0.0.1:50022</value>
     </property>
+
+    <property>
+        <name>dfs.permissions</name>
+        <value>false</value>
+    </property>
 </configuration>

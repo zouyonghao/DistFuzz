@@ -34,7 +34,16 @@ public:
         boost::filesystem::ofstream a("./a");
         a << 0;
         a.close();
-        std::string configure_string = "timeout 3 /home/zyh/hadoop/bin/hdfs dfs -put ./a /a";
+        std::string configure_string = "timeout 3 /home/zyh/hadoop/bin/hdfs dfs ";
+        if (__dst_get_random_uint8_t() > 128)
+        {
+            // use namenode2
+            configure_string += "-fs hdfs://127.0.0.1:9001 ";
+        } else {
+            // use namenode1
+            configure_string += "-fs hdfs://127.0.0.1:9000 ";
+        }
+        configure_string += " -put ./a /a";
         return configure_string;
     }
 };

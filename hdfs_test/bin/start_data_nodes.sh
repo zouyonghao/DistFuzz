@@ -1,3 +1,4 @@
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export HADOOP_HOME=/home/zyh/hadoop
 export PATH=$PATH:$HADOOP_HOME/bin:$JAVA_HOME/bin
 

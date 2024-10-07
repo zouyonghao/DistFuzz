@@ -48,7 +48,10 @@ public:
         if (__dst_get_random_uint8_t() > 128)
         {
             // use namenode2
-            configure_string += "-fs hdfs://localhost:9001 ";
+            configure_string += "-fs hdfs://127.0.0.1:9001 ";
+        } else {
+            // use namenode1
+            configure_string += "-fs hdfs://127.0.0.1:9000 ";
         }
         va_list random_nums;
         va_start(random_nums, node_count);

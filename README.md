@@ -61,6 +61,9 @@ cd DistFuzz/etcd_test/bin && ./fuzz.sh
 
 # ZooKeeper
 cd DistFuzz/zookeeper_test/bin && ./fuzz.sh
+
+# HDFS
+cd DistFuzz/hdfs_test/bin && ./fuzz.sh
 ```
 
 #### Analyzing results

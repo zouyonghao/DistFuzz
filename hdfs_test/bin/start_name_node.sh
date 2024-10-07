@@ -1,3 +1,4 @@
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export HADOOP_HOME=/home/zyh/hadoop
 export PATH=$PATH:$HADOOP_HOME/bin:$JAVA_HOME/bin
 
@@ -7,9 +8,15 @@ hdfs journalnode -Ddfs.journalnode.rpc-address=127.0.0.1:8485 -Ddfs.journalnode.
 hdfs journalnode -Ddfs.journalnode.rpc-address=127.0.0.1:8486 -Ddfs.journalnode.http-address=127.0.0.1:8489 -Ddfs.journalnode.edits.dir=/home/zyh/DistFuzz/hdfs_test/bin/hadoop/dfs/journalnode2 &
 hdfs journalnode -Ddfs.journalnode.rpc-address=127.0.0.1:8487 -Ddfs.journalnode.http-address=127.0.0.1:8490 -Ddfs.journalnode.edits.dir=/home/zyh/DistFuzz/hdfs_test/bin/hadoop/dfs/journalnode3 &
 
+sleep 1
+
+echo "tickTime=2000
+dataDir=/home/zyh/DistFuzz/hdfs_test/bin/zkData
+clientPort=2181" > /home/zyh/zookeeper/conf/zoo.cfg
+mkdir /home/zyh/DistFuzz/hdfs_test/bin/zkData
 /home/zyh/zookeeper/bin/zkServer.sh start
 
-sleep 2
+sleep 1
 
 export HADOOP_CONF_DIR=/home/zyh/DistFuzz/hdfs_test/bin/namenode1
 

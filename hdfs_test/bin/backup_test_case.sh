@@ -15,6 +15,7 @@ mv init_random.txt ./test_cases/$1
 # mv rr_rec_* ./test_cases/$1
 mv hadoop ./test_cases/$1
 mv core* ./test_cases/$1
+mv zkData ./test_cases/$1
 
 # checking the operation log!
 ./check.sh ${PWD}/test_cases/$1/operation_log >${PWD}/test_cases/$1/check_log 2>&1
