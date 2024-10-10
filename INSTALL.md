@@ -1,13 +1,13 @@
 ## Installation
 We suggest you run the experiments using the Docker image we provide.
 ```bash
-docker run -it --network none --cap-add=NET_ADMIN --device=/dev/net/tun --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyonghao/distfuzz:artifact
+docker run -it --network none --cap-add=NET_ADMIN --device=/dev/net/tun --cap-add=SYS_PTRACE --cap-add=SYS_NICE --cap-add=IPC_LOCK --security-opt seccomp=unconfined zouyonghao/distfuzz:artifact
 ```
 
 Or, you can build the Docker container yourself using the Dockerfile included in the repository.
 ```bash
 docker build . -t distfuzz:artifact    # It may take 10 ~ 20 minutes.
-docker run -it --network none --cap-add=NET_ADMIN --device=/dev/net/tun --cap-add=SYS_PTRACE --security-opt seccomp=unconfined distfuzz:artifact
+docker run -it --network none --cap-add=NET_ADMIN --device=/dev/net/tun --cap-add=SYS_PTRACE --cap-add=SYS_NICE --cap-add=IPC_LOCK --security-opt seccomp=unconfined distfuzz:artifact
 ```
 
 Alternatively, you can manually install DistFuzz and target systems by following the steps below. Please note that we have have only tested building and running DistFuzz with Ubuntu 20.04.
