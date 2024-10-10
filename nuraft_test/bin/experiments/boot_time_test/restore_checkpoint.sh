@@ -10,7 +10,7 @@ set -x
 
 # for i in 0 1 2 3 4; do
 #     # sudo /home/zyh/criu/criu/criu \
-#     sudo /home/zyh/criu/scripts/criu-ns \
+#     sudo criu-ns \
 #         restore -D checkpoint_folder/$i -v4 --tcp-established -vvv -o restore.log &
 # done
 

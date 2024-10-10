@@ -10,7 +10,7 @@ for i in 1 2 3 4 5; do
     mkdir checkpoint_folder/$i
     PID=$(ps -ef | grep java | grep zookeeper | grep -v grep | grep "zoo$i" | awk '{print $2}')
     echo $PID
-    sudo /home/zyh/criu/scripts/criu-ns \
+    sudo criu-ns \
         dump --tree $(ps -ef | grep java | grep zookeeper | grep -v grep | grep "zoo$i" | awk '{print $2}') \
         -D checkpoint_folder/$i -v4 --tcp-established -j -vvv -o dump.log && echo OK
 done

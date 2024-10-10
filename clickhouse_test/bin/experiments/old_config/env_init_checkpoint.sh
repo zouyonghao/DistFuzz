@@ -14,10 +14,10 @@ mkdir checkpoint_folder2
 
 cp -r run run_backup
 
-sudo /home/zyh/criu/scripts/criu-ns dump -t $(ps -ef | grep clickhouse-server | grep -v grep | grep config0 | awk '{print $2}') -D checkpoint_folder0 --tcp-established --file-locks -vvv -o dump.log && echo OK
+sudo criu-ns dump -t $(ps -ef | grep clickhouse-server | grep -v grep | grep config0 | awk '{print $2}') -D checkpoint_folder0 --tcp-established --file-locks -vvv -o dump.log && echo OK
 
-sudo /home/zyh/criu/scripts/criu-ns dump -t $(ps -ef | grep clickhouse-server | grep -v grep | grep config1 | awk '{print $2}') -D checkpoint_folder1 --tcp-established --file-locks -vvv -o dump.log && echo OK
+sudo criu-ns dump -t $(ps -ef | grep clickhouse-server | grep -v grep | grep config1 | awk '{print $2}') -D checkpoint_folder1 --tcp-established --file-locks -vvv -o dump.log && echo OK
 
-sudo /home/zyh/criu/scripts/criu-ns dump -t $(ps -ef | grep clickhouse-server | grep -v grep | grep config2 | awk '{print $2}') -D checkpoint_folder2 --tcp-established --file-locks -vvv -o dump.log && echo OK
+sudo criu-ns dump -t $(ps -ef | grep clickhouse-server | grep -v grep | grep config2 | awk '{print $2}') -D checkpoint_folder2 --tcp-established --file-locks -vvv -o dump.log && echo OK
 
 ./stop.sh

@@ -10,7 +10,7 @@ for i in 0 1 2 3 4; do
     mkdir checkpoint_folder/$i
     PID=$(ps -ef | grep server | grep -v grep | grep data/$i | awk '{print $2}')
     echo $PID
-    sudo /home/zyh/criu/scripts/criu-ns \
+    sudo criu-ns \
         dump --tree $(ps -ef | grep server | grep -v grep | grep data/$i | awk '{print $2}') \
         -D checkpoint_folder/$i -v4 --tcp-established -vvv -o dump.log && echo OK
 done
