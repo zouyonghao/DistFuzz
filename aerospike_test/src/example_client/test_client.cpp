@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     } else {
         as_record rec;
         as_record_inita(&rec, 1);
-        as_record_set_str(&rec, "test-bin", argv[2]);
+        as_record_set_int64(&rec, "test-bin", atoi(argv[2]));
         if (aerospike_key_put(&as, &err, NULL, &key, &rec) != AEROSPIKE_OK)
         {
             fprintf(stderr, "err(%d) %s at [%s:%d]\n", err.code, err.message, err.file, err.line);
