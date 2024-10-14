@@ -45,6 +45,12 @@ target_link_libraries(example_client
         -Wl,--no-whole-archive dst_random dst_default_kv dst_event aerospike ssl crypto dl m z
         ${Boost_LIBRARIES})
 
+add_executable(test_client src/example_client/test_client.cpp)
+target_link_libraries(test_client
+        -Wl,--whole-archive dst_default_operator
+        -Wl,--no-whole-archive dst_random dst_default_kv dst_event aerospike ssl crypto dl m z
+        ${Boost_LIBRARIES})
+
 add_library(aerospike_operator_lib ${AEROSPIKE_TEST_OPERATORS_SRC})
 enable_testing()
 add_subdirectory(tests)
