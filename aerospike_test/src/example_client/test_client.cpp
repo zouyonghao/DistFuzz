@@ -39,7 +39,7 @@ int main(int argc, char **argv)
             return false;
         }
         char *val_as_str = as_val_tostring(as_bin_get_value(p_rec->bins.entries));
-        printf("read value is %s\n", val_as_str);
+        printf("%s\n", val_as_str);
         free(val_as_str);
         as_record_destroy(p_rec);
     } else {
