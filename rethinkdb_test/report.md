@@ -112,6 +112,8 @@
 
     https://github.com/rethinkdb/rethinkdb/issues/6956
 
+    CVE-2024-22937
+
 ### stack-use-after-scope
 
     ```
