@@ -37,8 +37,8 @@ public:
         std::string config = BIN_PATH;
         config += " --name node" + node_id_str;
         config += " --data-dir ./" DATA_DIR_PREFIX + node_id_str;
-        config += " --heartbeat-interval 100";
-        config += " --election-timeout 500";
+        config += " --heartbeat-interval 30";
+        config += " --election-timeout 150";
         config += " --socket-reuse-port";
         config += " --socket-reuse-address";
         config += " --initial-cluster-token etcd-cluster";

@@ -36,7 +36,7 @@
 #define HEARTBEAT_PORT_PREFIX "\t\tport "
 #define HEARTBEAT_BASE_PORT 5000
 #define MESH_PORT_PREFIX "\t\tmesh-seed-address-port 127.0.1.1 "
-#define CONFIG_FILE_PIECE_NETWORK_4 "\n\t\tinterval 100\n\t\ttimeout 3\n\t\tconnect-timeout-ms 100\n\t}\n"
+#define CONFIG_FILE_PIECE_NETWORK_4 "\n\t\tinterval 100\n\t\ttimeout 3\n\t\tconnect-timeout-ms 150\n\t}\n"
 
 /* Add a address to fabric to avoid error 1 */
 #define CONFIG_FILE_PIECE_NETWORK_5 "\n\tfabric {\n\t\taddress 127.0.1.1\n"

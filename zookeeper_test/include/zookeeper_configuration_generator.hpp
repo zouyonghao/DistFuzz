@@ -36,7 +36,7 @@ public:
         /** zk server id starts from 1 */
         std::string zk_id_str = std::to_string(node_id + 1);
         std::ofstream zk_conf_file(BASE_CONF_PATH_PREFIX + zk_id_str);
-        zk_conf_file << "tickTime=200\n";
+        zk_conf_file << "tickTime=150\n";
         zk_conf_file << "initLimit=5\n";
         zk_conf_file << "syncLimit=2\n";
         zk_conf_file << "admin.enableServer=false\n";

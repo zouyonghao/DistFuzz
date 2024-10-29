@@ -22,7 +22,7 @@ class BraftConfigurationGenerator : public ServerConfigurationGenerator
 public:
     std::string get_configure_string(uint32_t node_id, uint32_t node_count) override
     {
-        std::string config = SERVER_BIN_PATH " -reuse_addr -ip=" IP " -reuse_port -election_timeout_ms=100 ";
+        std::string config = SERVER_BIN_PATH " -reuse_addr -ip=" IP " -reuse_port -election_timeout_ms=150 ";
         config += "-port=" + std::to_string(BASE_PORT + node_id) + " ";
         config += "-conf=";
         for (uint32_t i = 0; i < node_count; i++)
