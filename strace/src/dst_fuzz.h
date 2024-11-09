@@ -8,7 +8,7 @@ extern bool is_dst_fuzz;
 
 extern kernel_ulong_t stored_rip;
 
-enum INJECT_EVENT { DELAY, FAIL, LOST, DUP };
+enum INJECT_EVENT { DELAY, FAIL, LOST, DUP, NETPART, NUM_INJECT_EVENTS };
 
 extern void dst_fuzz_syscall_enter(struct tcb *);
 

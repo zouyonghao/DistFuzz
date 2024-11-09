@@ -107,6 +107,9 @@ static unsigned long tmp_offset = 0;
 // static int ignore_range = 1;
 // static int prev = 0;
 static uint64_t event_index = 0;
+
+static bool net_partition = false;
+
 uint64_t
 get_hash_value(uint32_t syscall_no, uint64_t position, size_t length, bool fault_injected)
 {
@@ -314,11 +317,20 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		/* be careful of LOST and DUP, this may leads to false positive because of partial write of a message. */
 		LOST, DUP
 	};
-	int supported_event_size = 4;
+	int supported_event_size = NUM_INJECT_EVENTS;
 	// int supported_event_size = 2;
 	/* read socket, read file, write file can noly DELAY or FAIL */
 	if (!is_send || is_file) {
 		supported_event_size = 2;
+	}
+
+	if (net_partition && !is_file) {
+		if (__dst_get_random_uint8_t() % 2 == 0) {
+			// heal the net partition
+			net_partition = false;
+		} else {
+			goto NETPART;
+		}
 	}
 
 	switch (events[__dst_get_random_uint8_t() % supported_event_size]) {
@@ -368,6 +380,18 @@ handle_random_event(struct tcb *tcp, bool is_send, size_t length, int error_code
 		fprintf(stderr, "inject dup to process %d syscall %ld\n", tcp->pid, tcp->scno);
 		break;
 	}
+	case NETPART: {
+		net_partition = true;
+NETPART:
+		tcp->qual_flg |= QUAL_INJECT;
+		tcp->flags |= INJECT_F_RETVAL;
+		opts[tcp->scno].data.flags = INJECT_F_RETVAL;
+		opts[tcp->scno].data.rval_idx = retval_new(-1);
+		fprintf(stderr, "inject fail (net part) to process %d syscall %ld\n", tcp->pid, tcp->scno);
+		break;
+	}
+	case NUM_INJECT_EVENTS:
+		break;
 	}
 
 EXIT:
