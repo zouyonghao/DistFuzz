@@ -101,3 +101,15 @@ docker run -it --rm --cap-add=SYS_PTRACE --security-opt seccomp=unconfined zouyo
 ### Found bugs
 
 Please check the [FOUND_BUGS.txt](FOUND_BUGS.txt)
+
+### Citing the Paper
+If you would like to cite our work, use the following BibTex entry:
+
+```
+@inproceedings{distfuzz,
+  title={Blackbox Fuzzing of Distributed Systems with Multi-Dimensional Inputs and Symmetry-Based Feedback Pruning},
+  author={Zou, Yonghao and Bai, Jia-Ju and Jiang, Zu-Ming and  Zhao, Ming and Zhou, Diyu},
+  booktitle={Proceedings of the 32nd Network and Distributed System Security Symposium (NDSS)},
+  year={2025}
+}
+```
